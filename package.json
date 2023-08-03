@@ -1,13 +1,13 @@
 {
   "name": "todo-list",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "pretty": "prettier --write 'src/**/*.{ts,tsx}'",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives",
+    "pretty": "prettier 'src/**/*.{ts,tsx}' --write",
+    "lint": "eslint src/ --ext .ts,.tsx --report-unused-disable-directives",
     "format": "yarn pretty && yarn lint --fix",
     "deploy": "yarn build && gh-pages -b deploy -m 'build: Deployment' -d dist",
     "preview": "vite preview"
