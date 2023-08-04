@@ -6,7 +6,8 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/strict-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked",
     "preact",
     "plugin:import/recommended",
     "plugin:import/typescript",
@@ -32,6 +33,7 @@
   },
   "plugins": ["@typescript-eslint", "import", "n"],
   "rules": {
+    "@typescript-eslint/explicit-function-return-type": "error",
     "import/extensions": ["error", "always", { "ts": "never" }],
     "jest/no-deprecated-functions": 0,
     "n/no-missing-import": "off",
