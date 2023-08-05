@@ -33,10 +33,10 @@
   },
   "plugins": ["@typescript-eslint", "import", "n"],
   "rules": {
-    "@typescript-eslint/explicit-function-return-type": "error",
-    "import/extensions": ["error", "always", { "ts": "never" }],
+    "@typescript-eslint/explicit-function-return-type": 2,
+    "import/extensions": [2, "always", { "ts": "never" }],
     "jest/no-deprecated-functions": 0,
-    "n/no-missing-import": "off",
+    "n/no-missing-import": 0,
     "eqeqeq": 2
   },
   "root": true
