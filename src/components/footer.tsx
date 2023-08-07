@@ -5,11 +5,11 @@ import { faSchoolFlag } from '@fortawesome/free-solid-svg-icons';
 
 export const Footer = (): JSX.Element => {
   return (
-    <footer class='flex flex-col select-none items-center justify-center gap-1.5 bg-slate-100 dark:bg-slate-800 dark:text-pink-600 text-lg px-4 py-5 font-bold text-violet-800'>
-      <p class='gap-2.5 flex'>
+    <footer class='md:(items-start, px-6) dark:(bg-slate-800, text-pink-600) flex select-none flex-col items-center justify-center gap-1.5 bg-slate-100 px-4 py-5 text-lg font-bold text-violet-800 xl:text-xl'>
+      <p class='flex gap-2.5'>
         by
         <a
-          class='text-indigo-300 transition-transform hover:scale-105'
+          class='text-indigo-800 transition-transform hover:scale-105 dark:text-indigo-300'
           title='Go to GitHub'
           target='_blank'
           rel='noreferrer'
@@ -17,10 +17,10 @@ export const Footer = (): JSX.Element => {
           <FontAwesomeIcon icon={faGithub} /> eldarlrd
         </a>
       </p>
-      <p class='gap-2.5 flex'>
+      <p class='flex gap-3'>
         for
         <a
-          class='text-yellow-500 transition-transform hover:scale-105'
+          class='text-yellow-700 transition-transform hover:scale-105 dark:text-yellow-500'
           title='Go to The Odin Project'
           target='_blank'
           rel='noreferrer'
