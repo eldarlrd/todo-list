@@ -33,10 +33,12 @@
   },
   "plugins": ["@typescript-eslint", "import", "n"],
   "rules": {
+    "@typescript-eslint/no-unused-vars": 2,
     "@typescript-eslint/explicit-function-return-type": 2,
     "import/extensions": [2, "ignorePackages"],
     "jest/no-deprecated-functions": 0,
     "n/no-missing-import": 0,
+    "no-unused-vars": 0,
     "eqeqeq": 2
   },
   "root": true
