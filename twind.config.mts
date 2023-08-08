@@ -4,6 +4,7 @@ import presetTailwind from '@twind/preset-tailwind';
 
 export default defineConfig({
   presets: [presetAutoprefix(), presetTailwind()],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: { 'main': 'Inter, sans' }
