@@ -35,11 +35,12 @@ const MobileNav = ({ darkMode, darkToggle }: Theme): JSX.Element => {
 
 const Sidebar = ({ darkMode, darkToggle }: Theme): JSX.Element => {
   return (
-    <nav class='dark:(bg-slate-700, text-pink-600) xl:(w-80, text-3xl) hidden w-72 select-none items-center gap-2 bg-slate-200 p-3 text-2xl text-violet-800 lg:flex 2xl:w-96'>
+    <nav class='dark:(bg-slate-700, text-pink-600) xl:w-80 flex-col hidden w-72 items-start select-none gap-2 bg-slate-200 p-3 text-2xl text-violet-800 lg:flex 2xl:w-96'>
       <button
         onClick={darkToggle}
-        class='hover:(bg-slate-300, active:bg-slate-400, dark:(bg-slate-800, active:bg-slate-900)) w-12 rounded-lg px-3 py-2 leading-4 outline-none transition-colors'>
-        <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
+        class='break-all h-10 hover:(bg-slate-300, active:bg-slate-400, dark:(bg-slate-800, active:bg-slate-900)) min-w-full rounded-lg px-3 py-2 leading-4 outline-none flex transition-colors items-center gap-3'>
+        <FontAwesomeIcon size={darkMode ? '1x' : 'lg'} icon={darkMode ? faSun : faMoon} />
+        {darkMode ? 'Light' : 'Dark'}
       </button>
     </nav>
   );
