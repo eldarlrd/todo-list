@@ -1,71 +1,37 @@
 import { type JSX } from 'preact/jsx-runtime';
-import { useState, useEffect } from 'preact/hooks';
+import { ThemeToggle } from '@/components/static/themeToggle.tsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoon, faSun, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faPlus } from '@fortawesome/free-solid-svg-icons';
 
-interface Theme {
-  darkMode: boolean | undefined;
-  darkToggle: () => void;
-}
-
-const themeCheck = (): void => {
-  if (
-    localStorage.theme === 'dark' ||
-    (!('theme' in localStorage) &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches)
-  )
-    document.body.classList.add('dark');
-  else document.body.classList.remove('dark');
-};
-
-const MobileNav = ({ darkMode, darkToggle }: Theme): JSX.Element => {
+const MobileNav = (): JSX.Element => {
   return (
-    <nav class='dark:(bg-slate-700, text-pink-600) absolute top-0 min-w-full select-none items-center gap-2 bg-slate-200 p-3 text-2xl text-violet-800 lg:hidden'>
-      <button class='hover:(bg-slate-300, active:bg-slate-400, dark:(bg-slate-800, active:bg-slate-900)) w-12 rounded-lg px-3 py-2 leading-4 outline-none transition-colors'>
+    <nav class='dark:(bg-slate-800, text-pink-600) absolute top-0 min-w-full select-none bg-slate-100 p-3 text-2xl text-violet-800 lg:hidden'>
+      <button
+        title='Open Drawer'
+        class='hover:(bg-slate-200, active:bg-slate-300, dark:(bg-slate-700, active:bg-slate-600)) mr-2 w-12 rounded-lg px-3 py-2 leading-4 transition-colors'>
         <FontAwesomeIcon icon={faBars} />
       </button>
-      <button
-        onClick={darkToggle}
-        class='hover:(bg-slate-300, active:bg-slate-400, dark:(bg-slate-800, active:bg-slate-900)) w-12 rounded-lg px-3 py-2 leading-4 outline-none transition-colors'>
-        <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
-      </button>
+      <ThemeToggle />
     </nav>
   );
 };
 
-const Sidebar = ({ darkMode, darkToggle }: Theme): JSX.Element => {
+const Sidebar = (): JSX.Element => {
   return (
-    <nav class='dark:(bg-slate-700, text-pink-600) xl:w-80 flex-col hidden w-72 items-start select-none gap-2 bg-slate-200 p-3 text-2xl text-violet-800 lg:flex 2xl:w-96'>
-      <button
-        onClick={darkToggle}
-        class='break-all h-10 hover:(bg-slate-300, active:bg-slate-400, dark:(bg-slate-800, active:bg-slate-900)) min-w-full rounded-lg px-3 py-2 leading-4 outline-none flex transition-colors items-center gap-3'>
-        <FontAwesomeIcon size={darkMode ? '1x' : 'lg'} icon={darkMode ? faSun : faMoon} />
-        {darkMode ? 'Light' : 'Dark'}
+    <nav class='dark:(bg-slate-700, text-pink-600) hidden w-72 select-none flex-col items-start gap-2 bg-slate-200 p-3 text-2xl text-violet-800 lg:flex xl:w-80 2xl:w-96'>
+      <button class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex h-12 min-w-full items-center gap-3 break-all rounded-lg px-3 leading-4 outline-none transition-colors'>
+        <FontAwesomeIcon icon={faPlus} />
+        Add Project
       </button>
     </nav>
   );
 };
 
 export const Navbar = (): JSX.Element => {
-  const [dark, setDark] = useState<boolean>();
-  const iconSwitch = (): void => {
-    document.body.classList.contains('dark') ? setDark(true) : setDark(false);
-  };
-
-  useEffect(iconSwitch, []);
-
-  const themeToggle = (): void => {
-    dark ? (localStorage.theme = 'light') : (localStorage.theme = 'dark');
-    document.body.classList.toggle('dark');
-    setDark(!dark);
-  };
-
   return (
     <>
-      <MobileNav darkMode={dark} darkToggle={themeToggle} />
-      <Sidebar darkMode={dark} darkToggle={themeToggle} />
+      <MobileNav />
+      <Sidebar />
     </>
   );
 };
-
-themeCheck();

@@ -5,7 +5,7 @@ import { faSchoolFlag } from '@fortawesome/free-solid-svg-icons';
 
 export const Footer = (): JSX.Element => {
   return (
-    <footer class='md:(items-start, px-6) dark:(bg-slate-800, text-pink-600) flex select-none flex-col items-center justify-center gap-1.5 bg-slate-100 p-4 text-lg font-bold text-violet-800 xl:text-xl'>
+    <footer class='lg:(items-start, px-6) dark:(bg-slate-800, text-pink-600) flex select-none flex-col items-center justify-center gap-1.5 bg-slate-100 p-4 text-lg font-bold text-violet-800 xl:text-xl'>
       <p class='flex gap-2.5'>
         by
         <a
