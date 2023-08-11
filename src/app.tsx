@@ -10,7 +10,7 @@ export const App = (): JSX.Element => {
       id='app'
       class='font-main flex min-h-screen flex-col justify-between bg-slate-50 accent-emerald-500 selection:bg-emerald-500 dark:bg-slate-900'>
       <Header />
-      <main class='flex grow'>
+      <main class='flex max-h-screen grow'>
         <Navbar />
         <List />
       </main>

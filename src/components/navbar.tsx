@@ -18,8 +18,8 @@ const MobileNav = (): JSX.Element => {
 
 const Sidebar = (): JSX.Element => {
   return (
-    <nav class='dark:(bg-slate-700, text-pink-600) hidden w-72 select-none flex-col items-start gap-2 bg-slate-200 p-3 text-2xl text-violet-800 lg:flex xl:w-80 2xl:w-96'>
-      <button class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex h-12 min-w-full items-center gap-3 break-all rounded-lg px-3 leading-4 outline-none transition-colors'>
+    <nav class='dark:(bg-slate-700, text-pink-600) hidden w-72 select-none flex-col items-start gap-2 overflow-y-auto bg-slate-200 p-3 text-2xl text-violet-800 lg:flex xl:w-80 2xl:w-96'>
+      <button class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex min-w-full items-center gap-3 break-all rounded-lg p-3 leading-4 transition-colors'>
         <FontAwesomeIcon icon={faPlus} />
         Add Project
       </button>
