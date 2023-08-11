@@ -4,8 +4,8 @@ import Logo from '@/assets/todoList.webp';
 
 export const Header = (): JSX.Element => {
   return (
-    <header class='lg:(flex-row, justify-between, gap-4, px-6, py-4) dark:(bg-slate-800, text-pink-600) xl:(py-2, text-4xl) flex select-none items-center justify-center bg-slate-100 p-4 pt-16 text-3xl font-bold italic text-violet-800'>
-      <span class='md:(flex-row, gap-4) flex flex-col items-center justify-center gap-2'>
+    <header class='lg:(flex-row, justify-between, gap-4, px-6, py-4) dark:(bg-slate-800, text-pink-600) xl:(py-2, text-4xl) flex select-none items-center justify-center bg-slate-100 p-4 pt-16 text-3xl font-bold italic text-violet-800 transition-all'>
+      <span class='md:(flex-row, gap-4) flex flex-col items-center justify-center gap-2 transition-all'>
         <img
           class='xl:(h-24, w-24) h-20 w-20 dark:hue-rotate-60'
           alt='A Pinned Note'
