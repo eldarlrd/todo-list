@@ -1,12 +1,12 @@
 import { type JSX } from 'preact/jsx-runtime';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faSchoolFlag } from '@fortawesome/free-solid-svg-icons';
+import { faGavel } from '@fortawesome/free-solid-svg-icons';
 
 export const Footer = (): JSX.Element => {
   return (
     <footer class='lg:(items-start, px-6) dark:(bg-slate-800, text-pink-600) flex select-none flex-col items-center justify-center gap-1.5 bg-slate-100 p-4 text-lg font-semibold text-violet-800 transition-all xl:text-xl'>
-      <p class='flex gap-2.5'>
+      <p id='author' class='flex gap-2'>
         by
         <a
           class='text-indigo-800 transition-transform hover:scale-105 dark:text-indigo-300'
@@ -17,7 +17,7 @@ export const Footer = (): JSX.Element => {
           <FontAwesomeIcon icon={faGithub} /> eldarlrd
         </a>
       </p>
-      <p class='flex gap-3'>
+      <p id='curriculum' class='flex gap-2.5'>
         for
         <a
           class='text-yellow-700 transition-transform hover:scale-105 dark:text-yellow-500'
@@ -25,7 +25,7 @@ export const Footer = (): JSX.Element => {
           target='_blank'
           rel='noreferrer'
           href='https://theodinproject.com'>
-          <FontAwesomeIcon icon={faSchoolFlag} /> The Odin Project
+          <FontAwesomeIcon icon={faGavel} /> The Odin Project
         </a>
       </p>
     </footer>

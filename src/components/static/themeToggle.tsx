@@ -29,8 +29,9 @@ export const ThemeToggle = (): JSX.Element => {
 
   return (
     <button
+      id='themeToggle'
       onClick={themeToggle}
-      title='Switch Theme'
+      title='Toggle Theme'
       class='hover:(bg-slate-200, active:bg-slate-300, dark:(bg-slate-700, active:bg-slate-600)) w-12 rounded-lg py-2 leading-4 transition-colors lg:w-14 xl:w-16'>
       <FontAwesomeIcon icon={dark ? faSun : faMoon} />
     </button>
