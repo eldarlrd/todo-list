@@ -488,9 +488,9 @@
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
 "@mdn/browser-compat-data@^5.2.34", "@mdn/browser-compat-data@^5.2.47":
-  version "5.3.8"
-  resolved "https://registry.npmjs.org/@mdn/browser-compat-data/-/browser-compat-data-5.3.8.tgz#02f44a6a74a79ed2919b5ea96ae325440ff221c2"
-  integrity sha512-WE2eeLb0gZJcQEnPhCIQWs+5KpNK2VI0EOWFUvR39/iks2vDSzJO//78hVz/gYdOGXz6mo4jg0T7RygsUbyZ8w==
+  version "5.3.9"
+  resolved "https://registry.npmjs.org/@mdn/browser-compat-data/-/browser-compat-data-5.3.9.tgz#cfdb769398a34be56b34f345e71a09658f011d51"
+  integrity sha512-J7lLtHMEizYbI5T0Xlqpg1JXCz9JegZBeb7y3v/Nm8ScRw8TL9v3n+I3g1TFm+bLrRtwA33FKwX5znDwz+WzAQ==
 
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   version "5.1.1-v1"
@@ -1396,6 +1396,11 @@ eslint-plugin-n@^16.0.1:
     minimatch "^3.1.2"
     resolve "^1.22.2"
     semver "^7.5.3"
+
+eslint-plugin-no-relative-import-paths@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.npmjs.org/eslint-plugin-no-relative-import-paths/-/eslint-plugin-no-relative-import-paths-1.5.2.tgz#c35f2fd0bf2a6a57b268193ed7df63ff7000134e"
+  integrity sha512-wMlL+TVuDhKk1plP+w3L4Hc7+u89vUkrOYq6/0ARjcYqwc9/YaS9uEXNzaqAk+WLoEgakzNL5JgJJw6m4qd5zw==
 
 eslint-plugin-promise@^6.1.1:
   version "6.1.1"

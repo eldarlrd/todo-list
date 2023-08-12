@@ -1,5 +1,5 @@
 import { type JSX } from 'preact/jsx-runtime';
-import { ThemeToggle } from '@/components/static/themeToggle.tsx';
+import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
 import Logo from '@/assets/todoList.webp';
 
 export const Header = (): JSX.Element => {

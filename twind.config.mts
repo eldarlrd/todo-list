@@ -2,6 +2,7 @@ import { defineConfig } from '@twind/core';
 import presetAutoprefix from '@twind/preset-autoprefix';
 import presetTailwind from '@twind/preset-tailwind';
 
+// https://twind.style/reference
 export default defineConfig({
   presets: [presetAutoprefix(), presetTailwind()],
   darkMode: 'class',

@@ -1,6 +1,6 @@
 import { type JSX } from 'preact/jsx-runtime';
-import { Header } from '@/components/static/header.tsx';
-import { Footer } from '@/components/static/footer.tsx';
+import { Header } from '@/components/banners/header.tsx';
+import { Footer } from '@/components/banners/footer.tsx';
 import { Navbar } from '@/components/navbar.tsx';
 import { List } from '@/components/list.tsx';
 

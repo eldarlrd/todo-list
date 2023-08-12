@@ -31,13 +31,15 @@
     "sourceType": "module",
     "project": ["tsconfig.json"]
   },
-  "plugins": ["@typescript-eslint", "import", "n"],
+  "plugins": ["@typescript-eslint", "no-relative-import-paths", "import", "n"],
   "rules": {
     "@typescript-eslint/no-unused-vars": 2,
     "@typescript-eslint/explicit-function-return-type": 2,
     "@typescript-eslint/consistent-type-imports": [2, { "fixStyle": "inline-type-imports" }],
+    "no-relative-import-paths/no-relative-import-paths": [2, { "rootDir": "src", "prefix": "@" }],
     "import/consistent-type-specifier-style": [2, "prefer-inline"],
     "import/extensions": [2, "ignorePackages"],
+    "import/no-useless-path-segments": 2,
     "jest/no-deprecated-functions": 0,
     "n/no-missing-import": 0,
     "no-unused-vars": 0,
