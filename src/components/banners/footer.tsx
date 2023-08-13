@@ -10,7 +10,7 @@ export const Footer = (): JSX.Element => {
           class='flex items-center gap-0.5 text-indigo-800 transition-transform hover:scale-105 dark:text-indigo-300 xl:gap-1'
           title='Go to GitHub'
           target='_blank'
-          rel='noreferrer'
+          rel='noopener noreferrer nofollow'
           href='https://github.com/eldarlrd'>
           <Github size='20' class='transition-transform xl:scale-110' />
           eldarlrd
@@ -22,7 +22,7 @@ export const Footer = (): JSX.Element => {
           class='flex items-center gap-1 text-yellow-800 transition-transform hover:scale-105 dark:text-yellow-500 xl:gap-1.5'
           title='Go to The Odin Project'
           target='_blank'
-          rel='noreferrer'
+          rel='noopener noreferrer nofollow'
           href='https://theodinproject.com'>
           <Gavel size='20' class='transition-transform xl:scale-110' />
           The Odin Project
