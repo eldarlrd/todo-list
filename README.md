@@ -1,5 +1,5 @@
 # Todo List
-[![version](https://img.shields.io/badge/version-0.5.7-16a34a?labelColor=7c3aed&style=&logo=git-extensions&link=https://github.com/eldarlrd/todo-list/blob/main/package.json)](https://github.com/eldarlrd/todo-list/blob/main/package.json)
+[![Version](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/eldarlrd/todo-list/main/package.json&query=version&logo=git-extensions&label=version&labelColor=7c3aed&color=16a34a)](https://github.com/eldarlrd/todo-list/blob/main/package.json)
 
 > Todo List is a website built with
 > - **[Preact](https://preactjs.com)**
