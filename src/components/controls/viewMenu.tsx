@@ -10,6 +10,7 @@ interface ViewControls {
 }
 
 export const ViewMenu = ({ view, setView }: ViewControls): JSX.Element => {
+  const viewOptions: string[] = ['All', 'Todo', 'In Progress', 'Done'];
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
 
@@ -47,36 +48,18 @@ export const ViewMenu = ({ view, setView }: ViewControls): JSX.Element => {
         <div
           id='viewDropdown'
           class={
-            'absolute right-6 mt-2 flex flex-col items-end justify-center rounded-md bg-slate-200 dark:bg-slate-700'
+            'absolute right-6 mt-2 flex flex-col items-end justify-center overflow-clip rounded-md bg-slate-200 dark:bg-slate-700'
           }>
-          <button
-            onClick={(e: Event): void => {
-              switchView((e.target as HTMLButtonElement).innerText);
-            }}
-            class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-32 min-w-fit justify-end rounded-t-md px-2 py-0.5 font-medium active:bg-slate-400'>
-            All
-          </button>
-          <button
-            onClick={(e: Event): void => {
-              switchView((e.target as HTMLButtonElement).innerText);
-            }}
-            class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-32 min-w-fit justify-end px-2 py-0.5 font-medium active:bg-slate-400'>
-            Todo
-          </button>
-          <button
-            onClick={(e: Event): void => {
-              switchView((e.target as HTMLButtonElement).innerText);
-            }}
-            class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-32 min-w-fit justify-end px-2 py-0.5 font-medium active:bg-slate-400'>
-            In Progress
-          </button>
-          <button
-            onClick={(e: Event): void => {
-              switchView((e.target as HTMLButtonElement).innerText);
-            }}
-            class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-32 min-w-fit justify-end rounded-b-md px-2 py-0.5 font-medium active:bg-slate-400'>
-            Done
-          </button>
+          {viewOptions.map(option => (
+            <button
+              key={option}
+              onClick={(e: Event): void => {
+                switchView((e.target as HTMLButtonElement).innerText);
+              }}
+              class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-32 min-w-fit justify-end px-2 py-0.5 font-medium active:bg-slate-400'>
+              {option}
+            </button>
+          ))}
         </div>
       )}
     </div>
