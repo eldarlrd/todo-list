@@ -34,13 +34,11 @@ export const ThemeToggle = (): JSX.Element => {
       class='hover:(bg-slate-200, active:bg-slate-300, dark:(bg-slate-700, active:bg-slate-600)) lg:(w-14, px-4, py-3) xl:(w-16, px-5, py-4) w-12 rounded-lg px-3 py-2 leading-4 transition-colors'>
       {dark ? (
         <Sun
-          fill='currentColor'
           strokeWidth='2.25'
           class='scale-110 transition-transform lg:scale-125 xl:scale-150'
         />
       ) : (
         <Moon
-          fill='currentColor'
           strokeWidth='2.25'
           class='scale-110 transition-transform lg:scale-125 xl:scale-150'
         />
