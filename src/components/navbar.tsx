@@ -1,8 +1,7 @@
 import { type JSX } from 'preact/jsx-runtime';
 import { type StateUpdater, useState, useEffect } from 'preact/hooks';
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { Menu, Plus, X } from 'lucide-preact';
 
 interface DrawerControls {
   drawer?: boolean | undefined;
@@ -27,7 +26,7 @@ const MobileNav = ({ setDrawer }: DrawerControls): JSX.Element => {
         }}
         title='Open Drawer'
         class='hover:(bg-slate-200, active:bg-slate-300, dark:(bg-slate-700, active:bg-slate-600)) mr-2 w-12 rounded-lg px-3 py-2 leading-4 transition-colors'>
-        <FontAwesomeIcon icon={faBars} />
+        <Menu strokeWidth='2.25' class='scale-125' />
       </button>
       <ThemeToggle />
     </nav>
@@ -46,8 +45,8 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
       <span class='flex min-w-full gap-2 text-2xl'>
         <button
           id='addProject'
-          class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex grow items-center gap-3 break-all rounded-lg p-3 font-medium leading-4 transition-colors'>
-          <FontAwesomeIcon icon={faPlus} />
+          class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex grow items-center gap-1.5 break-all rounded-lg p-3 font-medium leading-4 transition-colors'>
+          <Plus strokeWidth='2.25' class='scale-110' />
           Add Project
         </button>
         {drawer ? (
@@ -58,7 +57,7 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
             }}
             title='Close Drawer'
             class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) w-12 rounded-lg p-3 leading-4 transition-colors lg:hidden'>
-            <FontAwesomeIcon icon={faXmark} />
+            <X strokeWidth='2.25' class='scale-110' />
           </button>
         ) : null}
       </span>

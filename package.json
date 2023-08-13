@@ -1,7 +1,7 @@
 {
   "name": "todo-list",
   "private": true,
-  "version": "0.5.4",
+  "version": "0.5.5",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -25,10 +25,6 @@
   "devDependencies": {
     "@babel/core": "^7.22.10",
     "@babel/plugin-transform-react-jsx": "^7.22.5",
-    "@fortawesome/fontawesome-svg-core": "^6.4.2",
-    "@fortawesome/free-brands-svg-icons": "^6.4.2",
-    "@fortawesome/free-solid-svg-icons": "^6.4.2",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "@preact/preset-vite": "^2.5.0",
     "@twind/core": "^1.1.3",
     "@twind/preset-autoprefix": "^1.0.7",
@@ -46,6 +42,7 @@
     "eslint-plugin-no-relative-import-paths": "^1.5.2",
     "eslint-plugin-promise": "^6.1.1",
     "gh-pages": "^6.0.0",
+    "lucide-preact": "^0.266.0",
     "preact": "^10.16.0",
     "prettier": "^3.0.1",
     "prettier-plugin-tailwindcss": "^0.5.1",

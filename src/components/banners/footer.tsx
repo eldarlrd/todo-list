@@ -1,7 +1,5 @@
 import { type JSX } from 'preact/jsx-runtime';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faGavel } from '@fortawesome/free-solid-svg-icons';
+import { Github, Gavel } from 'lucide-preact';
 
 export const Footer = (): JSX.Element => {
   return (
@@ -9,23 +7,25 @@ export const Footer = (): JSX.Element => {
       <p id='author' class='flex gap-2'>
         by
         <a
-          class='text-indigo-800 transition-transform hover:scale-105 dark:text-indigo-300'
+          class='flex items-center gap-0.5 text-indigo-800 transition-transform hover:scale-105 dark:text-indigo-300 xl:gap-1'
           title='Go to GitHub'
           target='_blank'
           rel='noreferrer'
           href='https://github.com/eldarlrd'>
-          <FontAwesomeIcon icon={faGithub} /> eldarlrd
+          <Github size='20' class='transition-transform xl:scale-110' />
+          eldarlrd
         </a>
       </p>
-      <p id='curriculum' class='flex gap-2.5'>
+      <p id='curriculum' class='flex gap-2'>
         for
         <a
-          class='text-yellow-800 transition-transform hover:scale-105 dark:text-yellow-500'
+          class='flex items-center gap-1 text-yellow-800 transition-transform hover:scale-105 dark:text-yellow-500 xl:gap-1.5'
           title='Go to The Odin Project'
           target='_blank'
           rel='noreferrer'
           href='https://theodinproject.com'>
-          <FontAwesomeIcon icon={faGavel} /> The Odin Project
+          <Gavel size='20' class='transition-transform xl:scale-110' />
+          The Odin Project
         </a>
       </p>
     </footer>

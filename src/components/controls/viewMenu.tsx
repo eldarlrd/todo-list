@@ -1,8 +1,7 @@
 import { type JSX } from 'preact/jsx-runtime';
 import { type StateUpdater, useEffect } from 'preact/hooks';
 import { useComponentVisible } from '@/hooks/useComponentVisible.ts';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { Eye } from 'lucide-preact';
 
 interface ViewControls {
   view: string | undefined;
@@ -36,10 +35,10 @@ export const ViewMenu = ({ view, setView }: ViewControls): JSX.Element => {
         title='Switch View'
         class={`${
           isComponentVisible ? 'bg-slate-200 dark:bg-slate-700' : ''
-        } hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) flex items-center justify-end gap-2 rounded-md px-2 font-medium transition-colors`}>
+        } hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) flex items-center justify-end gap-1.5 rounded-md px-2 font-medium transition-colors`}>
         {view ? (
           <>
-            <FontAwesomeIcon icon={faEye} />
+            <Eye size='20' />
             {view}
           </>
         ) : null}
