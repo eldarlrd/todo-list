@@ -2134,10 +2134,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-lucide-preact@^0.266.0:
-  version "0.266.0"
-  resolved "https://registry.npmjs.org/lucide-preact/-/lucide-preact-0.266.0.tgz#6652f80deb67126809b94b8fad94dc0cacaf2ed6"
-  integrity sha512-HOQTOQ8dbx6DfnGOwXDimqx5Lp2uOiZ0lFjL3O9cmA82TA2Mqy8aNXq6HO+fuzCevscrfYsrWYjRIcHiwP13Dg==
+lucide-preact@^0.268.0:
+  version "0.268.0"
+  resolved "https://registry.npmjs.org/lucide-preact/-/lucide-preact-0.268.0.tgz#e92102682f4d884b030df3aa7fad2add17c26c10"
+  integrity sha512-Is2g4mIlGyy5yScsLv8MPHAlHF8g8Ff0r7LbEUnTRLnpcltMPc2wKgeAZsedxAjRap94Jlnb+UU2TMaUNDEiKw==
 
 make-dir@^3.0.2:
   version "3.1.0"

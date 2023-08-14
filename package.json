@@ -1,7 +1,7 @@
 {
   "name": "todo-list",
   "private": true,
-  "version": "0.5.8",
+  "version": "0.5.9",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -42,7 +42,7 @@
     "eslint-plugin-no-relative-import-paths": "^1.5.2",
     "eslint-plugin-promise": "^6.1.1",
     "gh-pages": "^6.0.0",
-    "lucide-preact": "^0.266.0",
+    "lucide-preact": "^0.268.0",
     "preact": "^10.16.0",
     "prettier": "^3.0.1",
     "prettier-plugin-tailwindcss": "^0.5.1",

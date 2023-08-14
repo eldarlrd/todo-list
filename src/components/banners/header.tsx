@@ -9,8 +9,8 @@ export const Header = (): JSX.Element => {
         id='logo'
         class='md:(flex-row, gap-4) flex flex-col items-center justify-center gap-2 transition-all'>
         <img
-          class='xl:(h-24, w-24) h-20 w-20 dark:hue-rotate-60'
-          alt='A Pinned Note'
+          class='xl:(h-24, w-24) h-20 w-20 text-center text-lg dark:hue-rotate-60'
+          alt='A Pinned Note by Freepik'
           src={Logo}
         />
         Todo List
