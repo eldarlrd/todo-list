@@ -9,7 +9,7 @@ export const Header = (): JSX.Element => {
         id='logo'
         class='md:(flex-row, gap-4) flex flex-col items-center justify-center gap-2 transition-all'>
         <img
-          class='xl:(h-24, w-24) h-20 w-20 text-center text-sm transition-all dark:hue-rotate-60 xl:text-base'
+          class='xl:(h-24, w-24, text-base) h-20 w-20 text-center text-sm transition-all dark:(text-violet-400, hue-rotate-60)'
           alt='A Pinned Note originally by Freepik'
           src={Logo}
         />
