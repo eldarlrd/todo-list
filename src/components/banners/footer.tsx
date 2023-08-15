@@ -12,7 +12,11 @@ export const Footer = (): JSX.Element => {
           target='_blank'
           rel='noopener noreferrer nofollow'
           href='https://github.com/eldarlrd'>
-          <Github size='20' class='transition-transform xl:scale-110' />
+          <Github
+            aria-label='GitHub Octocat'
+            size='20'
+            class='transition-transform xl:scale-110'
+          />
           eldarlrd
         </a>
       </p>
@@ -24,7 +28,11 @@ export const Footer = (): JSX.Element => {
           target='_blank'
           rel='noopener noreferrer nofollow'
           href='https://theodinproject.com'>
-          <Gavel size='20' class='transition-transform xl:scale-110' />
+          <Gavel
+            aria-label='Hammer'
+            size='20'
+            class='transition-transform xl:scale-110'
+          />
           The Odin Project
         </a>
       </p>

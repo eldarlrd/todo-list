@@ -38,7 +38,7 @@ export const ViewMenu = ({ view, setView }: ViewControls): JSX.Element => {
         } hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) flex items-center justify-end gap-1.5 rounded-md px-2 font-medium transition-colors`}>
         {view ? (
           <>
-            <Eye size='20' />
+            <Eye aria-label='Eye' size='20' />
             {view}
           </>
         ) : null}

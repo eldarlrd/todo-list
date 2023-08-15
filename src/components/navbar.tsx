@@ -26,7 +26,7 @@ const MobileNav = ({ setDrawer }: DrawerControls): JSX.Element => {
         }}
         title='Open Drawer'
         class='hover:(bg-slate-200, active:bg-slate-300, dark:(bg-slate-700, active:bg-slate-600)) mr-2 w-12 rounded-lg px-3 py-2 leading-4 transition-colors'>
-        <Menu strokeWidth='2.25' class='scale-125' />
+        <Menu aria-label='Bars' strokeWidth='2.25' class='scale-125' />
       </button>
       <ThemeToggle />
     </nav>
@@ -45,8 +45,8 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
       <span class='flex min-w-full gap-2 text-2xl'>
         <button
           id='addProject'
-          class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex grow items-center gap-1.5 break-all rounded-lg p-3 font-medium leading-4 transition-colors'>
-          <Plus strokeWidth='2.25' class='scale-110' />
+          class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) flex grow items-center gap-1.5 break-all rounded-lg bg-violet-800 p-3 font-medium leading-4 text-slate-50 transition-colors dark:bg-pink-600'>
+          <Plus aria-label='Plus Sign' strokeWidth='2.25' class='scale-110' />
           Add Project
         </button>
         {drawer ? (
@@ -57,7 +57,7 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
             }}
             title='Close Drawer'
             class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) w-12 rounded-lg p-3 leading-4 transition-colors lg:hidden'>
-            <X strokeWidth='2.25' class='scale-110' />
+            <X aria-label='X' strokeWidth='2.25' class='scale-110' />
           </button>
         ) : null}
       </span>
