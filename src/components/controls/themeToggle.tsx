@@ -2,27 +2,37 @@ import { type JSX } from 'preact/jsx-runtime';
 import { useState, useEffect } from 'preact/hooks';
 import { Sun, Moon } from 'lucide-preact';
 
+const rootTheme = document.documentElement.style;
+const bodyTheme = document.body.classList;
+
 const themeCheck = (): void => {
   if (
     localStorage.theme === 'dark' ||
     (!('theme' in localStorage) &&
       window.matchMedia('(prefers-color-scheme: dark)').matches)
-  )
-    document.body.classList.add('dark');
-  else document.body.classList.remove('dark');
+  ) {
+    rootTheme.colorScheme = 'dark';
+    bodyTheme.add('dark');
+  } else {
+    rootTheme.colorScheme = 'light';
+    bodyTheme.remove('dark');
+  }
 };
 
 export const ThemeToggle = (): JSX.Element => {
   const [dark, setDark] = useState<boolean>();
   const iconSwitch = (): void => {
-    document.body.classList.contains('dark') ? setDark(true) : setDark(false);
+    bodyTheme.contains('dark') ? setDark(true) : setDark(false);
   };
 
   useEffect(iconSwitch, []);
 
   const themeToggle = (): void => {
     dark ? (localStorage.theme = 'light') : (localStorage.theme = 'dark');
-    document.body.classList.toggle('dark');
+    rootTheme.colorScheme === 'dark'
+      ? (rootTheme.colorScheme = 'light')
+      : (rootTheme.colorScheme = 'dark');
+    bodyTheme.toggle('dark');
     setDark(!dark);
   };
 

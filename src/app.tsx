@@ -22,5 +22,5 @@ export const App = (): JSX.Element => {
 // Easter Egg
 console.log(`"Give me six hours to chop down a tree and I will
 spend the first four sharpening the axe." - Abraham Lincoln`);
-// Source Code
-console.log('Source Code available at https://github.com/eldarlrd/todo-list');
+// Source Link
+console.log('Source https://github.com/eldarlrd/todo-list');
