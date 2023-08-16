@@ -1,6 +1,6 @@
 # Todo List
-[![Version](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/eldarlrd/todo-list/main/package.json&query=version&logo=git-extensions&label=version&labelColor=7c3aed&color=16a34a)](https://github.com/eldarlrd/todo-list/blob/main/package.json)
-[![License](https://img.shields.io/badge/license-AGPLv3-a21caf?labelColor=4f46e5&logo=open-source-initiative&logoColor=fff)](https://github.com/eldarlrd/todo-list/blob/main/LICENSE)
+[![Version](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/eldarlrd/todo-list/main/package.json&query=version&logo=git-extensions&label=version&labelColor=475569&color=0284c7)](https://github.com/eldarlrd/todo-list/blob/main/package.json)
+[![License](https://img.shields.io/badge/license-AGPLv3-c026d3?labelColor=475569&logo=open-source-initiative&logoColor=fff)](https://github.com/eldarlrd/todo-list/blob/main/LICENSE)
 
 > Todo List is a website built with
 > - **[Preact](https://preactjs.com)**
