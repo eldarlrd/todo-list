@@ -1,7 +1,7 @@
 /**
  * @license AGPL-3.0-or-later
  * Todo List - A Complex Todo List with Projects
- * Copyright (C) 2023 eldarlrd
+ * Copyright (C) 2023 Eldar Pashazade <eldarlrd@pm.me>
  *
  * This file is part of Todo List.
  *
