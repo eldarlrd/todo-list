@@ -1,7 +1,7 @@
 {
   "name": "todo-list",
   "private": true,
-  "version": "0.6.4",
+  "version": "0.6.5",
   "type": "module",
   "description": "A Complex Todo List with Projects",
   "keywords": [
@@ -13,7 +13,7 @@
   "repository": "github:eldarlrd/todo-list",
   "bugs": "https://github.com/eldarlrd/todo-list/issues",
   "author": "Eldar Pashazade <eldarlrd@pm.me> (https://eldarlrd.github.io)",
-  "license": "AGPL-3.0-or-later",
+  "license": "AGPL-3.0-only",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
