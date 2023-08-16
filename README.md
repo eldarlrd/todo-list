@@ -7,6 +7,7 @@
 > - **[TypeScript](https://typescriptlang.org)**
 > - **[Twind](https://twind.style)**
 > - **[Lucide](https://lucide.dev)**
+> - **[Nano ID](https://zelark.github.io/nano-id-cc)**
 > - **[Vite](https://vitejs.dev)**
 >
 > providing projects and progress stages.
