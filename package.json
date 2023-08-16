@@ -1,16 +1,27 @@
 {
   "name": "todo-list",
   "private": true,
-  "version": "0.6.1",
+  "version": "0.6.2",
   "type": "module",
+  "description": "A Complex Todo List with Projects",
+  "keywords": [
+    "todo list",
+    "todo",
+    "projects"
+  ],
+  "homepage": "https://eldarlrd.github.io/todo-list",
+  "repository": "github:eldarlrd/todo-list",
+  "bugs": "https://github.com/eldarlrd/todo-list/issues",
+  "author": "eldarlrd <eldarlrd@pm.me> (https://eldarlrd.github.io)",
+  "license": "AGPLv3",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "preview": "vite preview",
     "lint": "eslint src/ --ext .ts,.tsx --report-unused-disable-directives",
     "pretty": "prettier 'src/**/*.{ts,tsx}' --write",
     "format": "yarn lint --fix && yarn pretty",
-    "deploy": "yarn build && gh-pages -b deploy -m 'build: Deployment' -d dist",
-    "preview": "vite preview"
+    "deploy": "yarn build && gh-pages -b deploy -m 'build: Deployment' -d dist"
   },
   "prettier": {
     "singleQuote": true,
@@ -22,14 +33,20 @@
       "prettier-plugin-tailwindcss"
     ]
   },
-  "devDependencies": {
-    "@babel/core": "^7.22.10",
-    "@babel/plugin-transform-react-jsx": "^7.22.5",
-    "@preact/preset-vite": "^2.5.0",
+  "dependencies": {
     "@twind/core": "^1.1.3",
     "@twind/preset-autoprefix": "^1.0.7",
     "@twind/preset-tailwind": "^1.1.4",
     "@twind/with-react": "^1.1.3",
+    "lucide-preact": "^0.268.0",
+    "preact": "^10.17.0",
+    "react": "npm:@preact/compat",
+    "react-dom": "npm:@preact/compat"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.10",
+    "@babel/plugin-transform-react-jsx": "^7.22.5",
+    "@preact/preset-vite": "^2.5.0",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "^6.4.0",
     "eslint": "^8.46.0",
@@ -42,12 +59,8 @@
     "eslint-plugin-no-relative-import-paths": "^1.5.2",
     "eslint-plugin-promise": "^6.1.1",
     "gh-pages": "^6.0.0",
-    "lucide-preact": "^0.268.0",
-    "preact": "^10.17.0",
-    "prettier": "^3.0.1",
-    "prettier-plugin-tailwindcss": "^0.5.1",
-    "react": "npm:@preact/compat",
-    "react-dom": "npm:@preact/compat",
+    "prettier": "^3.0.2",
+    "prettier-plugin-tailwindcss": "^0.5.3",
     "typescript": "^5.0.2",
     "vite": "^4.4.8"
   }

@@ -1,6 +1,6 @@
 # Todo List
 [![Version](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/eldarlrd/todo-list/main/package.json&query=version&logo=git-extensions&label=version&labelColor=475569&color=0284c7)](https://github.com/eldarlrd/todo-list/blob/main/package.json)
-[![License](https://img.shields.io/badge/license-AGPLv3-c026d3?labelColor=475569&logo=open-source-initiative&logoColor=fff)](https://github.com/eldarlrd/todo-list/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/eldarlrd/todo-list/main/package.json&query=license&logo=open-source-initiative&logoColor=fff&label=license&labelColor=475569&color=c026d3)](https://github.com/eldarlrd/todo-list/blob/main/LICENSE)
 
 > Todo List is a website built with
 > - **[Preact](https://preactjs.com)**
@@ -20,17 +20,17 @@ yarn install
 ```sh
 yarn dev
 ```
-### Make a Production Build
+### Make a Prod. Build
 ```sh
 yarn build
-```
-### Format the Code (ESLint + Prettier)
-```sh
-yarn format
 ```
 ### Preview Prod. Build
 ```sh
 yarn preview
+```
+### Format the Code (ESLint + Prettier)
+```sh
+yarn format
 ```
 ## Deployment
 ```sh
