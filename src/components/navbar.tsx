@@ -1,5 +1,8 @@
 import { type JSX } from 'preact/jsx-runtime';
 import { type StateUpdater, useState, useEffect } from 'preact/hooks';
+import { useComponentVisible } from '@/hooks/useComponentVisible.ts';
+import { Modal } from '@/components/modals/modal.tsx';
+import { AddProject } from '@/components/modals/addProject.tsx';
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
 import { Menu, Plus, X } from 'lucide-preact';
 
@@ -34,6 +37,10 @@ const MobileNav = ({ setDrawer }: DrawerControls): JSX.Element => {
 };
 
 const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useComponentVisible(false);
+  const [modalWindow, setModalWindow] = useState<JSX.Element>();
+
   return (
     <nav
       id='sidebar'
@@ -45,6 +52,10 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
       <span class='flex min-w-full gap-2 text-2xl'>
         <button
           id='addProject'
+          onClick={(): void => {
+            setIsComponentVisible(true);
+            setModalWindow(<AddProject refer={ref} />);
+          }}
           class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) flex grow items-center gap-1.5 break-all rounded-lg bg-violet-800 p-3 font-medium leading-4 text-slate-50 transition-colors dark:bg-pink-600'>
           <Plus aria-label='Plus Sign' strokeWidth='2.25' class='scale-110' />
           Add Project
@@ -61,6 +72,7 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
           </button>
         ) : null}
       </span>
+
       <div id='projectList' class='mt-2 flex min-w-full flex-col gap-2'>
         <span>
           <button class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex min-w-full items-center break-all rounded-lg px-3 py-2 text-xl leading-4 text-slate-900 transition-colors dark:text-slate-50'>
@@ -68,6 +80,7 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
           </button>
         </span>
       </div>
+      <Modal window={modalWindow} visible={isComponentVisible} />
     </nav>
   );
 };

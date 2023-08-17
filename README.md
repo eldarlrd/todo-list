@@ -5,9 +5,9 @@
 > Todo List is a website built with
 > - **[Preact](https://preactjs.com)**
 > - **[TypeScript](https://typescriptlang.org)**
+> - **[Nano ID](https://zelark.github.io/nano-id-cc)**
 > - **[Twind](https://twind.style)**
 > - **[Lucide](https://lucide.dev)**
-> - **[Nano ID](https://zelark.github.io/nano-id-cc)**
 > - **[Vite](https://vitejs.dev)**
 >
 > providing projects and progress stages.
