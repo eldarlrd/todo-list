@@ -12,16 +12,16 @@
 >
 > providing projects and progress stages.
 
-## Installation
+## Install
 ```sh
 yarn install
 ```
-## Development
-### Run a Dev. Environment
+## Develop
+### Run Env.
 ```sh
 yarn dev
 ```
-### Make a Prod. Build
+### Prod. Build
 ```sh
 yarn build
 ```
@@ -29,11 +29,11 @@ yarn build
 ```sh
 yarn preview
 ```
-### Format the Code (ESLint + Prettier)
+### Format Code (ESLint + Prettier)
 ```sh
 yarn format
 ```
-## Deployment
+## Deploy
 ```sh
 yarn deploy
 ```
