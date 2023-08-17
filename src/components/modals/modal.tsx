@@ -12,7 +12,7 @@ export const Modal = ({
       id='overlay'
       class={
         visible
-          ? 'absolute inset-0 flex items-center justify-center bg-slate-50 bg-opacity-60 dark:bg-slate-900'
+          ? 'dark:(bg-slate-900, bg-opacity-70) absolute inset-0 flex items-center justify-center bg-slate-50 bg-opacity-70'
           : 'hidden'
       }>
       {window}

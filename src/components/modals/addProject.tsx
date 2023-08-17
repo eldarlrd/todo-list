@@ -1,4 +1,4 @@
-import { type Ref } from 'preact';
+import { type Ref } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 export const AddProject = ({
