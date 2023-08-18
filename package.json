@@ -1,14 +1,14 @@
 {
   "name": "todo-list",
   "private": true,
-  "version": "0.6.6",
+  "version": "0.6.7",
   "type": "module",
-  "description": "A Complex Todo List with Projects",
   "keywords": [
     "todo list",
-    "todo",
-    "projects"
+    "projects",
+    "todo"
   ],
+  "description": "A Complex Todo List with Projects",
   "repository": "github:eldarlrd/todo-list",
   "homepage": "https://eldarlrd.github.io/todo-list",
   "author": "Eldar Pashazade <eldarlrd@pm.me> (https://eldarlrd.github.io)",

@@ -24,6 +24,7 @@ const MobileNav = ({ setDrawer }: DrawerControls): JSX.Element => {
       class='dark:(bg-slate-800, text-pink-500) absolute top-0 min-w-full select-none bg-slate-100 p-3 text-2xl text-violet-800 transition-colors lg:hidden'>
       <button
         id='hamburgerMenu'
+        type='button'
         onClick={(): void => {
           setDrawer(true);
         }}
@@ -52,6 +53,7 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
       <span class='flex min-w-full gap-2 text-2xl'>
         <button
           id='addProject'
+          type='button'
           onClick={(): void => {
             setIsComponentVisible(true);
             setModalWindow(<AddProject refer={ref} />);
@@ -63,6 +65,7 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
         {drawer ? (
           <button
             id='mobileCloseDrawer'
+            type='button'
             onClick={(): void => {
               setDrawer(false);
             }}
@@ -75,7 +78,7 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
 
       <div id='projectList' class='mt-2 flex min-w-full flex-col gap-2'>
         <span>
-          <button class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex min-w-full items-center break-all rounded-lg px-3 py-2 text-xl leading-4 text-slate-900 transition-colors dark:text-slate-50'>
+          <button type='button' class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex min-w-full items-center break-all rounded-lg px-3 py-2 text-xl leading-4 text-slate-900 transition-colors dark:text-slate-50'>
             Default
           </button>
         </span>

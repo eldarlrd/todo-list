@@ -29,6 +29,7 @@ export const ViewMenu = ({ view, setView }: ViewControls): JSX.Element => {
     <div ref={ref}>
       <button
         id='viewMenu'
+        type='button'
         onClick={(): void => {
           setIsComponentVisible(!isComponentVisible);
         }}
@@ -52,6 +53,7 @@ export const ViewMenu = ({ view, setView }: ViewControls): JSX.Element => {
           {viewOptions.map(option => (
             <button
               key={option}
+              type='button'
               onClick={(e: Event): void => {
                 switchView((e.target as HTMLButtonElement).innerText);
               }}
