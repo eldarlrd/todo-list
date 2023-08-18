@@ -15,14 +15,8 @@
   "icons": [
     {
       "src": "favicon.png",
-      "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "../src/assets/todoList.webp",
-      "sizes": "512x512",
-      "type": "image/webp",
+      "sizes": "192x192",
       "purpose": "any maskable"
     }
   ]

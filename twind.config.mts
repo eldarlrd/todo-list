@@ -16,7 +16,7 @@ export default defineConfig({
       {
         fontFamily: 'Inter',
         fontDisplay: 'swap',
-        src: 'url("src/assets/Inter.woff2") format("woff2")'
+        src: 'url("Inter.woff2") format("woff2")'
       }
     ]
   }
