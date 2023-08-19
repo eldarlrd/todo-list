@@ -9,15 +9,14 @@
   ],
   "orientation": "natural",
   "theme_color": "#10b981",
-  "background_color": "#10b981",
+  "background_color": "#f1f5f9",
   "description": "A Complex Todo List with Projects",
   "start_url": "https://eldarlrd.github.io/todo-list",
   "icons": [
     {
       "src": "favicon.png",
       "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
+      "sizes": "192x192"
     }
   ]
 }
