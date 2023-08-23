@@ -56,7 +56,7 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
           type='button'
           onClick={(): void => {
             setIsComponentVisible(true);
-            setModalWindow(<AddProject refer={ref} />);
+            setModalWindow(<AddProject key='Add Project' />);
           }}
           class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) flex grow items-center gap-1.5 break-all rounded-lg bg-violet-800 p-3 font-medium leading-4 text-slate-50 transition-colors dark:bg-pink-600'>
           <Plus aria-label='Plus Sign' strokeWidth='2.25' class='scale-110' />
@@ -85,7 +85,12 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
           </button>
         </span>
       </div>
-      <Modal window={modalWindow} visible={isComponentVisible} />
+      <Modal
+        windowContent={modalWindow}
+        setVisible={setIsComponentVisible}
+        visible={isComponentVisible}
+        refer={ref}
+      />
     </nav>
   );
 };

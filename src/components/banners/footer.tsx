@@ -8,11 +8,11 @@ export const Footer = (): JSX.Element => {
         © 2023
         <a
           class='flex items-center gap-0.5 text-indigo-800 transition-transform hover:scale-105 dark:text-indigo-300 xl:gap-1'
-          title='Go to GitHub'
+          title='Go to the Source'
           target='_blank'
           type='text/html'
           rel='noopener noreferrer nofollow external author'
-          href='https://github.com/eldarlrd'>
+          href='https://github.com/eldarlrd/todo-list'>
           <Github
             aria-label='GitHub Octocat'
             size='20'
@@ -25,11 +25,11 @@ export const Footer = (): JSX.Element => {
         for
         <a
           class='flex items-center gap-1 text-yellow-800 transition-transform hover:scale-105 dark:text-yellow-500 xl:gap-1.5'
-          title='Go to The Odin Project'
+          title='Go to the Task'
           target='_blank'
           type='text/html'
           rel='noopener noreferrer nofollow external'
-          href='https://theodinproject.com'>
+          href='https://theodinproject.com/lessons/node-path-javascript-todo-list'>
           <Gavel
             aria-label='Hammer'
             size='20'
