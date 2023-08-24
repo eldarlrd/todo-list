@@ -7,7 +7,7 @@ export const Footer = (): JSX.Element => {
       <p id='author' class='flex gap-2'>
         © 2023
         <a
-          class='flex items-center gap-0.5 text-indigo-800 transition-transform hover:scale-105 dark:text-indigo-300 xl:gap-1'
+          class='flex items-center gap-0.5 rounded-md text-indigo-800 transition-transform hover:scale-105 dark:text-indigo-300 xl:gap-1'
           title='Go to the Source'
           target='_blank'
           type='text/html'
@@ -24,7 +24,7 @@ export const Footer = (): JSX.Element => {
       <p id='curriculum' class='flex gap-2'>
         for
         <a
-          class='flex items-center gap-1 text-yellow-800 transition-transform hover:scale-105 dark:text-yellow-500 xl:gap-1.5'
+          class='flex items-center gap-1 rounded-md text-yellow-800 transition-transform hover:scale-105 dark:text-yellow-500 xl:gap-1.5'
           title='Go to the Task'
           target='_blank'
           type='text/html'

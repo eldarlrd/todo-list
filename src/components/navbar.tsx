@@ -53,10 +53,16 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
       <span class='flex min-w-full gap-2 text-2xl'>
         <button
           id='addProject'
+          tabIndex={drawer ? 0 : -1}
           type='button'
           onClick={(): void => {
             setIsComponentVisible(true);
-            setModalWindow(<AddProject key='Add Project' />);
+            setModalWindow(
+              <AddProject
+                key='Add Project'
+                setVisible={setIsComponentVisible}
+              />
+            );
           }}
           class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) flex grow items-center gap-1.5 break-all rounded-lg bg-violet-800 p-3 font-medium leading-4 text-slate-50 transition-colors dark:bg-pink-600'>
           <Plus aria-label='Plus Sign' strokeWidth='2.25' class='scale-110' />
@@ -79,6 +85,7 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
       <div id='projectList' class='mt-2 flex min-w-full flex-col gap-2'>
         <span>
           <button
+            tabIndex={drawer ? 0 : -1}
             type='button'
             class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex min-w-full items-center break-all rounded-lg px-3 py-2 text-xl leading-4 text-slate-900 transition-colors dark:text-slate-50'>
             Default

@@ -1,9 +1,33 @@
 import { type JSX } from 'preact/jsx-runtime';
+import { type StateUpdater, useState } from 'preact/hooks';
 
-export const AddProject = (): JSX.Element => {
+export const AddProject = ({
+  setVisible
+}: {
+  setVisible: StateUpdater<boolean>;
+}): JSX.Element => {
+  const [title, setTitle] = useState<string>();
   return (
-    <div class='dark:(bg-slate-700, text-slate-50) mx-px mb-px grow select-text rounded-b-lg bg-slate-200 px-4 py-2 text-slate-900'>
-      Project Name
-    </div>
+    <form>
+      <label class='flex flex-col gap-1'>
+        <span class='font-medium'>
+          Title
+          <span class='text-violet-900 dark:text-pink-300'>*</span>
+        </span>
+        <input
+          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150'
+          title=''
+          name='projectTitle'
+          type='text'
+          minLength={1}
+          maxLength={32}
+          value={title}
+          required
+          onInput={(e: Event): void => {
+            setTitle((e.target as HTMLInputElement).value);
+          }}
+        />
+      </label>
+    </form>
   );
 };

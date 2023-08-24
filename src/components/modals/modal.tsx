@@ -20,12 +20,16 @@ export const Modal = ({
       id='overlay'
       class={
         visible
-          ? 'dark:(bg-slate-900, bg-opacity-70) absolute inset-0 flex items-center justify-center bg-slate-50 bg-opacity-70'
-          : 'hidden'
+          ? 'dark:(bg-slate-900, bg-opacity-70) absolute inset-0 flex items-center justify-center bg-slate-50 bg-opacity-70 backdrop-blur-[1px] transition-opacity duration-200'
+          : 'opacity-0'
       }>
       <div
         id='modalAddProject'
-        class='dark:(bg-slate-600, shadow-slate-700) z-10 flex aspect-video w-80 flex-col rounded-lg bg-slate-300 shadow-sm shadow-slate-200 transition-all sm:w-96 md:w-[28rem] lg:w-[32rem] xl:w-[36rem] 2xl:w-[40rem]'
+        class={
+          visible
+            ? 'dark:(bg-slate-600, shadow-slate-700) z-10 flex aspect-video w-80 flex-col rounded-lg bg-slate-300 shadow-sm shadow-slate-200 transition-all sm:w-96 md:w-[28rem] lg:w-[32rem] xl:w-[36rem] 2xl:w-[40rem]'
+            : 'hidden'
+        }
         ref={refer}>
         <div class='mx-4 my-2 flex justify-between text-xl font-semibold transition-all dark:text-pink-300 xl:text-2xl'>
           {windowContent?.key}
@@ -43,7 +47,9 @@ export const Modal = ({
             />
           </button>
         </div>
-        {windowContent}
+        <div class='dark:(bg-slate-700, text-slate-50) mx-px mb-px grow rounded-b-lg bg-slate-200 px-4 py-2 text-slate-900'>
+          {windowContent}
+        </div>
       </div>
     </div>
   );
