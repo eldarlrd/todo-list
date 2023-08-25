@@ -20,7 +20,7 @@ export const AddProject = ({
           name='projectTitle'
           type='text'
           minLength={1}
-          maxLength={32}
+          maxLength={128}
           value={title}
           required
           onInput={(e: Event): void => {

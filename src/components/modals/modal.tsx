@@ -20,14 +20,14 @@ export const Modal = ({
       id='overlay'
       class={
         visible
-          ? 'dark:(bg-slate-900, bg-opacity-70) absolute inset-0 flex items-center justify-center bg-slate-50 bg-opacity-70 backdrop-blur-[1px] transition-opacity duration-200'
-          : 'opacity-0'
+          ? 'dark:(bg-slate-900, bg-opacity-70) absolute inset-0 flex items-center justify-center bg-slate-50 bg-opacity-70 backdrop-blur-[1px] z-10 transition-opacity duration-200'
+          : 'opacity-0 w-0 h-0'
       }>
       <div
         id='modalAddProject'
         class={
           visible
-            ? 'dark:(bg-slate-600, shadow-slate-700) z-10 flex aspect-video w-80 flex-col rounded-lg bg-slate-300 shadow-sm shadow-slate-200 transition-all sm:w-96 md:w-[28rem] lg:w-[32rem] xl:w-[36rem] 2xl:w-[40rem]'
+            ? 'dark:(bg-slate-600, shadow-slate-700) flex aspect-video w-80 flex-col rounded-lg bg-slate-300 shadow-sm shadow-slate-200 transition-all sm:w-96 md:w-[28rem] lg:w-[32rem] xl:w-[36rem] 2xl:w-[40rem]'
             : 'hidden'
         }
         ref={refer}>
