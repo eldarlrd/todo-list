@@ -36,7 +36,7 @@ export const ViewMenu = ({ view, setView }: ViewControls): JSX.Element => {
         title='Switch View'
         class={`${
           isComponentVisible ? 'bg-slate-200 dark:bg-slate-700' : ''
-        } hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) flex max-w-[8rem] items-center justify-end gap-1.5 whitespace-nowrap rounded-md px-2 font-medium transition-colors`}>
+        } hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) flex max-w-[8rem] items-center justify-end gap-1.5 whitespace-nowrap rounded-md px-2 font-medium`}>
         {view ? (
           <>
             <Eye aria-label='Eye' size='20' />

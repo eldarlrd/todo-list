@@ -38,9 +38,9 @@ const MobileNav = ({ setDrawer }: DrawerControls): JSX.Element => {
 };
 
 const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
+  const [modalWindow, setModalWindow] = useState<JSX.Element>();
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
-  const [modalWindow, setModalWindow] = useState<JSX.Element>();
 
   return (
     <nav

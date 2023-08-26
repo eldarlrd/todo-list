@@ -1,5 +1,11 @@
 import { type JSX } from 'preact/jsx-runtime';
-import { type StateUpdater, useState } from 'preact/hooks';
+import {
+  type StateUpdater,
+  useState,
+  useEffect,
+  useContext
+} from 'preact/hooks';
+import { ModalVisible } from '@/components/modals/modal.tsx';
 
 export const AddProject = ({
   setVisible
@@ -7,8 +13,14 @@ export const AddProject = ({
   setVisible: StateUpdater<boolean>;
 }): JSX.Element => {
   const [title, setTitle] = useState<string>();
+  const visible = useContext(ModalVisible);
+
+  useEffect(() => {
+    setTitle('');
+  }, [visible]);
+
   return (
-    <form>
+    <form class='flex flex-col gap-3'>
       <label class='flex flex-col gap-1'>
         <span class='font-medium'>
           Title
@@ -27,6 +39,10 @@ export const AddProject = ({
             setTitle((e.target as HTMLInputElement).value);
           }}
         />
+      </label>
+      <label class='flex flex-col gap-1'>
+        <span class='font-medium'>Icon</span>
+        <input type='radio' />
       </label>
     </form>
   );

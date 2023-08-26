@@ -1,6 +1,9 @@
+import { createContext } from 'preact';
 import { type JSX } from 'preact/jsx-runtime';
 import { type StateUpdater, type Ref } from 'preact/hooks';
 import { X } from 'lucide-preact';
+
+export const ModalVisible = createContext(false);
 
 interface ModalContent {
   windowContent: JSX.Element | undefined;
@@ -20,8 +23,8 @@ export const Modal = ({
       id='overlay'
       class={
         visible
-          ? 'dark:(bg-slate-900, bg-opacity-70) absolute inset-0 flex items-center justify-center bg-slate-50 bg-opacity-70 backdrop-blur-[1px] z-10 transition-opacity duration-200'
-          : 'opacity-0 w-0 h-0'
+          ? 'dark:(bg-slate-900, bg-opacity-70) absolute inset-0 z-10 flex items-center justify-center bg-slate-50 bg-opacity-70 backdrop-blur-[1px] transition-opacity duration-200'
+          : 'h-0 w-0 opacity-0'
       }>
       <div
         id='modalAddProject'
@@ -47,8 +50,10 @@ export const Modal = ({
             />
           </button>
         </div>
-        <div class='dark:(bg-slate-700, text-slate-50) mx-px mb-px grow rounded-b-lg bg-slate-200 px-4 py-2 text-slate-900'>
-          {windowContent}
+        <div class='dark:(bg-slate-700, text-slate-50) mx-px mb-px grow rounded-b-lg bg-slate-200 px-4 py-3 text-slate-900'>
+          <ModalVisible.Provider value={visible}>
+            {windowContent}
+          </ModalVisible.Provider>
         </div>
       </div>
     </div>
