@@ -1,7 +1,7 @@
 import { type JSX } from 'preact/jsx-runtime';
 import { type StateUpdater, useState, useEffect } from 'preact/hooks';
 import { useComponentVisible } from '@/hooks/useComponentVisible.ts';
-import { Modal } from '@/components/modals/modal.tsx';
+import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { AddProject } from '@/components/modals/addProject.tsx';
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
 import { Menu, Plus, X } from 'lucide-preact';
@@ -49,7 +49,7 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
         drawer
           ? 'lg:(relative, min-w-0) absolute top-0 min-h-full w-full transition-all duration-500'
           : 'lg:(ml-0, transition-all) -ml-72'
-      } dark:(bg-slate-700, text-pink-400) w-72 select-none flex-col items-start overflow-y-auto bg-slate-200 p-3 text-violet-900 lg:flex xl:w-80 2xl:w-96`}>
+      } dark:(bg-slate-700, text-pink-400) z-10 w-72 select-none flex-col items-start overflow-y-auto bg-slate-200 p-3 text-violet-900 lg:flex xl:w-80 2xl:w-96`}>
       <span class='flex min-w-full gap-2 text-2xl'>
         <button
           id='addProject'
@@ -92,7 +92,7 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
           </button>
         </span>
       </div>
-      <Modal
+      <ModalWindow
         windowContent={modalWindow}
         setVisible={setIsComponentVisible}
         visible={isComponentVisible}

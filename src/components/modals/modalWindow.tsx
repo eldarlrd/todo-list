@@ -12,7 +12,7 @@ interface ModalContent {
   refer: Ref<HTMLDivElement>;
 }
 
-export const Modal = ({
+export const ModalWindow = ({
   windowContent,
   setVisible,
   visible,

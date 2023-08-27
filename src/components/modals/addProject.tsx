@@ -5,7 +5,7 @@ import {
   useEffect,
   useContext
 } from 'preact/hooks';
-import { ModalVisible } from '@/components/modals/modal.tsx';
+import { ModalVisible } from '@/components/modals/modalWindow.tsx';
 
 export const AddProject = ({
   setVisible
@@ -42,7 +42,12 @@ export const AddProject = ({
       </label>
       <label class='flex flex-col gap-1'>
         <span class='font-medium'>Icon</span>
-        <input type='radio' />
+        <input
+          type='radio'
+          onClick={(): void => {
+            setVisible(false);
+          }}
+        />
       </label>
     </form>
   );
