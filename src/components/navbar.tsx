@@ -53,7 +53,6 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
       <span class='flex min-w-full gap-2 text-2xl'>
         <button
           id='addProject'
-          tabIndex={drawer ? 0 : -1}
           type='button'
           onClick={(): void => {
             setIsComponentVisible(true);
@@ -85,7 +84,6 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
       <div id='projectList' class='mt-2 flex min-w-full flex-col gap-2'>
         <span>
           <button
-            tabIndex={drawer ? 0 : -1}
             type='button'
             class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex min-w-full items-center break-all rounded-lg px-3 py-2 text-xl leading-4 text-slate-900 transition-colors dark:text-slate-50'>
             Default

@@ -1,11 +1,9 @@
 import { type JSX } from 'preact/jsx-runtime';
-import { useState } from 'preact/hooks';
 import { SortMenu } from '@/components/controls/sortMenu.tsx';
 import { ViewMenu } from '@/components/controls/viewMenu.tsx';
 import { Plus } from 'lucide-preact';
 
 export const ControlBar = (): JSX.Element => {
-  const [view, setView] = useState<string>();
   return (
     <div
       id='controlBar'
@@ -13,7 +11,7 @@ export const ControlBar = (): JSX.Element => {
       <button
         id='addTodo'
         type='button'
-        class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) md:(max-w-[8.5rem], text-lg, gap-1, pl-3, pr-4, py-1.5) flex max-w-[7.25rem] items-center gap-0.5 whitespace-nowrap break-all rounded-lg bg-violet-800 py-1 pl-2 pr-3 font-medium leading-4 text-white transition-all dark:bg-pink-600'>
+        class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) md:(max-w-[8.5rem], text-lg, gap-1, pl-3, pr-4, py-1.5) flex max-w-[7.25rem] items-center gap-0.5 whitespace-nowrap break-all rounded-md bg-violet-800 py-1 pl-2 pr-3 font-medium leading-4 text-white transition-all dark:bg-pink-600'>
         <Plus
           aria-label='Plus Sign'
           strokeWidth='2.25'
@@ -22,9 +20,9 @@ export const ControlBar = (): JSX.Element => {
         />
         Add Todo
       </button>
-      <div class='flex gap-1'>
+      <div class='flex gap-2'>
         <SortMenu />
-        <ViewMenu view={view} setView={setView} />
+        <ViewMenu />
       </div>
     </div>
   );
