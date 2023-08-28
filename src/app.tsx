@@ -1,7 +1,7 @@
 import { type JSX } from 'preact/jsx-runtime';
 import { Header } from '@/components/banners/header.tsx';
 import { Footer } from '@/components/banners/footer.tsx';
-import { Navbar } from '@/components/navbar.tsx';
+import { Sidebar } from '@/components/sidebar.tsx';
 import { List } from '@/components/list.tsx';
 
 export const App = (): JSX.Element => {
@@ -11,7 +11,7 @@ export const App = (): JSX.Element => {
       class='font-main flex min-h-[100svh] flex-col justify-between bg-slate-50 accent-emerald-500 selection:bg-emerald-500 dark:bg-slate-900'>
       <Header />
       <main class='flex max-h-screen grow'>
-        <Navbar />
+        <Sidebar />
         <List />
       </main>
       <Footer />

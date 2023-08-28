@@ -7,26 +7,26 @@ import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
 import { Menu, Plus, X } from 'lucide-preact';
 
 interface DrawerControls {
-  drawer?: boolean | undefined;
-  setDrawer: StateUpdater<boolean | undefined>;
+  isDrawerOpen?: boolean | undefined;
+  setIsDrawerOpen: StateUpdater<boolean | undefined>;
 }
 
-const MobileNav = ({ setDrawer }: DrawerControls): JSX.Element => {
+const MobileBar = ({ setIsDrawerOpen }: DrawerControls): JSX.Element => {
   useEffect(() => {
     window.addEventListener('resize', () => {
-      window.innerWidth >= 1024 ? setDrawer(false) : null;
+      window.innerWidth >= 1024 ? setIsDrawerOpen(false) : null;
     });
-  }, [setDrawer]);
+  }, [setIsDrawerOpen]);
 
   return (
     <nav
-      id='mobileNavbar'
+      id='mobileBar'
       class='dark:(bg-slate-800, text-pink-500) absolute top-0 min-w-full select-none bg-slate-100 p-3 text-2xl text-violet-800 transition-colors lg:hidden'>
       <button
         id='hamburgerMenu'
         type='button'
         onClick={(): void => {
-          setDrawer(true);
+          setIsDrawerOpen(true);
         }}
         title='Open Drawer'
         class='hover:(bg-slate-200, active:bg-slate-300, dark:(bg-slate-700, active:bg-slate-600)) mr-2 w-12 rounded-lg px-3 py-2 leading-4 transition-colors'>
@@ -37,8 +37,11 @@ const MobileNav = ({ setDrawer }: DrawerControls): JSX.Element => {
   );
 };
 
-const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
-  const [modalWindow, setModalWindow] = useState<JSX.Element>();
+const SidePanel = ({
+  isDrawerOpen,
+  setIsDrawerOpen
+}: DrawerControls): JSX.Element => {
+  const [modalContent, setModalContent] = useState<JSX.Element>();
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
 
@@ -46,7 +49,7 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
     <nav
       id='sidebar'
       class={`${
-        drawer
+        isDrawerOpen
           ? 'lg:(relative, min-w-0) absolute top-0 min-h-full w-full transition-all duration-500'
           : 'lg:(ml-0, transition-all) -ml-72'
       } dark:(bg-slate-700, text-pink-400) z-10 w-72 select-none flex-col items-start overflow-y-auto bg-slate-200 p-3 text-violet-900 lg:flex xl:w-80 2xl:w-96`}>
@@ -56,10 +59,10 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
           type='button'
           onClick={(): void => {
             setIsComponentVisible(true);
-            setModalWindow(
+            setModalContent(
               <AddProject
                 key='Add Project'
-                setVisible={setIsComponentVisible}
+                setIsComponentVisible={setIsComponentVisible}
               />
             );
           }}
@@ -67,12 +70,12 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
           <Plus aria-label='Plus Sign' strokeWidth='2.25' class='scale-110' />
           Add Project
         </button>
-        {drawer ? (
+        {isDrawerOpen ? (
           <button
             id='mobileCloseDrawer'
             type='button'
             onClick={(): void => {
-              setDrawer(false);
+              setIsDrawerOpen(false);
             }}
             title='Close Drawer'
             class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) w-12 rounded-lg p-3 leading-4 transition-colors lg:hidden'>
@@ -91,21 +94,24 @@ const Sidebar = ({ drawer, setDrawer }: DrawerControls): JSX.Element => {
         </span>
       </div>
       <ModalWindow
-        windowContent={modalWindow}
-        setVisible={setIsComponentVisible}
-        visible={isComponentVisible}
+        modalContent={modalContent}
+        setIsComponentVisible={setIsComponentVisible}
+        isComponentVisible={isComponentVisible}
         refer={ref}
       />
     </nav>
   );
 };
 
-export const Navbar = (): JSX.Element => {
-  const [drawer, setDrawer] = useState<boolean>();
+export const Sidebar = (): JSX.Element => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>();
   return (
     <>
-      <MobileNav setDrawer={setDrawer} />
-      <Sidebar drawer={drawer} setDrawer={setDrawer} />
+      <MobileBar setIsDrawerOpen={setIsDrawerOpen} />
+      <SidePanel
+        isDrawerOpen={isDrawerOpen}
+        setIsDrawerOpen={setIsDrawerOpen}
+      />
     </>
   );
 };

@@ -5,19 +5,19 @@ import {
   useEffect,
   useContext
 } from 'preact/hooks';
-import { ModalVisible } from '@/components/modals/modalWindow.tsx';
+import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
 
 export const AddProject = ({
-  setVisible
+  setIsComponentVisible
 }: {
-  setVisible: StateUpdater<boolean>;
+  setIsComponentVisible: StateUpdater<boolean>;
 }): JSX.Element => {
-  const [title, setTitle] = useState<string>();
-  const visible = useContext(ModalVisible);
+  const [projectTitle, setProjectTitle] = useState<string>();
+  const isModalVisible = useContext(IsModalVisible);
 
   useEffect(() => {
-    setTitle('');
-  }, [visible]);
+    setProjectTitle('');
+  }, [isModalVisible]);
 
   return (
     <form class='flex flex-col gap-3'>
@@ -33,10 +33,10 @@ export const AddProject = ({
           type='text'
           minLength={1}
           maxLength={128}
-          value={title}
+          value={projectTitle}
           required
           onInput={(e: Event): void => {
-            setTitle((e.target as HTMLInputElement).value);
+            setProjectTitle((e.target as HTMLInputElement).value);
           }}
         />
       </label>
@@ -45,7 +45,7 @@ export const AddProject = ({
         <input
           type='radio'
           onClick={(): void => {
-            setVisible(false);
+            setIsComponentVisible(false);
           }}
         />
       </label>

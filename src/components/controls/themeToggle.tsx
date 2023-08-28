@@ -18,20 +18,20 @@ const themeCheck = (): void => {
 };
 
 export const ThemeToggle = (): JSX.Element => {
-  const [dark, setDark] = useState<boolean>();
+  const [isDark, setIsDark] = useState<boolean>();
   const iconSwitch = (): void => {
-    root.classList.contains('dark') ? setDark(true) : setDark(false);
+    root.classList.contains('dark') ? setIsDark(true) : setIsDark(false);
   };
 
   useEffect(iconSwitch, []);
 
   const themeToggle = (): void => {
-    dark ? (localStorage.theme = 'light') : (localStorage.theme = 'dark');
+    isDark ? (localStorage.theme = 'light') : (localStorage.theme = 'dark');
     root.style.colorScheme === 'dark'
       ? (root.style.colorScheme = 'light')
       : (root.style.colorScheme = 'dark');
     root.classList.toggle('dark');
-    setDark(!dark);
+    setIsDark(!isDark);
   };
 
   return (
@@ -41,7 +41,7 @@ export const ThemeToggle = (): JSX.Element => {
       onClick={themeToggle}
       title='Toggle Theme'
       class='hover:(bg-slate-200, active:bg-slate-300, dark:(bg-slate-700, active:bg-slate-600)) lg:(w-14, px-4, py-3) xl:(w-16, px-5, py-4) w-12 rounded-lg px-3 py-2 leading-4 transition-colors'>
-      {dark ? (
+      {isDark ? (
         <Sun
           aria-label='Sun'
           strokeWidth='2.25'
