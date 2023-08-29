@@ -1,10 +1,11 @@
 import { type JSX } from 'preact/jsx-runtime';
 import { useState, useEffect } from 'preact/hooks';
-import { useComponentVisible } from '@/hooks/use_component_visible.ts';
+import { useComponentVisible } from '@/hooks/useComponentVisible.ts';
 import { Eye } from 'lucide-preact';
 
+const VIEW_OPTIONS: string[] = ['All', 'Todo', 'In Progress', 'Done'];
+
 export const ViewMenu = (): JSX.Element => {
-  const VIEW_OPTIONS: string[] = ['All', 'Todo', 'In Progress', 'Done'];
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
   const [viewSelected, setViewSelected] = useState<string>();

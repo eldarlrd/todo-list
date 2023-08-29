@@ -1,9 +1,9 @@
 import { type JSX } from 'preact/jsx-runtime';
 import { type StateUpdater, useState, useEffect } from 'preact/hooks';
-import { useComponentVisible } from '@/hooks/use_component_visible.ts';
-import { ModalWindow } from '@/components/modals/modal_window.tsx';
-import { AddProject } from '@/components/modals/add_project.tsx';
-import { ThemeToggle } from '@/components/controls/theme_toggle.tsx';
+import { useComponentVisible } from '@/hooks/useComponentVisible.ts';
+import { ModalWindow } from '@/components/modals/modalWindow.tsx';
+import { AddProject } from '@/components/modals/addProject.tsx';
+import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
 import { Menu, Plus, X } from 'lucide-preact';
 
 interface DrawerControls {
