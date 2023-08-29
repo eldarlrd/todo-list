@@ -1,9 +1,9 @@
 import { type JSX } from 'preact/jsx-runtime';
 import { type StateUpdater, useState, useEffect } from 'preact/hooks';
-import { useComponentVisible } from '@/hooks/useComponentVisible.ts';
-import { ModalWindow } from '@/components/modals/modalWindow.tsx';
-import { AddProject } from '@/components/modals/addProject.tsx';
-import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
+import { useComponentVisible } from '@/hooks/use_component_visible.ts';
+import { ModalWindow } from '@/components/modals/modal_window.tsx';
+import { AddProject } from '@/components/modals/add_project.tsx';
+import { ThemeToggle } from '@/components/controls/theme_toggle.tsx';
 import { Menu, Plus, X } from 'lucide-preact';
 
 interface DrawerControls {
@@ -20,10 +20,10 @@ const MobileBar = ({ setIsDrawerOpen }: DrawerControls): JSX.Element => {
 
   return (
     <nav
-      id='mobileBar'
+      id='mobile-bar'
       class='dark:(bg-slate-800, text-pink-500) absolute top-0 min-w-full select-none bg-slate-100 p-3 text-2xl text-violet-800 transition-colors lg:hidden'>
       <button
-        id='hamburgerMenu'
+        id='hamburger-menu'
         type='button'
         onClick={(): void => {
           setIsDrawerOpen(true);
@@ -55,7 +55,7 @@ const SidePanel = ({
       } dark:(bg-slate-700, text-pink-400) z-10 w-72 select-none flex-col items-start overflow-y-auto bg-slate-200 p-3 text-violet-900 lg:flex xl:w-80 2xl:w-96`}>
       <span class='flex min-w-full gap-2 text-2xl'>
         <button
-          id='addProject'
+          id='add-project'
           type='button'
           onClick={(): void => {
             setIsComponentVisible(true);
@@ -72,7 +72,7 @@ const SidePanel = ({
         </button>
         {isDrawerOpen ? (
           <button
-            id='mobileCloseDrawer'
+            id='mobile-close-drawer'
             type='button'
             onClick={(): void => {
               setIsDrawerOpen(false);
@@ -84,8 +84,8 @@ const SidePanel = ({
         ) : null}
       </span>
 
-      <div id='projectList' class='mt-2 flex min-w-full flex-col gap-2'>
-        <span>
+      <div id='project-list' class='mt-2 flex min-w-full flex-col gap-2'>
+        <span id='project-title'>
           <button
             type='button'
             class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex min-w-full items-center break-all rounded-lg px-3 py-2 text-xl leading-4 text-slate-900 transition-colors dark:text-slate-50'>

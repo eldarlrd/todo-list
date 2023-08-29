@@ -36,7 +36,7 @@ export const ThemeToggle = (): JSX.Element => {
 
   return (
     <button
-      id='themeToggle'
+      id='theme-toggle'
       type='button'
       onClick={themeToggle}
       title='Toggle Theme'

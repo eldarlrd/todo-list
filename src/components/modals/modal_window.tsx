@@ -5,7 +5,7 @@ import { X } from 'lucide-preact';
 
 export const IsModalVisible = createContext(false);
 
-interface ModalContent {
+interface ModalControls {
   modalContent: JSX.Element | undefined;
   setIsComponentVisible: StateUpdater<boolean>;
   isComponentVisible: boolean;
@@ -17,7 +17,7 @@ export const ModalWindow = ({
   setIsComponentVisible,
   isComponentVisible,
   refer
-}: ModalContent): JSX.Element => {
+}: ModalControls): JSX.Element => {
   return (
     <div
       id='overlay'
@@ -27,7 +27,7 @@ export const ModalWindow = ({
           : 'h-0 w-0 opacity-0'
       }>
       <div
-        id='modalWindow'
+        id='modal-window'
         class={
           isComponentVisible
             ? 'dark:(bg-slate-600, shadow-slate-700) flex aspect-video w-80 flex-col rounded-lg bg-slate-300 shadow-sm shadow-slate-200 transition-all sm:w-96 md:w-[28rem] lg:w-[32rem] xl:w-[36rem] 2xl:w-[40rem]'
@@ -37,7 +37,7 @@ export const ModalWindow = ({
         <div class='mx-4 my-2 flex justify-between text-xl font-semibold transition-all dark:text-pink-300 xl:text-2xl'>
           {modalContent?.key}
           <button
-            id='closeModal'
+            id='close-modal'
             type='button'
             onClick={(): void => {
               setIsComponentVisible(false);
@@ -51,7 +51,7 @@ export const ModalWindow = ({
           </button>
         </div>
         <div
-          id='modalContent'
+          id='modal-content'
           class='dark:(bg-slate-700, text-slate-50) mx-px mb-px grow rounded-b-lg bg-slate-200 px-4 py-3 text-slate-900'>
           <IsModalVisible.Provider value={isComponentVisible}>
             {modalContent}

@@ -7,7 +7,7 @@ import {
   useRef
 } from 'preact/hooks';
 
-interface VisibilitySettings {
+interface VisibilityControls {
   ref: Ref<HTMLDivElement>;
   isComponentVisible: boolean;
   setIsComponentVisible: StateUpdater<boolean>;
@@ -15,7 +15,7 @@ interface VisibilitySettings {
 
 export const useComponentVisible = (
   initialIsVisible: boolean
-): VisibilitySettings => {
+): VisibilityControls => {
   const [isComponentVisible, setIsComponentVisible] =
     useState<boolean>(initialIsVisible);
   const ref = useRef<HTMLDivElement>(null);

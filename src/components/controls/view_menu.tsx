@@ -1,10 +1,10 @@
 import { type JSX } from 'preact/jsx-runtime';
 import { useState, useEffect } from 'preact/hooks';
-import { useComponentVisible } from '@/hooks/useComponentVisible.ts';
+import { useComponentVisible } from '@/hooks/use_component_visible.ts';
 import { Eye } from 'lucide-preact';
 
 export const ViewMenu = (): JSX.Element => {
-  const viewOptions: string[] = ['All', 'Todo', 'In Progress', 'Done'];
+  const VIEW_OPTIONS: string[] = ['All', 'Todo', 'In Progress', 'Done'];
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
   const [viewSelected, setViewSelected] = useState<string>();
@@ -24,7 +24,7 @@ export const ViewMenu = (): JSX.Element => {
   return (
     <div ref={ref}>
       <button
-        id='viewMenu'
+        id='view-menu'
         type='button'
         onClick={(): void => {
           setIsComponentVisible(!isComponentVisible);
@@ -42,11 +42,11 @@ export const ViewMenu = (): JSX.Element => {
       </button>
       {isComponentVisible && (
         <div
-          id='viewDropdown'
+          id='view-dropdown'
           class={
             'absolute right-3 mt-1.5 flex flex-col items-end justify-center overflow-clip rounded-md bg-slate-200 dark:bg-slate-700 md:mt-2'
           }>
-          {viewOptions.map(option => (
+          {VIEW_OPTIONS.map(option => (
             <button
               key={option}
               type='button'
