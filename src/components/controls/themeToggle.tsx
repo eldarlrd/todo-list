@@ -17,7 +17,11 @@ const themeCheck = (): void => {
   }
 };
 
-export const ThemeToggle = (): JSX.Element => {
+export const ThemeToggle = ({
+  identifier
+}: {
+  identifier: string;
+}): JSX.Element => {
   const [isDark, setIsDark] = useState<boolean>();
   const iconSwitch = (): void => {
     root.classList.contains('dark') ? setIsDark(true) : setIsDark(false);
@@ -36,7 +40,7 @@ export const ThemeToggle = (): JSX.Element => {
 
   return (
     <button
-      id='theme-toggle'
+      id={identifier}
       type='button'
       onClick={themeToggle}
       title='Toggle Theme'

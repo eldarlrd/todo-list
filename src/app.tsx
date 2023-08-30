@@ -8,7 +8,7 @@ export const App = (): JSX.Element => {
   return (
     <div
       id='app'
-      class='font-main flex min-h-[100svh] flex-col justify-between bg-slate-50 accent-emerald-500 selection:bg-emerald-500 dark:bg-slate-900'>
+      class='font-main dark:(bg-slate-900, accent-sky-600, selection:bg-sky-600) flex min-h-[100svh] flex-col justify-between bg-slate-50 accent-emerald-400 selection:bg-emerald-400'>
       <Header />
       <main class='flex max-h-screen grow'>
         <Sidebar />

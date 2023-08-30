@@ -32,7 +32,7 @@ const MobileBar = ({ setIsDrawerOpen }: DrawerControls): JSX.Element => {
         class='hover:(bg-slate-200, active:bg-slate-300, dark:(bg-slate-700, active:bg-slate-600)) mr-2 w-12 rounded-lg px-3 py-2 leading-4 transition-colors'>
         <Menu aria-label='Bars' strokeWidth='2.25' class='scale-125' />
       </button>
-      <ThemeToggle />
+      <ThemeToggle identifier='mobile-theme-toggle' />
     </nav>
   );
 };
@@ -88,7 +88,7 @@ const SidePanel = ({
         <span id='project-title'>
           <button
             type='button'
-            class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex min-w-full items-center break-all rounded-lg px-3 py-2 text-xl leading-4 text-slate-900 transition-colors dark:text-slate-50'>
+            class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex min-w-full items-center break-all rounded-lg px-3 py-2 text-xl leading-4 text-slate-900 duration-150 dark:text-slate-50'>
             Default
           </button>
         </span>
