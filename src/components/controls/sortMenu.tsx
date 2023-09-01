@@ -9,7 +9,7 @@ import {
   ArrowDownNarrowWide,
   ArrowUpWideNarrow
 } from 'lucide-preact';
-import { useComponentVisible } from '@/hooks/useComponentVisible.ts';
+import { useVisible } from '@/hooks/useVisible.ts';
 
 const SORT_OPTIONS: {
   Title: JSX.Element[];
@@ -61,8 +61,7 @@ const SORT_OPTIONS: {
 };
 
 export const SortMenu = (): JSX.Element => {
-  const { ref, isComponentVisible, setIsComponentVisible } =
-    useComponentVisible(false);
+  const { ref, isVisible, setIsVisible } = useVisible(false);
   const [isSortAscending, setIsSortAscending] = useState<boolean>();
   const [sortSelected, setSortSelected] = useState<string>();
 
@@ -73,7 +72,7 @@ export const SortMenu = (): JSX.Element => {
 
   const switchSort = (sort: string): void => {
     setSortSelected(sort);
-    setIsComponentVisible(false);
+    setIsVisible(false);
     sessionStorage.setItem('sort', sort);
   };
 
@@ -114,11 +113,11 @@ export const SortMenu = (): JSX.Element => {
         id='sort-menu'
         type='button'
         onClick={(): void => {
-          setIsComponentVisible(!isComponentVisible);
+          setIsVisible(!isVisible);
         }}
         title='Switch Sort'
         class={`${
-          isComponentVisible ? 'bg-slate-200 dark:bg-slate-700' : ''
+          isVisible ? 'bg-slate-200 dark:bg-slate-700' : ''
         } hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) md:(max-w-[8rem], text-base, gap-1.5, px-2.5, py-2) flex max-w-[7rem] items-center justify-end gap-1 whitespace-nowrap rounded-r-md px-1.5 py-1 text-sm font-medium duration-150`}>
         {sortSelected ? (
           <ChevronDown
@@ -128,7 +127,7 @@ export const SortMenu = (): JSX.Element => {
           />
         ) : null}
       </button>
-      {isComponentVisible && (
+      {isVisible && (
         <div
           id='sort-dropdown'
           class='absolute -ml-[1.4rem] mt-[2.35rem] flex flex-col items-end justify-center overflow-clip rounded-md bg-slate-200 dark:bg-slate-700 md:mt-12'>

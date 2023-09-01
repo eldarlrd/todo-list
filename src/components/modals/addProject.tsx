@@ -8,9 +8,9 @@ import {
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
 
 export const AddProject = ({
-  setIsComponentVisible
+  setIsVisible
 }: {
-  setIsComponentVisible: StateUpdater<boolean>;
+  setIsVisible: StateUpdater<boolean>;
 }): JSX.Element => {
   const [projectTitle, setProjectTitle] = useState<string>();
   const isModalVisible = useContext(IsModalVisible);
@@ -45,7 +45,7 @@ export const AddProject = ({
         <input
           type='radio'
           onClick={(): void => {
-            setIsComponentVisible(false);
+            setIsVisible(false);
           }}
         />
       </label>

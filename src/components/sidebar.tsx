@@ -1,6 +1,6 @@
 import { type JSX } from 'preact/jsx-runtime';
 import { type StateUpdater, useState, useEffect } from 'preact/hooks';
-import { useComponentVisible } from '@/hooks/useComponentVisible.ts';
+import { useVisible } from '@/hooks/useVisible.ts';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { AddProject } from '@/components/modals/addProject.tsx';
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
@@ -42,8 +42,7 @@ const SidePanel = ({
   setIsDrawerOpen
 }: DrawerControls): JSX.Element => {
   const [modalContent, setModalContent] = useState<JSX.Element>();
-  const { ref, isComponentVisible, setIsComponentVisible } =
-    useComponentVisible(false);
+  const { ref, isVisible, setIsVisible } = useVisible(false);
 
   return (
     <nav
@@ -58,12 +57,9 @@ const SidePanel = ({
           id='add-project'
           type='button'
           onClick={(): void => {
-            setIsComponentVisible(true);
+            setIsVisible(true);
             setModalContent(
-              <AddProject
-                key='Add Project'
-                setIsComponentVisible={setIsComponentVisible}
-              />
+              <AddProject key='Add Project' setIsVisible={setIsVisible} />
             );
           }}
           class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) flex grow items-center gap-1.5 break-all rounded-lg bg-violet-800 p-3 font-medium leading-4 text-slate-50 transition-colors dark:bg-pink-600'>
@@ -95,8 +91,8 @@ const SidePanel = ({
       </div>
       <ModalWindow
         modalContent={modalContent}
-        setIsComponentVisible={setIsComponentVisible}
-        isComponentVisible={isComponentVisible}
+        setIsVisible={setIsVisible}
+        isVisible={isVisible}
         refer={ref}
       />
     </nav>

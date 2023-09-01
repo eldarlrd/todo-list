@@ -9,20 +9,17 @@ import {
 
 interface VisibilityControls {
   ref: Ref<HTMLDivElement>;
-  isComponentVisible: boolean;
-  setIsComponentVisible: StateUpdater<boolean>;
+  isVisible: boolean;
+  setIsVisible: StateUpdater<boolean>;
 }
 
-export const useComponentVisible = (
-  initialIsVisible: boolean
-): VisibilityControls => {
-  const [isComponentVisible, setIsComponentVisible] =
-    useState<boolean>(initialIsVisible);
+export const useVisible = (initialIsVisible: boolean): VisibilityControls => {
+  const [isVisible, setIsVisible] = useState<boolean>(initialIsVisible);
   const ref = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: Event): void => {
     if (ref.current && !ref.current.contains(event.target as HTMLElement)) {
-      setIsComponentVisible(false);
+      setIsVisible(false);
     }
   };
 
@@ -33,5 +30,5 @@ export const useComponentVisible = (
     };
   }, []);
 
-  return { ref, isComponentVisible, setIsComponentVisible };
+  return { ref, isVisible, setIsVisible };
 };
