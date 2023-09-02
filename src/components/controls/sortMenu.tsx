@@ -9,6 +9,7 @@ import {
   ArrowDownNarrowWide,
   ArrowUpWideNarrow
 } from 'lucide-preact';
+
 import { useVisible } from '@/hooks/useVisible.ts';
 
 const SORT_OPTIONS: {

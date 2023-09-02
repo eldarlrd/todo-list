@@ -1,10 +1,11 @@
 import { type JSX } from 'preact/jsx-runtime';
 import { type StateUpdater, useState, useEffect } from 'preact/hooks';
+import { Menu, Plus, X } from 'lucide-preact';
+
 import { useVisible } from '@/hooks/useVisible.ts';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { AddProject } from '@/components/modals/addProject.tsx';
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
-import { Menu, Plus, X } from 'lucide-preact';
 
 interface DrawerControls {
   isDrawerOpen?: boolean | undefined;

@@ -1,7 +1,8 @@
 import { type JSX } from 'preact/jsx-runtime';
-import { SortMenu } from '@/components/controls/sortMenu.tsx';
-import { ViewMenu } from '@/components/controls/viewMenu.tsx';
 import { Plus } from 'lucide-preact';
+
+import { ViewMenu } from '@/components/controls/viewMenu.tsx';
+import { SortMenu } from '@/components/controls/sortMenu.tsx';
 
 export const ControlPanel = (): JSX.Element => {
   return (

@@ -1,7 +1,8 @@
 import { type JSX } from 'preact/jsx-runtime';
 import { useState, useEffect } from 'preact/hooks';
-import { useVisible } from '@/hooks/useVisible.ts';
 import { Eye } from 'lucide-preact';
+
+import { useVisible } from '@/hooks/useVisible.ts';
 
 const VIEW_OPTIONS: string[] = ['All', 'Todo', 'In Progress', 'Done'];
 

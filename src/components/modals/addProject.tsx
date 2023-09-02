@@ -5,6 +5,7 @@ import {
   useEffect,
   useContext
 } from 'preact/hooks';
+
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
 
 export const AddProject = ({

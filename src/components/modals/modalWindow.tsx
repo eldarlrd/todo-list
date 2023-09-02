@@ -1,9 +1,7 @@
-import { createContext } from 'preact';
 import { type JSX } from 'preact/jsx-runtime';
 import { type StateUpdater, type Ref } from 'preact/hooks';
+import { createContext } from 'preact';
 import { X } from 'lucide-preact';
-
-export const IsModalVisible = createContext(false);
 
 interface ModalControls {
   modalContent: JSX.Element | undefined;
@@ -12,7 +10,9 @@ interface ModalControls {
   refer: Ref<HTMLDivElement>;
 }
 
-export const ModalWindow = ({
+const IsModalVisible = createContext(false);
+
+const ModalWindow = ({
   modalContent,
   setIsVisible,
   isVisible,
@@ -50,6 +50,7 @@ export const ModalWindow = ({
             />
           </button>
         </div>
+
         <div
           id='modal-content'
           class='dark:(bg-slate-700, text-slate-50) mx-px mb-px grow rounded-b-lg bg-slate-200 px-4 py-3 text-slate-900'>
@@ -61,3 +62,5 @@ export const ModalWindow = ({
     </div>
   );
 };
+
+export { IsModalVisible, ModalWindow };

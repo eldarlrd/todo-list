@@ -1,4 +1,5 @@
 import { type JSX } from 'preact/jsx-runtime';
+
 import { ControlPanel } from '@/components/controls/controlPanel.tsx';
 
 export const List = (): JSX.Element => {
