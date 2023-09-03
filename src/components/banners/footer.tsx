@@ -1,5 +1,5 @@
-import { type JSX } from 'preact/jsx-runtime';
 import { Github, Gavel } from 'lucide-preact';
+import { type JSX } from 'preact/jsx-runtime';
 
 export const Footer = (): JSX.Element => {
   return (

@@ -1,6 +1,6 @@
-import { type JSX } from 'preact/jsx-runtime';
-import { useState, useEffect } from 'preact/hooks';
 import { Sun, Moon } from 'lucide-preact';
+import { useState, useEffect } from 'preact/hooks';
+import { type JSX } from 'preact/jsx-runtime';
 
 const root: HTMLElement = document.documentElement;
 const themeCheck = (): void => {

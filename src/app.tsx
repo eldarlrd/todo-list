@@ -1,9 +1,9 @@
 import { type JSX } from 'preact/jsx-runtime';
 
-import { Sidebar } from '@/components/sidebar.tsx';
-import { List } from '@/components/list.tsx';
-import { Header } from '@/components/banners/header.tsx';
 import { Footer } from '@/components/banners/footer.tsx';
+import { Header } from '@/components/banners/header.tsx';
+import { List } from '@/components/list.tsx';
+import { Sidebar } from '@/components/sidebar.tsx';
 
 export const App = (): JSX.Element => {
   return (

@@ -18,8 +18,8 @@
  * along with Todo List. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { render } from 'preact';
 import install from '@twind/with-react';
+import { render } from 'preact';
 
 import config from '../twind.config.mts';
 

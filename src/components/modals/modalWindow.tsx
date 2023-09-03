@@ -1,7 +1,7 @@
-import { type JSX } from 'preact/jsx-runtime';
-import { type StateUpdater, type Ref } from 'preact/hooks';
-import { createContext } from 'preact';
 import { X } from 'lucide-preact';
+import { createContext } from 'preact';
+import { type StateUpdater, type Ref } from 'preact/hooks';
+import { type JSX } from 'preact/jsx-runtime';
 
 interface ModalControls {
   modalContent: JSX.Element | undefined;

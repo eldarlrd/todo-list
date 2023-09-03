@@ -1,6 +1,6 @@
-import { type JSX } from 'preact/jsx-runtime';
-import { useState, useEffect } from 'preact/hooks';
 import { Eye } from 'lucide-preact';
+import { useState, useEffect } from 'preact/hooks';
+import { type JSX } from 'preact/jsx-runtime';
 
 import { useVisible } from '@/hooks/useVisible.ts';
 
