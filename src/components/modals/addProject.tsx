@@ -50,12 +50,6 @@ export const AddProject = ({
             setIsVisible(false);
           }}
         />
-        <input
-          type='radio'
-          onClick={(): void => {
-            setIsVisible(false);
-          }}
-        />
       </label>
 
       <span class='flex justify-end gap-2'>
