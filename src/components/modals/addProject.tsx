@@ -1,3 +1,4 @@
+import { Wrench } from 'lucide-preact';
 import {
   type StateUpdater,
   useState,
@@ -42,20 +43,26 @@ export const AddProject = ({
         />
       </label>
 
-      <label class='flex flex-col gap-1 xl:text-lg'>
+      <div class='flex flex-col gap-1 xl:text-lg'>
         <span class='font-medium'>Icon</span>
-        <input
-          type='radio'
-          onClick={(): void => {
-            setIsVisible(false);
-          }}
-        />
-      </label>
+        <span
+          id='project-icons'
+          class='flex flex-wrap items-center justify-center gap-1.5'>
+          <button
+            type='button'
+            class='hover:(bg-slate-50, dark:bg-slate-800) active:(border-transparent, bg-violet-800, text-slate-50, dark:(bg-pink-600, text-slate-50)) rounded-md border border-current p-2 text-violet-900 transition-all dark:text-pink-300'>
+            <Wrench aria-label='Wrench' />
+          </button>
+        </span>
+      </div>
 
       <span class='flex justify-end gap-2'>
         <button
           id='project-cancel'
           type='button'
+          onClick={(): void => {
+            setIsVisible(false);
+          }}
           class='hover:(bg-rose-700, border-rose-700, text-slate-50, active:(bg-rose-800, border-rose-800)) border-1 md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded-md border-current py-1.5 text-lg font-medium text-rose-700 transition-all dark:text-slate-50 lg:w-28'>
           Cancel
         </button>
