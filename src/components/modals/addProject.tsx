@@ -9,6 +9,13 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
 
+const PROJECT_ICONS = [
+  {
+    key: 'wrench',
+    icon: <Wrench aria-label='Wrench' />
+  }
+];
+
 export const AddProject = ({
   setIsVisible
 }: {
@@ -48,11 +55,14 @@ export const AddProject = ({
         <span
           id='project-icons'
           class='flex flex-wrap items-center justify-center gap-1.5'>
-          <button
-            type='button'
-            class='hover:(bg-slate-50, dark:bg-slate-800) active:(border-transparent, bg-violet-800, text-slate-50, dark:(bg-pink-600, text-slate-50)) rounded-md border border-current p-2 text-violet-900 transition-all dark:text-pink-300'>
-            <Wrench aria-label='Wrench' />
-          </button>
+          {PROJECT_ICONS.map(icon => (
+            <button
+              key={icon.key}
+              type='button'
+              class='hover:(bg-slate-50, dark:bg-slate-800) active:(border-transparent, bg-violet-800, text-slate-50, dark:(bg-pink-600, text-slate-50)) rounded-md border border-current p-2 text-violet-900 transition-all dark:text-pink-300'>
+              {icon.icon}
+            </button>
+          ))}
         </span>
       </div>
 
