@@ -1,4 +1,4 @@
-import { Menu, Plus, X } from 'lucide-preact';
+import { Menu, Plus, Star, X } from 'lucide-preact';
 import { type StateUpdater, useState, useEffect } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
@@ -85,7 +85,8 @@ const SidePanel = ({
         <span id='project-title'>
           <button
             type='button'
-            class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex min-w-full items-center break-all rounded-lg px-3 py-2 text-xl leading-4 text-slate-900 duration-150 dark:text-slate-50'>
+            class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex min-w-full items-center gap-1.5 break-all rounded-lg px-3 py-2 text-xl leading-4 text-slate-900 duration-150 dark:text-slate-50'>
+            <Star aria-label='Star' />
             Default
           </button>
         </span>

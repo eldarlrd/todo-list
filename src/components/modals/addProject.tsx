@@ -24,24 +24,20 @@ import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
 
 const PROJECT_ICONS = [
   {
-    key: 'wrench',
-    icon: <Wrench aria-label='Wrench' class='xl:scale-110' />
-  },
-  {
-    key: 'leaf',
-    icon: <Leaf aria-label='Leaf' class='xl:scale-110' />
+    key: 'star',
+    icon: <Star aria-label='Star' class='xl:scale-110' />
   },
   {
     key: 'book',
     icon: <BookOpen aria-label='Book' class='xl:scale-110' />
   },
   {
-    key: 'dumbbell',
-    icon: <Dumbbell aria-label='Dumbbell' class='xl:scale-110' />
+    key: 'leaf',
+    icon: <Leaf aria-label='Leaf' class='xl:scale-110' />
   },
   {
-    key: 'dollar',
-    icon: <CircleDollarSign aria-label='Dollar' class='xl:scale-110' />
+    key: 'wrench',
+    icon: <Wrench aria-label='Wrench' class='xl:scale-110' />
   },
   {
     key: 'pizza',
@@ -52,24 +48,28 @@ const PROJECT_ICONS = [
     icon: <Backpack aria-label='Backpack' class='xl:scale-110' />
   },
   {
-    key: 'gift',
-    icon: <Gift aria-label='Gift' class='xl:scale-110' />
-  },
-  {
     key: 'gem',
     icon: <Gem aria-label='Gem' class='xl:scale-110' />
   },
   {
-    key: 'star',
-    icon: <Star aria-label='Star' class='xl:scale-110' />
+    key: 'gift',
+    icon: <Gift aria-label='Gift' class='xl:scale-110' />
+  },
+  {
+    key: 'pen',
+    icon: <PenTool aria-label='Pen' class='xl:scale-110' />
+  },
+  {
+    key: 'dumbbell',
+    icon: <Dumbbell aria-label='Dumbbell' class='xl:scale-110' />
   },
   {
     key: 'gamepad',
     icon: <Gamepad2 aria-label='Gamepad' class='xl:scale-110' />
   },
   {
-    key: 'pen',
-    icon: <PenTool aria-label='Pen' class='xl:scale-110' />
+    key: 'dollar',
+    icon: <CircleDollarSign aria-label='Dollar' class='xl:scale-110' />
   }
 ];
 
