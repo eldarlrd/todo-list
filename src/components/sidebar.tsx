@@ -1,9 +1,10 @@
-import { Menu, Plus, Star, X } from 'lucide-preact';
+import { Menu, Plus, Star, Trash2, X } from 'lucide-preact';
 import { type StateUpdater, useState, useEffect } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
 import { AddProject } from '@/components/modals/addProject.tsx';
+import { DeleteModal } from '@/components/modals/deleteModal.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { useVisible } from '@/hooks/useVisible.ts';
 
@@ -82,12 +83,24 @@ const SidePanel = ({
       </span>
 
       <div id='project-list' class='mt-2 flex min-w-full flex-col gap-2'>
-        <span id='project-title'>
+        <span id='project-title' class='flex'>
           <button
             type='button'
-            class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex min-w-full items-center gap-1.5 break-all rounded-lg px-3 py-2 text-xl leading-4 text-slate-900 duration-150 dark:text-slate-50'>
+            class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex grow items-center gap-1.5 break-all rounded-l-lg px-3 py-2 text-xl leading-4 text-slate-900 duration-150 dark:text-slate-50'>
             <Star aria-label='Star' />
             Default
+          </button>
+          <button
+            type='button'
+            onClick={(): void => {
+              setIsVisible(true);
+              setModalContent(
+                <DeleteModal key='Delete Project' setIsVisible={setIsVisible} />
+              );
+            }}
+            title='Delete Project'
+            class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) z-10 flex items-center gap-1.5 break-all rounded-r-lg px-3 text-xl leading-4 text-slate-900 duration-150 dark:text-slate-50'>
+            <Trash2 aria-label='Trash' />
           </button>
         </span>
       </div>

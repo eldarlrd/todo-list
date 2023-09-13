@@ -34,7 +34,7 @@ const ModalWindow = ({
             : 'hidden'
         }
         ref={refer}>
-        <div class='mx-4 my-2 flex justify-between text-xl font-semibold transition-all dark:text-pink-300 xl:text-2xl'>
+        <div class='mx-4 my-2 flex select-none justify-between text-xl font-semibold text-violet-900 transition-all dark:text-pink-300 xl:text-2xl'>
           {modalContent?.key}
           <button
             id='close-modal'
