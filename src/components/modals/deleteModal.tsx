@@ -14,6 +14,11 @@ export const DeleteModal = ({
           setIsVisible(false);
         }}
       />
+      <button
+        onClick={(): void => {
+          setIsVisible(false);
+        }}
+      />
     </div>
   );
 };
