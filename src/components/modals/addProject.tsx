@@ -95,10 +95,10 @@ export const AddProject = ({
           <span class='text-violet-900 dark:text-pink-300'>*</span>
         </span>
         <input
-          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150'
           title=''
-          name='project-title'
           type='text'
+          name='project-title'
+          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150'
           minLength={1}
           maxLength={128}
           value={projectTitle}
@@ -116,9 +116,9 @@ export const AddProject = ({
           class='flex flex-wrap items-center justify-center gap-1.5 lg:gap-2 2xl:gap-2.5'>
           {PROJECT_ICONS.map(icon => (
             <button
+              type='button'
               id={icon.key}
               key={icon.key}
-              type='button'
               class={`${
                 icon.key === projectIcon
                   ? 'dark:(bg-pink-600, text-slate-50) border-transparent bg-violet-800 text-slate-50'
@@ -135,8 +135,8 @@ export const AddProject = ({
 
       <span class='flex justify-end gap-2 pt-1.5'>
         <button
-          id='project-cancel'
           type='button'
+          id='project-cancel'
           onClick={(): void => {
             setIsVisible(false);
           }}
@@ -144,8 +144,8 @@ export const AddProject = ({
           Cancel
         </button>
         <button
-          id='project-add'
           type='button'
+          id='project-add'
           class='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded-md bg-emerald-800 py-1.5 text-lg font-medium text-white transition-all dark:bg-sky-600 lg:w-28'>
           Add
         </button>

@@ -25,12 +25,12 @@ const MobileBar = ({ setIsDrawerOpen }: DrawerControls): JSX.Element => {
       id='mobile-bar'
       class='dark:(bg-slate-800, text-pink-500) absolute top-0 min-w-full select-none bg-slate-100 p-3 text-2xl text-violet-800 transition-colors lg:hidden'>
       <button
-        id='hamburger-menu'
         type='button'
+        title='Open Drawer'
+        id='hamburger-menu'
         onClick={(): void => {
           setIsDrawerOpen(true);
         }}
-        title='Open Drawer'
         class='hover:(bg-slate-200, active:bg-slate-300, dark:(bg-slate-700, active:bg-slate-600)) mr-2 w-12 rounded-lg px-3 py-2 leading-4 transition-colors'>
         <Menu aria-label='Bars' strokeWidth='2.25' class='scale-125' />
       </button>
@@ -56,8 +56,8 @@ const SidePanel = ({
       } dark:(bg-slate-700, text-pink-400) z-10 w-72 select-none flex-col items-start overflow-y-auto bg-slate-200 p-3 text-violet-900 lg:flex xl:w-80 2xl:w-96`}>
       <span class='flex min-w-full gap-2 text-2xl'>
         <button
-          id='add-project'
           type='button'
+          id='add-project'
           onClick={(): void => {
             setIsVisible(true);
             setModalContent(
@@ -70,12 +70,12 @@ const SidePanel = ({
         </button>
         {isDrawerOpen ? (
           <button
-            id='mobile-close-drawer'
             type='button'
+            title='Close Drawer'
+            id='mobile-close-drawer'
             onClick={(): void => {
               setIsDrawerOpen(false);
             }}
-            title='Close Drawer'
             class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) w-12 rounded-lg p-3 leading-4 transition-colors lg:hidden'>
             <X aria-label='X' strokeWidth='2.25' class='scale-110' />
           </button>
@@ -86,21 +86,25 @@ const SidePanel = ({
         <span id='project-title' class='flex'>
           <button
             type='button'
-            class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex grow items-center gap-1.5 break-all rounded-l-lg px-3 py-2 text-xl leading-4 text-slate-900 duration-150 dark:text-slate-50'>
-            <Star aria-label='Star' />
-            Default
-          </button>
-          <button
-            type='button'
-            onClick={(): void => {
-              setIsVisible(true);
-              setModalContent(
-                <DeleteModal key='Delete Project' setIsVisible={setIsVisible} />
-              );
-            }}
-            title='Delete Project'
-            class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) z-10 flex items-center gap-1.5 break-all rounded-r-lg px-3 text-xl leading-4 text-slate-900 duration-150 dark:text-slate-50'>
-            <Trash2 aria-label='Trash' />
+            class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex grow items-center justify-between gap-1.5 rounded-lg px-3 py-2 text-xl leading-4 text-slate-900 duration-150 dark:text-slate-50'>
+            <span class='flex items-center gap-1.5 break-all'>
+              <Star aria-label='Star' />
+              Default
+            </span>
+            <button
+              type='button'
+              title='Delete Project'
+              onClick={(): void => {
+                setIsVisible(true);
+                setModalContent(
+                  <DeleteModal
+                    key='Delete Project'
+                    setIsVisible={setIsVisible}
+                  />
+                );
+              }}>
+              <Trash2 aria-label='Trash' />
+            </button>
           </button>
         </span>
       </div>

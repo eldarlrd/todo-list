@@ -95,12 +95,12 @@ export const SortMenu = (): JSX.Element => {
     <div class='flex' ref={ref}>
       {sortSelected ? (
         <button
-          id='toggle-order'
           type='button'
+          title='Toggle Order'
+          id='toggle-order'
           onClick={(): void => {
             switchSortOrder(!isSortAscending);
           }}
-          title='Toggle Order'
           class='hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) md:(max-w-[8rem], text-base, gap-1.5, pl-3.5, pr-3, py-2) flex max-w-[7rem] items-center justify-end gap-1 whitespace-nowrap rounded-l-md py-1 pl-2.5 pr-2 text-sm font-medium duration-150'>
           {
             SORT_OPTIONS[sortSelected as keyof typeof SORT_OPTIONS][
@@ -111,12 +111,12 @@ export const SortMenu = (): JSX.Element => {
       ) : null}
 
       <button
-        id='sort-menu'
         type='button'
+        title='Switch Sort'
+        id='sort-menu'
         onClick={(): void => {
           setIsVisible(!isVisible);
         }}
-        title='Switch Sort'
         class={`${
           isVisible ? 'bg-slate-200 dark:bg-slate-700' : ''
         } hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) md:(max-w-[8rem], text-base, gap-1.5, px-2.5, py-2) flex max-w-[7rem] items-center justify-end gap-1 whitespace-nowrap rounded-r-md px-1.5 py-1 text-sm font-medium duration-150`}>
@@ -134,8 +134,8 @@ export const SortMenu = (): JSX.Element => {
           class='absolute -ml-[1.4rem] mt-[2.35rem] flex flex-col items-end justify-center overflow-clip rounded-md bg-slate-200 dark:bg-slate-700 md:mt-12'>
           {Object.keys(SORT_OPTIONS).map(option => (
             <button
-              key={option}
               type='button'
+              key={option}
               onClick={(e: Event): void => {
                 switchSort((e.target as HTMLButtonElement).innerText);
               }}

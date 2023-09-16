@@ -37,8 +37,8 @@ const ModalWindow = ({
         <div class='mx-4 my-2 flex select-none justify-between text-xl font-semibold text-violet-900 transition-all dark:text-pink-300 xl:text-2xl'>
           {modalContent?.key}
           <button
-            id='close-modal'
             type='button'
+            id='close-modal'
             onClick={(): void => {
               setIsVisible(false);
             }}
