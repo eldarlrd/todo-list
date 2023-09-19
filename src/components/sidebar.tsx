@@ -94,6 +94,7 @@ const SidePanel = ({
             <button
               type='button'
               title='Delete Project'
+              class='hover:(text-rose-900, dark:text-rose-400) duration-150'
               onClick={(): void => {
                 setIsVisible(true);
                 setModalContent(
