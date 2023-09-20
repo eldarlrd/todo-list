@@ -17,10 +17,10 @@ export const ControlPanel = (): JSX.Element => {
         <button
           type='button'
           id='add-todo'
+          class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) md:(max-w-[8.5rem], text-lg, gap-1, pl-3, pr-4, py-1.5) flex max-w-[7.25rem] items-center gap-0.5 whitespace-nowrap break-all rounded-md bg-violet-800 py-1 pl-2 pr-3 font-medium leading-4 text-white transition-all dark:bg-pink-600'
           onClick={(): void => {
             setIsVisible(true);
-          }}
-          class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) md:(max-w-[8.5rem], text-lg, gap-1, pl-3, pr-4, py-1.5) flex max-w-[7.25rem] items-center gap-0.5 whitespace-nowrap break-all rounded-md bg-violet-800 py-1 pl-2 pr-3 font-medium leading-4 text-white transition-all dark:bg-pink-600'>
+          }}>
           <Plus
             aria-label='Plus Sign'
             strokeWidth='2.25'

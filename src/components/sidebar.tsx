@@ -28,10 +28,10 @@ const MobileBar = ({ setIsDrawerOpen }: DrawerControls): JSX.Element => {
         type='button'
         title='Open Drawer'
         id='hamburger-menu'
+        class='hover:(bg-slate-200, active:bg-slate-300, dark:(bg-slate-700, active:bg-slate-600)) mr-2 w-12 rounded-lg px-3 py-2 leading-4 transition-colors'
         onClick={(): void => {
           setIsDrawerOpen(true);
-        }}
-        class='hover:(bg-slate-200, active:bg-slate-300, dark:(bg-slate-700, active:bg-slate-600)) mr-2 w-12 rounded-lg px-3 py-2 leading-4 transition-colors'>
+        }}>
         <Menu aria-label='Bars' strokeWidth='2.25' class='scale-125' />
       </button>
       <ThemeToggle identifier='mobile-theme-toggle' />
@@ -58,13 +58,13 @@ const SidePanel = ({
         <button
           type='button'
           id='add-project'
+          class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) flex grow items-center gap-1.5 break-all rounded-lg bg-violet-800 p-3 font-medium leading-4 text-slate-50 transition-colors dark:bg-pink-600'
           onClick={(): void => {
             setIsVisible(true);
             setModalContent(
               <AddProject key='Add Project' setIsVisible={setIsVisible} />
             );
-          }}
-          class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) flex grow items-center gap-1.5 break-all rounded-lg bg-violet-800 p-3 font-medium leading-4 text-slate-50 transition-colors dark:bg-pink-600'>
+          }}>
           <Plus aria-label='Plus Sign' strokeWidth='2.25' class='scale-110' />
           Add Project
         </button>
@@ -73,10 +73,10 @@ const SidePanel = ({
             type='button'
             title='Close Drawer'
             id='mobile-close-drawer'
+            class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) w-12 rounded-lg p-3 leading-4 transition-colors lg:hidden'
             onClick={(): void => {
               setIsDrawerOpen(false);
-            }}
-            class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) w-12 rounded-lg p-3 leading-4 transition-colors lg:hidden'>
+            }}>
             <X aria-label='X' strokeWidth='2.25' class='scale-110' />
           </button>
         ) : null}

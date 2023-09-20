@@ -98,10 +98,10 @@ export const SortMenu = (): JSX.Element => {
           type='button'
           title='Toggle Order'
           id='toggle-order'
+          class='hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) md:(max-w-[8rem], text-base, gap-1.5, pl-3.5, pr-3, py-2) flex max-w-[7rem] items-center justify-end gap-1 whitespace-nowrap rounded-l-md py-1 pl-2.5 pr-2 text-sm font-medium duration-150'
           onClick={(): void => {
             switchSortOrder(!isSortAscending);
-          }}
-          class='hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) md:(max-w-[8rem], text-base, gap-1.5, pl-3.5, pr-3, py-2) flex max-w-[7rem] items-center justify-end gap-1 whitespace-nowrap rounded-l-md py-1 pl-2.5 pr-2 text-sm font-medium duration-150'>
+          }}>
           {
             SORT_OPTIONS[sortSelected as keyof typeof SORT_OPTIONS][
               isSortAscending ? 1 : 0
@@ -114,12 +114,12 @@ export const SortMenu = (): JSX.Element => {
         type='button'
         title='Switch Sort'
         id='sort-menu'
-        onClick={(): void => {
-          setIsVisible(!isVisible);
-        }}
         class={`${
           isVisible ? 'bg-slate-200 dark:bg-slate-700' : ''
-        } hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) md:(max-w-[8rem], text-base, gap-1.5, px-2.5, py-2) flex max-w-[7rem] items-center justify-end gap-1 whitespace-nowrap rounded-r-md px-1.5 py-1 text-sm font-medium duration-150`}>
+        } hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) md:(max-w-[8rem], text-base, gap-1.5, px-2.5, py-2) flex max-w-[7rem] items-center justify-end gap-1 whitespace-nowrap rounded-r-md px-1.5 py-1 text-sm font-medium duration-150`}
+        onClick={(): void => {
+          setIsVisible(!isVisible);
+        }}>
         {sortSelected ? (
           <ChevronDown
             aria-label='Chevron Down'
@@ -136,10 +136,10 @@ export const SortMenu = (): JSX.Element => {
             <button
               type='button'
               key={option}
+              class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-24 min-w-fit justify-end px-2 py-0.5 font-medium active:bg-slate-400 md:w-28'
               onClick={(e: Event): void => {
                 switchSort((e.target as HTMLButtonElement).innerText);
-              }}
-              class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-24 min-w-fit justify-end px-2 py-0.5 font-medium active:bg-slate-400 md:w-28'>
+              }}>
               {option}
             </button>
           ))}

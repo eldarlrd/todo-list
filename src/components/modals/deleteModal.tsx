@@ -9,7 +9,7 @@ export const DeleteModal = ({
   return (
     <div class='flex flex-col'>
       Delete?
-      <div class='flex justify-between items-center'>
+      <div class='flex items-center justify-between'>
         <button
           type='button'
           id='delete-cancel'
