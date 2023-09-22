@@ -13,7 +13,7 @@ export const ControlPanel = (): JSX.Element => {
     <>
       <div
         id='control-panel'
-        class='dark:(bg-slate-600, text-slate-50) flex min-h-[2.5rem] items-center justify-between bg-slate-300 px-3 py-1 text-slate-900 transition-all md:py-1.5'>
+        class='flex min-h-[2.5rem] items-center justify-between bg-slate-300 px-3 py-1 transition-all dark:bg-slate-600 md:py-1.5'>
         <button
           type='button'
           id='add-todo'

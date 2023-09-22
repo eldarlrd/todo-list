@@ -121,7 +121,7 @@ export const AddProject = ({
               key={icon.key}
               class={`${
                 icon.key === projectIcon
-                  ? 'dark:(bg-pink-600, text-slate-50) border-transparent bg-violet-800 text-slate-50'
+                  ? 'border-transparent bg-violet-800 text-slate-50 dark:bg-pink-600'
                   : 'hover:(bg-slate-50, dark:bg-slate-800) border-current text-violet-900 dark:text-pink-300'
               } rounded-md border p-2 transition-all xl:p-2.5 2xl:p-3`}
               onClick={(): void => {
@@ -137,7 +137,7 @@ export const AddProject = ({
         <button
           type='button'
           id='project-cancel'
-          class='hover:(bg-slate-100, active:(bg-slate-50), dark:(bg-slate-800, active:bg-slate-900)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded-md py-1.5 text-lg font-medium text-slate-900 transition-all dark:text-slate-50 lg:w-28'
+          class='hover:(bg-slate-100, active:(bg-slate-50), dark:(bg-slate-800, active:bg-slate-900)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded-md py-1.5 text-lg font-medium transition-all lg:w-28'
           onClick={(): void => {
             setIsVisible(false);
           }}>
