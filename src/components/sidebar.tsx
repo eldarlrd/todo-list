@@ -53,7 +53,7 @@ const SidePanel = ({
         isDrawerOpen
           ? 'lg:(relative, min-w-0) absolute top-0 min-h-full w-full transition-all duration-500'
           : 'lg:(ml-0, transition-all) -ml-72'
-      } dark:(bg-slate-700, text-pink-400) z-10 w-72 select-none flex-col items-start overflow-y-auto bg-slate-200 p-3 text-violet-900 lg:flex xl:w-80 2xl:w-96`}>
+      } dark:(bg-slate-700, text-pink-400) z-10 w-72 select-none flex-col items-start overflow-y-auto overflow-x-clip bg-slate-200 p-3 text-violet-900 lg:flex xl:w-80 2xl:w-96`}>
       <span class='flex min-w-full gap-2 text-2xl'>
         <button
           type='button'
@@ -82,32 +82,34 @@ const SidePanel = ({
         ) : null}
       </span>
 
-      <div id='project-list' class='mt-2 flex min-w-full flex-col gap-2'>
-        <span id='project-title' class='flex'>
+      <div id='project-list' class='mt-2 flex max-w-full flex-col gap-2'>
+        <button
+          type='button'
+          class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex grow items-start justify-between gap-1.5 rounded-lg px-3 py-2 text-xl leading-4 text-slate-900 duration-150 dark:text-slate-50'>
+          <span class='flex max-w-full grow gap-1.5'>
+            <Star aria-label='Star' class='min-w-fit' />
+            <p class='break-words'>
+              DefaultDefaultDefaultDefault Default
+            </p>
+          </span>
           <button
             type='button'
-            class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex grow items-center justify-between gap-1.5 rounded-lg px-3 py-2 text-xl leading-4 text-slate-900 duration-150 dark:text-slate-50'>
-            <span class='flex items-center gap-1.5 break-all'>
-              <Star aria-label='Star' />
-              Default
-            </span>
-            <button
-              type='button'
-              title='Delete Project'
-              class='hover:(text-rose-900, dark:text-rose-400) duration-150'
-              onClick={(): void => {
-                setIsVisible(true);
-                setModalContent(
-                  <DeleteModal
-                    key='Delete Project'
-                    setIsVisible={setIsVisible}
-                  />
-                );
-              }}>
-              <Trash2 aria-label='Trash' />
-            </button>
+            title='Delete Project'
+            class='hover:(text-rose-900, dark:text-rose-400) duration-150'
+            onClick={(): void => {
+              setIsVisible(true);
+              setModalContent(
+                <DeleteModal
+                  key='Delete Project'
+                  setIsVisible={setIsVisible}
+                  taskMode='Project'
+                  taskTitle='Default'
+                />
+              );
+            }}>
+            <Trash2 aria-label='Trash' />
           </button>
-        </span>
+        </button>
       </div>
       <ModalWindow
         modalContent={modalContent}

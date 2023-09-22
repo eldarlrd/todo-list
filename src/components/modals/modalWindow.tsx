@@ -31,7 +31,7 @@ const ModalWindow = ({
         ref={refer}
         class={
           isVisible
-            ? 'dark:(bg-slate-600, shadow-slate-700) flex aspect-video w-80 flex-col rounded-lg bg-slate-300 shadow-sm shadow-slate-200 transition-all sm:w-96 md:w-[28rem] lg:w-[32rem] xl:w-[36rem] 2xl:w-[40rem]'
+            ? 'dark:(bg-slate-600, shadow-slate-700) flex w-80 flex-col rounded-lg bg-slate-300 shadow-sm shadow-slate-200 transition-all sm:w-96 md:w-[28rem] lg:w-[32rem] xl:w-[36rem] 2xl:w-[40rem]'
             : 'hidden'
         }>
         <div class='mx-4 my-2 flex select-none justify-between text-xl font-semibold text-violet-900 transition-all dark:text-pink-300 xl:text-2xl'>

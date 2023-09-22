@@ -2,14 +2,21 @@ import { type StateUpdater } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 export const DeleteModal = ({
-  setIsVisible
+  setIsVisible,
+  taskMode,
+  taskTitle
 }: {
   setIsVisible: StateUpdater<boolean>;
+  taskMode: string;
+  taskTitle: string;
 }): JSX.Element => {
   return (
-    <div class='flex flex-col'>
-      Delete?
-      <div class='flex justify-between pt-1.5'>
+    <div class='flex flex-col gap-1.5 break-words xl:text-lg'>
+      <p>Are you sure?</p>
+      <p>
+        {taskMode} <strong>{taskTitle}</strong> will be deleted permanently.
+      </p>
+      <div class='flex justify-end gap-2 pt-1.5'>
         <button
           type='button'
           id='delete-cancel'
