@@ -14,6 +14,11 @@ export const AddTodo = ({
           setIsVisible(false);
         }}
       />
+      <button
+        onClick={(): void => {
+          setIsVisible(false);
+        }}
+      />
     </div>
   );
 };
