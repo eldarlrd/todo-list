@@ -29,10 +29,7 @@ export const DeleteModal = ({
         <button
           type='button'
           id='delete-item'
-          class='hover:(bg-rose-700, active:bg-rose-600, dark:(bg-rose-700, active:bg-rose-800)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded-md bg-rose-800 py-1.5 text-lg font-medium text-white transition-all dark:bg-rose-600 lg:w-28'
-          onClick={(): void => {
-            setIsVisible(false);
-          }}>
+          class='hover:(bg-rose-700, active:bg-rose-600, dark:(bg-rose-700, active:bg-rose-800)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded-md bg-rose-800 py-1.5 text-lg font-medium text-white transition-all dark:bg-rose-600 lg:w-28'>
           Delete
         </button>
       </div>
