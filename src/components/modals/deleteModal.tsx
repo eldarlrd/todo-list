@@ -11,7 +11,7 @@ export const DeleteModal = ({
   taskTitle: string;
 }): JSX.Element => {
   return (
-    <div class='flex flex-col gap-1.5 break-words xl:text-lg'>
+    <div class='flex flex-col gap-1.5 break-words text-center xl:text-lg'>
       <p>Are you sure?</p>
       <p>
         {taskMode} <strong>{taskTitle}</strong> will be deleted permanently.

@@ -14,15 +14,17 @@ export const AddTodo = ({
   setIsVisible: StateUpdater<boolean>;
 }): JSX.Element => {
   const [todoTitle, setTodoTitle] = useState<string>();
+  const [todoDescription, setTodoDescription] = useState<string>();
 
   const isModalVisible = useContext(IsModalVisible);
 
   useEffect(() => {
     setTodoTitle('');
+    setTodoDescription('');
   }, [isModalVisible]);
 
   return (
-    <form class='flex h-full flex-col gap-3'>
+    <form class='flex h-full select-none flex-col gap-3'>
       <label class='flex flex-col gap-1.5 xl:text-lg'>
         <span class='font-medium'>
           Title
@@ -39,6 +41,21 @@ export const AddTodo = ({
           required
           onInput={(e: Event): void => {
             setTodoTitle((e.target as HTMLInputElement).value);
+          }}
+        />
+      </label>
+
+      <label class='flex flex-col gap-1.5 xl:text-lg'>
+        <span class='font-medium'>Description</span>
+        <input
+          title=''
+          type='text'
+          name='todo-description'
+          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150'
+          maxLength={256}
+          value={todoDescription}
+          onInput={(e: Event): void => {
+            setTodoDescription((e.target as HTMLInputElement).value);
           }}
         />
       </label>
