@@ -60,6 +60,51 @@ export const AddTodo = ({
         />
       </label>
 
+      <label class='flex flex-col gap-1.5 xl:text-lg'>
+        <span class='font-medium'>Priority</span>
+        <input
+          title=''
+          type='text'
+          name='todo-priority'
+          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150'
+          maxLength={256}
+          value={todoDescription}
+          onInput={(e: Event): void => {
+            setTodoDescription((e.target as HTMLInputElement).value);
+          }}
+        />
+      </label>
+
+      <label class='flex flex-col gap-1.5 xl:text-lg'>
+        <span class='font-medium'>Due Date</span>
+        <input
+          title=''
+          type='text'
+          name='todo-date'
+          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150'
+          maxLength={256}
+          value={todoDescription}
+          onInput={(e: Event): void => {
+            setTodoDescription((e.target as HTMLInputElement).value);
+          }}
+        />
+      </label>
+
+      <label class='flex flex-col gap-1.5 xl:text-lg'>
+        <span class='font-medium'>Stage</span>
+        <input
+          title=''
+          type='text'
+          name='todo-stage'
+          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150'
+          maxLength={256}
+          value={todoDescription}
+          onInput={(e: Event): void => {
+            setTodoDescription((e.target as HTMLInputElement).value);
+          }}
+        />
+      </label>
+
       <span class='flex justify-end gap-2 pt-1.5'>
         <button
           type='button'
