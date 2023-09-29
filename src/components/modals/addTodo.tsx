@@ -1,3 +1,4 @@
+import { formatISO } from 'date-fns';
 import {
   type StateUpdater,
   useState,
@@ -8,19 +9,33 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
 
+interface TodoDetails {
+  title: string;
+  description: string;
+  dueDate: string;
+  priority: string;
+  stage: string;
+}
+
+const emptyTodo: TodoDetails = {
+  title: '',
+  description: '',
+  dueDate: formatISO(new Date(), { representation: 'date' }),
+  priority: '',
+  stage: ''
+};
+
 export const AddTodo = ({
   setIsVisible
 }: {
   setIsVisible: StateUpdater<boolean>;
 }): JSX.Element => {
-  const [todoTitle, setTodoTitle] = useState<string>();
-  const [todoDescription, setTodoDescription] = useState<string>();
+  const [todo, setTodo] = useState(emptyTodo);
 
   const isModalVisible = useContext(IsModalVisible);
 
   useEffect(() => {
-    setTodoTitle('');
-    setTodoDescription('');
+    setTodo(emptyTodo);
   }, [isModalVisible]);
 
   return (
@@ -37,10 +52,15 @@ export const AddTodo = ({
           class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150'
           minLength={1}
           maxLength={128}
-          value={todoTitle}
+          value={todo.title}
           required
           onInput={(e: Event): void => {
-            setTodoTitle((e.target as HTMLInputElement).value);
+            setTodo(
+              (prevState): TodoDetails => ({
+                ...prevState,
+                title: (e.target as HTMLInputElement).value
+              })
+            );
           }}
         />
       </label>
@@ -53,9 +73,38 @@ export const AddTodo = ({
           name='todo-description'
           class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150'
           maxLength={256}
-          value={todoDescription}
+          value={todo.description}
           onInput={(e: Event): void => {
-            setTodoDescription((e.target as HTMLInputElement).value);
+            setTodo(
+              (prevState): TodoDetails => ({
+                ...prevState,
+                description: (e.target as HTMLInputElement).value
+              })
+            );
+          }}
+        />
+      </label>
+
+      <label class='flex flex-col gap-1.5 xl:text-lg'>
+        <span class='font-medium'>
+          Due Date<span class='text-violet-900 dark:text-pink-300'>*</span>
+        </span>
+        <input
+          title=''
+          type='date'
+          name='todo-date'
+          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150'
+          max='9999-12-31'
+          min={todo.dueDate}
+          value={todo.dueDate}
+          required
+          onInput={(e: Event): void => {
+            setTodo(
+              (prevState): TodoDetails => ({
+                ...prevState,
+                dueDate: (e.target as HTMLInputElement).value
+              })
+            );
           }}
         />
       </label>
@@ -68,24 +117,14 @@ export const AddTodo = ({
           name='todo-priority'
           class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150'
           maxLength={256}
-          value={todoDescription}
+          value={todo.priority}
           onInput={(e: Event): void => {
-            setTodoDescription((e.target as HTMLInputElement).value);
-          }}
-        />
-      </label>
-
-      <label class='flex flex-col gap-1.5 xl:text-lg'>
-        <span class='font-medium'>Due Date</span>
-        <input
-          title=''
-          type='text'
-          name='todo-date'
-          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150'
-          maxLength={256}
-          value={todoDescription}
-          onInput={(e: Event): void => {
-            setTodoDescription((e.target as HTMLInputElement).value);
+            setTodo(
+              (prevState): TodoDetails => ({
+                ...prevState,
+                priority: (e.target as HTMLInputElement).value
+              })
+            );
           }}
         />
       </label>
@@ -98,9 +137,14 @@ export const AddTodo = ({
           name='todo-stage'
           class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150'
           maxLength={256}
-          value={todoDescription}
+          value={todo.stage}
           onInput={(e: Event): void => {
-            setTodoDescription((e.target as HTMLInputElement).value);
+            setTodo(
+              (prevState): TodoDetails => ({
+                ...prevState,
+                stage: (e.target as HTMLInputElement).value
+              })
+            );
           }}
         />
       </label>
