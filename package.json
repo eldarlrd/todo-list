@@ -40,7 +40,7 @@
     "date-fns": "^2.30.0",
     "lucide-preact": "^0.279.0",
     "nanoid": "^5.0.1",
-    "preact": "^10.17.1",
+    "preact": "^10.18.0",
     "react": "npm:@preact/compat",
     "react-dom": "npm:@preact/compat"
   },
