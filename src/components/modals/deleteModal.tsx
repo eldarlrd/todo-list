@@ -16,7 +16,7 @@ export const DeleteModal = ({
       <p>
         {taskMode} <strong>{taskTitle}</strong> will be deleted permanently.
       </p>
-      <div class='flex justify-end gap-2 pt-1.5'>
+      <div class='flex justify-end gap-2 pt-3'>
         <button
           type='button'
           id='delete-cancel'

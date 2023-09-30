@@ -22,7 +22,10 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
 
-const PROJECT_ICONS = [
+const PROJECT_ICONS: {
+  key: string;
+  icon: JSX.Element;
+}[] = [
   {
     key: 'star',
     icon: <Star aria-label='Star' class='xl:scale-110' />
@@ -98,7 +101,7 @@ export const AddProject = ({
           title=''
           type='text'
           name='project-title'
-          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150'
+          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
           minLength={1}
           maxLength={128}
           value={projectTitle}
@@ -133,7 +136,7 @@ export const AddProject = ({
         </span>
       </div>
 
-      <span class='flex justify-end gap-2 pt-1.5'>
+      <span class='flex justify-end gap-2 pt-3'>
         <button
           type='button'
           id='project-cancel'
