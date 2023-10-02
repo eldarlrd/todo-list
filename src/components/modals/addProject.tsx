@@ -101,7 +101,7 @@ export const AddProject = ({
           title=''
           type='text'
           name='project-title'
-          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
+          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
           minLength={1}
           maxLength={128}
           value={projectTitle}
@@ -126,7 +126,7 @@ export const AddProject = ({
                 icon.key === projectIcon
                   ? 'border-transparent bg-violet-800 text-slate-50 dark:bg-pink-600'
                   : 'hover:(bg-slate-50, dark:bg-slate-800) border-current text-violet-900 dark:text-pink-300'
-              } rounded-md border p-2 transition-all xl:p-2.5 2xl:p-3`}
+              } rounded border p-2 transition-all xl:p-2.5 2xl:p-3`}
               onClick={(): void => {
                 setProjectIcon(icon.key);
               }}>
@@ -140,7 +140,7 @@ export const AddProject = ({
         <button
           type='button'
           id='project-cancel'
-          class='hover:(bg-slate-100, active:(bg-slate-50), dark:(bg-slate-800, active:bg-slate-900)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded-md py-1.5 text-lg font-medium transition-all lg:w-28'
+          class='hover:(bg-slate-100, active:(bg-slate-50), dark:(bg-slate-800, active:bg-slate-900)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded py-1.5 text-lg font-medium transition-all lg:w-28'
           onClick={(): void => {
             setIsVisible(false);
           }}>
@@ -149,7 +149,7 @@ export const AddProject = ({
         <button
           type='button'
           id='project-add'
-          class='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded-md bg-emerald-800 py-1.5 text-lg font-medium text-white transition-all dark:bg-sky-600 lg:w-28'>
+          class='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded bg-emerald-800 py-1.5 text-lg font-medium text-white transition-all dark:bg-sky-600 lg:w-28'>
           Add
         </button>
       </span>

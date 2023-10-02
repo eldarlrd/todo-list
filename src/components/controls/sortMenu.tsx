@@ -98,7 +98,7 @@ export const SortMenu = (): JSX.Element => {
           type='button'
           title='Toggle Order'
           id='toggle-order'
-          class='hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) md:(max-w-[8rem], text-base, gap-1.5, pl-3.5, pr-3, py-2) flex max-w-[7rem] items-center justify-end gap-1 whitespace-nowrap rounded-l-md py-1 pl-2.5 pr-2 text-sm font-medium duration-150'
+          class='hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) md:(max-w-[8rem], text-base, gap-1.5, pl-3.5, pr-3, py-2) flex max-w-[7rem] items-center justify-end gap-1 whitespace-nowrap rounded-l py-1 pl-2.5 pr-2 text-sm font-medium duration-150'
           onClick={(): void => {
             switchSortOrder(!isSortAscending);
           }}>
@@ -116,7 +116,7 @@ export const SortMenu = (): JSX.Element => {
         id='sort-menu'
         class={`${
           isVisible ? 'bg-slate-200 dark:bg-slate-700' : ''
-        } hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) md:(max-w-[8rem], text-base, gap-1.5, px-2.5, py-2) flex max-w-[7rem] items-center justify-end gap-1 whitespace-nowrap rounded-r-md px-1.5 py-1 text-sm font-medium duration-150`}
+        } hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) md:(max-w-[8rem], text-base, gap-1.5, px-2.5, py-2) flex max-w-[7rem] items-center justify-end gap-1 whitespace-nowrap rounded-r px-1.5 py-1 text-sm font-medium duration-150`}
         onClick={(): void => {
           setIsVisible(!isVisible);
         }}>
@@ -131,7 +131,7 @@ export const SortMenu = (): JSX.Element => {
       {isVisible && (
         <div
           id='sort-dropdown'
-          class='absolute -ml-[1.4rem] mt-[2.35rem] flex flex-col items-end justify-center overflow-clip rounded-md bg-slate-200 dark:bg-slate-700 md:mt-12'>
+          class='absolute -ml-[1.4rem] mt-[2.35rem] flex flex-col items-end justify-center overflow-clip rounded bg-slate-200 dark:bg-slate-700 md:mt-12'>
           {Object.keys(SORT_OPTIONS).map(option => (
             <button
               type='button'

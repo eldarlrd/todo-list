@@ -78,7 +78,7 @@ export const AddTodo = ({
           title=''
           type='text'
           name='todo-title'
-          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
+          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
           minLength={1}
           maxLength={128}
           value={todo.title}
@@ -95,7 +95,7 @@ export const AddTodo = ({
           title=''
           type='text'
           name='todo-description'
-          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
+          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
           maxLength={256}
           value={todo.description}
           onInput={(e: Event): void => {
@@ -110,7 +110,7 @@ export const AddTodo = ({
           title=''
           type='date'
           name='todo-date'
-          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded-md bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
+          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
           max='9999-12-31'
           min={todo.dueDate}
           value={todo.dueDate}
@@ -121,10 +121,7 @@ export const AddTodo = ({
       </label>
 
       <fieldset class='flex flex-col gap-1.5 xl:text-lg'>
-        <span class='font-medium'>
-          Priority
-          <span class='text-violet-900 dark:text-pink-300'>*</span>
-        </span>
+        <span class='font-medium'>Priority</span>
         <span class='flex items-center justify-evenly'>
           {PRIORITY_OPTIONS.map(priority => (
             <label key={priority.value} class='flex gap-1.5'>
@@ -147,10 +144,7 @@ export const AddTodo = ({
       </fieldset>
 
       <fieldset class='flex flex-col gap-1.5 xl:text-lg'>
-        <span class='font-medium'>
-          Stage
-          <span class='text-violet-900 dark:text-pink-300'>*</span>
-        </span>
+        <span class='font-medium'>Stage</span>
         <span class='flex items-center justify-evenly'>
           {STAGE_OPTIONS.map(stage => (
             <label key={stage} class='flex gap-1.5'>
@@ -176,7 +170,7 @@ export const AddTodo = ({
         <button
           type='button'
           id='todo-cancel'
-          class='hover:(bg-slate-100, active:(bg-slate-50), dark:(bg-slate-800, active:bg-slate-900)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded-md py-1.5 text-lg font-medium transition-all lg:w-28'
+          class='hover:(bg-slate-100, active:(bg-slate-50), dark:(bg-slate-800, active:bg-slate-900)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded py-1.5 text-lg font-medium transition-all lg:w-28'
           onClick={(): void => {
             setIsVisible(false);
           }}>
@@ -185,7 +179,7 @@ export const AddTodo = ({
         <button
           type='button'
           id='todo-add'
-          class='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded-md bg-emerald-800 py-1.5 text-lg font-medium text-white transition-all dark:bg-sky-600 lg:w-28'>
+          class='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded bg-emerald-800 py-1.5 text-lg font-medium text-white transition-all dark:bg-sky-600 lg:w-28'>
           Add
         </button>
       </span>

@@ -20,7 +20,7 @@ export const DeleteModal = ({
         <button
           type='button'
           id='delete-cancel'
-          class='hover:(bg-slate-100, active:(bg-slate-50), dark:(bg-slate-800, active:bg-slate-900)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded-md py-1.5 text-lg font-medium transition-all lg:w-28'
+          class='hover:(bg-slate-100, active:(bg-slate-50), dark:(bg-slate-800, active:bg-slate-900)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded py-1.5 text-lg font-medium transition-all lg:w-28'
           onClick={(): void => {
             setIsVisible(false);
           }}>
@@ -29,7 +29,7 @@ export const DeleteModal = ({
         <button
           type='button'
           id='delete-item'
-          class='hover:(bg-rose-700, active:bg-rose-600, dark:(bg-rose-700, active:bg-rose-800)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded-md bg-rose-800 py-1.5 text-lg font-medium text-white transition-all dark:bg-rose-600 lg:w-28'>
+          class='hover:(bg-rose-700, active:bg-rose-600, dark:(bg-rose-700, active:bg-rose-800)) md:(w-24, py-2) xl:(w-32, py-2.5, text-xl) max-h-[3rem] w-20 rounded bg-rose-800 py-1.5 text-lg font-medium text-white transition-all dark:bg-rose-600 lg:w-28'>
           Delete
         </button>
       </div>

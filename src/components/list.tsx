@@ -10,6 +10,7 @@ export const List = (): JSX.Element => {
       class='flex grow flex-col bg-slate-50 transition-colors dark:bg-slate-900'>
       <ControlPanel />
       <Task />
+      <Task />
     </section>
   );
 };

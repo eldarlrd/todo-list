@@ -28,7 +28,7 @@ const MobileBar = ({ setIsDrawerOpen }: DrawerControls): JSX.Element => {
         type='button'
         title='Open Drawer'
         id='hamburger-menu'
-        class='hover:(bg-slate-200, active:bg-slate-300, dark:(bg-slate-700, active:bg-slate-600)) mr-2 w-12 rounded-lg px-3 py-2 leading-4 transition-colors'
+        class='hover:(bg-slate-200, active:bg-slate-300, dark:(bg-slate-700, active:bg-slate-600)) mr-2 w-12 rounded px-3 py-2 leading-4 transition-colors'
         onClick={(): void => {
           setIsDrawerOpen(true);
         }}>
@@ -58,7 +58,7 @@ const SidePanel = ({
         <button
           type='button'
           id='add-project'
-          class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) flex grow items-center gap-1.5 break-all rounded-lg bg-violet-800 p-3 font-medium leading-4 text-slate-50 transition-colors dark:bg-pink-600'
+          class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) flex grow items-center gap-1.5 break-all rounded bg-violet-800 p-3 font-medium leading-4 text-slate-50 transition-colors dark:bg-pink-600'
           onClick={(): void => {
             setIsVisible(true);
             setModalContent(
@@ -73,7 +73,7 @@ const SidePanel = ({
             type='button'
             title='Close Drawer'
             id='mobile-close-drawer'
-            class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) w-12 rounded-lg p-3 leading-4 transition-colors lg:hidden'
+            class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) w-12 rounded p-3 leading-4 transition-colors lg:hidden'
             onClick={(): void => {
               setIsDrawerOpen(false);
             }}>
@@ -85,7 +85,7 @@ const SidePanel = ({
       <div id='project-list' class='mt-2 flex min-w-full flex-col gap-2'>
         <button
           type='button'
-          class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex grow items-start justify-between gap-1.5 rounded-lg px-3 py-2 text-xl text-slate-900 duration-150 dark:text-slate-50'>
+          class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex grow items-start justify-between gap-1.5 rounded px-3 py-2 text-xl text-slate-900 duration-150 dark:text-slate-50'>
           <span class='flex max-w-full grow gap-1.5 break-all leading-6'>
             <Star aria-label='Star' class='min-w-fit' />
             Default

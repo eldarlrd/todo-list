@@ -31,7 +31,7 @@ const ModalWindow = ({
         ref={refer}
         class={
           isVisible
-            ? 'dark:(bg-slate-600, shadow-slate-700) flex w-80 flex-col rounded-lg bg-slate-300 shadow-sm shadow-slate-200 transition-all sm:w-96 md:w-[28rem] lg:w-[32rem] xl:w-[36rem] 2xl:w-[40rem]'
+            ? 'dark:(bg-slate-600, shadow-slate-700) flex w-80 flex-col rounded bg-slate-300 shadow-sm shadow-slate-200 transition-all sm:w-96 md:w-[28rem] lg:w-[32rem] xl:w-[36rem] 2xl:w-[40rem]'
             : 'hidden'
         }>
         <div class='mx-4 my-2 flex select-none justify-between text-xl font-semibold text-violet-900 transition-all dark:text-pink-300 xl:text-2xl'>
@@ -39,7 +39,7 @@ const ModalWindow = ({
           <button
             type='button'
             id='close-modal'
-            class='hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) rounded-lg px-1 leading-4 transition-colors xl:px-2'
+            class='hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) rounded px-1 leading-4 transition-colors xl:px-2'
             onClick={(): void => {
               setIsVisible(false);
             }}>
@@ -53,7 +53,7 @@ const ModalWindow = ({
 
         <div
           id='modal-content'
-          class='dark:(bg-slate-700, text-slate-50) mx-px mb-px grow rounded-b-lg bg-slate-200 px-4 py-3 text-slate-900'>
+          class='dark:(bg-slate-700, text-slate-50) mx-px mb-px grow rounded-b bg-slate-200 px-4 py-3 text-slate-900'>
           <IsModalVisible.Provider value={isVisible}>
             {modalContent}
           </IsModalVisible.Provider>
