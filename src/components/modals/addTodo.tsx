@@ -41,8 +41,8 @@ const emptyTodo: TodoDetails = {
   title: '',
   description: '',
   dueDate: formatISO(new Date(), { representation: 'date' }),
-  priority: '',
-  stage: ''
+  priority: PRIORITY_OPTIONS[0].value,
+  stage: STAGE_OPTIONS[0]
 };
 
 export const AddTodo = ({
@@ -133,6 +133,7 @@ export const AddTodo = ({
                 type='radio'
                 name='todo-priority'
                 class={`${priority.color} dark:(bg-slate-800, caret-pink-300) w-5 bg-slate-50 caret-violet-900`}
+                checked={priority.value === todo.priority}
                 value={priority.value}
                 required
                 onInput={(e: Event): void => {
@@ -158,6 +159,7 @@ export const AddTodo = ({
                 type='radio'
                 name='todo-stage'
                 class='dark:(bg-slate-800, accent-pink-300, caret-pink-300) w-5 bg-slate-50 caret-violet-900 accent-violet-400'
+                checked={stage === todo.stage}
                 value={stage}
                 required
                 onInput={(e: Event): void => {

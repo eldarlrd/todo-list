@@ -1,5 +1,5 @@
 import { type JSX } from 'preact/jsx-runtime';
 
 export const Task = (): JSX.Element => {
-  return <></>;
+  return <div class='bg-slate-200'>Task</div>;
 };
