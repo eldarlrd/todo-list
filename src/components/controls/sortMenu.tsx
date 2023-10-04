@@ -131,7 +131,7 @@ export const SortMenu = (): JSX.Element => {
       {isVisible && (
         <div
           id='sort-dropdown'
-          class='absolute -ml-[1.4rem] mt-[2.35rem] flex flex-col items-end justify-center overflow-clip rounded bg-slate-200 dark:bg-slate-700 md:mt-12'>
+          class='absolute z-10 -ml-[1.4rem] mt-[2.35rem] flex flex-col items-end justify-center overflow-clip rounded bg-slate-200 dark:bg-slate-700 md:mt-12'>
           {Object.keys(SORT_OPTIONS).map(option => (
             <button
               type='button'

@@ -23,15 +23,15 @@ const PRIORITY_OPTIONS: {
 }[] = [
   {
     value: 'Low',
-    color: 'accent-teal-500'
+    color: 'teal-500'
   },
   {
     value: 'Medium',
-    color: 'accent-amber-500'
+    color: 'amber-500'
   },
   {
     value: 'High',
-    color: 'accent-rose-400'
+    color: 'rose-400'
   }
 ];
 
@@ -129,7 +129,7 @@ export const AddTodo = ({
                 title=''
                 type='radio'
                 name='todo-priority'
-                class={`${priority.color} dark:(bg-slate-800, caret-pink-300) w-5 bg-slate-50 caret-violet-900`}
+                class={`accent-${priority.color} dark:(bg-slate-800, caret-pink-300) w-5 bg-slate-50 caret-violet-900`}
                 checked={priority.value === todo.priority}
                 value={priority.value}
                 required

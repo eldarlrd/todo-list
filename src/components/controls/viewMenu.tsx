@@ -44,7 +44,7 @@ export const ViewMenu = (): JSX.Element => {
       {isVisible && (
         <div
           id='view-dropdown'
-          class='absolute right-3 mt-1.5 flex flex-col items-end justify-center overflow-clip rounded bg-slate-200 dark:bg-slate-700 md:mt-2'>
+          class='absolute right-3 z-10 mt-1.5 flex flex-col items-end justify-center overflow-clip rounded bg-slate-200 dark:bg-slate-700 md:mt-2'>
           {VIEW_OPTIONS.map(option => (
             <button
               type='button'
