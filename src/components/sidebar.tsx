@@ -68,6 +68,7 @@ const SidePanel = ({
           <Plus aria-label='Plus Sign' strokeWidth='2.25' class='scale-110' />
           Add Project
         </button>
+
         {isDrawerOpen ? (
           <button
             type='button'
@@ -109,6 +110,7 @@ const SidePanel = ({
           </button>
         </button>
       </div>
+
       <ModalWindow
         modalContent={modalContent}
         setIsVisible={setIsVisible}

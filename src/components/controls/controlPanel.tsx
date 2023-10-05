@@ -13,7 +13,7 @@ export const ControlPanel = (): JSX.Element => {
     <>
       <div
         id='control-panel'
-        class='flex min-h-[2.5rem] items-center justify-between bg-slate-300 px-3 py-1 transition-all dark:bg-slate-600 md:py-1.5'>
+        class='md:(py-1.5, min-h-[3.25rem]) flex min-h-[2.5rem] items-center justify-between bg-slate-300 px-3 py-1 transition-all dark:bg-slate-600'>
         <button
           type='button'
           id='add-todo'
@@ -29,11 +29,13 @@ export const ControlPanel = (): JSX.Element => {
           />
           Add Todo
         </button>
+
         <div class='flex gap-2'>
           <SortMenu />
           <ViewMenu />
         </div>
       </div>
+
       <ModalWindow
         modalContent={<AddTodo key='Add Todo' setIsVisible={setIsVisible} />}
         setIsVisible={setIsVisible}

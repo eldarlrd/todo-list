@@ -128,6 +128,7 @@ export const SortMenu = (): JSX.Element => {
           />
         ) : null}
       </button>
+
       {isVisible && (
         <div
           id='sort-dropdown'

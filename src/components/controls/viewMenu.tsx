@@ -41,6 +41,7 @@ export const ViewMenu = (): JSX.Element => {
           </>
         ) : null}
       </button>
+
       {isVisible && (
         <div
           id='view-dropdown'
