@@ -120,8 +120,8 @@ export const AddTodo = ({
         />
       </label>
 
-      <fieldset class='flex flex-col gap-1.5 xl:text-lg'>
-        <span class='font-medium'>Priority</span>
+      <fieldset class='flex flex-col xl:text-lg'>
+        <legend class='mb-1.5 font-medium'>Priority</legend>
         <span class='flex items-center justify-evenly'>
           {PRIORITY_OPTIONS.map(priority => (
             <label key={priority.value} class='flex gap-1.5'>
@@ -143,8 +143,8 @@ export const AddTodo = ({
         </span>
       </fieldset>
 
-      <fieldset class='flex flex-col gap-1.5 xl:text-lg'>
-        <span class='font-medium'>Stage</span>
+      <fieldset class='flex flex-col xl:text-lg'>
+        <legend class='mb-1.5 font-medium'>Stage</legend>
         <span class='flex items-center justify-evenly'>
           {STAGE_OPTIONS.map(stage => (
             <label key={stage} class='flex gap-1.5'>

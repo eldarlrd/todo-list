@@ -21,13 +21,17 @@ export const Task = (): JSX.Element => {
         <div class='flex items-center justify-between'>
           <p class='-skew-x-6'>Project</p>
           <span class='flex gap-1.5'>
-            <button>
-              <PenSquare />
+            <button
+              type='button'
+              title='Edit Todo'
+              class='rounded duration-150'>
+              <PenSquare aria-label='Pen' />
             </button>
+
             <button
               type='button'
               title='Delete Todo'
-              class='hover:(text-rose-900, dark:text-rose-400) duration-150'
+              class='hover:(text-rose-900, dark:text-rose-400) rounded duration-150'
               onClick={(): void => {
                 setIsVisible(true);
                 setModalContent(
@@ -52,8 +56,8 @@ export const Task = (): JSX.Element => {
             <span class='block aspect-square w-4 rounded-full bg-teal-500' />
             Low
           </p>
-          <button>
-            <HelpCircle />
+          <button type='button' title='Check Done' class='rounded duration-150'>
+            <HelpCircle aria-label='Question Mark' />
           </button>
         </div>
       </div>
