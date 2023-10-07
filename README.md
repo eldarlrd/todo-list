@@ -6,6 +6,7 @@
 > - **[Preact](https://preactjs.com)**
 > - **[TypeScript](https://typescriptlang.org)**
 > - **[Nano ID](https://zelark.github.io/nano-id-cc)**
+> - **[date-fns](https://date-fns.org)**
 > - **[Twind](https://twind.style)**
 > - **[Lucide](https://lucide.dev)**
 > - **[Vite](https://vitejs.dev)**

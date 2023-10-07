@@ -50,9 +50,8 @@ export const AddTodo = ({
 }: {
   setIsVisible: StateUpdater<boolean>;
 }): JSX.Element => {
-  const [todo, setTodo] = useState(emptyTodo);
-
-  const isModalVisible = useContext(IsModalVisible);
+  const [todo, setTodo] = useState<TodoDetails>(emptyTodo);
+  const isModalVisible = useContext<boolean>(IsModalVisible);
 
   const handleInput = (e: Event, detail: string): void => {
     setTodo(
@@ -166,7 +165,7 @@ export const AddTodo = ({
         </span>
       </fieldset>
 
-      <span class='flex justify-end gap-2 pt-3'>
+      <span class='mt-4 flex justify-end gap-2'>
         <button
           type='button'
           id='todo-cancel'

@@ -83,7 +83,7 @@ export const AddProject = ({
 }): JSX.Element => {
   const [projectTitle, setProjectTitle] = useState<string>();
   const [projectIcon, setProjectIcon] = useState<string>(PROJECT_ICONS[0].key);
-  const isModalVisible = useContext(IsModalVisible);
+  const isModalVisible = useContext<boolean>(IsModalVisible);
 
   useEffect(() => {
     setProjectTitle('');
@@ -136,7 +136,7 @@ export const AddProject = ({
         </span>
       </div>
 
-      <span class='flex justify-end gap-2 pt-3'>
+      <span class='mt-4 flex justify-end gap-2'>
         <button
           type='button'
           id='project-cancel'

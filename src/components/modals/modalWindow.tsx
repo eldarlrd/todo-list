@@ -10,7 +10,7 @@ interface ModalControls {
   refer: Ref<HTMLDivElement>;
 }
 
-const IsModalVisible = createContext(false);
+const IsModalVisible = createContext<boolean>(false);
 
 const ModalWindow = ({
   modalContent,

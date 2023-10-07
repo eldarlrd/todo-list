@@ -14,9 +14,10 @@ export const DeleteModal = ({
     <div class='flex select-none flex-col gap-1.5 break-words text-center xl:text-lg'>
       <p>Are you sure?</p>
       <p>
-        {taskMode} <strong>{taskTitle}</strong> will be deleted permanently.
+        {taskMode} <span class='font-semibold'>{taskTitle}</span> will be
+        deleted permanently.
       </p>
-      <div class='flex justify-end gap-2 pt-3'>
+      <div class='mt-4 flex justify-end gap-2'>
         <button
           type='button'
           id='delete-cancel'
