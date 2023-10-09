@@ -86,7 +86,7 @@ const SidePanel = ({
       <div id='project-list' class='mt-2 flex min-w-full flex-col gap-2'>
         <button
           type='button'
-          class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) flex grow items-start justify-between gap-1.5 rounded px-3 py-2 text-xl text-slate-900 duration-150 dark:text-slate-50'>
+          class='hover:(bg-slate-50, dark:bg-slate-800) flex grow items-start justify-between gap-1.5 rounded px-3 py-2 text-xl text-slate-900 duration-150 dark:text-slate-50'>
           <span class='flex max-w-full grow gap-1.5 break-all leading-6'>
             <Star aria-label='Star' class='min-w-fit' />
             Default

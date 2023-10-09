@@ -5,6 +5,7 @@
 > Todo List is a website built with
 > - **[Preact](https://preactjs.com)**
 > - **[TypeScript](https://typescriptlang.org)**
+> - **[Redux Toolkit](https://redux-toolkit.js.org)**
 > - **[Nano ID](https://zelark.github.io/nano-id-cc)**
 > - **[date-fns](https://date-fns.org)**
 > - **[Twind](https://twind.style)**

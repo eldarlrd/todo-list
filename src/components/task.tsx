@@ -14,11 +14,19 @@ export const Task = (): JSX.Element => {
 
   return (
     <>
-      <div class='mt-3.5 flex flex-col gap-1.5 rounded bg-slate-100 px-4 py-3 drop-shadow-sm duration-150 dark:bg-slate-800 xl:text-lg'>
-        <div class='flex items-start justify-between'>
-          <p class='mr-8 -skew-x-6 break-all text-slate-600 dark:text-slate-400'>
-            Project
+      <div class='mt-3.5 flex justify-between gap-6 rounded bg-slate-100 px-4 py-3 drop-shadow-sm duration-150 dark:bg-slate-800 xl:text-lg'>
+        <div class='flex flex-col gap-1.5 break-all'>
+          <p class='-skew-x-6 text-slate-600 dark:text-slate-400'>Project</p>
+          <p class='-my-1 font-medium'>Title</p>
+          <p>Description</p>
+          <p class='-mb-1 mt-1'>18 Sep. 2023</p>
+          <p class='flex items-center gap-1.5'>
+            <span class='block aspect-square w-4 rounded-full bg-teal-500' />
+            Low
           </p>
+        </div>
+
+        <div class='flex flex-col items-end justify-between'>
           <span class='flex gap-3'>
             <button
               type='button'
@@ -53,16 +61,7 @@ export const Task = (): JSX.Element => {
               <span class='hidden sm:inline xl:text-lg'>Delete</span>
             </button>
           </span>
-        </div>
 
-        <p class='-my-1 mr-20 break-all font-medium sm:mr-44'>Title</p>
-        <p class='mr-20 break-all sm:mr-44'>Description</p>
-        <p class='-mb-1 mr-20 mt-1 sm:mr-44'>18 Sep. 2023</p>
-        <div class='flex items-end justify-between'>
-          <p class='mr-14 flex items-center gap-1.5 break-all sm:mr-20'>
-            <span class='block aspect-square w-4 rounded-full bg-teal-500' />
-            Low
-          </p>
           <button
             type='button'
             title='Check Done'
