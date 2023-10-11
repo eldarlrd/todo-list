@@ -17,9 +17,14 @@ export const Task = (): JSX.Element => {
       <div class='mt-3.5 flex justify-between gap-6 rounded bg-slate-100 px-4 py-3 drop-shadow-sm duration-150 dark:bg-slate-800 xl:text-lg'>
         <div class='flex flex-col gap-1.5 break-all'>
           <p class='-skew-x-6 text-slate-600 dark:text-slate-400'>Project</p>
-          <p class='-my-1 font-medium'>Title</p>
+          <p
+            class={`${
+              isDone ? 'line-through' : ''
+            } -my-1 font-medium decoration-2`}>
+            Title
+          </p>
           <p>Description</p>
-          <p class='-mb-1 mt-1'>18 Sep. 2023</p>
+          <p class='-mb-1 mt-1'>11 Oct. 2023</p>
           <p class='flex items-center gap-1.5'>
             <span class='block aspect-square w-4 rounded-full bg-teal-500' />
             Low

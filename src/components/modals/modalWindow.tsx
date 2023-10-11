@@ -23,7 +23,7 @@ const ModalWindow = ({
       id='overlay'
       class={
         isVisible
-          ? 'dark:(bg-slate-900, bg-opacity-70) absolute inset-0 z-10 flex items-center justify-center bg-slate-50 bg-opacity-70 backdrop-blur-[1px] transition-opacity duration-200'
+          ? 'absolute inset-0 z-10 flex items-center justify-center bg-slate-50/70 backdrop-blur-[1px] transition-opacity duration-200 dark:bg-slate-900/70'
           : 'h-0 w-0 opacity-0'
       }>
       <div
