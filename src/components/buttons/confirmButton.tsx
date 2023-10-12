@@ -1,16 +1,18 @@
 import { type JSX } from 'preact/jsx-runtime';
 
+interface ConfirmControls {
+  id: string;
+  action: string;
+  styleClass: string;
+  handleConfirm: () => void;
+}
+
 export const ConfirmButton = ({
   id,
   action,
   styleClass,
   handleConfirm
-}: {
-  id: string;
-  action: string;
-  styleClass: string;
-  handleConfirm: () => void;
-}): JSX.Element => {
+}: ConfirmControls): JSX.Element => {
   return (
     <button
       type='button'

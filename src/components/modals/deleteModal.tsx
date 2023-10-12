@@ -4,15 +4,17 @@ import { type JSX } from 'preact/jsx-runtime';
 import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
 
+interface DeleteControls {
+  setIsVisible: StateUpdater<boolean>;
+  taskMode: string;
+  taskTitle: string;
+}
+
 export const DeleteModal = ({
   setIsVisible,
   taskMode,
   taskTitle
-}: {
-  setIsVisible: StateUpdater<boolean>;
-  taskMode: string;
-  taskTitle: string;
-}): JSX.Element => {
+}: DeleteControls): JSX.Element => {
   return (
     <div class='flex select-none flex-col gap-1.5 break-words text-center xl:text-lg'>
       <p>Are you sure?</p>

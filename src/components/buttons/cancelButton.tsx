@@ -1,12 +1,14 @@
 import { type JSX } from 'preact/jsx-runtime';
 
+interface CancelControls {
+  id: string;
+  handleCancel: () => void;
+}
+
 export const CancelButton = ({
   id,
   handleCancel
-}: {
-  id: string;
-  handleCancel: () => void;
-}): JSX.Element => {
+}: CancelControls): JSX.Element => {
   return (
     <button
       type='button'
