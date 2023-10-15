@@ -20,10 +20,17 @@
 
 import install from '@twind/with-react';
 import { render } from 'preact';
+import { Provider } from 'react-redux';
 
 import config from '../twind.config.mts';
 
 import { App } from '@/app.tsx';
+import store from '@/store.mts';
 
 install(config, import.meta.env.PROD);
-render(<App />, document.body);
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.body
+);
