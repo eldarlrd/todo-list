@@ -25,7 +25,7 @@ import { Provider } from 'react-redux';
 import config from '../twind.config.mts';
 
 import { App } from '@/app.tsx';
-import store from '@/store.mts';
+import { store } from '@/store.ts';
 
 install(config, import.meta.env.PROD);
 render(
