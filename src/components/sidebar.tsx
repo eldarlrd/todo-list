@@ -3,6 +3,7 @@ import { type StateUpdater, useState, useEffect } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
+import { UserSignIn } from '@/components/controls/userSignIn.tsx';
 import { AddProject } from '@/components/modals/addProject.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
@@ -23,18 +24,21 @@ const MobileBar = ({ setIsDrawerOpen }: DrawerControls): JSX.Element => {
   return (
     <nav
       id='mobile-bar'
-      class='dark:(bg-slate-800, text-pink-500) absolute top-0 min-w-full select-none bg-slate-100 p-3 text-2xl text-violet-800 transition-colors lg:hidden'>
-      <button
-        type='button'
-        title='Open Drawer'
-        id='hamburger-menu'
-        class='hover:(bg-slate-200, active:bg-slate-300, dark:(bg-slate-700, active:bg-slate-600)) mr-2 w-12 rounded px-3 py-2 leading-4 transition-colors'
-        onClick={(): void => {
-          setIsDrawerOpen(true);
-        }}>
-        <Menu aria-label='Bars' strokeWidth='2.25' class='scale-125' />
-      </button>
-      <ThemeToggle identifier='mobile-theme-toggle' />
+      class='dark:(bg-slate-800, text-pink-500) absolute top-0 flex min-w-full select-none justify-between gap-2 bg-slate-100 p-3 text-2xl text-violet-800 transition-colors lg:hidden'>
+      <span class='flex gap-2'>
+        <button
+          type='button'
+          title='Open Drawer'
+          id='hamburger-menu'
+          class='hover:(bg-slate-200, active:bg-slate-300, dark:(bg-slate-700, active:bg-slate-600)) w-12 rounded px-3 py-2 leading-4 transition-colors'
+          onClick={(): void => {
+            setIsDrawerOpen(true);
+          }}>
+          <Menu aria-label='Bars' strokeWidth='2.25' class='scale-125' />
+        </button>
+        <ThemeToggle identifier='mobile-theme-toggle' />
+      </span>
+      <UserSignIn />
     </nav>
   );
 };
