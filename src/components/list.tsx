@@ -9,7 +9,7 @@ export const List = (): JSX.Element => {
       id='list'
       class='flex max-w-full grow flex-col bg-slate-50 transition-colors dark:bg-slate-900'>
       <ControlPanel />
-      <div class='overflow-x-hidden overflow-y-scroll px-3 pb-3.5'>
+      <div class='overflow-y-auto px-3 pb-3.5'>
         <p class='mx-2 mt-3.5 -skew-x-6 select-none text-xl font-bold xl:text-2xl'>
           Todo
         </p>

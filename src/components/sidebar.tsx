@@ -91,7 +91,7 @@ const SidePanel = ({
 
       <div
         id='project-list'
-        class='-mt-2 flex h-full min-w-full flex-col gap-1.5 overflow-x-hidden overflow-y-scroll px-3 py-1.5'>
+        class='-mt-2 flex h-full min-w-full flex-col gap-1.5 overflow-y-auto px-3 py-1.5'>
         <button
           type='button'
           class='hover:(bg-slate-50, dark:bg-slate-800) flex items-start justify-between gap-1.5 rounded px-3 py-2 text-xl text-slate-900 duration-150 dark:text-slate-50'>
