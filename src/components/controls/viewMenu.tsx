@@ -45,12 +45,12 @@ export const ViewMenu = (): JSX.Element => {
       {isVisible && (
         <div
           id='view-dropdown'
-          class='absolute right-3 z-10 mt-1.5 flex flex-col items-end justify-center overflow-clip rounded bg-slate-200 dark:bg-slate-700 md:mt-2'>
+          class='dark:(bg-slate-700, shadow-slate-600) absolute right-3 z-10 mt-1.5 flex flex-col items-end justify-center overflow-clip rounded bg-slate-200 shadow-sm shadow-slate-300 md:mt-2'>
           {VIEW_OPTIONS.map(option => (
             <button
               type='button'
               key={option}
-              class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-28 min-w-fit justify-end px-2 py-0.5 font-medium active:bg-slate-400 md:w-32'
+              class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-28 min-w-fit justify-end px-2 py-[3px] font-medium active:bg-slate-400 md:w-32'
               onClick={(e: Event): void => {
                 switchView((e.target as HTMLButtonElement).innerText);
               }}>

@@ -132,12 +132,12 @@ export const SortMenu = (): JSX.Element => {
       {isVisible && (
         <div
           id='sort-dropdown'
-          class='absolute z-10 -ml-[1.4rem] mt-[2.35rem] flex flex-col items-end justify-center overflow-clip rounded bg-slate-200 dark:bg-slate-700 md:mt-12'>
+          class='dark:(bg-slate-700, shadow-slate-600) absolute z-10 -ml-[1.4rem] mt-[2.35rem] flex flex-col items-end justify-center overflow-clip rounded bg-slate-200 shadow-sm shadow-slate-300 md:mt-12'>
           {Object.keys(SORT_OPTIONS).map(option => (
             <button
               type='button'
               key={option}
-              class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-24 min-w-fit justify-end px-2 py-0.5 font-medium active:bg-slate-400 md:w-28'
+              class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-24 min-w-fit justify-end px-2 py-[3px] font-medium active:bg-slate-400 md:w-28'
               onClick={(e: Event): void => {
                 switchSort((e.target as HTMLButtonElement).innerText);
               }}>
