@@ -128,8 +128,8 @@ const SidePanel = ({
                   <DeleteModal
                     key='Delete Project'
                     setIsVisible={setIsVisible}
+                    taskTitle={project.title}
                     taskMode='Project'
-                    taskTitle='Default'
                   />
                 );
               }}>

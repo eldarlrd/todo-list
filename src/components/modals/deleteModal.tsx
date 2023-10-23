@@ -6,14 +6,14 @@ import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
 
 interface DeleteControls {
   setIsVisible: StateUpdater<boolean>;
-  taskMode: string;
   taskTitle: string;
+  taskMode: string;
 }
 
 export const DeleteModal = ({
   setIsVisible,
-  taskMode,
-  taskTitle
+  taskTitle,
+  taskMode
 }: DeleteControls): JSX.Element => {
   return (
     <div class='flex select-none flex-col gap-1.5 break-words text-center xl:text-lg'>

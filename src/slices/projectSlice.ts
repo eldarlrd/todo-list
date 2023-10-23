@@ -21,7 +21,7 @@ const initialState: {
     }
   ],
   get selectedProject() {
-    return this.projectList[0].id;
+    return this.projectList[0]?.id;
   }
 };
 
