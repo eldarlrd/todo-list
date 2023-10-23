@@ -23,6 +23,8 @@ import { type JSX } from 'preact/jsx-runtime';
 import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
+import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
+import { projectActions } from '@/slices/projectSlice.ts';
 
 const PROJECT_ICONS: {
   key: string;
@@ -87,6 +89,9 @@ const AddProject = ({
   const [projectIcon, setProjectIcon] = useState<string>(PROJECT_ICONS[0].key);
   const isModalVisible = useContext<boolean>(IsModalVisible);
 
+  const dispatch = useAppDispatch();
+  const { setSelectedProject, addNewProject } = projectActions;
+
   useEffect(() => {
     setProjectTitle('');
     setProjectIcon(PROJECT_ICONS[0].key);
@@ -150,7 +155,15 @@ const AddProject = ({
           action='Add'
           styleClass='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) bg-emerald-800 dark:bg-sky-600'
           handleConfirm={(): void => {
-            console.log('Add');
+            dispatch(
+              addNewProject({
+                id: projectTitle,
+                title: projectTitle,
+                iconKey: projectIcon
+              })
+            );
+            dispatch(setSelectedProject(projectTitle));
+            setIsVisible(false);
           }}
         />
       </span>

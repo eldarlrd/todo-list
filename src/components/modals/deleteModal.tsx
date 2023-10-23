@@ -8,12 +8,14 @@ interface DeleteControls {
   setIsVisible: StateUpdater<boolean>;
   taskTitle: string;
   taskMode: string;
+  handleDelete: () => void;
 }
 
 export const DeleteModal = ({
   setIsVisible,
   taskTitle,
-  taskMode
+  taskMode,
+  handleDelete
 }: DeleteControls): JSX.Element => {
   return (
     <div class='flex select-none flex-col gap-1.5 break-words text-center xl:text-lg'>
@@ -34,7 +36,8 @@ export const DeleteModal = ({
           action='Delete'
           styleClass='hover:(bg-rose-700, active:bg-rose-600, dark:(bg-rose-700, active:bg-rose-800)) bg-rose-800 dark:bg-rose-600'
           handleConfirm={(): void => {
-            console.log('Delete');
+            handleDelete();
+            setIsVisible(false);
           }}
         />
       </div>

@@ -31,6 +31,16 @@ const projectSlice = createSlice({
   reducers: {
     setSelectedProject(state, action) {
       state.selectedProject = action.payload as string;
+    },
+    addNewProject(state, action) {
+      state.projectList.push(
+        action.payload as { id: string; title: string; iconKey: string }
+      );
+    },
+    deleteProject(state, action) {
+      state.projectList = state.projectList.filter(
+        e => e.id !== action.payload
+      );
     }
   }
 });

@@ -54,7 +54,7 @@ const SidePanel = ({
   const { refer, isVisible, setIsVisible } = useVisible(false);
 
   const dispatch = useAppDispatch();
-  const { setSelectedProject } = projectActions;
+  const { setSelectedProject, deleteProject } = projectActions;
   const { projectList, selectedProject } = useAppSelector(
     state => state.projectReducer
   );
@@ -128,6 +128,10 @@ const SidePanel = ({
                   <DeleteModal
                     key='Delete Project'
                     setIsVisible={setIsVisible}
+                    handleDelete={(): void => {
+                      dispatch(deleteProject(project.id));
+                      dispatch(setSelectedProject(projectList[0]?.id));
+                    }}
                     taskTitle={project.title}
                     taskMode='Project'
                   />
