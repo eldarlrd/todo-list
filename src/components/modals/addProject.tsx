@@ -98,12 +98,16 @@ const AddProject = ({
   }, [isModalVisible]);
 
   return (
-    <form class='flex h-full flex-col gap-3'>
+    <form
+      class='flex h-full flex-col gap-3'
+      onSubmit={(e: Event): void => {
+        e.preventDefault();
+      }}>
       <label class='flex flex-col gap-1.5 xl:text-lg'>
-        <span class='font-medium'>
+        <legend class='font-medium'>
           Title
           <span class='text-violet-900 dark:text-pink-300'>*</span>
-        </span>
+        </legend>
         <input
           title=''
           type='text'
@@ -120,7 +124,7 @@ const AddProject = ({
       </label>
 
       <div class='flex flex-col gap-1.5 xl:text-lg'>
-        <span class='font-medium'>Icon</span>
+        <legend class='font-medium'>Icon</legend>
         <span
           id='project-icons'
           class='flex flex-wrap items-center justify-center gap-1.5 lg:gap-2 2xl:gap-2.5'>

@@ -57,8 +57,11 @@ export const Task = (): JSX.Element => {
                   <DeleteModal
                     key='Delete Todo'
                     setIsVisible={setIsVisible}
-                    taskMode='Todo'
                     taskTitle='Default'
+                    taskMode='Todo'
+                    handleDelete={(): void => {
+                      console.log('Delete');
+                    }}
                   />
                 );
               }}>

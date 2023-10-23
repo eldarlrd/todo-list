@@ -69,7 +69,11 @@ export const AddTodo = ({
   }, [isModalVisible]);
 
   return (
-    <form class='flex h-full select-none flex-col gap-3'>
+    <form
+      class='flex h-full select-none flex-col gap-3'
+      onSubmit={(e: Event): void => {
+        e.preventDefault();
+      }}>
       <label class='flex flex-col gap-1.5 xl:text-lg'>
         <legend class='font-medium'>
           Title

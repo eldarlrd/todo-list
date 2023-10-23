@@ -4,7 +4,7 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
 import { UserSignIn } from '@/components/controls/userSignIn.tsx';
-import { AddProject, PROJECT_ICONS } from '@/components/modals/addProject.tsx';
+import { PROJECT_ICONS, AddProject } from '@/components/modals/addProject.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
@@ -128,12 +128,18 @@ const SidePanel = ({
                   <DeleteModal
                     key='Delete Project'
                     setIsVisible={setIsVisible}
-                    handleDelete={(): void => {
-                      dispatch(deleteProject(project.id));
-                      dispatch(setSelectedProject(projectList[0]?.id));
-                    }}
                     taskTitle={project.title}
                     taskMode='Project'
+                    handleDelete={(): void => {
+                      dispatch(deleteProject(project.id));
+                      dispatch(
+                        setSelectedProject(
+                          projectList[0]?.id !== project.id
+                            ? projectList[0]?.id
+                            : projectList[1]?.id
+                        )
+                      );
+                    }}
                   />
                 );
               }}>
