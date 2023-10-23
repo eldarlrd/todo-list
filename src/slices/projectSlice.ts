@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { nanoid } from 'nanoid';
 
 const initialState: {
   projectList: {
@@ -10,14 +11,9 @@ const initialState: {
 } = {
   projectList: [
     {
-      id: 'default',
+      id: nanoid(),
       title: 'Default',
       iconKey: 'star'
-    },
-    {
-      id: 'read',
-      title: 'Read Books',
-      iconKey: 'book'
     }
   ],
   get selectedProject() {

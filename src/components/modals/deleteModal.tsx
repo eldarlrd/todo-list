@@ -35,6 +35,7 @@ export const DeleteModal = ({
           id='delete-item'
           action='Delete'
           styleClass='hover:(bg-rose-700, active:bg-rose-600, dark:(bg-rose-700, active:bg-rose-800)) bg-rose-800 dark:bg-rose-600'
+          isDisabled={false}
           handleConfirm={(): void => {
             handleDelete();
             setIsVisible(false);

@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { PenSquare, Trash2, CheckCircle2, HelpCircle } from 'lucide-preact';
 import { useState } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
@@ -24,7 +25,7 @@ export const Task = (): JSX.Element => {
             Title
           </p>
           <p>Description</p>
-          <p class='-mb-1 mt-1'>11 Oct. 2023</p>
+          <p class='-mb-1 mt-1'>{format(new Date(), 'd MMM. y')}</p>
           <p class='flex items-center gap-1.5'>
             <span class='block aspect-square w-4 rounded-full bg-teal-500' />
             Low

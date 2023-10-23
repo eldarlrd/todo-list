@@ -86,7 +86,7 @@ export const AddTodo = ({
           class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
           minLength={1}
           maxLength={140}
-          value={todo.title}
+          value={todo.title.trim()}
           required
           onInput={(e: Event): void => {
             handleInput(e, 'title');
@@ -182,6 +182,7 @@ export const AddTodo = ({
           id='todo-add'
           action='Add'
           styleClass='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) bg-emerald-800 dark:bg-sky-600'
+          isDisabled={false}
           handleConfirm={(): void => {
             console.log('Add');
           }}

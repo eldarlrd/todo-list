@@ -12,6 +12,7 @@ import {
   Star,
   Wrench
 } from 'lucide-preact';
+import { nanoid } from 'nanoid';
 import {
   type StateUpdater,
   useState,
@@ -87,6 +88,7 @@ const AddProject = ({
 }): JSX.Element => {
   const [projectTitle, setProjectTitle] = useState<string>();
   const [projectIcon, setProjectIcon] = useState<string>(PROJECT_ICONS[0].key);
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const isModalVisible = useContext<boolean>(IsModalVisible);
 
   const dispatch = useAppDispatch();
@@ -96,6 +98,10 @@ const AddProject = ({
     setProjectTitle('');
     setProjectIcon(PROJECT_ICONS[0].key);
   }, [isModalVisible]);
+
+  useEffect(() => {
+    setIsDisabled(!projectTitle?.trim().length);
+  }, [projectTitle]);
 
   return (
     <form
@@ -158,15 +164,17 @@ const AddProject = ({
           id='project-add'
           action='Add'
           styleClass='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) bg-emerald-800 dark:bg-sky-600'
+          isDisabled={isDisabled}
           handleConfirm={(): void => {
+            const id = nanoid();
             dispatch(
               addNewProject({
-                id: projectTitle,
+                id,
                 title: projectTitle,
                 iconKey: projectIcon
               })
             );
-            dispatch(setSelectedProject(projectTitle));
+            dispatch(setSelectedProject(id));
             setIsVisible(false);
           }}
         />
