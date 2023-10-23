@@ -62,7 +62,7 @@ const SORT_OPTIONS: {
 };
 
 export const SortMenu = (): JSX.Element => {
-  const { ref, isVisible, setIsVisible } = useVisible(false);
+  const { refer, isVisible, setIsVisible } = useVisible(false);
   const [isSortAscending, setIsSortAscending] = useState<boolean>();
   const [sortSelected, setSortSelected] = useState<string>();
 
@@ -92,7 +92,7 @@ export const SortMenu = (): JSX.Element => {
   }, [setSortSelected]);
 
   return (
-    <div class='flex' ref={ref}>
+    <div class='flex' ref={refer}>
       {sortSelected ? (
         <button
           type='button'

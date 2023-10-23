@@ -7,7 +7,7 @@ import { useVisible } from '@/hooks/useVisible.ts';
 const VIEW_OPTIONS: string[] = ['All', 'Todo', 'In Progress', 'Done'];
 
 export const ViewMenu = (): JSX.Element => {
-  const { ref, isVisible, setIsVisible } = useVisible(false);
+  const { refer, isVisible, setIsVisible } = useVisible(false);
   const [viewSelected, setViewSelected] = useState<string>();
 
   const switchView = (view: string): void => {
@@ -23,7 +23,7 @@ export const ViewMenu = (): JSX.Element => {
   }, [setViewSelected]);
 
   return (
-    <div ref={ref}>
+    <div ref={refer}>
       <button
         type='button'
         title='Switch View'

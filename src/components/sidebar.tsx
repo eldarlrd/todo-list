@@ -1,13 +1,16 @@
-import { Menu, Plus, Star, Trash2, X } from 'lucide-preact';
+import { Menu, Plus, Trash2, X } from 'lucide-preact';
 import { type StateUpdater, useState, useEffect } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
 import { UserSignIn } from '@/components/controls/userSignIn.tsx';
-import { AddProject } from '@/components/modals/addProject.tsx';
+import { AddProject, PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
+import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
+import { useAppSelector } from '@/hooks/useAppSelector.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
+import { projectActions } from '@/slices/projectSlice.ts';
 
 interface DrawerControls {
   isDrawerOpen?: boolean | undefined;
@@ -48,7 +51,13 @@ const SidePanel = ({
   setIsDrawerOpen
 }: DrawerControls): JSX.Element => {
   const [modalContent, setModalContent] = useState<JSX.Element>();
-  const { ref, isVisible, setIsVisible } = useVisible(false);
+  const { refer, isVisible, setIsVisible } = useVisible(false);
+
+  const dispatch = useAppDispatch();
+  const { setSelectedProject } = projectActions;
+  const { projectList, selectedProject } = useAppSelector(
+    state => state.projectReducer
+  );
 
   return (
     <nav
@@ -91,39 +100,50 @@ const SidePanel = ({
 
       <div
         id='project-list'
-        class='-mt-2 flex h-full min-w-full flex-col gap-1.5 overflow-y-auto px-3 py-1.5'>
-        <button
-          type='button'
-          class='hover:(bg-slate-50, dark:bg-slate-800) flex items-start justify-between gap-1.5 rounded px-3 py-2 text-xl text-slate-900 duration-150 dark:text-slate-50'>
-          <span class='flex max-w-full grow gap-1.5 break-all leading-6'>
-            <Star aria-label='Star' class='min-w-fit' />
-            Default
-          </span>
+        class='-mt-2 flex h-full min-w-full flex-col gap-1 overflow-y-auto px-3 py-1.5'>
+        {projectList.map(project => (
           <button
+            id={project.id}
             type='button'
-            title='Delete Project'
-            class='hover:(text-rose-900, dark:text-rose-400) rounded duration-150'
+            key={project.id}
+            class={`${
+              project.id === selectedProject
+                ? 'bg-slate-50, dark:bg-slate-800'
+                : ''
+            } hover:(bg-slate-50, dark:bg-slate-800) flex items-start justify-between gap-1.5 rounded px-3 py-2 text-xl text-slate-900 duration-150 dark:text-slate-50`}
             onClick={(): void => {
-              setIsVisible(true);
-              setModalContent(
-                <DeleteModal
-                  key='Delete Project'
-                  setIsVisible={setIsVisible}
-                  taskMode='Project'
-                  taskTitle='Default'
-                />
-              );
+              dispatch(setSelectedProject(project.id));
             }}>
-            <Trash2 aria-label='Trash' />
+            <span class='flex max-w-full grow gap-1.5 break-all leading-6'>
+              {PROJECT_ICONS.find(e => e.key === project.iconKey)?.icon}
+              {project.title}
+            </span>
+            <button
+              type='button'
+              title='Delete Project'
+              class='hover:(text-rose-900, dark:text-rose-400) rounded duration-150'
+              onClick={(): void => {
+                setIsVisible(true);
+                setModalContent(
+                  <DeleteModal
+                    key='Delete Project'
+                    setIsVisible={setIsVisible}
+                    taskMode='Project'
+                    taskTitle='Default'
+                  />
+                );
+              }}>
+              <Trash2 aria-label='Trash' />
+            </button>
           </button>
-        </button>
+        ))}
       </div>
 
       <ModalWindow
         modalContent={modalContent}
         setIsVisible={setIsVisible}
         isVisible={isVisible}
-        refer={ref}
+        refer={refer}
       />
     </nav>
   );

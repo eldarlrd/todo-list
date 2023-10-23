@@ -8,7 +8,7 @@ import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { useVisible } from '@/hooks/useVisible.ts';
 
 export const Task = (): JSX.Element => {
-  const { ref, isVisible, setIsVisible } = useVisible(false);
+  const { refer, isVisible, setIsVisible } = useVisible(false);
   const [modalContent, setModalContent] = useState<JSX.Element>();
   const [isDone, setIsDone] = useState<boolean>();
 
@@ -90,7 +90,7 @@ export const Task = (): JSX.Element => {
         modalContent={modalContent}
         setIsVisible={setIsVisible}
         isVisible={isVisible}
-        refer={ref}
+        refer={refer}
       />
     </>
   );

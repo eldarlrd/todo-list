@@ -8,17 +8,17 @@ import {
 } from 'preact/hooks';
 
 interface VisibilityControls {
-  ref: Ref<HTMLDivElement>;
+  refer: Ref<HTMLDivElement>;
   isVisible: boolean;
   setIsVisible: StateUpdater<boolean>;
 }
 
 export const useVisible = (initialIsVisible: boolean): VisibilityControls => {
   const [isVisible, setIsVisible] = useState<boolean>(initialIsVisible);
-  const ref = useRef<HTMLDivElement>(null);
+  const refer = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: Event): void => {
-    if (ref.current && !ref.current.contains(event.target as HTMLElement)) {
+    if (refer.current && !refer.current.contains(event.target as HTMLElement)) {
       setIsVisible(false);
     }
   };
@@ -30,5 +30,5 @@ export const useVisible = (initialIsVisible: boolean): VisibilityControls => {
     };
   }, []);
 
-  return { ref, isVisible, setIsVisible };
+  return { refer, isVisible, setIsVisible };
 };

@@ -78,7 +78,7 @@ const PROJECT_ICONS: {
   }
 ];
 
-export const AddProject = ({
+const AddProject = ({
   setIsVisible
 }: {
   setIsVisible: StateUpdater<boolean>;
@@ -157,3 +157,5 @@ export const AddProject = ({
     </form>
   );
 };
+
+export { PROJECT_ICONS, AddProject };

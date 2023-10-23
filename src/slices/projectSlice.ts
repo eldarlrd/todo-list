@@ -1,13 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface StateType {
-  selectedProject: string[];
-  projectList: string[];
-}
-
-const initialState: StateType = {
-  selectedProject: [],
-  projectList: []
+const initialState: {
+  projectList: {
+    id: string;
+    title: string;
+    iconKey: string;
+  }[];
+  selectedProject: string;
+} = {
+  projectList: [
+    {
+      id: 'default',
+      title: 'Default',
+      iconKey: 'star'
+    },
+    {
+      id: 'read',
+      title: 'Read Books',
+      iconKey: 'book'
+    }
+  ],
+  get selectedProject() {
+    return this.projectList[0].id;
+  }
 };
 
 const projectSlice = createSlice({
@@ -15,7 +30,7 @@ const projectSlice = createSlice({
   initialState,
   reducers: {
     setSelectedProject(state, action) {
-      state.selectedProject = action.payload as string[];
+      state.selectedProject = action.payload as string;
     }
   }
 });

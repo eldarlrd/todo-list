@@ -8,7 +8,7 @@ import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { useVisible } from '@/hooks/useVisible.ts';
 
 export const ControlPanel = (): JSX.Element => {
-  const { ref, isVisible, setIsVisible } = useVisible(false);
+  const { refer, isVisible, setIsVisible } = useVisible(false);
   return (
     <>
       <div
@@ -40,7 +40,7 @@ export const ControlPanel = (): JSX.Element => {
         modalContent={<AddTodo key='Add Todo' setIsVisible={setIsVisible} />}
         setIsVisible={setIsVisible}
         isVisible={isVisible}
-        refer={ref}
+        refer={refer}
       />
     </>
   );
