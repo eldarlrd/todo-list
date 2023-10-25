@@ -8,6 +8,7 @@
 > - **[Redux Toolkit](https://redux-toolkit.js.org)**
 > - **[Nano ID](https://zelark.github.io/nano-id-cc)**
 > - **[date-fns](https://date-fns.org)**
+> - **[focus-trap](https://focus-trap.github.io/focus-trap)**
 > - **[Twind](https://twind.style)**
 > - **[Lucide](https://lucide.dev)**
 > - **[Vite](https://vitejs.dev)**
@@ -16,7 +17,7 @@
 
 ## Install
 ```sh
-yarn install
+yarn
 ```
 ## Develop
 ### Run Env.

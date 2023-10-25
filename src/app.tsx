@@ -2,7 +2,7 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { Footer } from '@/components/banners/footer.tsx';
 import { Header } from '@/components/banners/header.tsx';
-import { List } from '@/components/list.tsx';
+import { TodoList } from '@/components/lists/todoList.tsx';
 import { Sidebar } from '@/components/sidebar.tsx';
 
 export const App = (): JSX.Element => {
@@ -13,7 +13,7 @@ export const App = (): JSX.Element => {
       <Header />
       <main class='flex max-h-screen grow'>
         <Sidebar />
-        <List />
+        <TodoList />
       </main>
       <Footer />
     </div>

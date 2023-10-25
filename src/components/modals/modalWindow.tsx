@@ -1,6 +1,7 @@
+import { type FocusTrap, createFocusTrap } from 'focus-trap';
 import { X } from 'lucide-preact';
 import { createContext } from 'preact';
-import { type StateUpdater, type Ref } from 'preact/hooks';
+import { type StateUpdater, type Ref, useState, useEffect } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 interface ModalControls {
@@ -18,14 +19,28 @@ const ModalWindow = ({
   isVisible,
   refer
 }: ModalControls): JSX.Element => {
+  const [focusTrap, setFocusTrap] = useState<FocusTrap>();
+
+  useEffect(() => {
+    refer.current ? setFocusTrap(createFocusTrap(refer.current)) : null;
+  }, [refer]);
+
+  useEffect(() => {
+    isVisible ? focusTrap?.activate() : focusTrap?.deactivate();
+  }, [isVisible, focusTrap]);
+
   return (
     <div
+      role='presentation'
       id='overlay'
       class={
         isVisible
           ? 'fixed inset-0 z-10 flex items-center justify-center bg-slate-50/70 backdrop-blur-[1px] transition-opacity duration-200 dark:bg-slate-900/70'
           : 'h-0 w-0 opacity-0'
-      }>
+      }
+      onKeyDown={(e: KeyboardEvent): void => {
+        e.key === 'Escape' ? setIsVisible(false) : null;
+      }}>
       <div
         id='modal-window'
         ref={refer}

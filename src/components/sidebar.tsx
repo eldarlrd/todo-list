@@ -1,20 +1,18 @@
-import { Menu, Plus, Trash2, X } from 'lucide-preact';
-import { type StateUpdater, useState, useEffect } from 'preact/hooks';
+import { type FocusTrap, createFocusTrap } from 'focus-trap';
+import { Menu, Plus, X } from 'lucide-preact';
+import { type StateUpdater, useState, useEffect, useRef } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
 import { UserSignIn } from '@/components/controls/userSignIn.tsx';
-import { PROJECT_ICONS, AddProject } from '@/components/modals/addProject.tsx';
-import { DeleteModal } from '@/components/modals/deleteModal.tsx';
+import { ProjectList } from '@/components/lists/projectList.tsx';
+import { AddProject } from '@/components/modals/addProject.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
-import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
-import { useAppSelector } from '@/hooks/useAppSelector.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
-import { projectActions } from '@/slices/projectSlice.ts';
 
 interface DrawerControls {
-  isDrawerOpen?: boolean | undefined;
-  setIsDrawerOpen: StateUpdater<boolean | undefined>;
+  isDrawerOpen?: boolean;
+  setIsDrawerOpen: StateUpdater<boolean>;
 }
 
 const MobileBar = ({ setIsDrawerOpen }: DrawerControls): JSX.Element => {
@@ -50,18 +48,22 @@ const SidePanel = ({
   isDrawerOpen,
   setIsDrawerOpen
 }: DrawerControls): JSX.Element => {
-  const [modalContent, setModalContent] = useState<JSX.Element>();
   const { refer, isVisible, setIsVisible } = useVisible(false);
+  const [focusTrap, setFocusTrap] = useState<FocusTrap>();
+  const navRef = useRef<HTMLDivElement>(null);
 
-  const dispatch = useAppDispatch();
-  const { setSelectedProject, deleteProject } = projectActions;
-  const { projectList, selectedProject } = useAppSelector(
-    state => state.projectReducer
-  );
+  useEffect(() => {
+    navRef.current ? setFocusTrap(createFocusTrap(navRef.current)) : null;
+  }, [navRef]);
+
+  useEffect(() => {
+    isDrawerOpen ? focusTrap?.activate() : focusTrap?.deactivate();
+  }, [isDrawerOpen, focusTrap]);
 
   return (
     <nav
       id='sidebar'
+      ref={navRef}
       class={`${
         isDrawerOpen
           ? 'lg:(relative, min-w-0) fixed min-h-full w-full transition-all duration-500'
@@ -75,9 +77,6 @@ const SidePanel = ({
             class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) flex grow items-center gap-1.5 break-all rounded bg-violet-800 p-3 font-medium leading-4 text-slate-50 transition-colors dark:bg-pink-600'
             onClick={(): void => {
               setIsVisible(true);
-              setModalContent(
-                <AddProject key='Add Project' setIsVisible={setIsVisible} />
-              );
             }}>
             <Plus aria-label='Plus Sign' strokeWidth='2.25' class='scale-110' />
             Add Project
@@ -98,59 +97,12 @@ const SidePanel = ({
         </span>
       </div>
 
-      <div
-        id='project-list'
-        class='-mt-2 flex h-full min-w-full flex-col gap-1 overflow-y-auto px-3 py-1.5'>
-        {projectList.map(project => (
-          <button
-            id={project.id}
-            type='button'
-            key={project.id}
-            class={`${
-              project.id === selectedProject
-                ? 'bg-slate-50, dark:bg-slate-800'
-                : ''
-            } hover:(bg-slate-50, dark:bg-slate-800) flex items-start justify-between gap-1.5 rounded px-3 py-2 text-xl text-slate-900 duration-150 dark:text-slate-50`}
-            onClick={(): void => {
-              dispatch(setSelectedProject(project.id));
-            }}>
-            <span class='flex max-w-full grow gap-1.5 break-all leading-6'>
-              {PROJECT_ICONS.find(e => e.key === project.iconKey)?.icon}
-              {project.title}
-            </span>
-            <button
-              type='button'
-              title='Delete Project'
-              class='hover:(text-rose-900, dark:text-rose-400) rounded duration-150'
-              onClick={(): void => {
-                setIsVisible(true);
-                setModalContent(
-                  <DeleteModal
-                    key='Delete Project'
-                    setIsVisible={setIsVisible}
-                    taskTitle={project.title}
-                    taskMode='Project'
-                    handleDelete={(): void => {
-                      dispatch(deleteProject(project.id));
-                      dispatch(
-                        setSelectedProject(
-                          projectList[0]?.id !== project.id
-                            ? projectList[0]?.id
-                            : projectList[1]?.id
-                        )
-                      );
-                    }}
-                  />
-                );
-              }}>
-              <Trash2 aria-label='Trash' />
-            </button>
-          </button>
-        ))}
-      </div>
+      <ProjectList />
 
       <ModalWindow
-        modalContent={modalContent}
+        modalContent={
+          <AddProject key='Add Project' setIsVisible={setIsVisible} />
+        }
         setIsVisible={setIsVisible}
         isVisible={isVisible}
         refer={refer}
@@ -160,7 +112,7 @@ const SidePanel = ({
 };
 
 export const Sidebar = (): JSX.Element => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>();
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   return (
     <>
       <MobileBar setIsDrawerOpen={setIsDrawerOpen} />

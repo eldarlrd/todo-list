@@ -8,7 +8,7 @@ import { DeleteModal } from '@/components/modals/deleteModal.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { useVisible } from '@/hooks/useVisible.ts';
 
-export const Task = (): JSX.Element => {
+export const Todo = (): JSX.Element => {
   const { refer, isVisible, setIsVisible } = useVisible(false);
   const [modalContent, setModalContent] = useState<JSX.Element>();
   const [isDone, setIsDone] = useState<boolean>();
