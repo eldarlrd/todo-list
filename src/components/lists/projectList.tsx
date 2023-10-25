@@ -10,7 +10,11 @@ import { useAppSelector } from '@/hooks/useAppSelector.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 
-export const ProjectList = (): JSX.Element => {
+export const ProjectList = ({
+  panelTabIndex
+}: {
+  panelTabIndex?: number;
+}): JSX.Element => {
   const { refer, isVisible, setIsVisible } = useVisible(false);
   const [modalContent, setModalContent] = useState<JSX.Element>();
 
@@ -30,6 +34,7 @@ export const ProjectList = (): JSX.Element => {
             type='button'
             id={project.id}
             key={project.id}
+            tabIndex={panelTabIndex}
             class={`${
               project.id === selectedProject
                 ? 'bg-slate-50, dark:bg-slate-800'
@@ -45,6 +50,7 @@ export const ProjectList = (): JSX.Element => {
             <button
               type='button'
               title='Delete Project'
+              tabIndex={panelTabIndex}
               class='hover:(text-rose-900, dark:text-rose-400) rounded duration-150'
               onClick={(): void => {
                 setIsVisible(true);

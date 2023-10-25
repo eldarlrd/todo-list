@@ -12,15 +12,23 @@ import { useVisible } from '@/hooks/useVisible.ts';
 
 interface DrawerControls {
   isDrawerOpen?: boolean;
+  panelTabIndex?: number;
   setIsDrawerOpen: StateUpdater<boolean>;
+  setPanelTabIndex: StateUpdater<number>;
 }
 
-const MobileBar = ({ setIsDrawerOpen }: DrawerControls): JSX.Element => {
+const MobileBar = ({
+  setIsDrawerOpen,
+  setPanelTabIndex
+}: DrawerControls): JSX.Element => {
   useEffect(() => {
     window.addEventListener('resize', () => {
-      window.innerWidth >= 1024 ? setIsDrawerOpen(false) : null;
+      if (window.innerWidth >= 1024) {
+        setIsDrawerOpen(false);
+        setPanelTabIndex(0);
+      } else setPanelTabIndex(-1);
     });
-  }, [setIsDrawerOpen]);
+  }, [setIsDrawerOpen, setPanelTabIndex]);
 
   return (
     <nav
@@ -46,19 +54,36 @@ const MobileBar = ({ setIsDrawerOpen }: DrawerControls): JSX.Element => {
 
 const SidePanel = ({
   isDrawerOpen,
-  setIsDrawerOpen
+  panelTabIndex,
+  setIsDrawerOpen,
+  setPanelTabIndex
 }: DrawerControls): JSX.Element => {
   const { refer, isVisible, setIsVisible } = useVisible(false);
   const [focusTrap, setFocusTrap] = useState<FocusTrap>();
   const navRef = useRef<HTMLDivElement>(null);
 
+  const windowWidth = useRef(window.innerWidth);
+
   useEffect(() => {
-    navRef.current ? setFocusTrap(createFocusTrap(navRef.current)) : null;
+    windowWidth.current >= 1024 ? setPanelTabIndex(0) : null;
+  }, [setPanelTabIndex]);
+
+  useEffect(() => {
+    navRef.current
+      ? setFocusTrap(
+          createFocusTrap(navRef.current, {
+            escapeDeactivates: false
+          })
+        )
+      : null;
   }, [navRef]);
 
   useEffect(() => {
-    isDrawerOpen ? focusTrap?.activate() : focusTrap?.deactivate();
-  }, [isDrawerOpen, focusTrap]);
+    if (isDrawerOpen) {
+      setPanelTabIndex(0);
+      focusTrap?.activate();
+    } else focusTrap?.deactivate();
+  }, [isDrawerOpen, focusTrap, setPanelTabIndex]);
 
   return (
     <nav
@@ -74,6 +99,7 @@ const SidePanel = ({
           <button
             type='button'
             id='add-project'
+            tabIndex={panelTabIndex}
             class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) flex grow items-center gap-1.5 break-all rounded bg-violet-800 p-3 font-medium leading-4 text-slate-50 transition-colors dark:bg-pink-600'
             onClick={(): void => {
               setIsVisible(true);
@@ -89,6 +115,7 @@ const SidePanel = ({
               id='mobile-close-drawer'
               class='hover:(bg-slate-100, active:bg-slate-50, dark:(bg-slate-800, active:bg-slate-900)) w-12 rounded p-3 leading-4 transition-colors lg:hidden'
               onClick={(): void => {
+                setPanelTabIndex(-1);
                 setIsDrawerOpen(false);
               }}>
               <X aria-label='X' strokeWidth='2.25' class='scale-110' />
@@ -97,7 +124,7 @@ const SidePanel = ({
         </span>
       </div>
 
-      <ProjectList />
+      <ProjectList panelTabIndex={panelTabIndex} />
 
       <ModalWindow
         modalContent={
@@ -113,12 +140,19 @@ const SidePanel = ({
 
 export const Sidebar = (): JSX.Element => {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
+  const [panelTabIndex, setPanelTabIndex] = useState<number>(-1);
+
   return (
     <>
-      <MobileBar setIsDrawerOpen={setIsDrawerOpen} />
+      <MobileBar
+        setIsDrawerOpen={setIsDrawerOpen}
+        setPanelTabIndex={setPanelTabIndex}
+      />
       <SidePanel
         isDrawerOpen={isDrawerOpen}
+        panelTabIndex={panelTabIndex}
         setIsDrawerOpen={setIsDrawerOpen}
+        setPanelTabIndex={setPanelTabIndex}
       />
     </>
   );
