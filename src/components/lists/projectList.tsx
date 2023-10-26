@@ -1,4 +1,4 @@
-import { PenSquare, Trash2 } from 'lucide-preact';
+import { GripVertical, PenSquare, Trash2 } from 'lucide-preact';
 import { useState } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
@@ -49,6 +49,7 @@ export const ProjectList = ({
               </span>
               {project.title}
             </span>
+
             <span class='flex gap-1.5'>
               <button
                 type='button'
@@ -84,6 +85,7 @@ export const ProjectList = ({
                 }}>
                 <PenSquare aria-label='Pen' />
               </button>
+
               <button
                 type='button'
                 title='Delete Project'
@@ -111,6 +113,14 @@ export const ProjectList = ({
                   );
                 }}>
                 <Trash2 aria-label='Trash' />
+              </button>
+
+              <button
+                type='button'
+                title='Drag Project'
+                tabIndex={panelTabIndex}
+                class='cursor-move rounded duration-150'>
+                <GripVertical aria-label='Drag' />
               </button>
             </span>
           </button>

@@ -1,5 +1,11 @@
 import { format } from 'date-fns';
-import { PenSquare, Trash2, CheckCircle2, HelpCircle } from 'lucide-preact';
+import {
+  PenSquare,
+  Trash2,
+  CheckCircle2,
+  HelpCircle,
+  GripVertical
+} from 'lucide-preact';
 import { useState } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
@@ -15,7 +21,12 @@ export const Todo = (): JSX.Element => {
 
   return (
     <>
-      <div class='mt-3.5 flex justify-between gap-6 rounded bg-slate-100 px-4 py-3 drop-shadow-sm duration-150 dark:bg-slate-800 xl:text-lg'>
+      <div
+        class={`${
+          isDone
+            ? 'dark:(bg-sky-900) bg-emerald-100'
+            : 'dark:(bg-slate-800) bg-slate-100'
+        } mt-3.5 flex justify-between gap-6 rounded px-4 py-3 drop-shadow-sm duration-150 xl:text-lg`}>
         <div class='flex flex-col gap-1.5 break-all'>
           <p class='-skew-x-6 text-slate-600 dark:text-slate-400'>Project</p>
           <p
@@ -33,7 +44,7 @@ export const Todo = (): JSX.Element => {
         </div>
 
         <div class='flex flex-col items-end justify-between'>
-          <span class='flex gap-3'>
+          <span class='flex gap-1.5 sm:gap-3'>
             <button
               type='button'
               title='Edit Todo'
@@ -68,6 +79,13 @@ export const Todo = (): JSX.Element => {
               }}>
               <Trash2 aria-label='Trash' />
               <span class='hidden sm:inline xl:text-lg'>Delete</span>
+            </button>
+
+            <button
+              type='button'
+              title='Drag Todo'
+              class='scale-105 cursor-move rounded duration-150'>
+              <GripVertical aria-label='Drag' />
             </button>
           </span>
 
