@@ -12,7 +12,6 @@ import {
   Star,
   Wrench
 } from 'lucide-preact';
-import { nanoid } from 'nanoid';
 import {
   type StateUpdater,
   useState,
@@ -24,8 +23,6 @@ import { type JSX } from 'preact/jsx-runtime';
 import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
-import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
-import { projectActions } from '@/slices/projectSlice.ts';
 
 const PROJECT_ICONS: {
   key: string;
@@ -81,23 +78,41 @@ const PROJECT_ICONS: {
   }
 ];
 
-const AddProject = ({
-  setIsVisible
-}: {
+interface ProjectDetails {
+  actionMode: string;
   setIsVisible: StateUpdater<boolean>;
-}): JSX.Element => {
+  handleAction: ({
+    projectTitle,
+    projectIcon
+  }: {
+    projectTitle?: string;
+    projectIcon: string;
+  }) => void;
+  currentTitle?: string;
+  currentIcon?: string;
+}
+
+const AddProject = ({
+  actionMode,
+  setIsVisible,
+  handleAction,
+  currentTitle,
+  currentIcon
+}: ProjectDetails): JSX.Element => {
   const [projectTitle, setProjectTitle] = useState<string>();
   const [projectIcon, setProjectIcon] = useState<string>(PROJECT_ICONS[0].key);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const isModalVisible = useContext<boolean>(IsModalVisible);
 
-  const dispatch = useAppDispatch();
-  const { setSelectedProject, addNewProject } = projectActions;
-
   useEffect(() => {
-    setProjectTitle('');
-    setProjectIcon(PROJECT_ICONS[0].key);
-  }, [isModalVisible]);
+    if (currentTitle && currentIcon) {
+      setProjectTitle(currentTitle);
+      setProjectIcon(currentIcon);
+    } else {
+      setProjectTitle('');
+      setProjectIcon(PROJECT_ICONS[0].key);
+    }
+  }, [isModalVisible, currentIcon, currentTitle]);
 
   useEffect(() => {
     setIsDisabled(!projectTitle?.trim().length);
@@ -162,19 +177,11 @@ const AddProject = ({
         />
         <ConfirmButton
           id='project-add'
-          action='Add'
+          action={actionMode}
           styleClass='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) bg-emerald-800 dark:bg-sky-600'
           isDisabled={isDisabled}
           handleConfirm={(): void => {
-            const id = nanoid();
-            dispatch(
-              addNewProject({
-                id,
-                title: projectTitle,
-                iconKey: projectIcon
-              })
-            );
-            dispatch(setSelectedProject(id));
+            handleAction({ projectTitle, projectIcon });
             setIsVisible(false);
           }}
         />

@@ -4,14 +4,14 @@ import { createContext } from 'preact';
 import { type StateUpdater, type Ref, useState, useEffect } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
+const IsModalVisible = createContext<boolean>(false);
+
 interface ModalControls {
   modalContent: JSX.Element | undefined;
   setIsVisible: StateUpdater<boolean>;
   isVisible: boolean;
   refer: Ref<HTMLDivElement>;
 }
-
-const IsModalVisible = createContext<boolean>(false);
 
 const ModalWindow = ({
   modalContent,

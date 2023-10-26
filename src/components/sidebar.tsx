@@ -1,5 +1,6 @@
 import { type FocusTrap, createFocusTrap } from 'focus-trap';
 import { Menu, Plus, X } from 'lucide-preact';
+import { nanoid } from 'nanoid';
 import { type StateUpdater, useState, useEffect, useRef } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
@@ -8,7 +9,9 @@ import { UserSignIn } from '@/components/controls/userSignIn.tsx';
 import { ProjectList } from '@/components/lists/projectList.tsx';
 import { AddProject } from '@/components/modals/addProject.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
+import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
+import { projectActions } from '@/slices/projectSlice.ts';
 
 interface DrawerControls {
   isDrawerOpen?: boolean;
@@ -63,6 +66,9 @@ const SidePanel = ({
   const navRef = useRef<HTMLDivElement>(null);
 
   const windowWidth = useRef(window.innerWidth);
+
+  const dispatch = useAppDispatch();
+  const { setSelectedProject, addNewProject } = projectActions;
 
   useEffect(() => {
     windowWidth.current >= 1024 ? setPanelTabIndex(0) : null;
@@ -128,7 +134,28 @@ const SidePanel = ({
 
       <ModalWindow
         modalContent={
-          <AddProject key='Add Project' setIsVisible={setIsVisible} />
+          <AddProject
+            key='Add Project'
+            actionMode='Add'
+            setIsVisible={setIsVisible}
+            handleAction={({
+              projectTitle,
+              projectIcon
+            }: {
+              projectTitle?: string;
+              projectIcon: string;
+            }): void => {
+              const id = nanoid();
+              dispatch(
+                addNewProject({
+                  id,
+                  title: projectTitle,
+                  iconKey: projectIcon
+                })
+              );
+              dispatch(setSelectedProject(id));
+            }}
+          />
         }
         setIsVisible={setIsVisible}
         isVisible={isVisible}

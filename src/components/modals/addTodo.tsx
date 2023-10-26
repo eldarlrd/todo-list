@@ -11,14 +11,6 @@ import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
 
-interface TodoDetails {
-  title: string;
-  description: string;
-  dueDate: string;
-  priority: string;
-  stage: string;
-}
-
 const PRIORITY_OPTIONS: {
   value: string;
   color: string;
@@ -38,6 +30,14 @@ const PRIORITY_OPTIONS: {
 ];
 
 const STAGE_OPTIONS: string[] = ['Todo', 'In Progress', 'Done'];
+
+interface TodoDetails {
+  title: string;
+  description: string;
+  dueDate: string;
+  priority: string;
+  stage: string;
+}
 
 const emptyTodo: TodoDetails = {
   title: '',
