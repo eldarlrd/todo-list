@@ -44,7 +44,7 @@ export const Todo = (): JSX.Element => {
         </div>
 
         <div class='flex flex-col items-end justify-between'>
-          <span class='flex gap-1.5 sm:gap-3'>
+          <span class='flex gap-2 sm:gap-3'>
             <button
               type='button'
               title='Edit Todo'

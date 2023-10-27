@@ -50,7 +50,7 @@ export const ProjectList = ({
               {project.title}
             </span>
 
-            <span class='flex gap-1.5'>
+            <span class='flex gap-2'>
               <button
                 type='button'
                 title='Edit Project'
