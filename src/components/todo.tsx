@@ -1,11 +1,5 @@
 import { format } from 'date-fns';
-import {
-  PenSquare,
-  Trash2,
-  CheckCircle2,
-  HelpCircle,
-  GripVertical
-} from 'lucide-preact';
+import { PenSquare, Trash2, CheckCircle2, HelpCircle } from 'lucide-preact';
 import { useState } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
@@ -79,13 +73,6 @@ export const Todo = (): JSX.Element => {
               }}>
               <Trash2 aria-label='Trash' />
               <span class='hidden sm:inline xl:text-lg'>Delete</span>
-            </button>
-
-            <button
-              type='button'
-              title='Drag Todo'
-              class='scale-105 cursor-move rounded duration-150'>
-              <GripVertical aria-label='Drag' />
             </button>
           </span>
 
