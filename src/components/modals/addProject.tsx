@@ -78,7 +78,7 @@ const PROJECT_ICONS: {
   }
 ];
 
-interface ProjectDetails {
+interface ProjectOptions {
   actionMode: string;
   setIsVisible: StateUpdater<boolean>;
   handleAction: ({
@@ -98,7 +98,7 @@ const AddProject = ({
   handleAction,
   currentTitle,
   currentIcon
-}: ProjectDetails): JSX.Element => {
+}: ProjectOptions): JSX.Element => {
   const [projectTitle, setProjectTitle] = useState<string>();
   const [projectIcon, setProjectIcon] = useState<string>(PROJECT_ICONS[0].key);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);

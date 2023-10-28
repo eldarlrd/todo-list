@@ -28,11 +28,13 @@ const projectSlice = createSlice({
     setSelectedProject(state, action) {
       state.selectedProject = action.payload as string;
     },
+
     addNewProject(state, action) {
       state.projectList.push(
         action.payload as { id: string; title: string; iconKey: string }
       );
     },
+
     editProject(state, action) {
       const { id, title, iconKey } = action.payload as {
         id: string;
@@ -45,10 +47,19 @@ const projectSlice = createSlice({
         editedProject.iconKey = iconKey;
       }
     },
+
     deleteProject(state, action) {
       state.projectList = state.projectList.filter(
         e => e.id !== action.payload
       );
+    },
+
+    sortProjects(state, action) {
+      state.projectList = action.payload as {
+        id: string;
+        title: string;
+        iconKey: string;
+      }[];
     }
   }
 });

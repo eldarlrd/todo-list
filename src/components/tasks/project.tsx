@@ -1,0 +1,145 @@
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { PenSquare, Trash2, GripVertical } from 'lucide-preact';
+import { type StateUpdater } from 'preact/hooks';
+import { type JSX } from 'preact/jsx-runtime';
+
+import { AddProject, PROJECT_ICONS } from '@/components/modals/addProject.tsx';
+import { DeleteModal } from '@/components/modals/deleteModal.tsx';
+import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
+import { useAppSelector } from '@/hooks/useAppSelector.ts';
+import { projectActions } from '@/slices/projectSlice.ts';
+
+interface ProjectDetails {
+  id: string;
+  title: string;
+  iconKey: string;
+  panelTabIndex?: number;
+  setIsVisible: StateUpdater<boolean>;
+  setModalContent: StateUpdater<JSX.Element | undefined>;
+}
+
+export const Project = ({
+  id,
+  title,
+  iconKey,
+  panelTabIndex,
+  setIsVisible,
+  setModalContent
+}: ProjectDetails): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const { setSelectedProject, editProject, deleteProject } = projectActions;
+  const { projectList, selectedProject } = useAppSelector(
+    state => state.projectReducer
+  );
+
+  const { setNodeRef, listeners, transition, transform, isDragging } =
+    useSortable({
+      id
+    });
+
+  const style = {
+    transition,
+    transform: CSS.Transform.toString(transform)
+  };
+
+  return (
+    <button
+      type='button'
+      id={id}
+      key={id}
+      tabIndex={panelTabIndex}
+      ref={setNodeRef}
+      style={style}
+      class={`${
+        id === selectedProject
+          ? 'bg-slate-50 !outline-slate-500 dark:bg-slate-800'
+          : 'bg-slate-200 dark:bg-slate-700'
+      } ${
+        isDragging ? 'z-10' : ''
+      } flex items-start justify-between gap-1.5 rounded px-3 py-2 text-xl text-slate-900 outline outline-1 outline-transparent transition-[background-color,outline] hover:outline-slate-500 active:outline-slate-500 dark:text-slate-50`}
+      onClick={(): void => {
+        dispatch(setSelectedProject(id));
+      }}>
+      <span class='flex max-w-full grow gap-1.5 break-all leading-6'>
+        <span>{PROJECT_ICONS.find(e => e.key === iconKey)?.icon}</span>
+        {title}
+      </span>
+
+      <span class='flex gap-2'>
+        <button
+          type='button'
+          title='Edit Project'
+          tabIndex={panelTabIndex}
+          class='hover:(text-violet-900, dark:text-pink-400) rounded duration-150'
+          onClick={(): void => {
+            setIsVisible(true);
+            setModalContent(
+              <AddProject
+                key='Edit Project'
+                actionMode='Edit'
+                setIsVisible={setIsVisible}
+                handleAction={({
+                  projectTitle,
+                  projectIcon
+                }: {
+                  projectTitle?: string;
+                  projectIcon: string;
+                }): void => {
+                  dispatch(
+                    editProject({
+                      id,
+                      title: projectTitle,
+                      iconKey: projectIcon
+                    })
+                  );
+                }}
+                currentTitle={title}
+                currentIcon={iconKey}
+              />
+            );
+          }}>
+          <PenSquare aria-label='Pen' />
+        </button>
+
+        <button
+          type='button'
+          title='Delete Project'
+          tabIndex={panelTabIndex}
+          class='hover:(text-rose-900, dark:text-rose-400) rounded duration-150'
+          onClick={(): void => {
+            setIsVisible(true);
+            setModalContent(
+              <DeleteModal
+                key='Delete Project'
+                setIsVisible={setIsVisible}
+                taskTitle={title}
+                taskMode='Project'
+                handleDelete={(): void => {
+                  dispatch(deleteProject(id));
+                  dispatch(
+                    setSelectedProject(
+                      projectList[0]?.id !== id
+                        ? projectList[0]?.id
+                        : projectList[1]?.id
+                    )
+                  );
+                }}
+              />
+            );
+          }}>
+          <Trash2 aria-label='Trash' />
+        </button>
+
+        <button
+          {...listeners}
+          type='button'
+          title='Drag Project'
+          tabIndex={panelTabIndex}
+          class='cursor-move rounded duration-150'>
+          <GripVertical aria-label='Drag' />
+        </button>
+      </span>
+    </button>
+  );
+};

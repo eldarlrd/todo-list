@@ -8,6 +8,7 @@
 > - **[Redux Toolkit](https://redux-toolkit.js.org)**
 > - **[Nano ID](https://zelark.github.io/nano-id-cc)**
 > - **[date-fns](https://date-fns.org)**
+> - **[dnd kit](https://dndkit.com)**
 > - **[focus-trap](https://focus-trap.github.io/focus-trap)**
 > - **[Twind](https://twind.style)**
 > - **[Lucide](https://lucide.dev)**
