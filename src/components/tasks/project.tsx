@@ -53,11 +53,11 @@ export const Project = ({
       style={style}
       class={`${
         id === selectedProject
-          ? 'bg-slate-50 !outline-slate-500 dark:bg-slate-800'
+          ? '!border-slate-500 bg-slate-50 dark:bg-slate-800'
           : 'bg-slate-200 dark:bg-slate-700'
       } ${
         isDragging ? 'z-10' : ''
-      } flex items-start justify-between gap-1.5 rounded px-3 py-2 text-xl text-slate-900 outline outline-1 outline-transparent transition-[background-color,outline] hover:outline-slate-500 active:outline-slate-500 dark:text-slate-50`}
+      } flex items-start justify-between gap-1.5 rounded border border-transparent px-3 py-2 text-xl text-slate-900 transition-colors hover:border-slate-500 active:border-slate-500 dark:text-slate-50`}
       onClick={(): void => {
         dispatch(setSelectedProject(id));
       }}>
