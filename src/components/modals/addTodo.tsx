@@ -76,6 +76,16 @@ const AddTodo = ({
   };
 
   useEffect(() => {
+    if (todo.stage === STAGE_OPTIONS[2])
+    setTodo(
+      (prevState): TodoDetails => ({
+        ...prevState,
+        isDone: true
+      })
+    )
+  }, [todo.stage])
+
+  useEffect(() => {
     if (currentTodo?.title) {
       setTodo(currentTodo);
     } else {

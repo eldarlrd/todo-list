@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, isPast, isToday, isTomorrow } from 'date-fns';
 import { PenSquare, Trash2, CheckCircle2, HelpCircle } from 'lucide-preact';
 import { type StateUpdater } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
@@ -41,6 +41,8 @@ const Todo = ({
     state => state.projectReducer
   );
 
+  const todoDueDate = new Date(dueDate);
+
   return (
     <>
       <div
@@ -61,7 +63,12 @@ const Todo = ({
             {title}
           </p>
           <p>{description}</p>
-          <p class='-mb-1 mt-1'>{format(new Date(dueDate), 'd MMM. y')}</p>
+          <p class='-mb-1 mt-1'>
+            {format(todoDueDate, 'eee, d MMM. y')}
+            {isToday(todoDueDate) ? ' | Today' : ''}
+            {isTomorrow(todoDueDate) ? ' | Tomorrow' : ''}
+            {isPast(todoDueDate) ? ' | Overdue' : ''}
+          </p>
           <p class='flex items-center gap-1.5'>
             <span
               class={`bg-${PRIORITY_OPTIONS.find(e => e.value === priority)

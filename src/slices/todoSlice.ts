@@ -1,3 +1,4 @@
+import { STAGE_OPTIONS } from '@/components/modals/addTodo';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: {
@@ -24,6 +25,8 @@ const todoSlice = createSlice({
       const checkedTodo = state.todoList.find(e => e.id === id);
       if (checkedTodo) {
         checkedTodo.isDone = isDone;
+        if (isDone) checkedTodo.stage = STAGE_OPTIONS[2];
+        else checkedTodo.stage = STAGE_OPTIONS[0]
       }
     },
 
