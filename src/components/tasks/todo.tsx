@@ -1,11 +1,12 @@
 import { format } from 'date-fns';
 import { PenSquare, Trash2, CheckCircle2, HelpCircle } from 'lucide-preact';
-import { type StateUpdater, useState } from 'preact/hooks';
+import { type StateUpdater } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { AddTodo, PRIORITY_OPTIONS } from '@/components/modals/addTodo.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
 import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
+import { useAppSelector } from '@/hooks/useAppSelector.ts';
 import { todoActions } from '@/slices/todoSlice.ts';
 
 interface TodoDetails {
@@ -30,28 +31,32 @@ const Todo = ({
   dueDate,
   priority,
   stage,
+  isDone,
   setIsVisible,
   setModalContent
 }: TodoProps): JSX.Element => {
-  const [isTodoDone, setIsTodoDone] = useState<boolean>(false);
-
   const dispatch = useAppDispatch();
-  const { editTodo, deleteTodo } = todoActions;
+  const { checkTodo, editTodo, deleteTodo } = todoActions;
+  const { projectList, selectedProject } = useAppSelector(
+    state => state.projectReducer
+  );
 
   return (
     <>
       <div
         id={id}
         class={`${
-          isTodoDone
+          isDone
             ? 'dark:(bg-sky-900) bg-emerald-100'
             : 'dark:(bg-slate-800) bg-slate-100'
         } mt-3.5 flex justify-between gap-6 rounded px-4 py-3 drop-shadow-sm duration-150 xl:text-lg`}>
         <div class='flex flex-col gap-1.5 break-all'>
-          <p class='-skew-x-6 text-slate-600 dark:text-slate-400'>Project</p>
+          <p class='-skew-x-6 text-slate-600 dark:text-slate-400'>
+            {projectList.find(e => e.id === selectedProject)?.title}
+          </p>
           <p
             class={`${
-              isTodoDone ? 'line-through' : ''
+              isDone ? 'line-through' : ''
             } -my-1 font-medium decoration-2`}>
             {title}
           </p>
@@ -94,7 +99,7 @@ const Todo = ({
                           dueDate,
                           priority,
                           stage,
-                          isTodoDone
+                          isDone
                         })
                       );
                     }}
@@ -105,7 +110,7 @@ const Todo = ({
                       dueDate,
                       priority,
                       stage,
-                      isDone: isTodoDone
+                      isDone
                     }}
                   />
                 );
@@ -142,15 +147,15 @@ const Todo = ({
             title='Check Done'
             class='hover:(text-emerald-900, dark:text-sky-400) flex scale-110 items-center gap-1.5 rounded font-medium duration-150'
             onClick={(): void => {
-              setIsTodoDone(!isTodoDone);
+              dispatch(checkTodo({ id, isDone: !isDone }));
             }}>
-            {isTodoDone ? (
+            {isDone ? (
               <CheckCircle2 aria-label='Check Mark' />
             ) : (
               <HelpCircle aria-label='Question Mark' />
             )}
             <span class='hidden sm:inline xl:text-lg'>
-              {isTodoDone ? 'Done' : 'Working'}
+              {isDone ? 'Done' : 'Working'}
             </span>
           </button>
         </div>

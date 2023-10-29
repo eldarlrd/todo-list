@@ -136,7 +136,7 @@ const AddTodo = ({
           name='todo-date'
           class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
           max='9999-12-31'
-          min={todo.dueDate}
+          min={emptyTodo.dueDate}
           value={todo.dueDate}
           onInput={(e: Event): void => {
             handleInput(e, 'dueDate');
@@ -212,4 +212,4 @@ const AddTodo = ({
   );
 };
 
-export { PRIORITY_OPTIONS, AddTodo };
+export { PRIORITY_OPTIONS, STAGE_OPTIONS, AddTodo };

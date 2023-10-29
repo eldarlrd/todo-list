@@ -19,6 +19,14 @@ const todoSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
+    checkTodo(state, action) {
+      const { id, isDone } = action.payload as { id: string; isDone: boolean };
+      const checkedTodo = state.todoList.find(e => e.id === id);
+      if (checkedTodo) {
+        checkedTodo.isDone = isDone;
+      }
+    },
+
     addNewTodo(state, action) {
       state.todoList.push(
         action.payload as {
@@ -35,25 +43,16 @@ const todoSlice = createSlice({
     },
 
     editTodo(state, action) {
-      const {
-        id,
-        project,
-        title,
-        description,
-        dueDate,
-        priority,
-        stage,
-        isDone
-      } = action.payload as {
-        id: string;
-        project: string;
-        title: string;
-        description: string;
-        dueDate: string;
-        priority: string;
-        stage: string;
-        isDone: boolean;
-      };
+      const { id, project, title, description, dueDate, priority, stage } =
+        action.payload as {
+          id: string;
+          project: string;
+          title: string;
+          description: string;
+          dueDate: string;
+          priority: string;
+          stage: string;
+        };
       const editedTodo = state.todoList.find(e => e.id === id);
       if (editedTodo) {
         editedTodo.title = title;
@@ -62,7 +61,6 @@ const todoSlice = createSlice({
         editedTodo.dueDate = dueDate;
         editedTodo.priority = priority;
         editedTodo.stage = stage;
-        editedTodo.isDone = isDone;
       }
     },
 
