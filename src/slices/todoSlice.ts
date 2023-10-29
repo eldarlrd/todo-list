@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { nanoid } from 'nanoid';
 
 const initialState: {
   todoList: {
@@ -13,18 +12,7 @@ const initialState: {
     isDone: boolean;
   }[];
 } = {
-  todoList: [
-    {
-      id: nanoid(),
-      project: 'Test',
-      title: 'First',
-      description: 'Cool',
-      dueDate: '11/27/2023',
-      priority: 'Medium',
-      stage: 'Todo',
-      isDone: false
-    }
-  ]
+  todoList: []
 };
 
 const todoSlice = createSlice({

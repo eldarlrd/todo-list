@@ -16,8 +16,11 @@ interface TodoDetails {
   priority: string;
   stage: string;
   isDone: boolean;
-  setIsVisible?: StateUpdater<boolean>;
-  setModalContent?: StateUpdater<JSX.Element | undefined>;
+}
+
+interface TodoProps extends TodoDetails {
+  setIsVisible: StateUpdater<boolean>;
+  setModalContent: StateUpdater<JSX.Element | undefined>;
 }
 
 const Todo = ({
@@ -29,7 +32,7 @@ const Todo = ({
   stage,
   setIsVisible,
   setModalContent
-}: TodoDetails): JSX.Element => {
+}: TodoProps): JSX.Element => {
   const [isTodoDone, setIsTodoDone] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
@@ -53,7 +56,7 @@ const Todo = ({
             {title}
           </p>
           <p>{description}</p>
-          <p class='-mb-1 mt-1'>{format(new Date(), 'd MMM. y')}</p>
+          <p class='-mb-1 mt-1'>{format(new Date(dueDate), 'd MMM. y')}</p>
           <p class='flex items-center gap-1.5'>
             <span
               class={`bg-${PRIORITY_OPTIONS.find(e => e.value === priority)
