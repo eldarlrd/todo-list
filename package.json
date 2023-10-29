@@ -1,7 +1,7 @@
 {
   "name": "todo-list",
   "private": true,
-  "version": "0.8.5",
+  "version": "0.8.6",
   "type": "module",
   "keywords": [
     "todo list",
@@ -17,10 +17,10 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "deploy": "pnpm build && gh-pages -b deploy -m 'build: Deployment' -d dist",
+    "deploy": "yarn build && gh-pages -b deploy -m 'build: Deployment' -d dist",
     "lint": "eslint src/ --ext .ts,.tsx --report-unused-disable-directives",
     "pretty": "prettier 'src/**/*.{ts,tsx}' --write",
-    "format": "pnpm lint --fix && pnpm pretty"
+    "format": "yarn lint --fix && yarn pretty"
   },
   "prettier": {
     "singleQuote": true,

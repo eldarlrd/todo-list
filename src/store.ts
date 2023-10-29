@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { projectReducer } from '@/slices/projectSlice.ts';
+import { todoReducer } from '@/slices/todoSlice.ts';
 
 // https://redux-toolkit.js.org/api/configureStore
 const store = configureStore({
   reducer: {
-    projectReducer
+    projectReducer,
+    todoReducer
   }
 });
 

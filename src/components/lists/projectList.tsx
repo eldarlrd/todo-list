@@ -55,17 +55,23 @@ export const ProjectList = ({
           <SortableContext
             items={projectList}
             strategy={verticalListSortingStrategy}>
-            {projectList.map(project => (
-              <Project
-                id={project.id}
-                key={project.id}
-                title={project.title}
-                iconKey={project.iconKey}
-                panelTabIndex={panelTabIndex}
-                setIsVisible={setIsVisible}
-                setModalContent={setModalContent}
-              />
-            ))}
+            {projectList.length ? (
+              projectList.map(project => (
+                <Project
+                  id={project.id}
+                  key={project.id}
+                  title={project.title}
+                  iconKey={project.iconKey}
+                  panelTabIndex={panelTabIndex}
+                  setIsVisible={setIsVisible}
+                  setModalContent={setModalContent}
+                />
+              ))
+            ) : (
+              <p class='flex justify-center text-xl text-slate-700 dark:text-slate-300'>
+                Empty
+              </p>
+            )}
           </SortableContext>
         </DndContext>
       </div>

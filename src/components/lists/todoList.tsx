@@ -1,7 +1,6 @@
 import { type JSX } from 'preact/jsx-runtime';
 
 import { ControlPanel } from '@/components/controls/controlPanel.tsx';
-import { Todo } from '@/components/tasks/todo.tsx';
 
 export const TodoList = (): JSX.Element => {
   return (
@@ -13,20 +12,14 @@ export const TodoList = (): JSX.Element => {
         <p class='mx-2 mt-3.5 -skew-x-6 select-none text-xl font-bold xl:text-2xl'>
           Todo
         </p>
-        <Todo />
-        <Todo />
 
         <p class='mx-2 mt-3.5 -skew-x-6 select-none text-xl font-bold xl:text-2xl'>
           In Progress
         </p>
-        <Todo />
-        <Todo />
 
         <p class='mx-2 mt-3.5 -skew-x-6 select-none text-xl font-bold xl:text-2xl'>
           Done
         </p>
-        <Todo />
-        <Todo />
       </div>
     </section>
   );
