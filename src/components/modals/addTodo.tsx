@@ -10,6 +10,7 @@ import { type JSX } from 'preact/jsx-runtime';
 import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
+import { type TodoDetails } from '@/components/tasks/todo.tsx';
 
 const PRIORITY_OPTIONS: {
   value: string;
@@ -31,28 +32,38 @@ const PRIORITY_OPTIONS: {
 
 const STAGE_OPTIONS: string[] = ['Todo', 'In Progress', 'Done'];
 
-interface TodoDetails {
-  title: string;
-  description: string;
-  dueDate: string;
-  priority: string;
-  stage: string;
-}
-
 const emptyTodo: TodoDetails = {
+  id: '',
   title: '',
   description: '',
   dueDate: formatISO(new Date(), { representation: 'date' }),
   priority: PRIORITY_OPTIONS[0].value,
-  stage: STAGE_OPTIONS[0]
+  stage: STAGE_OPTIONS[0],
+  isDone: false
 };
 
-export const AddTodo = ({
-  setIsVisible
-}: {
+interface TodoOptions {
+  actionMode: string;
   setIsVisible: StateUpdater<boolean>;
-}): JSX.Element => {
+  handleAction: ({
+    title,
+    description,
+    dueDate,
+    priority,
+    stage,
+    isDone
+  }: TodoDetails) => void;
+  currentTodo?: TodoDetails;
+}
+
+const AddTodo = ({
+  actionMode,
+  setIsVisible,
+  handleAction,
+  currentTodo
+}: TodoOptions): JSX.Element => {
   const [todo, setTodo] = useState<TodoDetails>(emptyTodo);
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const isModalVisible = useContext<boolean>(IsModalVisible);
 
   const handleInput = (e: Event, detail: string): void => {
@@ -65,8 +76,16 @@ export const AddTodo = ({
   };
 
   useEffect(() => {
-    setTodo(emptyTodo);
-  }, [isModalVisible]);
+    if (currentTodo?.title) {
+      setTodo(currentTodo);
+    } else {
+      setTodo(emptyTodo);
+    }
+  }, [isModalVisible, currentTodo]);
+
+  useEffect(() => {
+    setIsDisabled(!todo.title.trim().length);
+  }, [todo.title]);
 
   return (
     <form
@@ -180,14 +199,17 @@ export const AddTodo = ({
         />
         <ConfirmButton
           id='todo-add'
-          action='Add'
+          action={actionMode}
           styleClass='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) bg-emerald-800 dark:bg-sky-600'
-          isDisabled={false}
+          isDisabled={isDisabled}
           handleConfirm={(): void => {
-            console.log('Add');
+            handleAction(todo);
+            setIsVisible(false);
           }}
         />
       </span>
     </form>
   );
 };
+
+export { PRIORITY_OPTIONS, AddTodo };

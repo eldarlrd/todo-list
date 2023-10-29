@@ -1,14 +1,22 @@
 import { Plus } from 'lucide-preact';
+import { nanoid } from 'nanoid';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { SortMenu } from '@/components/controls/sortMenu.tsx';
 import { ViewMenu } from '@/components/controls/viewMenu.tsx';
 import { AddTodo } from '@/components/modals/addTodo.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
+import { type TodoDetails } from '@/components/tasks/todo.tsx';
+import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
+import { todoActions } from '@/slices/todoSlice.ts';
 
 export const ControlPanel = (): JSX.Element => {
   const { refer, isVisible, setIsVisible } = useVisible(false);
+
+  const dispatch = useAppDispatch();
+  const { addNewTodo } = todoActions;
+
   return (
     <>
       <div
@@ -37,7 +45,34 @@ export const ControlPanel = (): JSX.Element => {
       </div>
 
       <ModalWindow
-        modalContent={<AddTodo key='Add Todo' setIsVisible={setIsVisible} />}
+        modalContent={
+          <AddTodo
+            key='Add Todo'
+            actionMode='Add'
+            setIsVisible={setIsVisible}
+            handleAction={({
+              title,
+              description,
+              dueDate,
+              priority,
+              stage,
+              isDone
+            }: TodoDetails): void => {
+              const id = nanoid();
+              dispatch(
+                addNewTodo({
+                  id,
+                  title,
+                  description,
+                  dueDate,
+                  priority,
+                  stage,
+                  isDone
+                })
+              );
+            }}
+          />
+        }
         setIsVisible={setIsVisible}
         isVisible={isVisible}
         refer={refer}

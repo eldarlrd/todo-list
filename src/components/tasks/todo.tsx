@@ -1,23 +1,46 @@
 import { format } from 'date-fns';
 import { PenSquare, Trash2, CheckCircle2, HelpCircle } from 'lucide-preact';
-import { useState } from 'preact/hooks';
+import { type StateUpdater, useState } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
-import { AddTodo } from '@/components/modals/addTodo.tsx';
+import { AddTodo, PRIORITY_OPTIONS } from '@/components/modals/addTodo.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
-import { ModalWindow } from '@/components/modals/modalWindow.tsx';
-import { useVisible } from '@/hooks/useVisible.ts';
+import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
+import { todoActions } from '@/slices/todoSlice.ts';
 
-export const Todo = (): JSX.Element => {
-  const { refer, isVisible, setIsVisible } = useVisible(false);
-  const [modalContent, setModalContent] = useState<JSX.Element>();
-  const [isDone, setIsDone] = useState<boolean>();
+interface TodoDetails {
+  id: string;
+  title: string;
+  description: string;
+  dueDate: string;
+  priority: string;
+  stage: string;
+  isDone: boolean;
+  setIsVisible?: StateUpdater<boolean>;
+  setModalContent?: StateUpdater<JSX.Element | undefined>;
+}
+
+const Todo = ({
+  id,
+  title,
+  description,
+  dueDate,
+  priority,
+  stage,
+  setIsVisible,
+  setModalContent
+}: TodoDetails): JSX.Element => {
+  const [isTodoDone, setIsTodoDone] = useState<boolean>(false);
+
+  const dispatch = useAppDispatch();
+  const { editTodo, deleteTodo } = todoActions;
 
   return (
     <>
       <div
+        id={id}
         class={`${
-          isDone
+          isTodoDone
             ? 'dark:(bg-sky-900) bg-emerald-100'
             : 'dark:(bg-slate-800) bg-slate-100'
         } mt-3.5 flex justify-between gap-6 rounded px-4 py-3 drop-shadow-sm duration-150 xl:text-lg`}>
@@ -25,15 +48,18 @@ export const Todo = (): JSX.Element => {
           <p class='-skew-x-6 text-slate-600 dark:text-slate-400'>Project</p>
           <p
             class={`${
-              isDone ? 'line-through' : ''
+              isTodoDone ? 'line-through' : ''
             } -my-1 font-medium decoration-2`}>
-            Title
+            {title}
           </p>
-          <p>Description</p>
+          <p>{description}</p>
           <p class='-mb-1 mt-1'>{format(new Date(), 'd MMM. y')}</p>
           <p class='flex items-center gap-1.5'>
-            <span class='block aspect-square w-4 rounded-full bg-teal-500' />
-            Low
+            <span
+              class={`bg-${PRIORITY_OPTIONS.find(e => e.value === priority)
+                ?.color} block aspect-square w-4 rounded-full`}
+            />
+            {priority}
           </p>
         </div>
 
@@ -46,7 +72,39 @@ export const Todo = (): JSX.Element => {
               onClick={(): void => {
                 setIsVisible(true);
                 setModalContent(
-                  <AddTodo key='Edit Todo' setIsVisible={setIsVisible} />
+                  <AddTodo
+                    key='Edit Todo'
+                    actionMode='Edit'
+                    setIsVisible={setIsVisible}
+                    handleAction={({
+                      title,
+                      description,
+                      dueDate,
+                      priority,
+                      stage
+                    }: TodoDetails): void => {
+                      dispatch(
+                        editTodo({
+                          id,
+                          title,
+                          description,
+                          dueDate,
+                          priority,
+                          stage,
+                          isTodoDone
+                        })
+                      );
+                    }}
+                    currentTodo={{
+                      id,
+                      title,
+                      description,
+                      dueDate,
+                      priority,
+                      stage,
+                      isDone: isTodoDone
+                    }}
+                  />
                 );
               }}>
               <PenSquare aria-label='Pen' />
@@ -63,10 +121,10 @@ export const Todo = (): JSX.Element => {
                   <DeleteModal
                     key='Delete Todo'
                     setIsVisible={setIsVisible}
-                    taskTitle='Default'
+                    taskTitle={title}
                     taskMode='Todo'
                     handleDelete={(): void => {
-                      console.log('Delete');
+                      dispatch(deleteTodo(id));
                     }}
                   />
                 );
@@ -81,26 +139,21 @@ export const Todo = (): JSX.Element => {
             title='Check Done'
             class='hover:(text-emerald-900, dark:text-sky-400) flex scale-110 items-center gap-1.5 rounded font-medium duration-150'
             onClick={(): void => {
-              setIsDone(!isDone);
+              setIsTodoDone(!isTodoDone);
             }}>
-            {isDone ? (
+            {isTodoDone ? (
               <CheckCircle2 aria-label='Check Mark' />
             ) : (
               <HelpCircle aria-label='Question Mark' />
             )}
             <span class='hidden sm:inline xl:text-lg'>
-              {isDone ? 'Done' : 'Working'}
+              {isTodoDone ? 'Done' : 'Working'}
             </span>
           </button>
         </div>
       </div>
-
-      <ModalWindow
-        modalContent={modalContent}
-        setIsVisible={setIsVisible}
-        isVisible={isVisible}
-        refer={refer}
-      />
     </>
   );
 };
+
+export { type TodoDetails, Todo };
