@@ -77,13 +77,13 @@ const AddTodo = ({
 
   useEffect(() => {
     if (todo.stage === STAGE_OPTIONS[2])
-    setTodo(
-      (prevState): TodoDetails => ({
-        ...prevState,
-        isDone: true
-      })
-    )
-  }, [todo.stage])
+      setTodo(
+        (prevState): TodoDetails => ({
+          ...prevState,
+          isDone: true
+        })
+      );
+  }, [todo.stage]);
 
   useEffect(() => {
     if (currentTodo?.title) {
@@ -115,7 +115,7 @@ const AddTodo = ({
           class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
           minLength={1}
           maxLength={140}
-          value={todo.title.trim()}
+          value={todo.title}
           required
           onInput={(e: Event): void => {
             handleInput(e, 'title');
@@ -213,6 +213,8 @@ const AddTodo = ({
           styleClass='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) bg-emerald-800 dark:bg-sky-600'
           isDisabled={isDisabled}
           handleConfirm={(): void => {
+            todo.title = todo.title.trim();
+            todo.description = todo.description.trim();
             handleAction(todo);
             setIsVisible(false);
           }}

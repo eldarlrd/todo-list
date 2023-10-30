@@ -1,5 +1,6 @@
-import { STAGE_OPTIONS } from '@/components/modals/addTodo';
 import { createSlice } from '@reduxjs/toolkit';
+
+import { STAGE_OPTIONS } from '@/components/modals/addTodo.tsx';
 
 const initialState: {
   todoList: {
@@ -25,8 +26,9 @@ const todoSlice = createSlice({
       const checkedTodo = state.todoList.find(e => e.id === id);
       if (checkedTodo) {
         checkedTodo.isDone = isDone;
-        if (isDone) checkedTodo.stage = STAGE_OPTIONS[2];
-        else checkedTodo.stage = STAGE_OPTIONS[0]
+        isDone
+          ? (checkedTodo.stage = STAGE_OPTIONS[2])
+          : (checkedTodo.stage = STAGE_OPTIONS[1]);
       }
     },
 
@@ -64,6 +66,9 @@ const todoSlice = createSlice({
         editedTodo.dueDate = dueDate;
         editedTodo.priority = priority;
         editedTodo.stage = stage;
+        stage === STAGE_OPTIONS[2]
+          ? (editedTodo.isDone = true)
+          : (editedTodo.isDone = false);
       }
     },
 

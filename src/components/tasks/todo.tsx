@@ -65,9 +65,13 @@ const Todo = ({
           <p>{description}</p>
           <p class='-mb-1 mt-1'>
             {format(todoDueDate, 'eee, d MMM. y')}
-            {isToday(todoDueDate) ? ' | Today' : ''}
-            {isTomorrow(todoDueDate) ? ' | Tomorrow' : ''}
-            {isPast(todoDueDate) ? ' | Overdue' : ''}
+            {isTomorrow(todoDueDate)
+              ? ' | Tomorrow'
+              : isToday(todoDueDate)
+              ? ' | Today'
+              : isPast(todoDueDate)
+              ? ' | Overdue'
+              : ''}
           </p>
           <p class='flex items-center gap-1.5'>
             <span

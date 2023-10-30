@@ -181,7 +181,7 @@ const AddProject = ({
           styleClass='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) bg-emerald-800 dark:bg-sky-600'
           isDisabled={isDisabled}
           handleConfirm={(): void => {
-            handleAction({ projectTitle, projectIcon });
+            handleAction({ projectTitle: projectTitle?.trim(), projectIcon });
             setIsVisible(false);
           }}
         />
