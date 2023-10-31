@@ -1,4 +1,4 @@
-import { formatISO } from 'date-fns';
+import { formatISO, isToday, isFuture, isValid } from 'date-fns';
 import {
   type StateUpdater,
   useState,
@@ -94,8 +94,15 @@ const AddTodo = ({
   }, [isModalVisible, currentTodo]);
 
   useEffect(() => {
-    setIsDisabled(!todo.title.trim().length);
-  }, [todo.title]);
+    const inputDate = new Date(todo.dueDate);
+    if (
+      !!todo.title.trim().length &&
+      isValid(inputDate) &&
+      (isToday(inputDate) || isFuture(inputDate))
+    )
+      setIsDisabled(false);
+    else setIsDisabled(true);
+  }, [todo.title, todo.dueDate]);
 
   return (
     <form
