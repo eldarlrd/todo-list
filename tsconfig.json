@@ -27,5 +27,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "vite.config.mts", "twind.config.mts"]
+  "include": ["src", "*.config.mts", "__tests__"]
 }
