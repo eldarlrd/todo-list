@@ -51,6 +51,7 @@ export const ControlPanel = (): JSX.Element => {
             actionMode='Add'
             setIsVisible={setIsVisible}
             handleAction={({
+              project,
               title,
               description,
               dueDate,
@@ -62,6 +63,7 @@ export const ControlPanel = (): JSX.Element => {
               dispatch(
                 addNewTodo({
                   id,
+                  project,
                   title,
                   description,
                   dueDate,

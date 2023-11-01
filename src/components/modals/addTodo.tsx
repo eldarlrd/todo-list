@@ -1,4 +1,5 @@
 import { formatISO, isToday, isFuture, isValid } from 'date-fns';
+import { nanoid } from 'nanoid';
 import {
   type StateUpdater,
   useState,
@@ -9,8 +10,14 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
+import { VIEW_OPTIONS } from '@/components/controls/viewMenu.tsx';
+import { PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
 import { type TodoDetails } from '@/components/tasks/todo.tsx';
+import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
+import { useAppSelector } from '@/hooks/useAppSelector.ts';
+import { projectActions } from '@/slices/projectSlice.ts';
+import { todoActions } from '@/slices/todoSlice.ts';
 
 const PRIORITY_OPTIONS: {
   value: string;
@@ -34,6 +41,7 @@ const STAGE_OPTIONS: string[] = ['Todo', 'In Progress', 'Done'];
 
 const emptyTodo: TodoDetails = {
   id: '',
+  project: '',
   title: '',
   description: '',
   dueDate: formatISO(new Date(), { representation: 'date' }),
@@ -46,6 +54,7 @@ interface TodoOptions {
   actionMode: string;
   setIsVisible: StateUpdater<boolean>;
   handleAction: ({
+    project,
     title,
     description,
     dueDate,
@@ -65,6 +74,13 @@ const AddTodo = ({
   const [todo, setTodo] = useState<TodoDetails>(emptyTodo);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const isModalVisible = useContext<boolean>(IsModalVisible);
+
+  const { setSelectedProject, addNewProject } = projectActions;
+  const { selectedProject } = useAppSelector(state => state.projectReducer);
+
+  const dispatch = useAppDispatch();
+  const { setViewMode } = todoActions;
+  const { viewMode } = useAppSelector(state => state.todoReducer);
 
   const handleInput = (e: Event, detail: string): void => {
     setTodo(
@@ -90,8 +106,26 @@ const AddTodo = ({
       setTodo(currentTodo);
     } else {
       setTodo(emptyTodo);
+      if (isModalVisible && !selectedProject) {
+        const id = nanoid();
+        dispatch(
+          addNewProject({
+            id,
+            title: 'Default',
+            iconKey: PROJECT_ICONS[0].key
+          })
+        );
+        dispatch(setSelectedProject(id));
+      }
     }
-  }, [isModalVisible, currentTodo]);
+  }, [
+    isModalVisible,
+    currentTodo,
+    setSelectedProject,
+    selectedProject,
+    addNewProject,
+    dispatch
+  ]);
 
   useEffect(() => {
     const inputDate = new Date(todo.dueDate);
@@ -220,8 +254,12 @@ const AddTodo = ({
           styleClass='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) bg-emerald-800 dark:bg-sky-600'
           isDisabled={isDisabled}
           handleConfirm={(): void => {
+            todo.project = selectedProject;
             todo.title = todo.title.trim();
             todo.description = todo.description.trim();
+            viewMode !== VIEW_OPTIONS[0]
+              ? dispatch(setViewMode(todo.stage))
+              : null;
             handleAction(todo);
             setIsVisible(false);
           }}

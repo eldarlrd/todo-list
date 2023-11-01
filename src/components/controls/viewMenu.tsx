@@ -1,26 +1,24 @@
 import { Eye } from 'lucide-preact';
-import { useState, useEffect } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
+import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
+import { useAppSelector } from '@/hooks/useAppSelector.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
+import { todoActions } from '@/slices/todoSlice.ts';
 
 const VIEW_OPTIONS: string[] = ['All', 'Todo', 'In Progress', 'Done'];
 
-export const ViewMenu = (): JSX.Element => {
+const ViewMenu = (): JSX.Element => {
   const { refer, isVisible, setIsVisible } = useVisible(false);
-  const [viewSelected, setViewSelected] = useState<string>();
+
+  const dispatch = useAppDispatch();
+  const { setViewMode } = todoActions;
+  const { viewMode } = useAppSelector(state => state.todoReducer);
 
   const switchView = (view: string): void => {
-    setViewSelected(view);
     setIsVisible(false);
-    sessionStorage.setItem('view', view);
+    dispatch(setViewMode(view));
   };
-
-  useEffect(() => {
-    sessionStorage.view
-      ? setViewSelected(sessionStorage.view as string)
-      : setViewSelected('All');
-  }, [setViewSelected]);
 
   return (
     <div ref={refer}>
@@ -34,10 +32,10 @@ export const ViewMenu = (): JSX.Element => {
         onClick={(): void => {
           setIsVisible(!isVisible);
         }}>
-        {viewSelected ? (
+        {viewMode ? (
           <>
             <Eye aria-label='Eye' size='20' />
-            {viewSelected}
+            {viewMode}
           </>
         ) : null}
       </button>
@@ -50,7 +48,7 @@ export const ViewMenu = (): JSX.Element => {
             <button
               type='button'
               key={option}
-              class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-28 min-w-fit justify-end px-2 py-[3px] font-medium active:bg-slate-400 md:w-32'
+              class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-28 min-w-fit select-none justify-end px-2 py-[3px] font-medium active:bg-slate-400 md:w-32'
               onClick={(e: Event): void => {
                 switchView((e.target as HTMLButtonElement).innerText);
               }}>
@@ -62,3 +60,5 @@ export const ViewMenu = (): JSX.Element => {
     </div>
   );
 };
+
+export { VIEW_OPTIONS, ViewMenu };

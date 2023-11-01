@@ -11,6 +11,7 @@ import { todoActions } from '@/slices/todoSlice.ts';
 
 interface TodoDetails {
   id: string;
+  project: string;
   title: string;
   description: string;
   dueDate: string;
@@ -26,6 +27,7 @@ interface TodoProps extends TodoDetails {
 
 const Todo = ({
   id,
+  project,
   title,
   description,
   dueDate,
@@ -37,9 +39,8 @@ const Todo = ({
 }: TodoProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const { checkTodo, editTodo, deleteTodo } = todoActions;
-  const { projectList, selectedProject } = useAppSelector(
-    state => state.projectReducer
-  );
+
+  const { projectList } = useAppSelector(state => state.projectReducer);
 
   const todoDueDate = new Date(dueDate);
 
@@ -54,7 +55,7 @@ const Todo = ({
         } mt-3.5 flex justify-between gap-6 rounded px-4 py-3 drop-shadow-sm duration-150 xl:text-lg`}>
         <div class='flex flex-col gap-1.5 break-all'>
           <p class='-skew-x-6 text-slate-600 dark:text-slate-400'>
-            {projectList.find(e => e.id === selectedProject)?.title}
+            {projectList.find(e => e.id === project)?.title}
           </p>
           <p
             class={`${
@@ -96,6 +97,7 @@ const Todo = ({
                     actionMode='Edit'
                     setIsVisible={setIsVisible}
                     handleAction={({
+                      project,
                       title,
                       description,
                       dueDate,
@@ -105,6 +107,7 @@ const Todo = ({
                       dispatch(
                         editTodo({
                           id,
+                          project,
                           title,
                           description,
                           dueDate,
@@ -116,6 +119,7 @@ const Todo = ({
                     }}
                     currentTodo={{
                       id,
+                      project,
                       title,
                       description,
                       dueDate,

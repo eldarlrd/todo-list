@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { VIEW_OPTIONS } from '@/components/controls/viewMenu.tsx';
 import { STAGE_OPTIONS } from '@/components/modals/addTodo.tsx';
 
 const initialState: {
@@ -13,14 +14,25 @@ const initialState: {
     stage: string;
     isDone: boolean;
   }[];
+  viewMode: string;
 } = {
-  todoList: []
+  todoList: [],
+  get viewMode() {
+    return sessionStorage.view
+      ? (sessionStorage.view as string)
+      : VIEW_OPTIONS[0];
+  }
 };
 
 const todoSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
+    setViewMode(state, action) {
+      state.viewMode = action.payload as string;
+      sessionStorage.setItem('view', action.payload as string);
+    },
+
     checkTodo(state, action) {
       const { id, isDone } = action.payload as { id: string; isDone: boolean };
       const checkedTodo = state.todoList.find(e => e.id === id);
@@ -74,6 +86,24 @@ const todoSlice = createSlice({
 
     deleteTodo(state, action) {
       state.todoList = state.todoList.filter(e => e.id !== action.payload);
+    },
+
+    deleteProjectTodos(state, action) {
+      state.todoList = state.todoList.filter(
+        e =>
+          !(
+            action.payload as {
+              id: string;
+              project: string;
+              title: string;
+              description: string;
+              dueDate: string;
+              priority: string;
+              stage: string;
+              isDone: boolean;
+            }[]
+          ).some(elem => elem.id === e.id)
+      );
     }
   }
 });

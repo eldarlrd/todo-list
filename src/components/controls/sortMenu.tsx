@@ -137,7 +137,7 @@ export const SortMenu = (): JSX.Element => {
             <button
               type='button'
               key={option}
-              class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-24 min-w-fit justify-end px-2 py-[3px] font-medium active:bg-slate-400 md:w-28'
+              class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-24 min-w-fit select-none justify-end px-2 py-[3px] font-medium active:bg-slate-400 md:w-28'
               onClick={(e: Event): void => {
                 switchSort((e.target as HTMLButtonElement).innerText);
               }}>

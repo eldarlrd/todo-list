@@ -9,6 +9,7 @@ import { DeleteModal } from '@/components/modals/deleteModal.tsx';
 import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
 import { useAppSelector } from '@/hooks/useAppSelector.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
+import { todoActions } from '@/slices/todoSlice.ts';
 
 interface ProjectDetails {
   id: string;
@@ -28,10 +29,12 @@ export const Project = ({
   setModalContent
 }: ProjectDetails): JSX.Element => {
   const dispatch = useAppDispatch();
+  const { deleteProjectTodos } = todoActions;
   const { setSelectedProject, editProject, deleteProject } = projectActions;
   const { projectList, selectedProject } = useAppSelector(
     state => state.projectReducer
   );
+  const { todoList } = useAppSelector(state => state.todoReducer);
 
   const { setNodeRef, listeners, transition, transform, isDragging } =
     useSortable({
@@ -117,6 +120,9 @@ export const Project = ({
                 taskMode='Project'
                 handleDelete={(): void => {
                   dispatch(deleteProject(id));
+                  dispatch(
+                    deleteProjectTodos(todoList.filter(e => e.project === id))
+                  );
                   dispatch(
                     setSelectedProject(
                       projectList[0]?.id !== id
