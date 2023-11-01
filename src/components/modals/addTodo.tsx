@@ -91,6 +91,7 @@ const AddTodo = ({
     );
   };
 
+  // Pushes to Done
   useEffect(() => {
     if (todo.stage === STAGE_OPTIONS[2])
       setTodo(
@@ -101,6 +102,7 @@ const AddTodo = ({
       );
   }, [todo.stage]);
 
+  // Handle Editing
   useEffect(() => {
     if (currentTodo?.title) {
       setTodo(currentTodo);

@@ -36,6 +36,7 @@ export const Project = ({
   );
   const { todoList } = useAppSelector(state => state.todoReducer);
 
+  // Drag & Drop Movement
   const { setNodeRef, listeners, transition, transform, isDragging } =
     useSortable({
       id

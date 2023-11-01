@@ -21,6 +21,7 @@ const ModalWindow = ({
 }: ModalControls): JSX.Element => {
   const [focusTrap, setFocusTrap] = useState<FocusTrap>();
 
+  // Modal Focus Trap
   useEffect(() => {
     refer.current ? setFocusTrap(createFocusTrap(refer.current)) : null;
   }, [refer]);

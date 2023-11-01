@@ -20,6 +20,8 @@ const initialState: {
   sortAscending: number;
 } = {
   todoList: [],
+
+  // Check for Session Storage View Mode
   get viewMode() {
     return sessionStorage.view
       ? (sessionStorage.view as string)
@@ -44,6 +46,7 @@ const todoSlice = createSlice({
       sessionStorage.setItem('view', action.payload as string);
     },
 
+    // Checks and Pushes to Done
     checkTodo(state, action) {
       const { id, isDone } = action.payload as { id: string; isDone: boolean };
       const checkedTodo = state.todoList.find(e => e.id === id);
@@ -89,6 +92,8 @@ const todoSlice = createSlice({
         editedTodo.dueDate = dueDate;
         editedTodo.priority = priority;
         editedTodo.stage = stage;
+
+        // Checks and Pushes to Done
         stage === STAGE_OPTIONS[2]
           ? (editedTodo.isDone = true)
           : (editedTodo.isDone = false);
@@ -99,6 +104,7 @@ const todoSlice = createSlice({
       state.todoList = state.todoList.filter(e => e.id !== action.payload);
     },
 
+    // Deletes Todos associated with a deleted Project
     deleteProjectTodos(state, action) {
       state.todoList = state.todoList.filter(
         e =>

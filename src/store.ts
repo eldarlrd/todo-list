@@ -8,6 +8,7 @@ interface InitState {
   todoReducer: ReturnType<typeof todoReducer>;
 }
 
+// Local Storage to Store
 const preloadedState = localStorage.state
   ? (JSON.parse(localStorage.state as string) as InitState)
   : {};
@@ -21,6 +22,7 @@ const store = configureStore({
   preloadedState
 });
 
+// Store to Local Storage
 store.subscribe(() => {
   localStorage.setItem('state', JSON.stringify(store.getState()));
 });

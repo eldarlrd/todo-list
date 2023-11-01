@@ -30,6 +30,7 @@ export const ProjectList = ({
   const { sortProjects } = projectActions;
   const { projectList } = useAppSelector(state => state.projectReducer);
 
+  // Drag & Drop Sorting
   const onDragEnd = (e: DragEndEvent): void => {
     const { active, over } = e;
     if (active.id !== over?.id) {

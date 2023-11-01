@@ -9,6 +9,8 @@ const initialState: {
   selectedProject: string;
 } = {
   projectList: [],
+
+  // Always Select
   get selectedProject() {
     return this.projectList[0]?.id;
   }

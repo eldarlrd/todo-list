@@ -24,6 +24,7 @@ const MobileBar = ({
   setIsDrawerOpen,
   setPanelTabIndex
 }: DrawerControls): JSX.Element => {
+  // Close the Drawer on screen resize beyond 1024px
   useEffect(() => {
     window.addEventListener('resize', () => {
       if (window.innerWidth >= 1024) {
@@ -74,6 +75,7 @@ const SidePanel = ({
     windowWidth.current >= 1024 ? setPanelTabIndex(0) : null;
   }, [setPanelTabIndex]);
 
+  // Sidebar Focus Trap
   useEffect(() => {
     navRef.current
       ? setFocusTrap(

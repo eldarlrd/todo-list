@@ -104,6 +104,7 @@ const AddProject = ({
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const isModalVisible = useContext<boolean>(IsModalVisible);
 
+  // Handle Editing
   useEffect(() => {
     if (currentTitle && currentIcon) {
       setProjectTitle(currentTitle);

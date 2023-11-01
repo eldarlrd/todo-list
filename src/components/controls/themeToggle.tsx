@@ -2,6 +2,7 @@ import { Sun, Moon } from 'lucide-preact';
 import { useState, useEffect } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
+// Check for Local Storage Theme Mode
 const root: HTMLElement = document.documentElement;
 const themeCheck = (): void => {
   if (
@@ -27,6 +28,7 @@ export const ThemeToggle = ({
     root.classList.contains('dark') ? setIsDark(true) : setIsDark(false);
   };
 
+  // Avoid FOUC
   useEffect(iconSwitch, []);
 
   const themeToggle = (): void => {
