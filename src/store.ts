@@ -1,3 +1,4 @@
+import type {} from 'immer';
 import { configureStore } from '@reduxjs/toolkit';
 
 import { projectReducer } from '@/slices/projectSlice.ts';
