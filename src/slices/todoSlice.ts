@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { SORT_OPTIONS } from '@/components/controls/sortMenu.tsx';
 import { VIEW_OPTIONS } from '@/components/controls/viewMenu.tsx';
 import { STAGE_OPTIONS } from '@/components/modals/addTodo.tsx';
 
@@ -15,12 +16,22 @@ const initialState: {
     isDone: boolean;
   }[];
   viewMode: string;
+  sortMode: string;
+  sortAscending: number;
 } = {
   todoList: [],
   get viewMode() {
     return sessionStorage.view
       ? (sessionStorage.view as string)
       : VIEW_OPTIONS[0];
+  },
+  get sortMode() {
+    return sessionStorage.sort
+      ? (sessionStorage.sort as string)
+      : Object.keys(SORT_OPTIONS)[0];
+  },
+  get sortAscending() {
+    return sessionStorage.ascending ? +sessionStorage.ascending : 0;
   }
 };
 
@@ -103,6 +114,19 @@ const todoSlice = createSlice({
               isDone: boolean;
             }[]
           ).some(elem => elem.id === e.id)
+      );
+    },
+
+    setSortMode(state, action) {
+      state.sortMode = action.payload as string;
+      sessionStorage.setItem('sort', action.payload as string);
+    },
+
+    setSortAscending(state, action) {
+      state.sortAscending = action.payload as number;
+      sessionStorage.setItem(
+        'ascending',
+        (action.payload as number).toString()
       );
     }
   }

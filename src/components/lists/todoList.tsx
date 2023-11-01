@@ -1,11 +1,16 @@
+import { isBefore } from 'date-fns';
 import { type StateUpdater, useState } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { ControlPanel } from '@/components/controls/controlPanel.tsx';
+import { SORT_OPTIONS } from '@/components/controls/sortMenu.tsx';
 import { VIEW_OPTIONS } from '@/components/controls/viewMenu.tsx';
-import { STAGE_OPTIONS } from '@/components/modals/addTodo.tsx';
+import {
+  PRIORITY_OPTIONS,
+  STAGE_OPTIONS
+} from '@/components/modals/addTodo.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
-import { Todo } from '@/components/tasks/todo.tsx';
+import { Todo, type TodoDetails } from '@/components/tasks/todo.tsx';
 import { useAppSelector } from '@/hooks/useAppSelector.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
 
@@ -144,7 +149,46 @@ export const TodoList = (): JSX.Element => {
   const [modalContent, setModalContent] = useState<JSX.Element>();
 
   const { selectedProject } = useAppSelector(state => state.projectReducer);
-  const { todoList, viewMode } = useAppSelector(state => state.todoReducer);
+  const { todoList, viewMode, sortMode, sortAscending } = useAppSelector(
+    state => state.todoReducer
+  );
+
+  const alphabetize = (a: TodoDetails, b: TodoDetails): number => {
+    const titleA = a.title.toLowerCase();
+    const titleB = b.title.toLowerCase();
+
+    if (titleA < titleB) return sortAscending === 0 ? -1 : 1;
+    if (titleA > titleB) return sortAscending === 0 ? 1 : -1;
+    return 0;
+  };
+
+  const prioritize = (a: TodoDetails, b: TodoDetails): number => {
+    const priorityA =
+      a.priority === PRIORITY_OPTIONS[0].value
+        ? 0
+        : a.priority === PRIORITY_OPTIONS[1].value
+        ? 1
+        : 2;
+    const priorityB =
+      b.priority === PRIORITY_OPTIONS[0].value
+        ? 0
+        : b.priority === PRIORITY_OPTIONS[1].value
+        ? 1
+        : 2;
+
+    if (priorityA > priorityB) return sortAscending === 0 ? -1 : 1;
+    if (priorityA < priorityB) return sortAscending === 0 ? 1 : -1;
+    return 0;
+  };
+
+  const byDate = (a: TodoDetails, b: TodoDetails): number => {
+    const dateA = new Date(a.dueDate);
+    const dateB = new Date(b.dueDate);
+
+    if (isBefore(dateA, dateB)) return sortAscending === 0 ? -1 : 1;
+    if (isBefore(dateB, dateA)) return sortAscending === 0 ? 1 : -1;
+    return 0;
+  };
 
   return (
     <>
@@ -157,19 +201,61 @@ export const TodoList = (): JSX.Element => {
             Empty
           </p>
           <ViewTodo
-            todoList={todoList.filter(e => e.project === selectedProject)}
+            todoList={
+              sortMode === Object.keys(SORT_OPTIONS)[0]
+                ? todoList
+                    .filter(e => e.project === selectedProject)
+                    .sort(alphabetize)
+                : sortMode === Object.keys(SORT_OPTIONS)[1]
+                ? todoList
+                    .filter(e => e.project === selectedProject)
+                    .sort(prioritize)
+                : sortMode === Object.keys(SORT_OPTIONS)[2]
+                ? todoList
+                    .filter(e => e.project === selectedProject)
+                    .sort(byDate)
+                : todoList.filter(e => e.project === selectedProject)
+            }
             viewMode={viewMode}
             setIsVisible={setIsVisible}
             setModalContent={setModalContent}
           />
           <ViewInProgress
-            todoList={todoList.filter(e => e.project === selectedProject)}
+            todoList={
+              sortMode === Object.keys(SORT_OPTIONS)[0]
+                ? todoList
+                    .filter(e => e.project === selectedProject)
+                    .sort(alphabetize)
+                : sortMode === Object.keys(SORT_OPTIONS)[1]
+                ? todoList
+                    .filter(e => e.project === selectedProject)
+                    .sort(prioritize)
+                : sortMode === Object.keys(SORT_OPTIONS)[2]
+                ? todoList
+                    .filter(e => e.project === selectedProject)
+                    .sort(byDate)
+                : todoList.filter(e => e.project === selectedProject)
+            }
             viewMode={viewMode}
             setIsVisible={setIsVisible}
             setModalContent={setModalContent}
           />
           <ViewDone
-            todoList={todoList.filter(e => e.project === selectedProject)}
+            todoList={
+              sortMode === Object.keys(SORT_OPTIONS)[0]
+                ? todoList
+                    .filter(e => e.project === selectedProject)
+                    .sort(alphabetize)
+                : sortMode === Object.keys(SORT_OPTIONS)[1]
+                ? todoList
+                    .filter(e => e.project === selectedProject)
+                    .sort(prioritize)
+                : sortMode === Object.keys(SORT_OPTIONS)[2]
+                ? todoList
+                    .filter(e => e.project === selectedProject)
+                    .sort(byDate)
+                : todoList.filter(e => e.project === selectedProject)
+            }
             viewMode={viewMode}
             setIsVisible={setIsVisible}
             setModalContent={setModalContent}

@@ -65,7 +65,7 @@ const Todo = ({
           </p>
           <p>{description}</p>
           <p class='-mb-1 mt-1'>
-            {format(todoDueDate, 'eee, d MMM. y')}
+            {format(todoDueDate, 'eee., d MMM. y')}
             {isTomorrow(todoDueDate)
               ? ' | Tomorrow'
               : isToday(todoDueDate)
