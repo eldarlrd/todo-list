@@ -12,6 +12,7 @@
 > - **[focus-trap](https://focus-trap.github.io/focus-trap)**
 > - **[Twind](https://twind.style)**
 > - **[Lucide](https://lucide.dev)**
+> - **[Vitest](https://vitest.dev)**
 > - **[Vite](https://vitejs.dev)**
 >
 > providing projects and progress stages.
@@ -36,6 +37,15 @@ yarn preview
 ### Format Code (ESLint + Prettier)
 ```sh
 yarn format
+```
+## Test
+### Run Watch
+```sh
+yarn test
+```
+### Coverage Report
+```sh
+yarn coverage
 ```
 ## Deploy
 ```sh
