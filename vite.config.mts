@@ -17,6 +17,7 @@ export default defineConfig({
   },
   test: {
     globals: true,
+    restoreMocks: true,
     environment: 'happy-dom',
     setupFiles: '__tests__/setup.ts',
     include: ['__tests__/**/*.{test,spec}.{ts,tsx}'],
