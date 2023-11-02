@@ -48,6 +48,7 @@
     "jest/no-deprecated-functions": 0,
     "vitest/no-test-return-statement": 2,
     "vitest/consistent-test-filename": 2,
+    "vitest/prefer-equality-matcher": 2,
     "vitest/prefer-lowercase-title": 2,
     "vitest/prefer-strict-equal": 2,
     "vitest/consistent-test-it": 2,
