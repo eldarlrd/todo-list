@@ -9,8 +9,7 @@ const initialState: {
   selectedProject: string;
 } = {
   projectList: [],
-
-  // Always Select
+  // Always Select First
   get selectedProject() {
     return this.projectList[0]?.id;
   }

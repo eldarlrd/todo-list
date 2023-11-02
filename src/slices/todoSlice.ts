@@ -20,7 +20,6 @@ const initialState: {
   sortAscending: number;
 } = {
   todoList: [],
-
   // Check for Session Storage View Mode
   get viewMode() {
     return sessionStorage.view
@@ -92,7 +91,6 @@ const todoSlice = createSlice({
         editedTodo.dueDate = dueDate;
         editedTodo.priority = priority;
         editedTodo.stage = stage;
-
         // Checks and Pushes to Done
         stage === STAGE_OPTIONS[2]
           ? (editedTodo.isDone = true)
