@@ -14,6 +14,7 @@
     "plugin:n/recommended",
     "plugin:promise/recommended",
     "plugin:jsx-a11y/recommended",
+    "plugin:vitest/recommended",
     "preact",
     "prettier"
   ],
@@ -32,7 +33,7 @@
     "sourceType": "module",
     "project": "tsconfig.json"
   },
-  "plugins": ["@typescript-eslint", "no-relative-import-paths", "import", "n"],
+  "plugins": ["@typescript-eslint", "no-relative-import-paths", "import", "vitest", "n"],
   "rules": {
     "@typescript-eslint/no-unused-vars": 2,
     "@typescript-eslint/explicit-function-return-type": 2,
@@ -45,6 +46,12 @@
     "import/no-default-export": 2,
     "import/group-exports": 2,
     "jest/no-deprecated-functions": 0,
+    "vitest/no-test-return-statement": 2,
+    "vitest/consistent-test-filename": 2,
+    "vitest/prefer-lowercase-title": 2,
+    "vitest/prefer-strict-equal": 2,
+    "vitest/consistent-test-it": 2,
+    "vitest/no-test-prefixes": 2,
     "n/no-missing-import": 0,
     "no-unused-vars": 0,
     "eqeqeq": 2

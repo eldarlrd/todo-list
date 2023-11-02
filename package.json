@@ -1,7 +1,7 @@
 {
   "name": "todo-list",
   "private": true,
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "module",
   "keywords": [
     "todo list",
@@ -71,6 +71,7 @@
     "eslint-plugin-n": "^16.2.0",
     "eslint-plugin-no-relative-import-paths": "^1.5.3",
     "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-vitest": "^0.3.8",
     "gh-pages": "^6.0.0",
     "happy-dom": "^12.10.3",
     "immer": "^9.0.21",

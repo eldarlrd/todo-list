@@ -2,14 +2,19 @@ import { nanoid } from 'nanoid';
 
 import { projectActions, projectReducer } from '@/slices/projectSlice.ts';
 
-describe('Project Reducer', () => {
+describe('project reducer', () => {
   const { setSelectedProject } = projectActions;
 
   it('returns the initial state when passed an empty action', () => {
     const initialState = undefined;
     const action = { type: '' };
     const result = projectReducer(initialState, action);
-    expect(result).toEqual({ projectList: [] });
+    expect(result).toStrictEqual({
+      projectList: [],
+      get selectedProject() {
+        return this.projectList[0];
+      }
+    });
   });
 
   it('sets a selected project', () => {
@@ -17,6 +22,6 @@ describe('Project Reducer', () => {
     const projectId = nanoid();
     const action = setSelectedProject(projectId);
     const result = projectReducer(initialState, action);
-    expect(result.selectedProject).toEqual(projectId);
+    expect(result.selectedProject).toBe(projectId);
   });
 });
