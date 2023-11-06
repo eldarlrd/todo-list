@@ -9,16 +9,21 @@ const initialState: {
   selectedProject: string;
 } = {
   projectList: [],
-  // Always Select First
-  get selectedProject() {
-    return this.projectList[0]?.id;
-  }
+  selectedProject: ''
 };
 
 const projectSlice = createSlice({
   name: 'projects',
   initialState,
   reducers: {
+    sortProjects(state, action) {
+      state.projectList = action.payload as {
+        id: string;
+        title: string;
+        iconKey: string;
+      }[];
+    },
+
     setSelectedProject(state, action) {
       state.selectedProject = action.payload as string;
     },
@@ -46,14 +51,6 @@ const projectSlice = createSlice({
       state.projectList = state.projectList.filter(
         e => e.id !== action.payload
       );
-    },
-
-    sortProjects(state, action) {
-      state.projectList = action.payload as {
-        id: string;
-        title: string;
-        iconKey: string;
-      }[];
     }
   }
 });

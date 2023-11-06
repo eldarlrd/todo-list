@@ -1,8 +1,7 @@
 import { defineConfig } from 'vite';
 import preact from '@preact/preset-vite';
 
-/* https://vitejs.dev/config
-   https://vitest.dev/config */
+// https://vitejs.dev/config
 export default defineConfig({
   base: '/todo-list/',
   plugins: [preact()],
@@ -15,6 +14,7 @@ export default defineConfig({
       'react/jsx-runtime': 'preact/jsx-runtime'
     }
   },
+  // https://vitest.dev/config
   test: {
     globals: true,
     restoreMocks: true,
