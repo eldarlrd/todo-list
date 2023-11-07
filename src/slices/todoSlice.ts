@@ -20,20 +20,9 @@ const initialState: {
   sortAscending: number;
 } = {
   todoList: [],
-  // Check for Session Storage View Mode
-  get viewMode() {
-    return sessionStorage.view
-      ? (sessionStorage.view as string)
-      : VIEW_OPTIONS[0];
-  },
-  get sortMode() {
-    return sessionStorage.sort
-      ? (sessionStorage.sort as string)
-      : Object.keys(SORT_OPTIONS)[0];
-  },
-  get sortAscending() {
-    return sessionStorage.ascending ? +sessionStorage.ascending : 0;
-  }
+  viewMode: VIEW_OPTIONS[0],
+  sortMode: Object.keys(SORT_OPTIONS)[0],
+  sortAscending: 0
 };
 
 const todoSlice = createSlice({
@@ -42,7 +31,6 @@ const todoSlice = createSlice({
   reducers: {
     setViewMode(state, action) {
       state.viewMode = action.payload as string;
-      sessionStorage.setItem('view', action.payload as string);
     },
 
     // Checks and Pushes to Done
@@ -123,15 +111,10 @@ const todoSlice = createSlice({
 
     setSortMode(state, action) {
       state.sortMode = action.payload as string;
-      sessionStorage.setItem('sort', action.payload as string);
     },
 
     setSortAscending(state, action) {
       state.sortAscending = action.payload as number;
-      sessionStorage.setItem(
-        'ascending',
-        (action.payload as number).toString()
-      );
     }
   }
 });

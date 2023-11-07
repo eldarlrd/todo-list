@@ -45,7 +45,7 @@ pnpm test
 ```
 ### Coverage Report
 ```sh
-pnpm coverage
+pnpm cover
 ```
 ## Deploy
 ```sh

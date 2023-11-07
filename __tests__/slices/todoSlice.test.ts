@@ -1,6 +1,7 @@
-import { todoReducer } from '@/slices/todoSlice.ts';
+import { todoActions, todoReducer } from '@/slices/todoSlice.ts';
 
 describe('todo reducer', () => {
+  const { setViewMode } = todoActions;
   const initialState = undefined;
 
   it('returns the initial state', () => {
@@ -8,15 +9,15 @@ describe('todo reducer', () => {
     const result = todoReducer(initialState, action);
     expect(result).toStrictEqual({
       todoList: [],
-      get viewMode() {
-        return sessionStorage.view ? (sessionStorage.view as string) : 'All';
-      },
-      get sortMode() {
-        return sessionStorage.sort ? (sessionStorage.sort as string) : 'Title';
-      },
-      get sortAscending() {
-        return sessionStorage.ascending ? +sessionStorage.ascending : 0;
-      }
+      viewMode: 'All',
+      sortMode: 'Title',
+      sortAscending: 0
     });
+  });
+
+  it('sets the view mode', () => {
+    const action = setViewMode('Todo');
+    const result = todoReducer(initialState, action);
+    expect(result.viewMode).toBe('Todo');
   });
 });

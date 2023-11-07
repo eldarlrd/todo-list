@@ -1,7 +1,7 @@
 {
   "name": "todo-list",
   "private": true,
-  "version": "1.2.3",
+  "version": "1.2.4",
   "type": "module",
   "keywords": [
     "todo list",
@@ -18,7 +18,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "coverage": "vitest run --coverage",
+    "cover": "vitest run --coverage",
     "deploy": "pnpm build && gh-pages -b deploy -m 'build: Deployment' -d dist",
     "lint": "eslint src __tests__ --ext .ts,.tsx --report-unused-disable-directives",
     "pretty": "prettier '{src,__{tests,mocks,snapshots}__}/**/*.{ts,tsx}' --write",
