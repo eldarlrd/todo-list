@@ -33,16 +33,12 @@ const todoSlice = createSlice({
       state.viewMode = action.payload as string;
     },
 
-    // Checks and Pushes to Done
-    checkTodo(state, action) {
-      const { id, isDone } = action.payload as { id: string; isDone: boolean };
-      const checkedTodo = state.todoList.find(e => e.id === id);
-      if (checkedTodo) {
-        checkedTodo.isDone = isDone;
-        isDone
-          ? (checkedTodo.stage = STAGE_OPTIONS[2])
-          : (checkedTodo.stage = STAGE_OPTIONS[1]);
-      }
+    setSortMode(state, action) {
+      state.sortMode = action.payload as string;
+    },
+
+    setSortAscending(state, action) {
+      state.sortAscending = action.payload as number;
     },
 
     addNewTodo(state, action) {
@@ -60,6 +56,18 @@ const todoSlice = createSlice({
       );
     },
 
+    // Checks and Pushes to Done
+    checkTodo(state, action) {
+      const { id, isDone } = action.payload as { id: string; isDone: boolean };
+      const checkedTodo = state.todoList.find(e => e.id === id);
+      if (checkedTodo) {
+        checkedTodo.isDone = isDone;
+        isDone
+          ? (checkedTodo.stage = STAGE_OPTIONS[2])
+          : (checkedTodo.stage = STAGE_OPTIONS[1]);
+      }
+    },
+
     editTodo(state, action) {
       const { id, project, title, description, dueDate, priority, stage } =
         action.payload as {
@@ -73,8 +81,8 @@ const todoSlice = createSlice({
         };
       const editedTodo = state.todoList.find(e => e.id === id);
       if (editedTodo) {
-        editedTodo.title = title;
         editedTodo.project = project;
+        editedTodo.title = title;
         editedTodo.description = description;
         editedTodo.dueDate = dueDate;
         editedTodo.priority = priority;
@@ -107,14 +115,6 @@ const todoSlice = createSlice({
             }[]
           ).some(elem => elem.id === e.id)
       );
-    },
-
-    setSortMode(state, action) {
-      state.sortMode = action.payload as string;
-    },
-
-    setSortAscending(state, action) {
-      state.sortAscending = action.payload as number;
     }
   }
 });

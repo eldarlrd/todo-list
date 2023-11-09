@@ -14,13 +14,12 @@ interface VisibilityControls {
 }
 
 export const useVisible = (initialIsVisible: boolean): VisibilityControls => {
-  const [isVisible, setIsVisible] = useState<boolean>(initialIsVisible);
+  const [isVisible, setIsVisible] = useState(initialIsVisible);
   const refer = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: Event): void => {
-    if (refer.current && !refer.current.contains(event.target as HTMLElement)) {
+    if (refer.current && !refer.current.contains(event.target as HTMLElement))
       setIsVisible(false);
-    }
   };
 
   useEffect(() => {

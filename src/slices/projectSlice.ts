@@ -24,14 +24,14 @@ const projectSlice = createSlice({
       }[];
     },
 
-    setSelectedProject(state, action) {
-      state.selectedProject = action.payload as string;
-    },
-
     addNewProject(state, action) {
       state.projectList.push(
         action.payload as { id: string; title: string; iconKey: string }
       );
+    },
+
+    setSelectedProject(state, action) {
+      state.selectedProject = action.payload as string;
     },
 
     editProject(state, action) {

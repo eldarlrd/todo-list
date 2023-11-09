@@ -5,11 +5,11 @@ import { projectActions, projectReducer } from '@/slices/projectSlice.ts';
 
 describe('project reducer', () => {
   const {
-    setSelectedProject,
+    sortProjects,
     addNewProject,
+    setSelectedProject,
     editProject,
-    deleteProject,
-    sortProjects
+    deleteProject
   } = projectActions;
   const initialState = undefined;
   const projectId = nanoid();
@@ -34,16 +34,16 @@ describe('project reducer', () => {
     expect(result.projectList).toContainEqual(project);
   });
 
-  it('selects a project', () => {
-    const action = setSelectedProject(projectId);
-    const result = projectReducer(initialState, action);
-    expect(result.selectedProject).toBe(projectId);
-  });
-
   it('adds a new project', () => {
     const action = addNewProject(project);
     const result = projectReducer(initialState, action);
     expect(result.projectList).toContainEqual(project);
+  });
+
+  it('selects a project', () => {
+    const action = setSelectedProject(projectId);
+    const result = projectReducer(initialState, action);
+    expect(result.selectedProject).toBe(projectId);
   });
 
   it('edits a project', () => {
