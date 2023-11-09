@@ -2,7 +2,6 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import Logo from '@/assets/logo.webp';
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
-// import { UserSignIn } from '@/components/controls/userSignIn.tsx';
 
 export const Header = (): JSX.Element => {
   return (
@@ -20,7 +19,6 @@ export const Header = (): JSX.Element => {
 
       <span class='hidden gap-2 font-normal not-italic lg:flex'>
         <ThemeToggle identifier='theme-toggle' />
-        {/* <UserSignIn /> */}
       </span>
     </header>
   );

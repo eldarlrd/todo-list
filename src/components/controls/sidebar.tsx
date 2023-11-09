@@ -5,7 +5,6 @@ import { type StateUpdater, useState, useEffect, useRef } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
-// import { UserSignIn } from '@/components/controls/userSignIn.tsx';
 import { ProjectList } from '@/components/lists/projectList.tsx';
 import { AddProject } from '@/components/modals/addProject.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
@@ -51,7 +50,6 @@ const MobileBar = ({
         </button>
         <ThemeToggle identifier='mobile-theme-toggle' />
       </span>
-      {/* <UserSignIn /> */}
     </nav>
   );
 };
