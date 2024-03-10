@@ -164,17 +164,13 @@ export const TodoList = (): JSX.Element => {
 
   const prioritize = (a: TodoDetails, b: TodoDetails): number => {
     const priorityA =
-      a.priority === PRIORITY_OPTIONS[0].value
-        ? 0
-        : a.priority === PRIORITY_OPTIONS[1].value
-        ? 1
-        : 2;
+      a.priority === PRIORITY_OPTIONS[0].value ? 0
+      : a.priority === PRIORITY_OPTIONS[1].value ? 1
+      : 2;
     const priorityB =
-      b.priority === PRIORITY_OPTIONS[0].value
-        ? 0
-        : b.priority === PRIORITY_OPTIONS[1].value
-        ? 1
-        : 2;
+      b.priority === PRIORITY_OPTIONS[0].value ? 0
+      : b.priority === PRIORITY_OPTIONS[1].value ? 1
+      : 2;
 
     if (priorityA > priorityB) return sortAscending === 0 ? -1 : 1;
     if (priorityA < priorityB) return sortAscending === 0 ? 1 : -1;
@@ -197,24 +193,22 @@ export const TodoList = (): JSX.Element => {
         class='flex max-w-full grow flex-col bg-slate-50 transition-colors dark:bg-slate-900'>
         <ControlPanel />
         <div tabIndex={-1} class='overflow-y-auto px-3 pb-3.5'>
-          <p class='only-child:flex mt-4 hidden select-none justify-center text-lg text-slate-600 dark:text-slate-400 xl:text-xl'>
+          <p class='only-child:flex mt-4 hidden select-none justify-center text-lg text-slate-600 xl:text-xl dark:text-slate-400'>
             Empty
           </p>
           <ViewTodo
             todoList={
-              sortMode === Object.keys(SORT_OPTIONS)[0]
-                ? todoList
-                    .filter(e => e.project === selectedProject)
-                    .sort(alphabetize)
-                : sortMode === Object.keys(SORT_OPTIONS)[1]
-                ? todoList
-                    .filter(e => e.project === selectedProject)
-                    .sort(prioritize)
-                : sortMode === Object.keys(SORT_OPTIONS)[2]
-                ? todoList
-                    .filter(e => e.project === selectedProject)
-                    .sort(byDate)
-                : todoList.filter(e => e.project === selectedProject)
+              sortMode === Object.keys(SORT_OPTIONS)[0] ?
+                todoList
+                  .filter(e => e.project === selectedProject)
+                  .sort(alphabetize)
+              : sortMode === Object.keys(SORT_OPTIONS)[1] ?
+                todoList
+                  .filter(e => e.project === selectedProject)
+                  .sort(prioritize)
+              : sortMode === Object.keys(SORT_OPTIONS)[2] ?
+                todoList.filter(e => e.project === selectedProject).sort(byDate)
+              : todoList.filter(e => e.project === selectedProject)
             }
             viewMode={viewMode}
             setIsVisible={setIsVisible}
@@ -222,19 +216,17 @@ export const TodoList = (): JSX.Element => {
           />
           <ViewInProgress
             todoList={
-              sortMode === Object.keys(SORT_OPTIONS)[0]
-                ? todoList
-                    .filter(e => e.project === selectedProject)
-                    .sort(alphabetize)
-                : sortMode === Object.keys(SORT_OPTIONS)[1]
-                ? todoList
-                    .filter(e => e.project === selectedProject)
-                    .sort(prioritize)
-                : sortMode === Object.keys(SORT_OPTIONS)[2]
-                ? todoList
-                    .filter(e => e.project === selectedProject)
-                    .sort(byDate)
-                : todoList.filter(e => e.project === selectedProject)
+              sortMode === Object.keys(SORT_OPTIONS)[0] ?
+                todoList
+                  .filter(e => e.project === selectedProject)
+                  .sort(alphabetize)
+              : sortMode === Object.keys(SORT_OPTIONS)[1] ?
+                todoList
+                  .filter(e => e.project === selectedProject)
+                  .sort(prioritize)
+              : sortMode === Object.keys(SORT_OPTIONS)[2] ?
+                todoList.filter(e => e.project === selectedProject).sort(byDate)
+              : todoList.filter(e => e.project === selectedProject)
             }
             viewMode={viewMode}
             setIsVisible={setIsVisible}
@@ -242,19 +234,17 @@ export const TodoList = (): JSX.Element => {
           />
           <ViewDone
             todoList={
-              sortMode === Object.keys(SORT_OPTIONS)[0]
-                ? todoList
-                    .filter(e => e.project === selectedProject)
-                    .sort(alphabetize)
-                : sortMode === Object.keys(SORT_OPTIONS)[1]
-                ? todoList
-                    .filter(e => e.project === selectedProject)
-                    .sort(prioritize)
-                : sortMode === Object.keys(SORT_OPTIONS)[2]
-                ? todoList
-                    .filter(e => e.project === selectedProject)
-                    .sort(byDate)
-                : todoList.filter(e => e.project === selectedProject)
+              sortMode === Object.keys(SORT_OPTIONS)[0] ?
+                todoList
+                  .filter(e => e.project === selectedProject)
+                  .sort(alphabetize)
+              : sortMode === Object.keys(SORT_OPTIONS)[1] ?
+                todoList
+                  .filter(e => e.project === selectedProject)
+                  .sort(prioritize)
+              : sortMode === Object.keys(SORT_OPTIONS)[2] ?
+                todoList.filter(e => e.project === selectedProject).sort(byDate)
+              : todoList.filter(e => e.project === selectedProject)
             }
             viewMode={viewMode}
             setIsVisible={setIsVisible}

@@ -35,9 +35,9 @@ const ModalWindow = ({
       role='presentation'
       id='overlay'
       class={
-        isVisible
-          ? 'fixed inset-0 z-10 flex items-center justify-center bg-slate-50/70 backdrop-blur-[1px] transition-opacity duration-200 dark:bg-slate-900/70'
-          : 'h-0 w-0 opacity-0'
+        isVisible ?
+          'fixed inset-0 z-10 flex items-center justify-center bg-slate-50/70 backdrop-blur-[1px] transition-opacity duration-200 dark:bg-slate-900/70'
+        : 'h-0 w-0 opacity-0'
       }
       onKeyDown={(e: KeyboardEvent): void => {
         e.key === 'Escape' ? setIsVisible(false) : null;
@@ -46,11 +46,11 @@ const ModalWindow = ({
         id='modal-window'
         ref={refer}
         class={
-          isVisible
-            ? 'dark:(bg-slate-600, shadow-slate-700) flex w-80 flex-col rounded bg-slate-300 shadow-sm shadow-slate-200 transition-all sm:w-96 md:w-[28rem] lg:w-[32rem] xl:w-[36rem] 2xl:w-[40rem]'
-            : 'hidden'
+          isVisible ?
+            'dark:(bg-slate-600, shadow-slate-700) flex w-80 flex-col rounded bg-slate-300 shadow-sm shadow-slate-200 transition-all sm:w-96 md:w-[28rem] lg:w-[32rem] xl:w-[36rem] 2xl:w-[40rem]'
+          : 'hidden'
         }>
-        <div class='mx-4 my-2 flex select-none justify-between text-xl font-semibold text-violet-900 transition-all dark:text-pink-300 xl:text-2xl'>
+        <div class='mx-4 my-2 flex select-none justify-between text-xl font-semibold text-violet-900 transition-all xl:text-2xl dark:text-pink-300'>
           {modalContent?.key}
           <button
             type='button'

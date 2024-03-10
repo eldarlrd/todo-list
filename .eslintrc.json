@@ -2,8 +2,7 @@
   "root": true,
   "env": {
     "browser": true,
-    "commonjs": true,
-    "es2021": true
+    "es2022": true
   },
   "extends": [
     "eslint:recommended",
@@ -36,6 +35,7 @@
   "plugins": ["@typescript-eslint", "no-relative-import-paths", "import", "vitest", "n"],
   "rules": {
     "@typescript-eslint/no-unused-vars": 2,
+    "@typescript-eslint/explicit-member-accessibility": 2,
     "@typescript-eslint/explicit-function-return-type": 2,
     "@typescript-eslint/consistent-type-imports": [2, { "fixStyle": "inline-type-imports" }],
     "no-relative-import-paths/no-relative-import-paths": [2, { "rootDir": "src", "prefix": "@" }],
@@ -55,6 +55,7 @@
     "vitest/no-test-prefixes": 2,
     "n/no-missing-import": 0,
     "no-unused-vars": 0,
+    "prefer-const": 2,
     "eqeqeq": 2
   }
 }

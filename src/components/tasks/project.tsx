@@ -56,9 +56,9 @@ export const Project = ({
       ref={setNodeRef}
       style={style}
       class={`${
-        id === selectedProject
-          ? '!border-slate-500 bg-slate-50 dark:bg-slate-800'
-          : 'bg-slate-200 dark:bg-slate-700'
+        id === selectedProject ?
+          '!border-slate-500 bg-slate-50 dark:bg-slate-800'
+        : 'bg-slate-200 dark:bg-slate-700'
       } ${
         isDragging ? 'z-10 !transition-none' : ''
       } flex items-start justify-between gap-1.5 rounded border border-transparent px-3 py-2 text-xl text-slate-900 transition-colors hover:border-slate-500 active:border-slate-500 dark:text-slate-50`}
@@ -126,9 +126,9 @@ export const Project = ({
                   );
                   dispatch(
                     setSelectedProject(
-                      projectList[0]?.id !== id
-                        ? projectList[0]?.id
-                        : projectList[1]?.id
+                      projectList[0]?.id !== id ?
+                        projectList[0]?.id
+                      : projectList[1]?.id
                     )
                   );
                 }}

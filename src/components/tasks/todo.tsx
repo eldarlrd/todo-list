@@ -49,9 +49,9 @@ const Todo = ({
       <div
         id={id}
         class={`${
-          isDone
-            ? 'dark:(bg-sky-900) bg-emerald-100'
-            : 'dark:(bg-slate-800) bg-slate-100'
+          isDone ?
+            'dark:(bg-sky-900) bg-emerald-100'
+          : 'dark:(bg-slate-800) bg-slate-100'
         } mt-3.5 flex justify-between gap-6 rounded px-4 py-3 drop-shadow-sm duration-150 xl:text-lg`}>
         <div class='flex flex-col gap-1.5 break-all'>
           <p class='-skew-x-6 text-slate-600 dark:text-slate-400'>
@@ -66,18 +66,19 @@ const Todo = ({
           <p>{description}</p>
           <p class='-mb-1 mt-1'>
             {format(todoDueDate, 'eee., d MMM. y')}
-            {isTomorrow(todoDueDate)
-              ? ' | Tomorrow'
-              : isToday(todoDueDate)
-              ? ' | Today'
-              : isPast(todoDueDate)
-              ? ' | Overdue'
-              : ''}
+            {isTomorrow(todoDueDate) ?
+              ' | Tomorrow'
+            : isToday(todoDueDate) ?
+              ' | Today'
+            : isPast(todoDueDate) ?
+              ' | Overdue'
+            : ''}
           </p>
           <p class='flex items-center gap-1.5'>
             <span
-              class={`bg-${PRIORITY_OPTIONS.find(e => e.value === priority)
-                ?.color} block aspect-square w-4 rounded-full`}
+              class={`bg-${
+                PRIORITY_OPTIONS.find(e => e.value === priority)?.color
+              } block aspect-square w-4 rounded-full`}
             />
             {priority}
           </p>
@@ -164,11 +165,9 @@ const Todo = ({
             onClick={(): void => {
               dispatch(checkTodo({ id, isDone: !isDone }));
             }}>
-            {isDone ? (
+            {isDone ?
               <CheckCircle2 aria-label='Check Mark' />
-            ) : (
-              <HelpCircle aria-label='Question Mark' />
-            )}
+            : <HelpCircle aria-label='Question Mark' />}
             <span class='hidden sm:inline xl:text-lg'>
               {isDone ? 'Done' : 'Working'}
             </span>

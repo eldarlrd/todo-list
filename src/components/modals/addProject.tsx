@@ -156,9 +156,9 @@ const AddProject = ({
               id={icon.key}
               key={icon.key}
               class={`${
-                icon.key === projectIcon
-                  ? 'border-transparent bg-violet-800 text-slate-50 dark:bg-pink-600'
-                  : 'hover:(bg-slate-50, dark:bg-slate-800) border-current text-violet-900 dark:text-pink-300'
+                icon.key === projectIcon ?
+                  'border-transparent bg-violet-800 text-slate-50 dark:bg-pink-600'
+                : 'hover:(bg-slate-50, dark:bg-slate-800) border-current text-violet-900 dark:text-pink-300'
               } rounded border p-2 transition-all xl:p-2.5 2xl:p-3`}
               onClick={(): void => {
                 setProjectIcon(icon.key);

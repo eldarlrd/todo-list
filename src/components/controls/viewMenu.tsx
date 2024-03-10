@@ -32,12 +32,12 @@ const ViewMenu = (): JSX.Element => {
         onClick={(): void => {
           setIsVisible(!isVisible);
         }}>
-        {viewMode ? (
+        {viewMode ?
           <>
             <Eye aria-label='Eye' size='20' />
             {viewMode}
           </>
-        ) : null}
+        : null}
       </button>
 
       {isVisible && (

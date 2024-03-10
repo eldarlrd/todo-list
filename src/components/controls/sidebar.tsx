@@ -75,13 +75,13 @@ const SidePanel = ({
 
   // Sidebar Focus Trap
   useEffect(() => {
-    navRef.current
-      ? setFocusTrap(
-          createFocusTrap(navRef.current, {
-            escapeDeactivates: false
-          })
-        )
-      : null;
+    navRef.current ?
+      setFocusTrap(
+        createFocusTrap(navRef.current, {
+          escapeDeactivates: false
+        })
+      )
+    : null;
   }, [navRef]);
 
   useEffect(() => {
@@ -96,9 +96,9 @@ const SidePanel = ({
       id='sidebar'
       ref={navRef}
       class={`${
-        isDrawerOpen
-          ? 'lg:(relative, min-w-0) fixed min-h-full w-full transition-all duration-500'
-          : 'lg:(ml-0, transition-all) -ml-72'
+        isDrawerOpen ?
+          'lg:(relative, min-w-0) fixed min-h-full w-full transition-all duration-500'
+        : 'lg:(ml-0, transition-all) -ml-72'
       } dark:(bg-slate-700, text-pink-400) lg:(flex, pb-0) inset-0 z-10 w-72 select-none flex-col items-start bg-slate-200 py-1.5 text-violet-900 xl:w-80 2xl:w-96`}>
       <div class='after:(border-b, border-slate-300, transition-colors, dark:border-slate-600) mb-2 flex min-w-full flex-col gap-1.5 px-3 text-2xl'>
         <span class='flex gap-2'>
@@ -114,7 +114,7 @@ const SidePanel = ({
             Add Project
           </button>
 
-          {isDrawerOpen ? (
+          {isDrawerOpen ?
             <button
               type='button'
               title='Close Drawer'
@@ -126,7 +126,7 @@ const SidePanel = ({
               }}>
               <X aria-label='X' strokeWidth='2.25' class='scale-110' />
             </button>
-          ) : null}
+          : null}
         </span>
       </div>
 

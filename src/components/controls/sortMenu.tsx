@@ -83,7 +83,7 @@ const SortMenu = (): JSX.Element => {
 
   return (
     <div class='flex' ref={refer}>
-      {sortMode ? (
+      {sortMode ?
         <button
           type='button'
           title='Toggle Order'
@@ -94,7 +94,7 @@ const SortMenu = (): JSX.Element => {
           }}>
           {SORT_OPTIONS[sortMode as keyof typeof SORT_OPTIONS][sortAscending]}
         </button>
-      ) : null}
+      : null}
 
       <button
         type='button'
@@ -106,13 +106,13 @@ const SortMenu = (): JSX.Element => {
         onClick={(): void => {
           setIsVisible(!isVisible);
         }}>
-        {sortMode ? (
+        {sortMode ?
           <ChevronDown
             aria-label='Chevron Down'
             size='22'
             class='md:scale-110'
           />
-        ) : null}
+        : null}
       </button>
 
       {isVisible && (

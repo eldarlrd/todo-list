@@ -93,13 +93,12 @@ const AddTodo = ({
 
   // Pushes to Done
   useEffect(() => {
-    if (todo.stage === STAGE_OPTIONS[2])
-      setTodo(
-        (prevState): TodoDetails => ({
-          ...prevState,
-          isDone: true
-        })
-      );
+    setTodo(
+      (prevState): TodoDetails => ({
+        ...prevState,
+        isDone: todo.stage === STAGE_OPTIONS[2]
+      })
+    );
   }, [todo.stage]);
 
   // Handle Editing
@@ -259,9 +258,9 @@ const AddTodo = ({
             todo.project = selectedProject;
             todo.title = todo.title.trim();
             todo.description = todo.description.trim();
-            viewMode !== VIEW_OPTIONS[0]
-              ? dispatch(setViewMode(todo.stage))
-              : null;
+            viewMode !== VIEW_OPTIONS[0] ?
+              dispatch(setViewMode(todo.stage))
+            : null;
             handleAction(todo);
             setIsVisible(false);
           }}

@@ -10,8 +10,9 @@ interface InitState {
 }
 
 // Local Storage to Store
-const preloadedState = localStorage.state
-  ? (JSON.parse(localStorage.state as string) as InitState)
+const preloadedState =
+  localStorage.state ?
+    (JSON.parse(localStorage.state as string) as InitState)
   : {};
 
 // https://redux-toolkit.js.org/api/configureStore

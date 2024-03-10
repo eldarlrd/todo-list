@@ -62,9 +62,9 @@ const todoSlice = createSlice({
       const checkedTodo = state.todoList.find(e => e.id === id);
       if (checkedTodo) {
         checkedTodo.isDone = isDone;
-        isDone
-          ? (checkedTodo.stage = STAGE_OPTIONS[2])
-          : (checkedTodo.stage = STAGE_OPTIONS[1]);
+        isDone ?
+          (checkedTodo.stage = STAGE_OPTIONS[2])
+        : (checkedTodo.stage = STAGE_OPTIONS[1]);
       }
     },
 
@@ -88,9 +88,9 @@ const todoSlice = createSlice({
         editedTodo.priority = priority;
         editedTodo.stage = stage;
         // Checks and Pushes to Done
-        stage === STAGE_OPTIONS[2]
-          ? (editedTodo.isDone = true)
-          : (editedTodo.isDone = false);
+        stage === STAGE_OPTIONS[2] ?
+          (editedTodo.isDone = true)
+        : (editedTodo.isDone = false);
       }
     },
 
