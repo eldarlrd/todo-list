@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang='en' class='scroll-smooth'>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='description' content='A Complex Todo List with Projects'>
+    <meta name='keywords' content='todo list, projects, todo'>
+    <meta name='author' content='Eldar Pashazade'>
+    <meta name='theme-color' content='#5b21b6'>
+    <link rel='manifest' type='application/manifest+json' href='site.webmanifest'>
+    <link rel='icon' type='image/png' sizes='512x512' href='favicon.png'>
+    <title>Todo List</title>
+    <script type="module" crossorigin src="/todo-list/assets/index-BLbySJ7V.js"></script>
+  </head>
+
+  <body style='margin:0'>
+    <div
+      id='launch'
+      style='display:flex;justify-content:center;align-items:center;min-height:100svh;background-color:#f1f5f9'>
+      <svg width='120' height='120' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' fill='#5b21b6'>
+        <style>
+          rect {
+            animation: loading .9s linear infinite;
+            animation-delay: -.9s;
+          }
+          .bar-inner {
+            animation-delay: -.7s;
+          }
+          .bar-outer {
+            animation-delay: -.5s;
+          }
+          @keyframes loading {
+            0%, 66.66% {
+              animation-timing-function: cubic-bezier(.14, .73, .34, 1);
+              height: 12px;
+              y: 6px;
+            }
+            33.33% {
+              animation-timing-function: cubic-bezier(.65, .26, .82, .45);
+              height: 22px;
+              y: 1px;
+            }
+          }
+        </style>
+        <rect class='bar-outer' x='1' y='6' width='2.8' height='12' />
+        <rect class='bar-inner' x='5.8' y='6' width='2.8' height='12' />
+        <rect x='10.6' y='6' width='2.8' height='12' />
+        <rect class='bar-inner' x='15.4' y='6' width='2.8' height='12' />
+        <rect class='bar-outer' x='20.2' y='6' width='2.8' height='12' />
+      </svg>
+    </div>
+  </body>
+</html>
