@@ -1,7 +1,7 @@
 /**
  * @license AGPL-3.0-only
  * Todo List - A Complex Todo List with Projects
- * Copyright (C) 2023-2024 Eldar Pashazade <eldarlrd@pm.me>
+ * Copyright (C) 2023-2025 Eldar Pashazade <eldarlrd@pm.me>
  *
  * This file is part of Todo List.
  *
@@ -34,3 +34,18 @@ render(
   </Provider>,
   document.body
 );
+
+const registerSW = (): void => {
+  if ('serviceWorker' in navigator)
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('/todo-list/sw.js', {
+          scope: '/todo-list/'
+        })
+        .catch((error: unknown) => {
+          if (error instanceof Error) console.error(error);
+        });
+    });
+};
+
+registerSW();

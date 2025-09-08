@@ -1,11 +1,11 @@
-import { type StateUpdater } from 'preact/hooks';
+import { type Dispatch, type StateUpdater } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
 
 interface DeleteControls {
-  setIsVisible: StateUpdater<boolean>;
+  setIsVisible: Dispatch<StateUpdater<boolean>>;
   taskTitle: string;
   taskMode: string;
   handleDelete: () => void;

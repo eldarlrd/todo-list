@@ -1,16 +1,22 @@
+// eslint-disable-next-line import/named
 import { type FocusTrap, createFocusTrap } from 'focus-trap';
 import { X } from 'lucide-preact';
-import { createContext } from 'preact';
-import { type StateUpdater, type Ref, useState, useEffect } from 'preact/hooks';
+import { createContext, type RefObject } from 'preact';
+import {
+  type StateUpdater,
+  useState,
+  useEffect,
+  type Dispatch
+} from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 const IsModalVisible = createContext<boolean>(false);
 
 interface ModalControls {
   modalContent: JSX.Element | undefined;
-  setIsVisible: StateUpdater<boolean>;
+  setIsVisible: Dispatch<StateUpdater<boolean>>;
   isVisible: boolean;
-  refer: Ref<HTMLDivElement>;
+  refer: RefObject<HTMLDivElement>;
 }
 
 const ModalWindow = ({
@@ -23,11 +29,12 @@ const ModalWindow = ({
 
   // Modal Focus Trap
   useEffect(() => {
-    refer.current ? setFocusTrap(createFocusTrap(refer.current)) : null;
+    if (refer.current) setFocusTrap(createFocusTrap(refer.current));
   }, [refer]);
 
   useEffect(() => {
-    isVisible ? focusTrap?.activate() : focusTrap?.deactivate();
+    if (isVisible) focusTrap?.activate();
+    else focusTrap?.deactivate();
   }, [isVisible, focusTrap]);
 
   return (
@@ -40,7 +47,7 @@ const ModalWindow = ({
         : 'h-0 w-0 opacity-0'
       }
       onKeyDown={(e: KeyboardEvent): void => {
-        e.key === 'Escape' ? setIsVisible(false) : null;
+        if (e.key === 'Escape') setIsVisible(false);
       }}>
       <div
         id='modal-window'

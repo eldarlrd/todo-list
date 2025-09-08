@@ -1,6 +1,6 @@
 import { format, isPast, isToday, isTomorrow } from 'date-fns';
 import { PenSquare, Trash2, CheckCircle2, HelpCircle } from 'lucide-preact';
-import { type StateUpdater } from 'preact/hooks';
+import { type Dispatch, type StateUpdater } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { AddTodo, PRIORITY_OPTIONS } from '@/components/modals/addTodo.tsx';
@@ -21,8 +21,8 @@ interface TodoDetails {
 }
 
 interface TodoProps extends TodoDetails {
-  setIsVisible: StateUpdater<boolean>;
-  setModalContent: StateUpdater<JSX.Element | undefined>;
+  setIsVisible: Dispatch<StateUpdater<boolean>>;
+  setModalContent: Dispatch<StateUpdater<JSX.Element | undefined>>;
 }
 
 const Todo = ({
@@ -77,7 +77,7 @@ const Todo = ({
           <p class='flex items-center gap-1.5'>
             <span
               class={`bg-${
-                PRIORITY_OPTIONS.find(e => e.value === priority)?.color
+                PRIORITY_OPTIONS.find(e => e.value === priority)?.color ?? ''
               } block aspect-square w-4 rounded-full`}
             />
             {priority}

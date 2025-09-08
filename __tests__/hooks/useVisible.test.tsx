@@ -20,6 +20,7 @@ describe('use visible', () => {
       </div>
     );
   };
+
   it('toggles visibility when clicking toggle', async () => {
     const { getByText, queryByText } = render(<Component />);
 

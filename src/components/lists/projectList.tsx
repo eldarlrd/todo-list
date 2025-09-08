@@ -33,6 +33,7 @@ export const ProjectList = ({
   // Drag & Drop Sorting
   const onDragEnd = (e: DragEndEvent): void => {
     const { active, over } = e;
+
     if (active.id !== over?.id) {
       const prevIndex = projectList.findIndex(
         project => project.id === active.id
@@ -40,6 +41,7 @@ export const ProjectList = ({
       const newIndex = projectList.findIndex(
         project => project.id === over?.id
       );
+
       dispatch(sortProjects(arrayMove(projectList, prevIndex, newIndex)));
     }
   };

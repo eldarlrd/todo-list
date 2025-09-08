@@ -1,7 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { PenSquare, Trash2, GripVertical } from 'lucide-preact';
-import { type StateUpdater } from 'preact/hooks';
+import { type Dispatch, type StateUpdater } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { AddProject, PROJECT_ICONS } from '@/components/modals/addProject.tsx';
@@ -16,8 +16,8 @@ interface ProjectDetails {
   title: string;
   iconKey: string;
   panelTabIndex?: number;
-  setIsVisible: StateUpdater<boolean>;
-  setModalContent: StateUpdater<JSX.Element | undefined>;
+  setIsVisible: Dispatch<StateUpdater<boolean>>;
+  setModalContent: Dispatch<StateUpdater<JSX.Element | undefined>>;
 }
 
 export const Project = ({

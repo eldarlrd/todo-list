@@ -19,6 +19,7 @@ describe('todo reducer', () => {
 
   const today = new Date();
   const tomorrow = new Date(today);
+
   tomorrow.setDate(today.getDate() + 1);
   const tomorrowFormatted = formatISO(tomorrow, { representation: 'date' });
 
@@ -36,6 +37,7 @@ describe('todo reducer', () => {
   it('returns the initial state', () => {
     const action = { type: '' };
     const result = todoReducer(initialState, action);
+
     expect(result).toStrictEqual({
       todoList: [],
       viewMode: 'All',
@@ -47,24 +49,28 @@ describe('todo reducer', () => {
   it('sets the view mode', () => {
     const action = setViewMode('Todo');
     const result = todoReducer(initialState, action);
+
     expect(result.viewMode).toBe('Todo');
   });
 
   it('sets the sort mode', () => {
     const action = setSortMode('Priority');
     const result = todoReducer(initialState, action);
+
     expect(result.sortMode).toBe('Priority');
   });
 
   it('sets the sort ascending or descending', () => {
     const action = setSortAscending(1);
     const result = todoReducer(initialState, action);
+
     expect(result.sortAscending).toBe(1);
   });
 
   it('adds a new todo', () => {
     const action = addNewTodo(todo);
     const result = todoReducer(initialState, action);
+
     expect(result.todoList).toContainEqual(todo);
   });
 
@@ -74,6 +80,7 @@ describe('todo reducer', () => {
 
     const action = checkTodo(todo);
     const result = todoReducer(addResult, action);
+
     expect(result.todoList[0].isDone).toBe(false);
 
     const checkedTodo = {
@@ -82,6 +89,7 @@ describe('todo reducer', () => {
     };
     const checkedAction = checkTodo(checkedTodo);
     const checkedResult = todoReducer(result, checkedAction);
+
     expect(checkedResult.todoList[0].isDone).toBe(true);
   });
 
@@ -101,6 +109,7 @@ describe('todo reducer', () => {
     };
     const editAction = editTodo(editedTodo);
     const editResult = todoReducer(addResult, editAction);
+
     expect(editResult.todoList).toContainEqual(editedTodo);
 
     const checkedTodo = {
@@ -110,6 +119,7 @@ describe('todo reducer', () => {
     };
     const checkedAction = editTodo(checkedTodo);
     const checkedResult = todoReducer(editResult, checkedAction);
+
     expect(checkedResult.todoList).toContainEqual(checkedTodo);
   });
 
@@ -119,6 +129,7 @@ describe('todo reducer', () => {
 
     const deleteAction = deleteTodo(todoId);
     const deleteResult = todoReducer(addResult, deleteAction);
+
     expect(deleteResult.todoList).not.toContainEqual(todo);
   });
 
@@ -128,6 +139,7 @@ describe('todo reducer', () => {
 
     const deleteProjectAction = deleteProjectTodos([todo]);
     const deleteProjectResult = todoReducer(addResult, deleteProjectAction);
+
     expect(deleteProjectResult.todoList).not.toContainEqual(todo);
   });
 });

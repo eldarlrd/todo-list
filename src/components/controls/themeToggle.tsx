@@ -25,17 +25,16 @@ export const ThemeToggle = ({
 }): JSX.Element => {
   const [isDark, setIsDark] = useState<boolean>();
   const iconSwitch = (): void => {
-    root.classList.contains('dark') ? setIsDark(true) : setIsDark(false);
+    setIsDark(root.classList.contains('dark'));
   };
 
   // Avoid FOUC
   useEffect(iconSwitch, []);
 
   const themeToggle = (): void => {
-    isDark ? (localStorage.theme = 'light') : (localStorage.theme = 'dark');
-    root.style.colorScheme === 'dark' ?
-      (root.style.colorScheme = 'light')
-    : (root.style.colorScheme = 'dark');
+    localStorage.theme = isDark ? 'light' : 'dark';
+    if (root.style.colorScheme === 'dark') root.style.colorScheme = 'light';
+    else root.style.colorScheme = 'dark';
     root.classList.toggle('dark');
     setIsDark(!isDark);
   };

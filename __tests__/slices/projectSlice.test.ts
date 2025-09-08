@@ -22,6 +22,7 @@ describe('project reducer', () => {
   it('returns the initial state', () => {
     const action = { type: '' };
     const result = projectReducer(initialState, action);
+
     expect(result).toStrictEqual({
       projectList: [],
       selectedProject: ''
@@ -31,18 +32,21 @@ describe('project reducer', () => {
   it('sorts all projects', () => {
     const action = sortProjects([project]);
     const result = projectReducer(initialState, action);
+
     expect(result.projectList).toContainEqual(project);
   });
 
   it('adds a new project', () => {
     const action = addNewProject(project);
     const result = projectReducer(initialState, action);
+
     expect(result.projectList).toContainEqual(project);
   });
 
   it('selects a project', () => {
     const action = setSelectedProject(projectId);
     const result = projectReducer(initialState, action);
+
     expect(result.selectedProject).toBe(projectId);
   });
 
@@ -57,6 +61,7 @@ describe('project reducer', () => {
     };
     const editAction = editProject(editedProject);
     const editResult = projectReducer(addResult, editAction);
+
     expect(editResult.projectList).toContainEqual(editedProject);
   });
 
@@ -66,6 +71,7 @@ describe('project reducer', () => {
 
     const deleteAction = deleteProject(projectId);
     const deletedResult = projectReducer(addResult, deleteAction);
+
     expect(deletedResult.projectList).not.toContainEqual(project);
   });
 });

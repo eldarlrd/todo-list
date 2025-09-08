@@ -16,7 +16,8 @@ import {
   type StateUpdater,
   useState,
   useEffect,
-  useContext
+  useContext,
+  type Dispatch
 } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
@@ -80,7 +81,7 @@ const PROJECT_ICONS: {
 
 interface ProjectOptions {
   actionMode: string;
-  setIsVisible: StateUpdater<boolean>;
+  setIsVisible: Dispatch<StateUpdater<boolean>>;
   handleAction: ({
     projectTitle,
     projectIcon

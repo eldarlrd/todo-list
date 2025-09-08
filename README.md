@@ -13,7 +13,7 @@
 > - **[Twind](https://twind.style)**
 > - **[Lucide](https://lucide.dev)**
 > - **[Vitest](https://vitest.dev)**
-> - **[Vite](https://vitejs.dev)**
+> - **[Vite](https://vite.dev)**
 >
 > providing projects and progress stages.
 
@@ -22,21 +22,25 @@
 pnpm i
 ```
 ## Develop
-### Run Env.
+### Run Env
 ```sh
 pnpm dev
 ```
-### Prod. Build
+### Prod Build
 ```sh
 pnpm build
 ```
-### Preview Prod. Build
+### Preview Prod Build
 ```sh
 pnpm preview
 ```
 ### Format Code (ESLint + Prettier)
 ```sh
 pnpm format
+```
+### Cut Orphans (Knip)
+```sh
+pnpm cut
 ```
 ## Test
 ### Run Watch

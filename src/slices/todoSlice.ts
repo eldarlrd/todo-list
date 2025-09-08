@@ -60,11 +60,11 @@ const todoSlice = createSlice({
     checkTodo(state, action) {
       const { id, isDone } = action.payload as { id: string; isDone: boolean };
       const checkedTodo = state.todoList.find(e => e.id === id);
+
       if (checkedTodo) {
         checkedTodo.isDone = isDone;
-        isDone ?
-          (checkedTodo.stage = STAGE_OPTIONS[2])
-        : (checkedTodo.stage = STAGE_OPTIONS[1]);
+        if (isDone) checkedTodo.stage = STAGE_OPTIONS[2];
+        else checkedTodo.stage = STAGE_OPTIONS[1];
       }
     },
 
@@ -80,6 +80,7 @@ const todoSlice = createSlice({
           stage: string;
         };
       const editedTodo = state.todoList.find(e => e.id === id);
+
       if (editedTodo) {
         editedTodo.project = project;
         editedTodo.title = title;
@@ -88,9 +89,7 @@ const todoSlice = createSlice({
         editedTodo.priority = priority;
         editedTodo.stage = stage;
         // Checks and Pushes to Done
-        stage === STAGE_OPTIONS[2] ?
-          (editedTodo.isDone = true)
-        : (editedTodo.isDone = false);
+        editedTodo.isDone = stage === STAGE_OPTIONS[2];
       }
     },
 

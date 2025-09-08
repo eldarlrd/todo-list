@@ -60,6 +60,7 @@ export const ControlPanel = (): JSX.Element => {
               isDone
             }: TodoDetails): void => {
               const id = nanoid();
+
               dispatch(
                 addNewTodo({
                   id,

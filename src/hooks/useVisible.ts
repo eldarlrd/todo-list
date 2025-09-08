@@ -1,16 +1,17 @@
 // Courtesy of Paul Fitzgerald https://codesandbox.io/s/989y0758np
+import { type RefObject } from 'preact';
 import {
-  type Ref,
   type StateUpdater,
   useState,
   useEffect,
-  useRef
+  useRef,
+  type Dispatch
 } from 'preact/hooks';
 
 interface VisibilityControls {
-  refer: Ref<HTMLDivElement>;
+  refer: RefObject<HTMLDivElement>;
   isVisible: boolean;
-  setIsVisible: StateUpdater<boolean>;
+  setIsVisible: Dispatch<StateUpdater<boolean>>;
 }
 
 export const useVisible = (initialIsVisible: boolean): VisibilityControls => {
@@ -24,7 +25,8 @@ export const useVisible = (initialIsVisible: boolean): VisibilityControls => {
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside, true);
-    return () => {
+
+    return (): void => {
       document.removeEventListener('click', handleClickOutside, true);
     };
   }, []);

@@ -41,6 +41,7 @@ const projectSlice = createSlice({
         iconKey: string;
       };
       const editedProject = state.projectList.find(e => e.id === id);
+
       if (editedProject) {
         editedProject.title = title;
         editedProject.iconKey = iconKey;

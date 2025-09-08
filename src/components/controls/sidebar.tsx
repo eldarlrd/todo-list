@@ -1,7 +1,14 @@
+// eslint-disable-next-line import/named
 import { type FocusTrap, createFocusTrap } from 'focus-trap';
 import { Menu, Plus, X } from 'lucide-preact';
 import { nanoid } from 'nanoid';
-import { type StateUpdater, useState, useEffect, useRef } from 'preact/hooks';
+import {
+  type StateUpdater,
+  useState,
+  useEffect,
+  useRef,
+  type Dispatch
+} from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
@@ -15,8 +22,8 @@ import { projectActions } from '@/slices/projectSlice.ts';
 interface DrawerControls {
   isDrawerOpen?: boolean;
   panelTabIndex?: number;
-  setIsDrawerOpen: StateUpdater<boolean>;
-  setPanelTabIndex: StateUpdater<number>;
+  setIsDrawerOpen: Dispatch<StateUpdater<boolean>>;
+  setPanelTabIndex: Dispatch<StateUpdater<number>>;
 }
 
 const MobileBar = ({
@@ -70,18 +77,17 @@ const SidePanel = ({
   const { setSelectedProject, addNewProject } = projectActions;
 
   useEffect(() => {
-    windowWidth.current >= 1024 ? setPanelTabIndex(0) : null;
+    if (windowWidth.current >= 1024) setPanelTabIndex(0);
   }, [setPanelTabIndex]);
 
   // Sidebar Focus Trap
   useEffect(() => {
-    navRef.current ?
+    if (navRef.current)
       setFocusTrap(
         createFocusTrap(navRef.current, {
           escapeDeactivates: false
         })
-      )
-    : null;
+      );
   }, [navRef]);
 
   useEffect(() => {
@@ -146,6 +152,7 @@ const SidePanel = ({
               projectIcon: string;
             }): void => {
               const id = nanoid();
+
               dispatch(
                 addNewProject({
                   id,

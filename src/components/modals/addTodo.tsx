@@ -4,7 +4,8 @@ import {
   type StateUpdater,
   useState,
   useEffect,
-  useContext
+  useContext,
+  type Dispatch
 } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
@@ -52,7 +53,7 @@ const emptyTodo: TodoDetails = {
 
 interface TodoOptions {
   actionMode: string;
-  setIsVisible: StateUpdater<boolean>;
+  setIsVisible: Dispatch<StateUpdater<boolean>>;
   handleAction: ({
     project,
     title,
@@ -109,6 +110,7 @@ const AddTodo = ({
       setTodo(emptyTodo);
       if (isModalVisible && !selectedProject) {
         const id = nanoid();
+
         dispatch(
           addNewProject({
             id,
@@ -130,6 +132,7 @@ const AddTodo = ({
 
   useEffect(() => {
     const inputDate = new Date(todo.dueDate);
+
     if (
       !!todo.title.trim().length &&
       isValid(inputDate) &&
@@ -258,9 +261,7 @@ const AddTodo = ({
             todo.project = selectedProject;
             todo.title = todo.title.trim();
             todo.description = todo.description.trim();
-            viewMode !== VIEW_OPTIONS[0] ?
-              dispatch(setViewMode(todo.stage))
-            : null;
+            if (viewMode !== VIEW_OPTIONS[0]) dispatch(setViewMode(todo.stage));
             handleAction(todo);
             setIsVisible(false);
           }}
