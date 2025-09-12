@@ -12,6 +12,7 @@
 > - **[focus-trap](https://focus-trap.github.io/focus-trap)**
 > - **[Twind](https://twind.style)**
 > - **[Lucide](https://lucide.dev)**
+> - **[Simple Icons](https://simpleicons.org)**
 > - **[Vitest](https://vitest.dev)**
 > - **[Vite](https://vite.dev)**
 >
