@@ -6,6 +6,7 @@ import {
   Gamepad2,
   Gem,
   Gift,
+  LaptopMinimal,
   Leaf,
   PenTool,
   Pizza,
@@ -36,6 +37,10 @@ const PROJECT_ICONS: {
   {
     key: 'book',
     icon: <BookOpen aria-label='Book' class='xl:scale-110' />
+  },
+  {
+    key: 'laptop',
+    icon: <LaptopMinimal aria-label='Laptop' class='xl:scale-110' />
   },
   {
     key: 'leaf',

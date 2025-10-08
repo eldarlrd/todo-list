@@ -59,7 +59,7 @@ const todoSlice = createSlice({
     // Checks and Pushes to Done
     checkTodo(state, action) {
       const { id, isDone } = action.payload as { id: string; isDone: boolean };
-      const checkedTodo = state.todoList.find(e => e.id === id);
+      const checkedTodo = state.todoList.find(t => t.id === id);
 
       if (checkedTodo) {
         checkedTodo.isDone = isDone;
@@ -79,7 +79,7 @@ const todoSlice = createSlice({
           priority: string;
           stage: string;
         };
-      const editedTodo = state.todoList.find(e => e.id === id);
+      const editedTodo = state.todoList.find(t => t.id === id);
 
       if (editedTodo) {
         editedTodo.project = project;

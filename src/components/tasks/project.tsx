@@ -66,7 +66,7 @@ export const Project = ({
         dispatch(setSelectedProject(id));
       }}>
       <span class='flex max-w-full grow gap-1.5 break-all leading-6'>
-        <span>{PROJECT_ICONS.find(e => e.key === iconKey)?.icon}</span>
+        <span>{PROJECT_ICONS.find(p => p.key === iconKey)?.icon}</span>
         {title}
       </span>
 

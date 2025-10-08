@@ -3,6 +3,7 @@ import { PenSquare, Trash2, CheckCircle2, HelpCircle } from 'lucide-preact';
 import { type Dispatch, type StateUpdater } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
+import { PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { AddTodo, PRIORITY_OPTIONS } from '@/components/modals/addTodo.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
 import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
@@ -41,7 +42,7 @@ const Todo = ({
   const { checkTodo, editTodo, deleteTodo } = todoActions;
 
   const { projectList } = useAppSelector(state => state.projectReducer);
-
+  const currProject = projectList.find(p => p.id === project);
   const todoDueDate = new Date(dueDate);
 
   return (
@@ -54,8 +55,11 @@ const Todo = ({
           : 'dark:(bg-slate-800) bg-slate-100'
         } mt-3.5 flex justify-between gap-6 rounded px-4 py-3 drop-shadow-sm duration-150 xl:text-lg`}>
         <div class='flex flex-col gap-1.5 break-all'>
-          <p class='-skew-x-6 text-slate-600 dark:text-slate-400'>
-            {projectList.find(e => e.id === project)?.title}
+          <p class='flex -skew-x-6 items-center gap-0.5 text-slate-600 dark:text-slate-400'>
+            <span class='scale-75'>
+              {PROJECT_ICONS.find(p => p.key === currProject?.iconKey)?.icon}
+            </span>
+            {currProject?.title}
           </p>
           <p
             class={`${
@@ -67,17 +71,17 @@ const Todo = ({
           <p class='-mb-1 mt-1'>
             {format(todoDueDate, 'eee., d MMM. y')}
             {isTomorrow(todoDueDate) ?
-              ' | Tomorrow'
+              ' 🞄 Tomorrow'
             : isToday(todoDueDate) ?
-              ' | Today'
+              ' 🞄 Today'
             : isPast(todoDueDate) ?
-              ' | Overdue'
+              ' 🞄 Overdue'
             : ''}
           </p>
           <p class='flex items-center gap-1.5'>
             <span
               class={`bg-${
-                PRIORITY_OPTIONS.find(e => e.value === priority)?.color ?? ''
+                PRIORITY_OPTIONS.find(p => p.value === priority)?.color ?? ''
               } block aspect-square w-4 rounded-full`}
             />
             {priority}
