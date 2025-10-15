@@ -57,7 +57,7 @@ const ModalWindow = ({
             'dark:(bg-slate-600, shadow-slate-700) flex w-80 flex-col rounded bg-slate-300 shadow-sm shadow-slate-200 transition-all sm:w-96 md:w-[28rem] lg:w-[32rem] xl:w-[36rem] 2xl:w-[40rem]'
           : 'hidden'
         }>
-        <div class='mx-4 my-2 flex select-none justify-between text-xl font-semibold text-violet-900 transition-all xl:text-2xl dark:text-pink-300'>
+        <div class='mx-4 my-2 flex justify-between text-xl font-semibold text-violet-900 transition-all select-none xl:text-2xl dark:text-pink-300'>
           {modalContent?.key}
           <button
             type='button'

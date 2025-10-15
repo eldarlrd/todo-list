@@ -109,7 +109,7 @@ export const TodoList = (): JSX.Element => {
           tabIndex={-1}
           style='scrollbar-width:thin'
           class='overflow-y-auto px-3 pb-3.5'>
-          <p class='only-child:flex mt-4 hidden select-none justify-center text-lg text-slate-600 xl:text-xl dark:text-slate-400'>
+          <p class='only-child:flex mt-4 hidden justify-center text-lg text-slate-600 select-none xl:text-xl dark:text-slate-400'>
             Empty
           </p>
 
@@ -121,7 +121,7 @@ export const TodoList = (): JSX.Element => {
                   viewMode === VIEW_OPTIONS[i + 1])
               ) ?
                 <>
-                  <p className='mx-2 mt-3.5 -skew-x-6 select-none text-xl font-bold xl:text-2xl'>
+                  <p className='mx-2 mt-3.5 -skew-x-6 text-xl font-bold select-none xl:text-2xl'>
                     {title}
                   </p>
 

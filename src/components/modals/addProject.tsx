@@ -6,11 +6,16 @@ import {
   Gamepad2,
   Gem,
   Gift,
+  Heart,
+  Home,
   LaptopMinimal,
   Leaf,
+  Music,
   PenTool,
   Pizza,
+  ShoppingCart,
   Star,
+  Users,
   Wrench
 } from 'lucide-preact';
 import {
@@ -51,12 +56,24 @@ const PROJECT_ICONS: {
     icon: <Wrench aria-label='Wrench' class='xl:scale-110' />
   },
   {
+    key: 'home',
+    icon: <Home aria-label='Home' class='xl:scale-110' />
+  },
+  {
     key: 'pizza',
     icon: <Pizza aria-label='Pizza' class='xl:scale-110' />
   },
   {
+    key: 'cart',
+    icon: <ShoppingCart aria-label='Shopping Cart' class='xl:scale-110' />
+  },
+  {
     key: 'backpack',
     icon: <Backpack aria-label='Backpack' class='xl:scale-110' />
+  },
+  {
+    key: 'heart',
+    icon: <Heart aria-label='Heart' class='xl:scale-110' />
   },
   {
     key: 'gem',
@@ -75,12 +92,20 @@ const PROJECT_ICONS: {
     icon: <Dumbbell aria-label='Dumbbell' class='xl:scale-110' />
   },
   {
+    key: 'music',
+    icon: <Music aria-label='Music' class='xl:scale-110' />
+  },
+  {
     key: 'gamepad',
     icon: <Gamepad2 aria-label='Gamepad' class='xl:scale-110' />
   },
   {
     key: 'dollar',
     icon: <CircleDollarSign aria-label='Dollar' class='xl:scale-110' />
+  },
+  {
+    key: 'users',
+    icon: <Users aria-label='Users' class='xl:scale-110' />
   }
 ];
 

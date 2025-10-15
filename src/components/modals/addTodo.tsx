@@ -144,7 +144,7 @@ const AddTodo = ({
 
   return (
     <form
-      class='flex h-full select-none flex-col gap-3'
+      class='flex h-full flex-col gap-3 select-none'
       onSubmit={(e: Event): void => {
         e.preventDefault();
       }}>

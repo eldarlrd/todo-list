@@ -28,7 +28,7 @@ const ViewMenu = (): JSX.Element => {
         id='view-menu'
         class={`${
           isVisible ? 'bg-slate-200 dark:bg-slate-700' : ''
-        } hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) md:(max-w-[8rem], text-base, gap-1.5, px-2, py-2) flex max-w-[7rem] items-center justify-end gap-1 whitespace-nowrap rounded py-1.5 pl-1.5 pr-2 text-sm font-medium duration-150`}
+        } hover:(bg-slate-200, active:bg-slate-100, dark:(bg-slate-700, active:bg-slate-800)) md:(max-w-[8rem], text-base, gap-1.5, px-2, py-2) flex max-w-[7rem] items-center justify-end gap-1 rounded py-1.5 pr-2 pl-1.5 text-sm font-medium whitespace-nowrap duration-150`}
         onClick={(): void => {
           setIsVisible(!isVisible);
         }}>
@@ -48,7 +48,7 @@ const ViewMenu = (): JSX.Element => {
             <button
               type='button'
               key={option}
-              class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-28 min-w-fit select-none justify-end px-2 py-[3px] font-medium active:bg-slate-400 md:w-32'
+              class='hover:(bg-slate-300 dark:(bg-slate-600 active:bg-slate-500)) flex w-28 min-w-fit justify-end px-2 py-[3px] font-medium select-none active:bg-slate-400 md:w-32'
               onClick={(e: Event): void => {
                 switchView((e.target as HTMLButtonElement).innerText);
               }}>

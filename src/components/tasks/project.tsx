@@ -65,7 +65,7 @@ export const Project = ({
       onClick={(): void => {
         dispatch(setSelectedProject(id));
       }}>
-      <span class='flex max-w-full grow gap-1.5 break-all leading-6'>
+      <span class='flex max-w-full grow gap-1.5 leading-6 break-all'>
         <span>{PROJECT_ICONS.find(p => p.key === iconKey)?.icon}</span>
         {title}
       </span>

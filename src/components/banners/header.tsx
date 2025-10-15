@@ -5,7 +5,7 @@ import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
 import { UserLogin } from '@/components/controls/userLogin.tsx';
 
 export const Header = (): JSX.Element => (
-  <header class='lg:(flex-row, justify-between, gap-4, px-6, py-4) dark:(bg-slate-800, text-pink-500) xl:(py-2, text-4xl) flex select-none items-center justify-center bg-slate-100 p-4 pt-16 text-3xl font-bold text-violet-800 transition-all'>
+  <header class='lg:(flex-row, justify-between, gap-4, px-6, py-4) dark:(bg-slate-800, text-pink-500) xl:(py-2, text-4xl) flex items-center justify-center bg-slate-100 p-4 pt-16 text-3xl font-bold text-violet-800 transition-all select-none'>
     <span
       id='logo'
       class='md:(flex-row, gap-3) z-10 flex flex-col items-center justify-center gap-2'>

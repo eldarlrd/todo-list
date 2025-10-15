@@ -44,7 +44,7 @@ const MobileBar = ({
   return (
     <nav
       id='mobile-bar'
-      class='dark:(bg-slate-800, text-pink-500) absolute top-0 flex min-w-full select-none justify-between gap-2 bg-slate-100 p-3 text-2xl text-violet-800 transition-colors lg:hidden'>
+      class='dark:(bg-slate-800, text-pink-500) absolute top-0 flex min-w-full justify-between gap-2 bg-slate-100 p-3 text-2xl text-violet-800 transition-colors select-none lg:hidden'>
       <span class='flex gap-2'>
         <button
           type='button'
@@ -107,14 +107,14 @@ const SidePanel = ({
         isDrawerOpen ?
           'lg:(relative, min-w-0) fixed min-h-full w-full transition-all duration-500'
         : 'lg:(ml-0, transition-all) -ml-72'
-      } dark:(bg-slate-700, text-pink-400) lg:(flex, pb-0) inset-0 z-10 w-72 select-none flex-col items-start bg-slate-200 py-1.5 text-violet-900 xl:w-80 2xl:w-96`}>
+      } dark:(bg-slate-700, text-pink-400) lg:(flex, pb-0) inset-0 z-10 w-72 flex-col items-start bg-slate-200 py-1.5 text-violet-900 select-none xl:w-80 2xl:w-96`}>
       <div class='after:(border-b, border-slate-300, transition-colors, dark:border-slate-600) mb-2 flex min-w-full flex-col gap-1.5 px-3 text-2xl'>
         <span class='flex gap-2'>
           <button
             type='button'
             id='add-project'
             tabIndex={panelTabIndex}
-            class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) flex grow items-center gap-1.5 break-all rounded bg-violet-800 p-3 font-medium leading-4 text-slate-50 transition-colors dark:bg-pink-600'
+            class='hover:(bg-violet-700, active:bg-violet-600, dark:(bg-pink-700, active:bg-pink-800)) flex grow items-center gap-1.5 rounded bg-violet-800 p-3 leading-4 font-medium break-all text-slate-50 transition-colors dark:bg-pink-600'
             onClick={(): void => {
               setIsVisible(true);
             }}>

@@ -2,7 +2,7 @@ import { Github, Gavel } from 'lucide-preact';
 import { type JSX } from 'preact/jsx-runtime';
 
 export const Footer = (): JSX.Element => (
-  <footer class='lg:(items-start, px-6) dark:(bg-slate-800, text-pink-400, border-slate-700) flex select-none flex-col items-center justify-center gap-1.5 border-t border-slate-200 bg-slate-100 p-4 text-lg font-semibold text-violet-900 transition-all xl:text-xl'>
+  <footer class='lg:(items-start, px-6) dark:(bg-slate-800, text-pink-400, border-slate-700) flex flex-col items-center justify-center gap-1.5 border-t border-slate-200 bg-slate-100 p-4 text-lg font-semibold text-violet-900 transition-all select-none xl:text-xl'>
     <p id='author' class='flex gap-2'>
       © 2023 - 2025
       <a

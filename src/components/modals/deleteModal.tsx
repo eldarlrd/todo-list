@@ -17,7 +17,7 @@ export const DeleteModal = ({
   taskMode,
   handleDelete
 }: DeleteControls): JSX.Element => (
-  <div class='flex select-none flex-col gap-1.5 break-words text-center xl:text-lg'>
+  <div class='flex flex-col gap-1.5 text-center break-words select-none xl:text-lg'>
     <p>Are you sure?</p>
     <p>
       {taskMode} <span class='font-semibold'>{taskTitle}</span> will be deleted
