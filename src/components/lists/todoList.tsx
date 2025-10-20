@@ -12,7 +12,7 @@ import {
 } from '@/components/modals/addTodo.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { Todo, type TodoDetails } from '@/components/tasks/todo.tsx';
-import { useAppSelector } from '@/hooks/useAppSelector.ts';
+import { useAppSelector } from '@/hooks/useAppState.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
 
 const getSortedTodoList = (

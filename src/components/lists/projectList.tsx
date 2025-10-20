@@ -13,8 +13,7 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { Project } from '@/components/tasks/project.tsx';
-import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
-import { useAppSelector } from '@/hooks/useAppSelector.ts';
+import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 

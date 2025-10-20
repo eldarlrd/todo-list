@@ -6,8 +6,7 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { AddProject, PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
-import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
-import { useAppSelector } from '@/hooks/useAppSelector.ts';
+import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 import { todoActions } from '@/slices/todoSlice.ts';
 

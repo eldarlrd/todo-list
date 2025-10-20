@@ -16,7 +16,7 @@ import { UserLogin } from '@/components/controls/userLogin.tsx';
 import { ProjectList } from '@/components/lists/projectList.tsx';
 import { AddProject } from '@/components/modals/addProject.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
-import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
+import { useAppDispatch } from '@/hooks/useAppState.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 

@@ -15,8 +15,7 @@ import { VIEW_OPTIONS } from '@/components/controls/viewMenu.tsx';
 import { PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
 import { type TodoDetails } from '@/components/tasks/todo.tsx';
-import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
-import { useAppSelector } from '@/hooks/useAppSelector.ts';
+import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 import { todoActions } from '@/slices/todoSlice.ts';
 

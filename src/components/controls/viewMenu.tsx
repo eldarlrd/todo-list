@@ -1,8 +1,7 @@
 import { Eye } from 'lucide-preact';
 import { type JSX } from 'preact/jsx-runtime';
 
-import { useAppDispatch } from '@/hooks/useAppDispatch.ts';
-import { useAppSelector } from '@/hooks/useAppSelector.ts';
+import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
 import { todoActions } from '@/slices/todoSlice.ts';
 
