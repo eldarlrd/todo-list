@@ -13,6 +13,7 @@ interface UserData {
   sortAscending: number;
 }
 
+// FIXME: All Firestore crawling with bugs
 const fetchUserData = async (userId: string): Promise<UserData | null> => {
   try {
     const userDocRef = doc(db, 'users', userId);

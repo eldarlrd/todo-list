@@ -6,6 +6,7 @@ import { Sidebar } from '@/components/controls/sidebar.tsx';
 import { TodoList } from '@/components/lists/todoList.tsx';
 import { useAuth } from '@/hooks/useAuth.ts';
 
+// FIXME: Hook is wonky
 export const App = (): JSX.Element => {
   useAuth();
 

@@ -9,6 +9,7 @@ import { projectActions } from '@/slices/projectSlice.ts';
 import { todoActions } from '@/slices/todoSlice.ts';
 import { type AppDispatch, store } from '@/store.ts';
 
+// FIXME: Buggy as hell
 export const useAuth = (): void => {
   const dispatch = useDispatch<AppDispatch>();
   const { setLoading, setUser, clearUser } = authActions;

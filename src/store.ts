@@ -45,6 +45,7 @@ store.subscribe(() => {
     })
   );
 
+  // FIXME: Buggy store setup
   if (!user) return;
 
   const currentTodos = JSON.stringify(todoReducer.todoList);

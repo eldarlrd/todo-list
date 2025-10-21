@@ -5,6 +5,7 @@ import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { UserModal } from '@/components/modals/userModal.tsx';
 import { useVisible } from '@/hooks/useVisible.ts';
 
+// TODO: Pass props into modal
 export const UserLogin = (): JSX.Element => {
   const { refer, isVisible, setIsVisible } = useVisible(false);
 

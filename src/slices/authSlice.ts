@@ -9,6 +9,7 @@ const initialState: {
   loading: false
 };
 
+// FIXME: Tie this correctly to state
 const authSlice = createSlice({
   name: 'auth',
   initialState,

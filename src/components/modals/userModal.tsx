@@ -3,6 +3,7 @@ import { type JSX } from 'preact/jsx-runtime';
 import { useAppSelector } from '@/hooks/useAppState.ts';
 import { signInWithGoogle } from '@/lib/auth.ts';
 
+// TODO: Implement a modal for login & logout
 export const UserModal = (): JSX.Element => {
   const { user, loading } = useAppSelector(state => state.authReducer);
 
