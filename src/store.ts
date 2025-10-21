@@ -55,7 +55,7 @@ store.subscribe(() => {
     useDebouncedCallback(() => {
       saveTodos(user.uid, todoReducer.todoList).catch((error: unknown) => {
         if (error instanceof Error)
-          console.error('Failed to sync todos', error);
+          console.error('Failed to sync todos:', error);
       });
     }, 1000);
   }
@@ -76,7 +76,7 @@ store.subscribe(() => {
         projectReducer.selectedProject
       ).catch((error: unknown) => {
         if (error instanceof Error)
-          console.error('Failed to sync projects', error);
+          console.error('Failed to sync projects:', error);
       });
     }, 1000);
   }
@@ -98,7 +98,7 @@ store.subscribe(() => {
         sortAscending: todoReducer.sortAscending
       }).catch((error: unknown) => {
         if (error instanceof Error)
-          console.error('Failed to sync preferences', error);
+          console.error('Failed to sync preferences:', error);
       });
     }, 500);
   }

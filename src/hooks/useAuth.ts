@@ -44,7 +44,7 @@ export const useAuth = (): void => {
             dispatch(setSortAscending(mergedData.sortAscending));
           } catch (error: unknown) {
             if (error instanceof Error)
-              console.error('Failed to sync data on login', error);
+              console.error('Failed to sync data on login:', error);
           }
         } else dispatch(clearUser());
 

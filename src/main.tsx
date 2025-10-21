@@ -44,7 +44,7 @@ const registerSW = (): void => {
         })
         .catch((error: unknown) => {
           if (error instanceof Error)
-            console.error('Failed to register a service worker', error);
+            console.error('Failed to register a service worker:', error);
         });
     });
 };
