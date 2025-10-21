@@ -148,7 +148,8 @@ const syncLocalToFirestore = async (
 
     return mergedData;
   } catch (error: unknown) {
-    if (error instanceof Error) console.error('Error syncing Firestore', error);
+    if (error instanceof Error)
+      console.error('Failed to sync Firestore', error);
     throw error;
   }
 };
