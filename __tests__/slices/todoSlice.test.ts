@@ -5,6 +5,7 @@ import { todoActions, todoReducer } from '@/slices/todoSlice.ts';
 
 describe('todo reducer', () => {
   const {
+    setTodos,
     setViewMode,
     setSortMode,
     setSortAscending,
@@ -16,6 +17,7 @@ describe('todo reducer', () => {
   } = todoActions;
   const initialState = undefined;
   const todoId = nanoid();
+  const projectId = nanoid();
 
   const today = new Date();
   const tomorrow = new Date(today);
@@ -25,7 +27,7 @@ describe('todo reducer', () => {
 
   const todo = {
     id: todoId,
-    project: 'Default',
+    project: projectId,
     title: 'New Todo',
     description: 'Test this todo',
     dueDate: tomorrowFormatted,
@@ -44,6 +46,22 @@ describe('todo reducer', () => {
       sortMode: 'Title',
       sortAscending: 0
     });
+  });
+
+  it('sets all todos', () => {
+    const todoAnother = {
+      ...todo,
+      id: nanoid(),
+      title: 'Another Todo',
+      project: projectId
+    };
+    const todoList = [todo, todoAnother];
+
+    const action = setTodos(todoList);
+    const result = todoReducer(initialState, action);
+
+    expect(result.todoList).toStrictEqual(todoList);
+    expect(result.todoList).toHaveLength(2);
   });
 
   it('sets the view mode', () => {
@@ -74,7 +92,7 @@ describe('todo reducer', () => {
     expect(result.todoList).toContainEqual(todo);
   });
 
-  it('checks todo and pushes it to done stage', () => {
+  it('checks todo & pushes it to done stage', () => {
     const addAction = addNewTodo(todo);
     const addResult = todoReducer(initialState, addAction);
 
@@ -99,7 +117,7 @@ describe('todo reducer', () => {
 
     const editedTodo = {
       id: todoId,
-      project: 'Default',
+      project: projectId,
       title: 'Edited Todo',
       description: 'Edit this todo',
       dueDate: tomorrowFormatted,
@@ -137,7 +155,7 @@ describe('todo reducer', () => {
     const addAction = addNewTodo(todo);
     const addResult = todoReducer(initialState, addAction);
 
-    const deleteProjectAction = deleteProjectTodos([todo]);
+    const deleteProjectAction = deleteProjectTodos(projectId);
     const deleteProjectResult = todoReducer(addResult, deleteProjectAction);
 
     expect(deleteProjectResult.todoList).not.toContainEqual(todo);

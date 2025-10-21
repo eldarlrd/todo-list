@@ -43,7 +43,8 @@ const registerSW = (): void => {
           scope: '/todo-list/'
         })
         .catch((error: unknown) => {
-          if (error instanceof Error) console.error(error);
+          if (error instanceof Error)
+            console.error('Failed to register a service worker', error);
         });
     });
 };

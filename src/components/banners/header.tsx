@@ -1,6 +1,6 @@
 import { type JSX } from 'preact/jsx-runtime';
 
-import Logo from '@/assets/logo.webp';
+import Logo from '@/assets/images/logo.webp';
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
 import { UserLogin } from '@/components/controls/userLogin.tsx';
 

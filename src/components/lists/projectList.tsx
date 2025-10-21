@@ -26,7 +26,7 @@ export const ProjectList = ({
   const [modalContent, setModalContent] = useState<JSX.Element>();
 
   const dispatch = useAppDispatch();
-  const { sortProjects } = projectActions;
+  const { setProjects } = projectActions;
   const { projectList } = useAppSelector(state => state.projectReducer);
 
   // Drag & Drop Sorting
@@ -41,7 +41,7 @@ export const ProjectList = ({
         project => project.id === over?.id
       );
 
-      dispatch(sortProjects(arrayMove(projectList, prevIndex, newIndex)));
+      dispatch(setProjects(arrayMove(projectList, prevIndex, newIndex)));
     }
   };
 

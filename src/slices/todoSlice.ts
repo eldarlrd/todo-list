@@ -4,17 +4,19 @@ import { SORT_OPTIONS } from '@/components/controls/sortMenu.tsx';
 import { VIEW_OPTIONS } from '@/components/controls/viewMenu.tsx';
 import { STAGE_OPTIONS } from '@/components/modals/addTodo.tsx';
 
+interface TodoDetails {
+  id: string;
+  project: string;
+  title: string;
+  description: string;
+  dueDate: string;
+  priority: string;
+  stage: string;
+  isDone: boolean;
+}
+
 const initialState: {
-  todoList: {
-    id: string;
-    project: string;
-    title: string;
-    description: string;
-    dueDate: string;
-    priority: string;
-    stage: string;
-    isDone: boolean;
-  }[];
+  todoList: TodoDetails[];
   viewMode: string;
   sortMode: string;
   sortAscending: number;
@@ -29,6 +31,10 @@ const todoSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
+    setTodos(state, action) {
+      state.todoList = action.payload as TodoDetails[];
+    },
+
     setViewMode(state, action) {
       state.viewMode = action.payload as string;
     },
@@ -42,21 +48,10 @@ const todoSlice = createSlice({
     },
 
     addNewTodo(state, action) {
-      state.todoList.push(
-        action.payload as {
-          id: string;
-          project: string;
-          title: string;
-          description: string;
-          dueDate: string;
-          priority: string;
-          stage: string;
-          isDone: boolean;
-        }
-      );
+      state.todoList.push(action.payload as TodoDetails);
     },
 
-    // Checks and Pushes to Done
+    // Checks & pushes to Done
     checkTodo(state, action) {
       const { id, isDone } = action.payload as { id: string; isDone: boolean };
       const checkedTodo = state.todoList.find(t => t.id === id);
@@ -70,15 +65,7 @@ const todoSlice = createSlice({
 
     editTodo(state, action) {
       const { id, project, title, description, dueDate, priority, stage } =
-        action.payload as {
-          id: string;
-          project: string;
-          title: string;
-          description: string;
-          dueDate: string;
-          priority: string;
-          stage: string;
-        };
+        action.payload as TodoDetails;
       const editedTodo = state.todoList.find(t => t.id === id);
 
       if (editedTodo) {
@@ -88,31 +75,19 @@ const todoSlice = createSlice({
         editedTodo.dueDate = dueDate;
         editedTodo.priority = priority;
         editedTodo.stage = stage;
-        // Checks and Pushes to Done
+        // Checks & pushes to Done
         editedTodo.isDone = stage === STAGE_OPTIONS[2];
       }
     },
 
     deleteTodo(state, action) {
-      state.todoList = state.todoList.filter(e => e.id !== action.payload);
+      state.todoList = state.todoList.filter(t => t.id !== action.payload);
     },
 
     // Deletes Todos associated with a deleted Project
     deleteProjectTodos(state, action) {
       state.todoList = state.todoList.filter(
-        e =>
-          !(
-            action.payload as {
-              id: string;
-              project: string;
-              title: string;
-              description: string;
-              dueDate: string;
-              priority: string;
-              stage: string;
-              isDone: boolean;
-            }[]
-          ).some(elem => elem.id === e.id)
+        t => t.project !== (action.payload as string)
       );
     }
   }
@@ -121,4 +96,4 @@ const todoSlice = createSlice({
 const todoActions = todoSlice.actions;
 const todoReducer = todoSlice.reducer;
 
-export { todoActions, todoReducer };
+export { type TodoDetails, todoActions, todoReducer };

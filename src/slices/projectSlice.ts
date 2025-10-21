@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+interface ProjectDetails {
+  id: string;
+  title: string;
+  iconKey: string;
+}
+
 const initialState: {
-  projectList: {
-    id: string;
-    title: string;
-    iconKey: string;
-  }[];
+  projectList: ProjectDetails[];
   selectedProject: string;
 } = {
   projectList: [],
@@ -16,18 +18,12 @@ const projectSlice = createSlice({
   name: 'projects',
   initialState,
   reducers: {
-    sortProjects(state, action) {
-      state.projectList = action.payload as {
-        id: string;
-        title: string;
-        iconKey: string;
-      }[];
+    setProjects(state, action) {
+      state.projectList = action.payload as ProjectDetails[];
     },
 
     addNewProject(state, action) {
-      state.projectList.push(
-        action.payload as { id: string; title: string; iconKey: string }
-      );
+      state.projectList.push(action.payload as ProjectDetails);
     },
 
     setSelectedProject(state, action) {
@@ -35,11 +31,7 @@ const projectSlice = createSlice({
     },
 
     editProject(state, action) {
-      const { id, title, iconKey } = action.payload as {
-        id: string;
-        title: string;
-        iconKey: string;
-      };
+      const { id, title, iconKey } = action.payload as ProjectDetails;
       const editedProject = state.projectList.find(p => p.id === id);
 
       if (editedProject) {
@@ -50,7 +42,7 @@ const projectSlice = createSlice({
 
     deleteProject(state, action) {
       state.projectList = state.projectList.filter(
-        e => e.id !== action.payload
+        p => p.id !== action.payload
       );
     }
   }
@@ -59,4 +51,4 @@ const projectSlice = createSlice({
 const projectActions = projectSlice.actions;
 const projectReducer = projectSlice.reducer;
 
-export { projectActions, projectReducer };
+export { type ProjectDetails, projectActions, projectReducer };

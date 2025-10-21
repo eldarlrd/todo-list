@@ -6,10 +6,9 @@ import { SortMenu } from '@/components/controls/sortMenu.tsx';
 import { ViewMenu } from '@/components/controls/viewMenu.tsx';
 import { AddTodo } from '@/components/modals/addTodo.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
-import { type TodoDetails } from '@/components/tasks/todo.tsx';
 import { useAppDispatch } from '@/hooks/useAppState.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
-import { todoActions } from '@/slices/todoSlice.ts';
+import { todoActions, type TodoDetails } from '@/slices/todoSlice.ts';
 
 export const ControlPanel = (): JSX.Element => {
   const { refer, isVisible, setIsVisible } = useVisible(false);

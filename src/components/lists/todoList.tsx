@@ -11,9 +11,10 @@ import {
   STAGE_OPTIONS
 } from '@/components/modals/addTodo.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
-import { Todo, type TodoDetails } from '@/components/tasks/todo.tsx';
+import { Todo } from '@/components/tasks/todo.tsx';
 import { useAppSelector } from '@/hooks/useAppState.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
+import { type TodoDetails } from '@/slices/todoSlice.ts';
 
 const getSortedTodoList = (
   list: TodoDetails[],

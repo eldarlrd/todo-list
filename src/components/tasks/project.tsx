@@ -7,13 +7,10 @@ import { type JSX } from 'preact/jsx-runtime';
 import { AddProject, PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
-import { projectActions } from '@/slices/projectSlice.ts';
+import { projectActions, type ProjectDetails } from '@/slices/projectSlice.ts';
 import { todoActions } from '@/slices/todoSlice.ts';
 
-interface ProjectDetails {
-  id: string;
-  title: string;
-  iconKey: string;
+interface ProjectProps extends ProjectDetails {
   panelTabIndex?: number;
   setIsVisible: Dispatch<StateUpdater<boolean>>;
   setModalContent: Dispatch<StateUpdater<JSX.Element | undefined>>;
@@ -26,14 +23,13 @@ export const Project = ({
   panelTabIndex,
   setIsVisible,
   setModalContent
-}: ProjectDetails): JSX.Element => {
+}: ProjectProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const { deleteProjectTodos } = todoActions;
   const { setSelectedProject, editProject, deleteProject } = projectActions;
   const { projectList, selectedProject } = useAppSelector(
     state => state.projectReducer
   );
-  const { todoList } = useAppSelector(state => state.todoReducer);
 
   // Drag & Drop Movement
   const { setNodeRef, listeners, transition, transform, isDragging } =
@@ -120,9 +116,7 @@ export const Project = ({
                 taskMode='Project'
                 handleDelete={(): void => {
                   dispatch(deleteProject(id));
-                  dispatch(
-                    deleteProjectTodos(todoList.filter(e => e.project === id))
-                  );
+                  dispatch(deleteProjectTodos(id));
                   dispatch(
                     setSelectedProject(
                       projectList[0]?.id !== id ?

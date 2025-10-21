@@ -7,25 +7,14 @@ import { PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { AddTodo, PRIORITY_OPTIONS } from '@/components/modals/addTodo.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
-import { todoActions } from '@/slices/todoSlice.ts';
-
-interface TodoDetails {
-  id: string;
-  project: string;
-  title: string;
-  description: string;
-  dueDate: string;
-  priority: string;
-  stage: string;
-  isDone: boolean;
-}
+import { todoActions, type TodoDetails } from '@/slices/todoSlice.ts';
 
 interface TodoProps extends TodoDetails {
   setIsVisible: Dispatch<StateUpdater<boolean>>;
   setModalContent: Dispatch<StateUpdater<JSX.Element | undefined>>;
 }
 
-const Todo = ({
+export const Todo = ({
   id,
   project,
   title,
@@ -180,5 +169,3 @@ const Todo = ({
     </>
   );
 };
-
-export { type TodoDetails, Todo };

@@ -5,7 +5,7 @@ import { projectActions, projectReducer } from '@/slices/projectSlice.ts';
 
 describe('project reducer', () => {
   const {
-    sortProjects,
+    setProjects,
     addNewProject,
     setSelectedProject,
     editProject,
@@ -29,8 +29,8 @@ describe('project reducer', () => {
     });
   });
 
-  it('sorts all projects', () => {
-    const action = sortProjects([project]);
+  it('sets all projects', () => {
+    const action = setProjects([project]);
     const result = projectReducer(initialState, action);
 
     expect(result.projectList).toContainEqual(project);
