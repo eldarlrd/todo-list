@@ -11,7 +11,7 @@ const USER_ICONS: JSX.Element[] = [
     key='user'
     aria-label='User'
     strokeWidth='2.25'
-    class='-ml-px scale-110 transition-transform lg:scale-125 xl:scale-150'
+    class='lg:(scale-125, -ml-px) scale-110 transition-transform xl:scale-150'
   />,
   <UserRoundCheck
     key='user-check'
