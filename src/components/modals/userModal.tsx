@@ -1,24 +1,31 @@
+import { CircleUserRound } from 'lucide-preact';
 import { type Dispatch, type StateUpdater, useState } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
-// import { useAppSelector } from '@/hooks/useAppState.ts';
-import { signInWithGoogle } from '@/lib/auth.ts';
+import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
+import { signInWithGoogle, signOut } from '@/lib/auth.ts';
+import { authActions } from '@/slices/authSlice.ts';
 
 interface UserControls {
   setIsVisible: Dispatch<StateUpdater<boolean>>;
 }
 
-// TODO: Implement a modal for login & logout
 export const UserModal = ({ setIsVisible }: UserControls): JSX.Element => {
-  // const { user } = useAppSelector(state => state.authReducer);
+  const { user } = useAppSelector(state => state.authReducer);
   const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const { setUser, clearUser } = authActions;
 
   const handleLogin = async (): Promise<void> => {
     try {
       setIsLoading(true);
-      await signInWithGoogle();
+      const { displayName, photoURL, email } = await signInWithGoogle();
+
+      dispatch(setUser({ displayName, photoURL, email }));
+      setIsVisible(false);
     } catch (error: unknown) {
       if (error instanceof Error) console.error('Failed to login:', error);
     } finally {
@@ -26,21 +33,67 @@ export const UserModal = ({ setIsVisible }: UserControls): JSX.Element => {
     }
   };
 
+  const handleLogout = async (): Promise<void> => {
+    try {
+      setIsLoading(true);
+      await signOut();
+
+      dispatch(clearUser());
+      setIsVisible(false);
+    } catch (error: unknown) {
+      if (error instanceof Error) console.error('Failed to logout:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const buttonStyle =
+    user ?
+      'hover:(bg-rose-700, active:bg-rose-600, dark:(bg-rose-700, active:bg-rose-800))' +
+      ' bg-rose-800 dark:bg-rose-600'
+    : 'hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) bg-emerald-800 dark:bg-sky-600';
+
   return (
     <div class='flex flex-col gap-1.5 text-center text-base break-words select-none xl:text-lg'>
-      <p>
-        Login using your{' '}
-        <span class='font-semibold'>
-          <span class='text-blue-500'>G</span>
-          <span class='text-red-500'>o</span>
-          <span class='text-amber-500'>o</span>
-          <span class='text-blue-500'>g</span>
-          <span class='text-green-600'>l</span>
-          <span class='text-red-500'>e</span>
-        </span>{' '}
-        Account
-      </p>
-      <p>to store projects & todos online for remote access.</p>
+      {user ?
+        <>
+          <p class='font-medium'>
+            <span>
+              {user.photoURL ?
+                <img
+                  class='pointer-events-none mr-1.5 inline h-8 w-8 rounded-full text-sm transition-all'
+                  alt='User Avatar'
+                  src={user.photoURL}
+                />
+              : <CircleUserRound
+                  aria-label='Circle User'
+                  strokeWidth='2'
+                  class='mr-1.5 inline h-8 w-8'
+                />
+              }
+              {user.displayName}{' '}
+            </span>
+            <span class='inline-block font-light'>({user.email})</span>
+          </p>
+          <p>Logout if you no longer wish to store projects & todos online.</p>
+        </>
+      : <>
+          <p>
+            Login using your{' '}
+            <span class='font-semibold'>
+              <span class='text-blue-500'>G</span>
+              <span class='text-red-500'>o</span>
+              <span class='text-amber-500'>o</span>
+              <span class='text-blue-500'>g</span>
+              <span class='text-green-600'>l</span>
+              <span class='text-red-500'>e</span>
+            </span>{' '}
+            Account
+          </p>
+          <p>to store projects & todos online for remote access.</p>
+        </>
+      }
+
       <span class='mt-4 flex justify-end gap-2'>
         <CancelButton
           id='user-cancel'
@@ -49,12 +102,14 @@ export const UserModal = ({ setIsVisible }: UserControls): JSX.Element => {
           }}
         />
         <ConfirmButton
-          id='user-login'
-          action='Login'
-          styleClass='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) bg-emerald-800 dark:bg-sky-600'
+          id='user-action'
+          action={user ? 'Logout' : 'Login'}
+          styleClass={buttonStyle}
           isDisabled={isLoading}
           isLoading={isLoading}
-          handleConfirm={() => void handleLogin()}
+          handleConfirm={() =>
+            user ? void handleLogout() : void handleLogin()
+          }
         />
       </span>
     </div>

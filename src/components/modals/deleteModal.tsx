@@ -23,6 +23,7 @@ export const DeleteModal = ({
       {taskMode} <span class='font-semibold'>{taskTitle}</span> will be deleted
       permanently.
     </p>
+
     <div class='mt-4 flex justify-end gap-2'>
       <CancelButton
         id='delete-cancel'

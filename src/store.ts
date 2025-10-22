@@ -28,15 +28,7 @@ const store = configureStore({
 
 // Store to Local Storage
 store.subscribe(() => {
-  const { todoReducer, projectReducer } = store.getState();
-
-  localStorage.setItem(
-    'state',
-    JSON.stringify({
-      projectReducer,
-      todoReducer
-    })
-  );
+  localStorage.setItem('state', JSON.stringify(store.getState()));
 });
 
 type AppDispatch = typeof store.dispatch;
