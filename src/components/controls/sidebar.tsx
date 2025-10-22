@@ -12,7 +12,7 @@ import {
 import { type JSX } from 'preact/jsx-runtime';
 
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
-import { UserLogin } from '@/components/controls/userLogin.tsx';
+import { UserAccount } from '@/components/controls/userAccount.tsx';
 import { ProjectList } from '@/components/lists/projectList.tsx';
 import { AddProject } from '@/components/modals/addProject.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
@@ -58,7 +58,7 @@ const MobileBar = ({
         </button>
         <ThemeToggle identifier='mobile-theme-toggle' />
       </span>
-      <UserLogin />
+      <UserAccount />
     </nav>
   );
 };

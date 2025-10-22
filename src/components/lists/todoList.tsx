@@ -122,7 +122,7 @@ export const TodoList = (): JSX.Element => {
                   viewMode === VIEW_OPTIONS[i + 1])
               ) ?
                 <>
-                  <p className='mx-2 mt-3.5 -skew-x-6 text-xl font-bold select-none xl:text-2xl'>
+                  <p class='mx-2 mt-3.5 -skew-x-6 text-xl font-bold select-none xl:text-2xl'>
                     {title}
                   </p>
 

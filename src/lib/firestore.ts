@@ -14,7 +14,9 @@ interface UserData {
 }
 
 // FIXME: All Firestore crawling with bugs
-const fetchUserData = async (userId: string): Promise<UserData | null> => {
+const fetchUserData = async (
+  userId: string
+): Promise<UserData | null | undefined> => {
   try {
     const userDocRef = doc(db, 'users', userId);
     const userDoc = await getDoc(userDocRef);
@@ -25,7 +27,6 @@ const fetchUserData = async (userId: string): Promise<UserData | null> => {
   } catch (error: unknown) {
     if (error instanceof Error)
       console.error('Failed to fetch user data:', error);
-    throw error;
   }
 };
 
@@ -36,7 +37,6 @@ const saveUserData = async (userId: string, data: UserData): Promise<void> => {
     await setDoc(userDocRef, data, { merge: true });
   } catch (error: unknown) {
     if (error instanceof Error) console.error('Error saving user data:', error);
-    throw error;
   }
 };
 
@@ -50,7 +50,6 @@ const saveTodos = async (
     await setDoc(userDocRef, { todos }, { merge: true });
   } catch (error: unknown) {
     if (error instanceof Error) console.error('Error saving todos:', error);
-    throw error;
   }
 };
 
@@ -65,7 +64,6 @@ const saveProjects = async (
     await setDoc(userDocRef, { projects, selectedProject }, { merge: true });
   } catch (error: unknown) {
     if (error instanceof Error) console.error('Error saving projects:', error);
-    throw error;
   }
 };
 
@@ -84,7 +82,6 @@ const savePreferences = async (
   } catch (error: unknown) {
     if (error instanceof Error)
       console.error('Error saving preferences:', error);
-    throw error;
   }
 };
 
@@ -123,7 +120,7 @@ const mergeProjects = (
 const syncLocalToFirestore = async (
   userId: string,
   localData: UserData
-): Promise<UserData> => {
+): Promise<UserData | undefined> => {
   try {
     const existingData = await fetchUserData(userId);
 
@@ -151,7 +148,6 @@ const syncLocalToFirestore = async (
   } catch (error: unknown) {
     if (error instanceof Error)
       console.error('Failed to sync Firestore:', error);
-    throw error;
   }
 };
 
@@ -163,7 +159,6 @@ const deleteUserData = async (userId: string): Promise<void> => {
   } catch (error: unknown) {
     if (error instanceof Error)
       console.error('Error deleting user data:', error);
-    throw error;
   }
 };
 

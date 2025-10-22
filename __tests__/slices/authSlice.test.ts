@@ -2,7 +2,7 @@ import { type User } from 'firebase/auth';
 
 import { authActions, authReducer } from '@/slices/authSlice.ts';
 
-const { setUser, setLoading, clearUser } = authActions;
+const { setUser, clearUser } = authActions;
 
 describe('auth reducer', () => {
   const mockUser = {
@@ -18,33 +18,23 @@ describe('auth reducer', () => {
     const result = authReducer(initialState, action);
 
     expect(result).toStrictEqual({
-      user: null,
-      loading: false
+      user: null
     });
   });
 
   it('sets the user', () => {
-    const previousState = { user: null, loading: true };
+    const previousState = { user: null };
     const action = setUser(mockUser);
     const result = authReducer(previousState, action);
 
     expect(result.user).toStrictEqual(mockUser);
-    expect(result.loading).toBe(false);
-  });
-
-  it('sets loading to true', () => {
-    const action = setLoading(true);
-    const result = authReducer(initialState, action);
-
-    expect(result.loading).toBe(true);
   });
 
   it('logs out the user', () => {
-    const previousState = { user: mockUser, loading: true };
+    const previousState = { user: mockUser };
     const action = clearUser();
     const result = authReducer(previousState, action);
 
     expect(result.user).toBeNull();
-    expect(result.loading).toBe(false);
   });
 });

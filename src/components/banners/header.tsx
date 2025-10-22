@@ -2,7 +2,7 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import Logo from '@/assets/images/logo.webp';
 import { ThemeToggle } from '@/components/controls/themeToggle.tsx';
-import { UserLogin } from '@/components/controls/userLogin.tsx';
+import { UserAccount } from '@/components/controls/userAccount.tsx';
 
 export const Header = (): JSX.Element => (
   <header class='lg:(flex-row, justify-between, gap-4, px-6, py-4) dark:(bg-slate-800, text-pink-500) xl:(py-2, text-4xl) flex items-center justify-center bg-slate-100 p-4 pt-16 text-3xl font-bold text-violet-800 transition-all select-none'>
@@ -19,7 +19,7 @@ export const Header = (): JSX.Element => (
 
     <span class='hidden gap-2 font-normal not-italic lg:flex'>
       <ThemeToggle identifier='theme-toggle' />
-      <UserLogin />
+      <UserAccount />
     </span>
   </header>
 );
