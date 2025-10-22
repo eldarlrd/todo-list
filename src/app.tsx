@@ -1,11 +1,26 @@
+import { onAuthStateChanged } from 'firebase/auth';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { Footer } from '@/components/banners/footer.tsx';
 import { Header } from '@/components/banners/header.tsx';
 import { Sidebar } from '@/components/controls/sidebar.tsx';
 import { TodoList } from '@/components/lists/todoList.tsx';
+import { useAppDispatch } from '@/hooks/useAppState.ts';
+import { auth } from '@/lib/firebase.ts';
+import { authActions } from '@/slices/authSlice.ts';
 
 export const App = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const { setUser, clearUser } = authActions;
+
+  onAuthStateChanged(auth, fbUser => {
+    if (fbUser) {
+      const { displayName, photoURL, email } = fbUser;
+
+      dispatch(setUser({ displayName, photoURL, email }));
+    } else dispatch(clearUser());
+  });
+
   return (
     <div
       id='app'

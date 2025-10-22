@@ -9,7 +9,6 @@ const initialState: {
   user: null
 };
 
-// TODO: Tie this correctly to state
 const authSlice = createSlice({
   name: 'auth',
   initialState,
