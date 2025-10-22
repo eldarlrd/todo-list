@@ -22,9 +22,9 @@ export const UserModal = ({ setIsVisible }: UserControls): JSX.Element => {
   const handleLogin = async (): Promise<void> => {
     try {
       setIsLoading(true);
-      const { displayName, photoURL, email } = await signInWithGoogle();
+      const { displayName, photoURL, email, uid } = await signInWithGoogle();
 
-      dispatch(setUser({ displayName, photoURL, email }));
+      dispatch(setUser({ displayName, photoURL, email, uid }));
       setIsVisible(false);
     } catch (error: unknown) {
       if (error instanceof Error) console.error('Failed to login:', error);

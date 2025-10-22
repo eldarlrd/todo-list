@@ -1,3 +1,6 @@
+import { signOut } from '@/lib/auth.ts';
+import { projectActions } from '@/slices/projectSlice.ts';
+import { todoActions } from '@/slices/todoSlice.ts';
 import { onAuthStateChanged } from 'firebase/auth';
 import { type JSX } from 'preact/jsx-runtime';
 
@@ -12,12 +15,26 @@ import { authActions } from '@/slices/authSlice.ts';
 export const App = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { setUser, clearUser } = authActions;
+  const { setProjects } = projectActions;
+  const { setTodos } = todoActions;
 
   onAuthStateChanged(auth, fbUser => {
     if (fbUser) {
-      const { displayName, photoURL, email } = fbUser;
+      const { displayName, photoURL, email, uid } = fbUser;
 
-      dispatch(setUser({ displayName, photoURL, email }));
+      dispatch(setUser({ displayName, photoURL, email, uid }));
+
+      try {
+        // const { projects, todos } = await fetchAllData(uid);
+        //
+        // dispatch(setProjects(projects));
+        // dispatch(setTodos(todos));
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.error('Failed to fetch user data:', error);
+          dispatch(clearUser());
+        }
+      }
     } else dispatch(clearUser());
   });
 

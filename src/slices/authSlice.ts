@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { type User } from 'firebase/auth';
 
-type UserDetails = 'displayName' | 'photoURL' | 'email';
+type UserDetails = 'displayName' | 'photoURL' | 'email' | 'uid';
 
 const initialState: {
   user: Pick<User, UserDetails> | null;

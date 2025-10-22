@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore/lite';
+import { doc, getDoc, setDoc } from 'firebase/firestore/lite';
 
 import { db } from '@/lib/firebase.ts';
 import { type ProjectDetails } from '@/slices/projectSlice.ts';
@@ -7,13 +7,11 @@ import { type TodoDetails } from '@/slices/todoSlice.ts';
 interface UserData {
   todos: TodoDetails[];
   projects: ProjectDetails[];
-  selectedProject: string;
-  viewMode: string;
-  sortMode: string;
-  sortAscending: number;
 }
 
+// * Cloud is the Source of Truth
 // FIXME: All Firestore crawling with bugs
+// TODO: Add error toasts
 const fetchUserData = async (
   userId: string
 ): Promise<UserData | null | undefined> => {
@@ -55,33 +53,14 @@ const saveTodos = async (
 
 const saveProjects = async (
   userId: string,
-  projects: ProjectDetails[],
-  selectedProject: string
+  projects: ProjectDetails[]
 ): Promise<void> => {
   try {
     const userDocRef = doc(db, 'users', userId);
 
-    await setDoc(userDocRef, { projects, selectedProject }, { merge: true });
+    await setDoc(userDocRef, { projects }, { merge: true });
   } catch (error: unknown) {
     if (error instanceof Error) console.error('Error saving projects:', error);
-  }
-};
-
-const savePreferences = async (
-  userId: string,
-  preferences: {
-    viewMode: string;
-    sortMode: string;
-    sortAscending: number;
-  }
-): Promise<void> => {
-  try {
-    const userDocRef = doc(db, 'users', userId);
-
-    await setDoc(userDocRef, preferences, { merge: true });
-  } catch (error: unknown) {
-    if (error instanceof Error)
-      console.error('Error saving preferences:', error);
   }
 };
 
@@ -132,14 +111,7 @@ const syncLocalToFirestore = async (
     const mergedData: UserData = {
       // Merge Local & Cloud States
       todos: mergeTodos(localData.todos, existingData.todos),
-      projects: mergeProjects(localData.projects, existingData.projects),
-
-      // Cloud Priority
-      selectedProject:
-        existingData.selectedProject || localData.selectedProject,
-      viewMode: existingData.viewMode,
-      sortMode: existingData.sortMode,
-      sortAscending: existingData.sortAscending
+      projects: mergeProjects(localData.projects, existingData.projects)
     };
 
     await saveUserData(userId, mergedData);
@@ -151,23 +123,10 @@ const syncLocalToFirestore = async (
   }
 };
 
-const deleteUserData = async (userId: string): Promise<void> => {
-  try {
-    const userDocRef = doc(db, 'users', userId);
-
-    await deleteDoc(userDocRef);
-  } catch (error: unknown) {
-    if (error instanceof Error)
-      console.error('Error deleting user data:', error);
-  }
-};
-
 export {
   fetchUserData,
   saveUserData,
   saveTodos,
   saveProjects,
-  savePreferences,
-  syncLocalToFirestore,
-  deleteUserData
+  syncLocalToFirestore
 };
