@@ -1,37 +1,54 @@
-import { onAuthStateChanged, type User } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useEffect, useRef } from 'preact/hooks';
 
-import { useAppDispatch } from '@/hooks/useAppState.ts';
+import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { auth } from '@/lib/firebase.ts';
-import { fetchAllData } from '@/lib/firestore.ts';
+import { taskMerger } from '@/lib/taskMerger.ts';
 import { authActions } from '@/slices/authSlice.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 import { todoActions } from '@/slices/todoSlice.ts';
 
 export const useAuthListener = (): void => {
+  const { projectList: localProjects } = useAppSelector(
+    state => state.projectReducer
+  );
+  const { todoList: localTodos } = useAppSelector(state => state.todoReducer);
   const dispatch = useAppDispatch();
-  const { setUser, clearUser } = authActions;
+
+  const { clearUser } = authActions;
   const { setProjects } = projectActions;
   const { setTodos } = todoActions;
+  const hasSynced = useRef(false);
 
-  onAuthStateChanged(auth, fbUser => {
-    if (fbUser) {
-      void (async (user: User): Promise<void> => {
-        const { displayName, photoURL, email, uid } = user;
-
-        dispatch(setUser({ displayName, photoURL, email, uid }));
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    const unsubscribe = onAuthStateChanged(auth, async fbUser => {
+      if (fbUser) {
+        if (hasSynced.current) return;
+        hasSynced.current = true;
 
         try {
-          const { projects, todos } = await fetchAllData(uid);
+          const { uid } = fbUser;
 
-          dispatch(setProjects(projects));
-          dispatch(setTodos(todos));
+          const [mergedProjects, mergedTodos] = await taskMerger({
+            uid,
+            localProjects,
+            localTodos
+          });
+
+          dispatch(setProjects(mergedProjects));
+          dispatch(setTodos(mergedTodos));
         } catch (error: unknown) {
-          if (error instanceof Error) {
-            console.error('Failed to fetch user data:', error);
-            dispatch(clearUser());
-          }
+          if (error instanceof Error) throw error;
         }
-      })(fbUser);
-    } else dispatch(clearUser());
-  });
+      } else {
+        dispatch(clearUser());
+        hasSynced.current = false;
+      }
+    });
+
+    return (): void => {
+      unsubscribe();
+    };
+  }, [dispatch, localProjects, localTodos, setProjects, setTodos, clearUser]);
 };

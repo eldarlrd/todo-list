@@ -1,7 +1,7 @@
 {
   "name": "todo-list",
   "private": true,
-  "version": "1.4.5",
+  "version": "1.4.6",
   "type": "module",
   "keywords": [
     "todo list",

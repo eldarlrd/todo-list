@@ -1,22 +1,21 @@
 import { Plus } from 'lucide-preact';
-import { nanoid } from 'nanoid';
+import { useState } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { SortMenu } from '@/components/controls/sortMenu.tsx';
 import { ViewMenu } from '@/components/controls/viewMenu.tsx';
 import { AddTodo } from '@/components/modals/addTodo.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
-import { useAppDispatch } from '@/hooks/useAppState.ts';
+import { useStateSync } from '@/hooks/useStateSync.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
-import { todoActions, type TodoDetails } from '@/slices/todoSlice.ts';
+import { type TodoDetails } from '@/slices/todoSlice.ts';
 
 export const ControlPanel = (): JSX.Element => {
   const { refer, isVisible, setIsVisible } = useVisible(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { createTodo } = useStateSync();
 
-  const dispatch = useAppDispatch();
-  const { addNewTodo } = todoActions;
-
-  const handleAddNewTodo = ({
+  const handleAddNewTodo = async ({
     project,
     title,
     description,
@@ -24,12 +23,11 @@ export const ControlPanel = (): JSX.Element => {
     priority,
     stage,
     isDone
-  }: TodoDetails): void => {
-    const id = nanoid();
+  }: Omit<TodoDetails, 'id'>): Promise<void> => {
+    setIsLoading(true);
 
-    dispatch(
-      addNewTodo({
-        id,
+    try {
+      await createTodo({
         project,
         title,
         description,
@@ -37,8 +35,14 @@ export const ControlPanel = (): JSX.Element => {
         priority,
         stage,
         isDone
-      })
-    );
+      });
+
+      setIsVisible(false);
+    } catch (error: unknown) {
+      if (error instanceof Error) console.error('Failed to add todo:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -75,6 +79,7 @@ export const ControlPanel = (): JSX.Element => {
             actionMode='Add'
             setIsVisible={setIsVisible}
             handleAction={handleAddNewTodo}
+            isLoading={isLoading}
           />
         }
         setIsVisible={setIsVisible}

@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { useCallback } from 'preact/hooks';
 
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
@@ -9,7 +10,7 @@ interface SyncTools {
   createProject: (project: Omit<ProjectDetails, 'id'>) => Promise<string>;
   modifyProject: (project: ProjectDetails) => Promise<void>;
   removeProject: (projectId: string) => Promise<void>;
-  createTodo: (todo: Omit<TodoDetails, 'id'>) => Promise<string>;
+  createTodo: (todo: Omit<TodoDetails, 'id'>) => Promise<string | undefined>;
   modifyTodo: (todo: TodoDetails) => Promise<void>;
   removeTodo: (todoId: string) => Promise<void>;
   syncProjects: (projects: ProjectDetails[]) => Promise<void>;
@@ -63,7 +64,13 @@ export const useStateSync = (): SyncTools => {
 
   const createTodo = useCallback(
     async (todo: Omit<TodoDetails, 'id'>) => {
-      if (!uid) throw new Error('User not authenticated');
+      if (!uid) {
+        const id = nanoid();
+
+        dispatch(addNewTodo({ ...todo, id }));
+
+        return;
+      }
 
       const id = await fsService.addTodo(uid, todo);
 

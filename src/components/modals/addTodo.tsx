@@ -60,7 +60,8 @@ interface TodoOptions {
     priority,
     stage,
     isDone
-  }: TodoDetails) => void;
+  }: TodoDetails) => void | Promise<void>;
+  isLoading: boolean;
   currentTodo?: TodoDetails;
 }
 
@@ -68,6 +69,7 @@ const AddTodo = ({
   actionMode,
   setIsVisible,
   handleAction,
+  isLoading,
   currentTodo
 }: TodoOptions): JSX.Element => {
   const [todo, setTodo] = useState<TodoDetails>(emptyTodo);
@@ -255,13 +257,17 @@ const AddTodo = ({
           action={actionMode}
           styleClass='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) bg-emerald-800 dark:bg-sky-600'
           isDisabled={isDisabled}
-          handleConfirm={(): void => {
+          isLoading={isLoading}
+          handleConfirm={async (): Promise<void> => {
             todo.project = selectedProject;
             todo.title = todo.title.trim();
             todo.description = todo.description.trim();
             if (viewMode !== VIEW_OPTIONS[0]) dispatch(setViewMode(todo.stage));
-            handleAction(todo);
-            setIsVisible(false);
+            try {
+              await handleAction(todo);
+            } finally {
+              setIsVisible(false);
+            }
           }}
         />
       </span>

@@ -17,7 +17,6 @@ import { type TodoDetails } from '@/slices/todoSlice.ts';
 const BATCH_LIMIT = 500; // Firestore Batch Limit
 
 // * Cloud is the Source of Truth
-// TODO: Add error toasts
 const fetchAllData = async (
   uid: string
 ): Promise<{ projects: ProjectDetails[]; todos: TodoDetails[] }> => {

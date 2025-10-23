@@ -4,6 +4,7 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
+import { RefreshButton } from '@/components/buttons/refreshButton.tsx';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { signInWithGoogle, signOut } from '@/lib/auth.ts';
 import { authActions } from '@/slices/authSlice.ts';
@@ -101,11 +102,11 @@ export const UserModal = ({ setIsVisible }: UserControls): JSX.Element => {
             setIsVisible(false);
           }}
         />
+        {user && <RefreshButton />}
         <ConfirmButton
           id='user-action'
           action={user ? 'Logout' : 'Login'}
           styleClass={buttonStyle}
-          isDisabled={isLoading}
           isLoading={isLoading}
           handleConfirm={() =>
             user ? void handleLogout() : void handleLogin()

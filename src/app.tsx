@@ -6,6 +6,7 @@ import { Sidebar } from '@/components/controls/sidebar.tsx';
 import { TodoList } from '@/components/lists/todoList.tsx';
 import { useAuthListener } from '@/hooks/useAuthListener.ts';
 
+// TODO: Add Toasts
 export const App = (): JSX.Element => {
   useAuthListener();
 

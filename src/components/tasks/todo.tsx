@@ -1,12 +1,13 @@
 import { format, isPast, isToday, isTomorrow } from 'date-fns';
 import { PenSquare, Trash2, CheckCircle2, HelpCircle } from 'lucide-preact';
-import { type Dispatch, type StateUpdater } from 'preact/hooks';
+import { type Dispatch, type StateUpdater, useState } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { AddTodo, PRIORITY_OPTIONS } from '@/components/modals/addTodo.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
+import { useStateSync } from '@/hooks/useStateSync.ts';
 import { todoActions, type TodoDetails } from '@/slices/todoSlice.ts';
 
 interface TodoProps extends TodoDetails {
@@ -27,11 +28,43 @@ export const Todo = ({
   setModalContent
 }: TodoProps): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { checkTodo, editTodo, deleteTodo } = todoActions;
+  const { checkTodo, deleteTodo } = todoActions;
+  const [isLoading, setIsLoading] = useState(false);
+  const { modifyTodo } = useStateSync();
 
   const { projectList } = useAppSelector(state => state.projectReducer);
   const currProject = projectList.find(p => p.id === project);
   const todoDueDate = new Date(dueDate);
+
+  const handleEditTodo = async ({
+    project,
+    title,
+    description,
+    dueDate,
+    priority,
+    stage
+  }: TodoDetails): Promise<void> => {
+    setIsLoading(true);
+
+    try {
+      await modifyTodo({
+        id,
+        project,
+        title,
+        description,
+        dueDate,
+        priority,
+        stage,
+        isDone
+      });
+
+      setIsVisible(false);
+    } catch (error: unknown) {
+      if (error instanceof Error) console.error('Failed to edit todo:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
@@ -89,27 +122,8 @@ export const Todo = ({
                     key='Edit Todo'
                     actionMode='Edit'
                     setIsVisible={setIsVisible}
-                    handleAction={({
-                      project,
-                      title,
-                      description,
-                      dueDate,
-                      priority,
-                      stage
-                    }: TodoDetails): void => {
-                      dispatch(
-                        editTodo({
-                          id,
-                          project,
-                          title,
-                          description,
-                          dueDate,
-                          priority,
-                          stage,
-                          isDone
-                        })
-                      );
-                    }}
+                    isLoading={isLoading}
+                    handleAction={handleEditTodo}
                     currentTodo={{
                       id,
                       project,
