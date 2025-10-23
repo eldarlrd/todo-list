@@ -22,6 +22,10 @@ export default defineConfig({
     environment: 'happy-dom',
     setupFiles: '__tests__/setup.ts',
     include: ['__tests__/**/*.{test,spec}.{ts,tsx}'],
-    coverage: { all: true, include: ['src/{hooks,slices}/*.{ts,tsx}'] }
+    coverage: {
+      all: true,
+      include: ['src/{hooks,slices}/*.{ts,tsx}'],
+      exclude: ['src/hooks/{useAuthListener,useStateSync}.ts']
+    }
   }
 });

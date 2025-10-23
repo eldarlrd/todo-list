@@ -1,132 +1,154 @@
-import { doc, getDoc, setDoc } from 'firebase/firestore/lite';
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+  writeBatch
+} from 'firebase/firestore/lite';
 
 import { db } from '@/lib/firebase.ts';
 import { type ProjectDetails } from '@/slices/projectSlice.ts';
 import { type TodoDetails } from '@/slices/todoSlice.ts';
 
-interface UserData {
-  todos: TodoDetails[];
-  projects: ProjectDetails[];
-}
+const BATCH_LIMIT = 500; // Firestore Batch Limit
 
 // * Cloud is the Source of Truth
-// FIXME: All Firestore crawling with bugs
 // TODO: Add error toasts
-const fetchUserData = async (
-  userId: string
-): Promise<UserData | null | undefined> => {
-  try {
-    const userDocRef = doc(db, 'users', userId);
-    const userDoc = await getDoc(userDocRef);
+const fetchAllData = async (
+  uid: string
+): Promise<{ projects: ProjectDetails[]; todos: TodoDetails[] }> => {
+  const projectsRef = collection(db, 'users', uid, 'projects');
+  const todosRef = collection(db, 'users', uid, 'todos');
 
-    if (userDoc.exists()) return userDoc.data() as UserData;
+  const [projectsSnap, todosSnap] = await Promise.all([
+    getDocs(projectsRef),
+    getDocs(todosRef)
+  ]);
 
-    return null;
-  } catch (error: unknown) {
-    if (error instanceof Error)
-      console.error('Failed to fetch user data:', error);
-  }
+  const projects = projectsSnap.docs.map(d => ({
+    id: d.id,
+    ...d.data()
+  })) as ProjectDetails[];
+
+  const todos = todosSnap.docs.map(d => ({
+    id: d.id,
+    ...d.data()
+  })) as TodoDetails[];
+
+  return { projects, todos };
 };
 
-const saveUserData = async (userId: string, data: UserData): Promise<void> => {
-  try {
-    const userDocRef = doc(db, 'users', userId);
-
-    await setDoc(userDocRef, data, { merge: true });
-  } catch (error: unknown) {
-    if (error instanceof Error) console.error('Error saving user data:', error);
-  }
-};
-
-const saveTodos = async (
-  userId: string,
-  todos: TodoDetails[]
-): Promise<void> => {
-  try {
-    const userDocRef = doc(db, 'users', userId);
-
-    await setDoc(userDocRef, { todos }, { merge: true });
-  } catch (error: unknown) {
-    if (error instanceof Error) console.error('Error saving todos:', error);
-  }
-};
-
-const saveProjects = async (
-  userId: string,
+const addProjects = async (
+  uid: string,
   projects: ProjectDetails[]
 ): Promise<void> => {
-  try {
-    const userDocRef = doc(db, 'users', userId);
+  for (let i = 0; i < projects.length; i += BATCH_LIMIT) {
+    const chunk = projects.slice(i, i + BATCH_LIMIT);
+    const batch = writeBatch(db);
 
-    await setDoc(userDocRef, { projects }, { merge: true });
-  } catch (error: unknown) {
-    if (error instanceof Error) console.error('Error saving projects:', error);
+    chunk.forEach(project => {
+      const { id, ...data } = project;
+      const projectRef = doc(db, 'users', uid, 'projects', id);
+
+      batch.set(projectRef, data);
+    });
+
+    await batch.commit();
   }
 };
 
-const mergeTodos = (
-  localTodos: TodoDetails[],
-  cloudTodos: TodoDetails[]
-): TodoDetails[] => {
-  const todoMap = new Map<string, TodoDetails>();
+const addProject = async (
+  uid: string,
+  project: Omit<ProjectDetails, 'id'>
+): Promise<string> => {
+  const projectsRef = collection(db, 'users', uid, 'projects');
+  const docRef = await addDoc(projectsRef, project);
 
-  cloudTodos.forEach(todo => todoMap.set(todo.id, todo));
-  localTodos.forEach(todo => {
-    const existing = todoMap.get(todo.id);
-
-    if (!existing) todoMap.set(todo.id, todo);
-  });
-
-  return Array.from(todoMap.values());
+  return docRef.id;
 };
 
-const mergeProjects = (
-  localProjects: ProjectDetails[],
-  cloudProjects: ProjectDetails[]
-): ProjectDetails[] => {
-  const projectMap = new Map<string, ProjectDetails>();
+const updateProject = async (
+  uid: string,
+  projectId: string,
+  updates: Partial<Omit<ProjectDetails, 'id'>>
+): Promise<void> => {
+  const projectRef = doc(db, 'users', uid, 'projects', projectId);
 
-  cloudProjects.forEach(project => projectMap.set(project.id, project));
-  localProjects.forEach(project => {
-    const existing = projectMap.get(project.id);
-
-    if (!existing) projectMap.set(project.id, project);
-  });
-
-  return Array.from(projectMap.values());
+  await updateDoc(projectRef, updates);
 };
 
-const syncLocalToFirestore = async (
-  userId: string,
-  localData: UserData
-): Promise<UserData | undefined> => {
-  try {
-    const existingData = await fetchUserData(userId);
+const deleteProject = async (uid: string, projectId: string): Promise<void> => {
+  const batch = writeBatch(db);
+  const projectRef = doc(db, 'users', uid, 'projects', projectId);
 
-    if (!existingData) {
-      await saveUserData(userId, localData);
+  batch.delete(projectRef);
 
-      return localData;
-    }
-    const mergedData: UserData = {
-      // Merge Local & Cloud States
-      todos: mergeTodos(localData.todos, existingData.todos),
-      projects: mergeProjects(localData.projects, existingData.projects)
-    };
+  // Deletes Todos associated with a deleted Project
+  const todosRef = collection(db, 'users', uid, 'todos');
+  const q = query(todosRef, where('project', '==', projectId));
+  const todosSnap = await getDocs(q);
 
-    await saveUserData(userId, mergedData);
+  todosSnap.docs.forEach(d => {
+    batch.delete(d.ref);
+  });
 
-    return mergedData;
-  } catch (error: unknown) {
-    if (error instanceof Error)
-      console.error('Failed to sync Firestore:', error);
+  await batch.commit();
+};
+
+const addTodos = async (uid: string, todos: TodoDetails[]): Promise<void> => {
+  for (let i = 0; i < todos.length; i += BATCH_LIMIT) {
+    const chunk = todos.slice(i, i + BATCH_LIMIT);
+    const batch = writeBatch(db);
+
+    chunk.forEach(todo => {
+      const { id, ...data } = todo;
+      const todoRef = doc(db, 'users', uid, 'todos', id);
+
+      batch.set(todoRef, data);
+    });
+
+    await batch.commit();
   }
+};
+
+const addTodo = async (
+  uid: string,
+  todo: Omit<TodoDetails, 'id'>
+): Promise<string> => {
+  const todosRef = collection(db, 'users', uid, 'todos');
+  const docRef = await addDoc(todosRef, todo);
+
+  return docRef.id;
+};
+
+const updateTodo = async (
+  uid: string,
+  todoId: string,
+  updates: Partial<Omit<TodoDetails, 'id'>>
+): Promise<void> => {
+  const todoRef = doc(db, 'users', uid, 'todos', todoId);
+
+  await updateDoc(todoRef, updates);
+};
+
+const deleteTodo = async (uid: string, todoId: string): Promise<void> => {
+  const todoRef = doc(db, 'users', uid, 'todos', todoId);
+
+  await deleteDoc(todoRef);
 };
 
 export {
-  fetchUserData,
-  saveUserData,
-  saveTodos,
-  saveProjects,
-  syncLocalToFirestore
+  fetchAllData,
+  addProjects,
+  addProject,
+  updateProject,
+  deleteProject,
+  addTodos,
+  addTodo,
+  updateTodo,
+  deleteTodo
 };

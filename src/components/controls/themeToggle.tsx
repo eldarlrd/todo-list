@@ -28,7 +28,7 @@ export const ThemeToggle = ({
     setIsDark(root.classList.contains('dark'));
   };
 
-  // Avoid FOUC
+  // * Avoid FOUC
   useEffect(iconSwitch, []);
 
   const themeToggle = (): void => {

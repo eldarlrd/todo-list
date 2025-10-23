@@ -82,7 +82,7 @@ const SidePanel = ({
     if (windowWidth.current >= 1024) setPanelTabIndex(0);
   }, [setPanelTabIndex]);
 
-  // Sidebar Focus Trap
+  // * Sidebar Focus Trap
   useEffect(() => {
     if (navRef.current)
       setFocusTrap(
