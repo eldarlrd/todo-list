@@ -78,6 +78,25 @@ const SidePanel = ({
   const dispatch = useAppDispatch();
   const { setSelectedProject, addNewProject } = projectActions;
 
+  const handleAddNewProject = ({
+    projectTitle,
+    projectIcon
+  }: {
+    projectTitle?: string;
+    projectIcon: string;
+  }): void => {
+    const id = nanoid();
+
+    dispatch(
+      addNewProject({
+        id,
+        title: projectTitle,
+        iconKey: projectIcon
+      })
+    );
+    dispatch(setSelectedProject(id));
+  };
+
   useEffect(() => {
     if (windowWidth.current >= 1024) setPanelTabIndex(0);
   }, [setPanelTabIndex]);
@@ -146,24 +165,7 @@ const SidePanel = ({
             key='Add Project'
             actionMode='Add'
             setIsVisible={setIsVisible}
-            handleAction={({
-              projectTitle,
-              projectIcon
-            }: {
-              projectTitle?: string;
-              projectIcon: string;
-            }): void => {
-              const id = nanoid();
-
-              dispatch(
-                addNewProject({
-                  id,
-                  title: projectTitle,
-                  iconKey: projectIcon
-                })
-              );
-              dispatch(setSelectedProject(id));
-            }}
+            handleAction={handleAddNewProject}
           />
         }
         setIsVisible={setIsVisible}

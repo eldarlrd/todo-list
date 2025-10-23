@@ -7,7 +7,6 @@ import { authActions } from '@/slices/authSlice.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 import { todoActions } from '@/slices/todoSlice.ts';
 
-// FIXME: Connect the Auth Listener
 export const useAuthListener = (): void => {
   const dispatch = useAppDispatch();
   const { setUser, clearUser } = authActions;

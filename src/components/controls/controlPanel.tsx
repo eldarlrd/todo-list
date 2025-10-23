@@ -16,6 +16,31 @@ export const ControlPanel = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { addNewTodo } = todoActions;
 
+  const handleAddNewTodo = ({
+    project,
+    title,
+    description,
+    dueDate,
+    priority,
+    stage,
+    isDone
+  }: TodoDetails): void => {
+    const id = nanoid();
+
+    dispatch(
+      addNewTodo({
+        id,
+        project,
+        title,
+        description,
+        dueDate,
+        priority,
+        stage,
+        isDone
+      })
+    );
+  };
+
   return (
     <>
       <div
@@ -49,30 +74,7 @@ export const ControlPanel = (): JSX.Element => {
             key='Add Todo'
             actionMode='Add'
             setIsVisible={setIsVisible}
-            handleAction={({
-              project,
-              title,
-              description,
-              dueDate,
-              priority,
-              stage,
-              isDone
-            }: TodoDetails): void => {
-              const id = nanoid();
-
-              dispatch(
-                addNewTodo({
-                  id,
-                  project,
-                  title,
-                  description,
-                  dueDate,
-                  priority,
-                  stage,
-                  isDone
-                })
-              );
-            }}
+            handleAction={handleAddNewTodo}
           />
         }
         setIsVisible={setIsVisible}
