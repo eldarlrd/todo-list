@@ -10,6 +10,7 @@ import {
   writeBatch
 } from 'firebase/firestore/lite';
 
+import { STAGE_OPTIONS } from '@/config/globals.ts';
 import { db } from '@/lib/firebase.ts';
 import { type ProjectDetails } from '@/slices/projectSlice.ts';
 import { type TodoDetails } from '@/slices/todoSlice.ts';
@@ -124,6 +125,20 @@ const addTodo = async (
   return docRef.id;
 };
 
+const checkTodo = async (
+  uid: string,
+  todoId: string,
+  isDone: boolean
+): Promise<void> => {
+  const todoRef = doc(db, 'users', uid, 'todos', todoId);
+  const newStage = isDone ? STAGE_OPTIONS[2] : STAGE_OPTIONS[1];
+
+  await updateDoc(todoRef, {
+    isDone,
+    stage: newStage
+  });
+};
+
 const updateTodo = async (
   uid: string,
   todoId: string,
@@ -148,6 +163,7 @@ export {
   deleteProject,
   addTodos,
   addTodo,
+  checkTodo,
   updateTodo,
   deleteTodo
 };

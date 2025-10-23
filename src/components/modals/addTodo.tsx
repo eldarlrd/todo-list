@@ -1,5 +1,4 @@
 import { formatISO, isToday, isFuture, isValid } from 'date-fns';
-import { nanoid } from 'nanoid';
 import {
   type StateUpdater,
   useState,
@@ -11,10 +10,11 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
-import { VIEW_OPTIONS } from '@/components/controls/viewMenu.tsx';
 import { PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
+import { STAGE_OPTIONS, VIEW_OPTIONS } from '@/config/globals.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
+import { useStateSync } from '@/hooks/useStateSync.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 import { todoActions, type TodoDetails } from '@/slices/todoSlice.ts';
 
@@ -35,8 +35,6 @@ const PRIORITY_OPTIONS: {
     color: 'rose-400'
   }
 ];
-
-const STAGE_OPTIONS: string[] = ['Todo', 'In Progress', 'Done'];
 
 const emptyTodo: TodoDetails = {
   id: '',
@@ -74,9 +72,10 @@ const AddTodo = ({
 }: TodoOptions): JSX.Element => {
   const [todo, setTodo] = useState<TodoDetails>(emptyTodo);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
-  const isModalVisible = useContext<boolean>(IsModalVisible);
+  const isModalVisible = useContext(IsModalVisible);
+  const { createProject } = useStateSync();
 
-  const { setSelectedProject, addNewProject } = projectActions;
+  const { setSelectedProject } = projectActions;
   const { selectedProject } = useAppSelector(state => state.projectReducer);
 
   const dispatch = useAppDispatch();
@@ -104,30 +103,33 @@ const AddTodo = ({
 
   // Handle Editing
   useEffect(() => {
-    if (currentTodo?.title) {
-      setTodo(currentTodo);
-    } else {
-      setTodo(emptyTodo);
-      if (isModalVisible && !selectedProject) {
-        const id = nanoid();
+    const handleEditing = async (): Promise<void> => {
+      try {
+        const id = await createProject({
+          title: 'Default',
+          iconKey: PROJECT_ICONS[0].key
+        });
 
-        dispatch(
-          addNewProject({
-            id,
-            title: 'Default',
-            iconKey: PROJECT_ICONS[0].key
-          })
-        );
         dispatch(setSelectedProject(id));
+      } catch (error: unknown) {
+        if (error instanceof Error)
+          console.error('Failed to add project:', error);
       }
+    };
+
+    if (currentTodo?.title) setTodo(currentTodo);
+    else {
+      setTodo(emptyTodo);
+
+      if (isModalVisible && !selectedProject) void handleEditing();
     }
   }, [
-    isModalVisible,
+    createProject,
     currentTodo,
-    setSelectedProject,
+    dispatch,
+    isModalVisible,
     selectedProject,
-    addNewProject,
-    dispatch
+    setSelectedProject
   ]);
 
   useEffect(() => {
@@ -275,4 +277,4 @@ const AddTodo = ({
   );
 };
 
-export { PRIORITY_OPTIONS, STAGE_OPTIONS, AddTodo };
+export { PRIORITY_OPTIONS, AddTodo };

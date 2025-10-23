@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 import { useCallback } from 'preact/hooks';
 
+import { STAGE_OPTIONS } from '@/config/globals.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import * as fsService from '@/lib/firestore.ts';
 import { type ProjectDetails, projectActions } from '@/slices/projectSlice.ts';
@@ -10,24 +11,41 @@ interface SyncTools {
   createProject: (project: Omit<ProjectDetails, 'id'>) => Promise<string>;
   modifyProject: (project: ProjectDetails) => Promise<void>;
   removeProject: (projectId: string) => Promise<void>;
-  createTodo: (todo: Omit<TodoDetails, 'id'>) => Promise<string | undefined>;
+  createTodo: (todo: Omit<TodoDetails, 'id'>) => Promise<void>;
+  toggleTodo: (todoId: string, isDone: boolean) => Promise<void>;
   modifyTodo: (todo: TodoDetails) => Promise<void>;
   removeTodo: (todoId: string) => Promise<void>;
   syncProjects: (projects: ProjectDetails[]) => Promise<void>;
   syncTodos: (todos: TodoDetails[]) => Promise<void>;
 }
 
+// TODO: Sync on Logout, (create, modify, rm) Proj, rm Todo
 export const useStateSync = (): SyncTools => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(state => state.authReducer);
   const { addNewProject, editProject, deleteProject } = projectActions;
-  const { addNewTodo, editTodo, deleteTodo, deleteProjectTodos } = todoActions;
+  const { addNewTodo, editTodo, checkTodo, deleteTodo, deleteProjectTodos } =
+    todoActions;
 
   const uid = user?.uid;
 
+  const syncProjects = useCallback(
+    async (projects: ProjectDetails[]) => {
+      if (!uid) throw new Error('User not authenticated');
+      await fsService.addProjects(uid, projects);
+    },
+    [uid]
+  );
+
   const createProject = useCallback(
     async (project: Omit<ProjectDetails, 'id'>) => {
-      if (!uid) throw new Error('User not authenticated');
+      if (!uid) {
+        const id = nanoid();
+
+        dispatch(addNewProject({ ...project, id }));
+
+        return id;
+      }
 
       const id = await fsService.addProject(uid, project);
 
@@ -62,6 +80,14 @@ export const useStateSync = (): SyncTools => {
     [uid, dispatch, deleteProject, deleteProjectTodos]
   );
 
+  const syncTodos = useCallback(
+    async (todos: TodoDetails[]) => {
+      if (!uid) throw new Error('User not authenticated');
+      await fsService.addTodos(uid, todos);
+    },
+    [uid]
+  );
+
   const createTodo = useCallback(
     async (todo: Omit<TodoDetails, 'id'>) => {
       if (!uid) {
@@ -75,17 +101,37 @@ export const useStateSync = (): SyncTools => {
       const id = await fsService.addTodo(uid, todo);
 
       dispatch(addNewTodo({ ...todo, id }));
-
-      return id;
     },
     [uid, dispatch, addNewTodo]
   );
 
+  const toggleTodo = useCallback(
+    async (todoId: string, isDone: boolean) => {
+      if (!uid) {
+        dispatch(checkTodo({ id: todoId, isDone }));
+
+        return;
+      }
+      await fsService.checkTodo(uid, todoId, isDone);
+
+      dispatch(checkTodo({ id: todoId, isDone }));
+    },
+    [uid, dispatch, checkTodo]
+  );
+
   const modifyTodo = useCallback(
     async (todo: TodoDetails) => {
-      if (!uid) throw new Error('User not authenticated');
+      if (!uid) {
+        dispatch(editTodo(todo));
 
-      const { id, ...updates } = todo;
+        return;
+      }
+
+      const { id, ...data } = todo;
+      const updates = {
+        ...data,
+        isDone: todo.stage === STAGE_OPTIONS[2]
+      };
 
       await fsService.updateTodo(uid, id, updates);
       dispatch(editTodo(todo));
@@ -103,30 +149,15 @@ export const useStateSync = (): SyncTools => {
     [uid, dispatch, deleteTodo]
   );
 
-  const syncProjects = useCallback(
-    async (projects: ProjectDetails[]) => {
-      if (!uid) throw new Error('User not authenticated');
-      await fsService.addProjects(uid, projects);
-    },
-    [uid]
-  );
-
-  const syncTodos = useCallback(
-    async (todos: TodoDetails[]) => {
-      if (!uid) throw new Error('User not authenticated');
-      await fsService.addTodos(uid, todos);
-    },
-    [uid]
-  );
-
   return {
+    syncProjects,
     createProject,
     modifyProject,
     removeProject,
+    syncTodos,
     createTodo,
+    toggleTodo,
     modifyTodo,
-    removeTodo,
-    syncProjects,
-    syncTodos
+    removeTodo
   };
 };

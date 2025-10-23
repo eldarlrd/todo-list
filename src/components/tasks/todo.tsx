@@ -28,9 +28,9 @@ export const Todo = ({
   setModalContent
 }: TodoProps): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { checkTodo, deleteTodo } = todoActions;
+  const { deleteTodo } = todoActions;
   const [isLoading, setIsLoading] = useState(false);
-  const { modifyTodo } = useStateSync();
+  const { toggleTodo, modifyTodo } = useStateSync();
 
   const { projectList } = useAppSelector(state => state.projectReducer);
   const currProject = projectList.find(p => p.id === project);
@@ -169,7 +169,7 @@ export const Todo = ({
             title='Check Done'
             class='hover:(text-emerald-900, dark:text-sky-400) flex scale-110 items-center gap-1.5 rounded font-medium duration-150'
             onClick={(): void => {
-              dispatch(checkTodo({ id, isDone: !isDone }));
+              void toggleTodo(id, !isDone);
             }}>
             {isDone ?
               <CheckCircle2 aria-label='Check Mark' />

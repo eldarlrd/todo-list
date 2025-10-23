@@ -5,13 +5,10 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { ControlPanel } from '@/components/controls/controlPanel.tsx';
 import { SORT_OPTIONS } from '@/components/controls/sortMenu.tsx';
-import { VIEW_OPTIONS } from '@/components/controls/viewMenu.tsx';
-import {
-  PRIORITY_OPTIONS,
-  STAGE_OPTIONS
-} from '@/components/modals/addTodo.tsx';
+import { PRIORITY_OPTIONS } from '@/components/modals/addTodo.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { Todo } from '@/components/tasks/todo.tsx';
+import { STAGE_OPTIONS, VIEW_OPTIONS } from '@/config/globals.ts';
 import { useAppSelector } from '@/hooks/useAppState.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
 import { type TodoDetails } from '@/slices/todoSlice.ts';
