@@ -88,8 +88,14 @@ const SidePanel = ({
     projectIcon: string;
   }): Promise<void> => {
     try {
+      // Highest order to avoid collisions
+      const maxOrder = projectList.reduce(
+        (max, project) => (project.order > max ? project.order : max),
+        0
+      );
+
       const id = await createProject({
-        order: projectList.length,
+        order: maxOrder + 1,
         title: projectTitle,
         iconKey: projectIcon
       });

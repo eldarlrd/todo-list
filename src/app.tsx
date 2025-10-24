@@ -11,6 +11,7 @@ import { useAuthListener } from '@/hooks/useAuthListener.ts';
     • Add Loaders when Logged
     • Add Toasts
     • Total Refactor
+    • Smoother DnD
 */
 export const App = (): JSX.Element => {
   useAuthListener();

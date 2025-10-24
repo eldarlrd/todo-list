@@ -37,6 +37,7 @@ export const useStateSync = (): SyncTools => {
 
         return;
       }
+
       await fsService.addProjects(uid, projects);
 
       dispatch(setProjects(projects));

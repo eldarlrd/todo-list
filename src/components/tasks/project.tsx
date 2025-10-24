@@ -54,13 +54,11 @@ export const Project = ({
 
   const handleDeleteProject = async (): Promise<void> => {
     try {
+      const cleanProjectList = projectList.filter(p => p.id !== id);
+
       await removeProject(id);
 
-      dispatch(
-        setSelectedProject(
-          projectList[0]?.id !== id ? projectList[0]?.id : projectList[1]?.id
-        )
-      );
+      dispatch(setSelectedProject(cleanProjectList[0].id));
     } catch (error: unknown) {
       if (error instanceof Error)
         console.error('Failed to delete project:', error);

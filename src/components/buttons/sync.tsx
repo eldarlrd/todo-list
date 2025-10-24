@@ -7,7 +7,7 @@ import { taskMerger } from '@/lib/taskMerger.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 import { todoActions } from '@/slices/todoSlice.ts';
 
-export const ResyncButton = (): JSX.Element => {
+export const Sync = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useAppSelector(state => state.authReducer);
 
@@ -20,7 +20,7 @@ export const ResyncButton = (): JSX.Element => {
   const { setProjects, setSelectedProject } = projectActions;
   const { setTodos } = todoActions;
 
-  const handleResync = async (): Promise<void> => {
+  const handleSync = async (): Promise<void> => {
     if (user) {
       try {
         setIsLoading(true);
@@ -43,10 +43,10 @@ export const ResyncButton = (): JSX.Element => {
   return (
     <button
       type='button'
-      title='Resync'
+      title='Sync'
       id='user-sync'
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      onClick={handleResync}
+      onClick={handleSync}
       disabled={isLoading}
       class={`${isLoading ? 'cursor-not-allowed' : ''} hover:(bg-slate-100, active:(bg-slate-50), dark:(bg-slate-800, active:bg-slate-900)) lg:(w-14, px-4) xl:(w-16, px-5, py-2.5) max-h-[3rem] w-12 rounded px-3 py-1.5 leading-4 transition-colors md:py-2`}>
       <RefreshCw

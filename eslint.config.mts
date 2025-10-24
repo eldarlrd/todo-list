@@ -71,7 +71,7 @@ export default tseslint.config({
     'n/no-missing-import': 0,
     'no-unused-vars': 0,
     'no-undef': 0,
-    'prefer-const': 2,
+    'prefer-const': 1,
     'padding-line-between-statements': [1,
       { blankLine: 'always', prev: '*', next: 'return' },
       { blankLine: 'always', prev: ['directive', 'const', 'let', 'var'], next: '*' },

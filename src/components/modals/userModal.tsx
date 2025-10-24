@@ -4,7 +4,7 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
-import { ResyncButton } from '@/components/buttons/resyncButton.tsx';
+import { Sync } from '@/components/buttons/sync.tsx';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { signInWithGoogle, signOut } from '@/lib/auth.ts';
 import { authActions } from '@/slices/authSlice.ts';
@@ -111,7 +111,7 @@ export const UserModal = ({ setIsVisible }: UserControls): JSX.Element => {
             user ? void handleLogout() : void handleLogin()
           }
         />{' '}
-        {user && <ResyncButton />}
+        {user && <Sync />}
       </span>
     </div>
   );
