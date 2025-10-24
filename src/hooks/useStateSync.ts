@@ -19,7 +19,6 @@ interface SyncTools {
   syncTodos: (todos: TodoDetails[]) => Promise<void>;
 }
 
-// TODO: Sync on Logout
 export const useStateSync = (): SyncTools => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(state => state.authReducer);

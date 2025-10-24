@@ -8,6 +8,7 @@ interface DeleteControls {
   setIsVisible: Dispatch<StateUpdater<boolean>>;
   taskTitle: string;
   taskMode: string;
+  isLoading: boolean;
   handleDelete: () => void | Promise<void>;
 }
 
@@ -15,6 +16,7 @@ export const DeleteModal = ({
   setIsVisible,
   taskTitle,
   taskMode,
+  isLoading,
   handleDelete
 }: DeleteControls): JSX.Element => (
   <div class='flex flex-col gap-1.5 text-center break-words select-none xl:text-lg'>
@@ -35,7 +37,7 @@ export const DeleteModal = ({
         id='delete-item'
         action='Delete'
         styleClass='hover:(bg-rose-700, active:bg-rose-600, dark:(bg-rose-700, active:bg-rose-800)) bg-rose-800 dark:bg-rose-600'
-        isDisabled={false}
+        isLoading={isLoading}
         handleConfirm={(): void => {
           void handleDelete();
           setIsVisible(false);

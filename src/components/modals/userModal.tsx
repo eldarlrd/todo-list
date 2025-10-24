@@ -37,6 +37,7 @@ export const UserModal = ({ setIsVisible }: UserControls): JSX.Element => {
   const handleLogout = async (): Promise<void> => {
     try {
       setIsLoading(true);
+
       await signOut();
 
       dispatch(clearUser());

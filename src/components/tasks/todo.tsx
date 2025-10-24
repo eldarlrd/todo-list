@@ -27,7 +27,8 @@ export const Todo = ({
   setIsVisible,
   setModalContent
 }: TodoProps): JSX.Element => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const { toggleTodo, modifyTodo, removeTodo } = useStateSync();
 
   const { projectList } = useAppSelector(state => state.projectReducer);
@@ -42,9 +43,9 @@ export const Todo = ({
     priority,
     stage
   }: TodoDetails): Promise<void> => {
-    setIsLoading(true);
-
     try {
+      setIsEditing(true);
+
       await modifyTodo({
         id,
         project,
@@ -60,7 +61,20 @@ export const Todo = ({
     } catch (error: unknown) {
       if (error instanceof Error) console.error('Failed to edit todo:', error);
     } finally {
-      setIsLoading(false);
+      setIsEditing(false);
+    }
+  };
+
+  const handleDelete = async (): Promise<void> => {
+    try {
+      setIsDeleting(true);
+
+      await removeTodo(id);
+    } catch (error) {
+      if (error instanceof Error)
+        console.error('Failed to delete todo:', error);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -120,7 +134,7 @@ export const Todo = ({
                     key='Edit Todo'
                     actionMode='Edit'
                     setIsVisible={setIsVisible}
-                    isLoading={isLoading}
+                    isLoading={isEditing}
                     handleAction={handleEditTodo}
                     currentTodo={{
                       id,
@@ -151,9 +165,8 @@ export const Todo = ({
                     setIsVisible={setIsVisible}
                     taskTitle={title}
                     taskMode='Todo'
-                    handleDelete={(): void => {
-                      void removeTodo(id);
-                    }}
+                    isLoading={isDeleting}
+                    handleDelete={handleDelete}
                   />
                 );
               }}>

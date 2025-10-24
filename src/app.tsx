@@ -8,7 +8,6 @@ import { useAuthListener } from '@/hooks/useAuthListener.ts';
 
 /*
   TODO: UI Improvements
-    • Add Loaders when Logged
     • Add Toasts
     • Total Refactor
     • Smoother DnD

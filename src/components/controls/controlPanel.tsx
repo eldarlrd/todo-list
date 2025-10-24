@@ -24,9 +24,9 @@ export const ControlPanel = (): JSX.Element => {
     stage,
     isDone
   }: Omit<TodoDetails, 'id'>): Promise<void> => {
-    setIsLoading(true);
-
     try {
+      setIsLoading(true);
+
       await createTodo({
         project,
         title,

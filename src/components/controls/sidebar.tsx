@@ -71,6 +71,7 @@ const SidePanel = ({
 }: DrawerControls): JSX.Element => {
   const { refer, isVisible, setIsVisible } = useVisible(false);
   const [focusTrap, setFocusTrap] = useState<FocusTrap>();
+  const [isLoading, setIsLoading] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const { createProject } = useStateSync();
 
@@ -88,6 +89,8 @@ const SidePanel = ({
     projectIcon: string;
   }): Promise<void> => {
     try {
+      setIsLoading(true);
+
       // Highest order to avoid collisions
       const maxOrder = projectList.reduce(
         (max, project) => (project.order > max ? project.order : max),
@@ -104,6 +107,8 @@ const SidePanel = ({
     } catch (error: unknown) {
       if (error instanceof Error)
         console.error('Failed to add project:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -176,6 +181,7 @@ const SidePanel = ({
             actionMode='Add'
             setIsVisible={setIsVisible}
             handleAction={handleAddNewProject}
+            isLoading={isLoading}
           />
         }
         setIsVisible={setIsVisible}

@@ -1,7 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { PenSquare, Trash2, GripVertical } from 'lucide-preact';
-import { type Dispatch, type StateUpdater } from 'preact/hooks';
+import { type Dispatch, type StateUpdater, useState } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { AddProject, PROJECT_ICONS } from '@/components/modals/addProject.tsx';
@@ -27,6 +27,8 @@ export const Project = ({
 }: ProjectProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const { setSelectedProject } = projectActions;
+  const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const { modifyProject, removeProject } = useStateSync();
   const { projectList, selectedProject } = useAppSelector(
     state => state.projectReducer
@@ -40,6 +42,8 @@ export const Project = ({
     projectIcon: string;
   }): Promise<void> => {
     try {
+      setIsEditing(true);
+
       await modifyProject({
         id,
         order,
@@ -49,11 +53,14 @@ export const Project = ({
     } catch (error: unknown) {
       if (error instanceof Error)
         console.error('Failed to edit project:', error);
+    } finally {
+      setIsEditing(false);
     }
   };
 
   const handleDeleteProject = async (): Promise<void> => {
     try {
+      setIsDeleting(true);
       const cleanProjectList = projectList.filter(p => p.id !== id);
 
       await removeProject(id);
@@ -62,6 +69,8 @@ export const Project = ({
     } catch (error: unknown) {
       if (error instanceof Error)
         console.error('Failed to delete project:', error);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -115,6 +124,7 @@ export const Project = ({
                 handleAction={handleEditProject}
                 currentTitle={title}
                 currentIcon={iconKey}
+                isLoading={isEditing}
               />
             );
           }}>
@@ -134,6 +144,7 @@ export const Project = ({
                 setIsVisible={setIsVisible}
                 taskTitle={title}
                 taskMode='Project'
+                isLoading={isDeleting}
                 handleDelete={handleDeleteProject}
               />
             );

@@ -119,6 +119,7 @@ interface ProjectOptions {
     projectTitle: string;
     projectIcon: string;
   }) => void | Promise<void>;
+  isLoading: boolean;
   currentTitle?: string;
   currentIcon?: string;
 }
@@ -127,6 +128,7 @@ const AddProject = ({
   actionMode,
   setIsVisible,
   handleAction,
+  isLoading,
   currentTitle,
   currentIcon
 }: ProjectOptions): JSX.Element => {
@@ -212,6 +214,7 @@ const AddProject = ({
           action={actionMode}
           styleClass='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) bg-emerald-800 dark:bg-sky-600'
           isDisabled={isDisabled}
+          isLoading={isLoading}
           handleConfirm={(): void => {
             void handleAction({
               projectTitle: projectTitle.trim(),
