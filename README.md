@@ -10,7 +10,6 @@
 > - **[date-fns](https://date-fns.org)**
 > - **[dnd kit](https://dndkit.com)**
 > - **[focus-trap](https://focus-trap.github.io/focus-trap)**
-> - **[useDebounce](https://github.com/xnimorz/use-debounce)**
 > - **[Twind](https://twind.style)**
 > - **[Lucide](https://lucide.dev)**
 > - **[Vitest](https://vitest.dev)**

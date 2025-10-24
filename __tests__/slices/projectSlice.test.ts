@@ -54,6 +54,7 @@ describe('project reducer', () => {
     const addAction = addNewProject(project);
     const addResult = projectReducer(initialState, addAction);
 
+    // Happy Path
     const editedProject = {
       id: projectId,
       title: 'Edited Project',
@@ -63,6 +64,16 @@ describe('project reducer', () => {
     const editResult = projectReducer(addResult, editAction);
 
     expect(editResult.projectList).toContainEqual(editedProject);
+
+    // Sad Path
+    const fakeProject = {
+      title: 'Nonexistent Project',
+      iconKey: PROJECT_ICONS[3].key
+    };
+    const fakeEditAction = editProject(fakeProject);
+    const fakeResult = projectReducer(addResult, fakeEditAction);
+
+    expect(fakeResult.projectList).toContainEqual(project);
   });
 
   it('deletes a project', () => {

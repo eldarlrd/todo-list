@@ -101,6 +101,7 @@ describe('todo reducer', () => {
 
     expect(result.todoList[0].isDone).toBe(false);
 
+    // Happy Path
     const checkedTodo = {
       ...todo,
       isDone: true
@@ -109,17 +110,28 @@ describe('todo reducer', () => {
     const checkedResult = todoReducer(result, checkedAction);
 
     expect(checkedResult.todoList[0].isDone).toBe(true);
+
+    // Sad Path
+    const fakeTodo = {
+      ...todo,
+      id: null,
+      isDone: true
+    };
+    const fakeAction = checkTodo(fakeTodo);
+    const fakeResult = todoReducer(result, fakeAction);
+
+    expect(fakeResult.todoList[0].isDone).not.toBe(true);
   });
 
   it('edits a todo', () => {
     const addAction = addNewTodo(todo);
     const addResult = todoReducer(initialState, addAction);
 
+    // Happy Path
     const editedTodo = {
       id: todoId,
       project: projectId,
       title: 'Edited Todo',
-      description: 'Edit this todo',
       dueDate: tomorrowFormatted,
       priority: 'Medium',
       stage: 'Todo',
@@ -130,15 +142,19 @@ describe('todo reducer', () => {
 
     expect(editResult.todoList).toContainEqual(editedTodo);
 
-    const checkedTodo = {
-      ...editedTodo,
-      stage: 'Done',
-      isDone: true
+    // Sad Path
+    const fakeTodo = {
+      project: projectId,
+      title: 'Fake Todo',
+      dueDate: tomorrowFormatted,
+      priority: 'Medium',
+      stage: 'Todo',
+      isDone: false
     };
-    const checkedAction = editTodo(checkedTodo);
-    const checkedResult = todoReducer(editResult, checkedAction);
+    const fakeAction = editTodo(fakeTodo);
+    const fakeResult = todoReducer(addResult, fakeAction);
 
-    expect(checkedResult.todoList).toContainEqual(checkedTodo);
+    expect(fakeResult.todoList).toContainEqual(todo);
   });
 
   it('deletes a todo', () => {
