@@ -16,7 +16,6 @@ interface SyncTools {
   modifyTodo: (todo: TodoDetails) => Promise<void>;
   removeTodo: (todoId: string) => Promise<void>;
   syncProjects: (projects: ProjectDetails[]) => Promise<void>;
-  syncTodos: (todos: TodoDetails[]) => Promise<void>;
 }
 
 export const useStateSync = (): SyncTools => {
@@ -37,9 +36,8 @@ export const useStateSync = (): SyncTools => {
         return;
       }
 
-      await fsService.addProjects(uid, projects);
-
       dispatch(setProjects(projects));
+      await fsService.addProjects(uid, projects);
     },
     [dispatch, setProjects, uid]
   );
@@ -73,9 +71,8 @@ export const useStateSync = (): SyncTools => {
 
       const { id, ...updates } = project;
 
-      await fsService.updateProject(uid, id, updates);
-
       dispatch(editProject(project));
+      await fsService.updateProject(uid, id, updates);
     },
     [uid, dispatch, editProject]
   );
@@ -89,19 +86,11 @@ export const useStateSync = (): SyncTools => {
         return;
       }
 
-      await fsService.deleteProject(uid, projectId);
       dispatch(deleteProject(projectId));
       dispatch(deleteProjectTodos(projectId));
+      await fsService.deleteProject(uid, projectId);
     },
     [uid, dispatch, deleteProject, deleteProjectTodos]
-  );
-
-  const syncTodos = useCallback(
-    async (todos: TodoDetails[]) => {
-      if (!uid) throw new Error('User not authenticated');
-      await fsService.addTodos(uid, todos);
-    },
-    [uid]
   );
 
   const createTodo = useCallback(
@@ -128,9 +117,9 @@ export const useStateSync = (): SyncTools => {
 
         return;
       }
-      await fsService.checkTodo(uid, todoId, isDone);
 
       dispatch(checkTodo({ id: todoId, isDone }));
+      await fsService.checkTodo(uid, todoId, isDone);
     },
     [uid, dispatch, checkTodo]
   );
@@ -149,8 +138,8 @@ export const useStateSync = (): SyncTools => {
         isDone: todo.stage === STAGE_OPTIONS[2]
       };
 
-      await fsService.updateTodo(uid, id, updates);
       dispatch(editTodo(todo));
+      await fsService.updateTodo(uid, id, updates);
     },
     [uid, dispatch, editTodo]
   );
@@ -163,8 +152,8 @@ export const useStateSync = (): SyncTools => {
         return;
       }
 
-      await fsService.deleteTodo(uid, todoId);
       dispatch(deleteTodo(todoId));
+      await fsService.deleteTodo(uid, todoId);
     },
     [uid, dispatch, deleteTodo]
   );
@@ -174,7 +163,6 @@ export const useStateSync = (): SyncTools => {
     createProject,
     modifyProject,
     removeProject,
-    syncTodos,
     createTodo,
     toggleTodo,
     modifyTodo,

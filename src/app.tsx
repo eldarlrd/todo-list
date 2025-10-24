@@ -10,7 +10,6 @@ import { useAuthListener } from '@/hooks/useAuthListener.ts';
   TODO: UI Improvements
     • Add Toasts
     • Total Refactor
-    • Smoother DnD
 */
 export const App = (): JSX.Element => {
   useAuthListener();
