@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { SORT_OPTIONS } from '@/components/controls/sortMenu.tsx';
-import { STAGE_OPTIONS, VIEW_OPTIONS } from '@/config/globals.ts';
+import { STAGE_OPTIONS, VIEW_OPTIONS } from '@/config/options.ts';
 
 interface TodoDetails {
   id: string;

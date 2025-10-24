@@ -6,8 +6,14 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { AddProject, PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
+import { ERROR_PROJECT_DELETE, ERROR_PROJECT_EDIT } from '@/config/errors.ts';
+import {
+  SUCCESS_PROJECT_DELETE,
+  SUCCESS_PROJECT_EDIT
+} from '@/config/successes.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { useStateSync } from '@/hooks/useStateSync.ts';
+import { errorToast, successToast } from '@/lib/toast.ts';
 import { projectActions, type ProjectDetails } from '@/slices/projectSlice.ts';
 
 interface ProjectProps extends ProjectDetails {
@@ -50,9 +56,13 @@ export const Project = ({
         title: projectTitle,
         iconKey: projectIcon
       });
+
+      successToast(SUCCESS_PROJECT_EDIT);
     } catch (error: unknown) {
-      if (error instanceof Error)
-        console.error('Failed to edit project:', error);
+      if (error instanceof Error) {
+        errorToast(ERROR_PROJECT_EDIT);
+        console.error(ERROR_PROJECT_EDIT, error);
+      }
     } finally {
       setIsEditing(false);
     }
@@ -61,13 +71,19 @@ export const Project = ({
   const handleDeleteProject = async (): Promise<void> => {
     try {
       setIsDeleting(true);
-      const cleanProjectList = projectList.filter(p => p.id !== id);
+      const cleanProjectList = projectList.filter(p => p.id !== id) as
+        | ProjectDetails[]
+        | [null];
 
-      dispatch(setSelectedProject(cleanProjectList[0].id));
+      dispatch(setSelectedProject(cleanProjectList[0]?.id));
       await removeProject(id);
+
+      successToast(SUCCESS_PROJECT_DELETE);
     } catch (error: unknown) {
-      if (error instanceof Error)
-        console.error('Failed to delete project:', error);
+      if (error instanceof Error) {
+        errorToast(ERROR_PROJECT_DELETE);
+        console.error(ERROR_PROJECT_DELETE, error);
+      }
     } finally {
       setIsDeleting(false);
     }

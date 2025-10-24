@@ -25,6 +25,7 @@ import { Provider } from 'react-redux';
 import config from '../twind.config.mts';
 
 import { App } from '@/app.tsx';
+import { ERROR_SERVICE_WORKER } from '@/config/errors.ts';
 import { store } from '@/store.ts';
 
 install(config, import.meta.env.PROD);
@@ -44,7 +45,7 @@ const registerSW = (): void => {
         })
         .catch((error: unknown) => {
           if (error instanceof Error)
-            console.error('Failed to register a service worker:', error);
+            console.error(ERROR_SERVICE_WORKER, error);
         });
     });
 };

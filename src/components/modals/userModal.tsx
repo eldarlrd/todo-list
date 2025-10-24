@@ -5,8 +5,11 @@ import { type JSX } from 'preact/jsx-runtime';
 import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
 import { Sync } from '@/components/buttons/sync.tsx';
+import { ERROR_LOGIN, ERROR_LOGOUT } from '@/config/errors.ts';
+import { SUCCESS_LOGIN, SUCCESS_LOGOUT } from '@/config/successes.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { signInWithGoogle, signOut } from '@/lib/auth.ts';
+import { errorToast, successToast } from '@/lib/toast.ts';
 import { authActions } from '@/slices/authSlice.ts';
 
 interface UserControls {
@@ -27,8 +30,13 @@ export const UserModal = ({ setIsVisible }: UserControls): JSX.Element => {
 
       dispatch(setUser({ displayName, photoURL, email, uid }));
       setIsVisible(false);
+
+      successToast(SUCCESS_LOGIN);
     } catch (error: unknown) {
-      if (error instanceof Error) console.error('Failed to login:', error);
+      if (error instanceof Error) {
+        errorToast(ERROR_LOGIN);
+        console.error(ERROR_LOGIN, error);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -42,8 +50,13 @@ export const UserModal = ({ setIsVisible }: UserControls): JSX.Element => {
 
       dispatch(clearUser());
       setIsVisible(false);
+
+      successToast(SUCCESS_LOGOUT);
     } catch (error: unknown) {
-      if (error instanceof Error) console.error('Failed to logout:', error);
+      if (error instanceof Error) {
+        errorToast(ERROR_LOGOUT);
+        console.error(ERROR_LOGOUT, error);
+      }
     } finally {
       setIsLoading(false);
     }

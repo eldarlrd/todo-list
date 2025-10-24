@@ -12,9 +12,12 @@ import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
 import { PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
-import { STAGE_OPTIONS, VIEW_OPTIONS } from '@/config/globals.ts';
+import { ERROR_PROJECT_ADD } from '@/config/errors.ts';
+import { STAGE_OPTIONS, VIEW_OPTIONS } from '@/config/options.ts';
+import { SUCCESS_PROJECT_ADD } from '@/config/successes.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { useStateSync } from '@/hooks/useStateSync.ts';
+import { errorToast, successToast } from '@/lib/toast.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 import { todoActions, type TodoDetails } from '@/slices/todoSlice.ts';
 
@@ -112,9 +115,13 @@ const AddTodo = ({
         });
 
         dispatch(setSelectedProject(id));
+
+        successToast(SUCCESS_PROJECT_ADD);
       } catch (error: unknown) {
-        if (error instanceof Error)
-          console.error('Failed to add project:', error);
+        if (error instanceof Error) {
+          errorToast(ERROR_PROJECT_ADD);
+          console.error(ERROR_PROJECT_ADD, error);
+        }
       }
     };
 

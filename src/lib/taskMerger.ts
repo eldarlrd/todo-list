@@ -58,8 +58,7 @@ export const taskMerger = async ({
 
     return [reorderedProjects, mergedTodos];
   } catch (error: unknown) {
-    if (error instanceof Error)
-      console.error('Failed to sync user data:', error);
+    if (error instanceof Error) throw error;
 
     return [];
   }

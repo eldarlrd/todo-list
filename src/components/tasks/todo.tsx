@@ -6,8 +6,11 @@ import { type JSX } from 'preact/jsx-runtime';
 import { PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { AddTodo, PRIORITY_OPTIONS } from '@/components/modals/addTodo.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
+import { ERROR_TODO_DELETE, ERROR_TODO_EDIT } from '@/config/errors.ts';
+import { SUCCESS_TODO_DELETE, SUCCESS_TODO_EDIT } from '@/config/successes.ts';
 import { useAppSelector } from '@/hooks/useAppState.ts';
 import { useStateSync } from '@/hooks/useStateSync.ts';
+import { errorToast, successToast } from '@/lib/toast.ts';
 import { type TodoDetails } from '@/slices/todoSlice.ts';
 
 interface TodoProps extends TodoDetails {
@@ -58,8 +61,13 @@ export const Todo = ({
       });
 
       setIsVisible(false);
+
+      successToast(SUCCESS_TODO_EDIT);
     } catch (error: unknown) {
-      if (error instanceof Error) console.error('Failed to edit todo:', error);
+      if (error instanceof Error) {
+        errorToast(ERROR_TODO_EDIT);
+        console.error(ERROR_TODO_EDIT, error);
+      }
     } finally {
       setIsEditing(false);
     }
@@ -70,9 +78,13 @@ export const Todo = ({
       setIsDeleting(true);
 
       await removeTodo(id);
+
+      successToast(SUCCESS_TODO_DELETE);
     } catch (error) {
-      if (error instanceof Error)
-        console.error('Failed to delete todo:', error);
+      if (error instanceof Error) {
+        errorToast(ERROR_TODO_DELETE);
+        console.error(ERROR_TODO_DELETE, error);
+      }
     } finally {
       setIsDeleting(false);
     }
@@ -102,7 +114,7 @@ export const Todo = ({
           </p>
           <p>{description}</p>
           <p class='mt-1 -mb-1'>
-            {format(todoDueDate, 'eee, d MMM ’yy')}
+            {format(todoDueDate, 'eee., d MMM. ’yy')}
             {isTomorrow(todoDueDate) ?
               ' • Tomorrow'
             : isToday(todoDueDate) ?

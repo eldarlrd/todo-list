@@ -6,8 +6,11 @@ import { SortMenu } from '@/components/controls/sortMenu.tsx';
 import { ViewMenu } from '@/components/controls/viewMenu.tsx';
 import { AddTodo } from '@/components/modals/addTodo.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
+import { ERROR_TODO_ADD } from '@/config/errors.ts';
+import { SUCCESS_TODO_ADD } from '@/config/successes.ts';
 import { useStateSync } from '@/hooks/useStateSync.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
+import { errorToast, successToast } from '@/lib/toast.ts';
 import { type TodoDetails } from '@/slices/todoSlice.ts';
 
 export const ControlPanel = (): JSX.Element => {
@@ -38,8 +41,13 @@ export const ControlPanel = (): JSX.Element => {
       });
 
       setIsVisible(false);
+
+      successToast(SUCCESS_TODO_ADD);
     } catch (error: unknown) {
-      if (error instanceof Error) console.error('Failed to add todo:', error);
+      if (error instanceof Error) {
+        errorToast(ERROR_TODO_ADD);
+        console.error(ERROR_TODO_ADD, error);
+      }
     } finally {
       setIsLoading(false);
     }

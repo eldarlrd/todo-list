@@ -1,7 +1,7 @@
 import { Eye } from 'lucide-preact';
 import { type JSX } from 'preact/jsx-runtime';
 
-import { VIEW_OPTIONS } from '@/config/globals.ts';
+import { VIEW_OPTIONS } from '@/config/options.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
 import { todoActions } from '@/slices/todoSlice.ts';

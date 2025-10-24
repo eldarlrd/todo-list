@@ -2,11 +2,12 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { Footer } from '@/components/banners/footer.tsx';
 import { Header } from '@/components/banners/header.tsx';
+import { Toast } from '@/components/banners/toast.tsx';
 import { Sidebar } from '@/components/controls/sidebar.tsx';
 import { TodoList } from '@/components/lists/todoList.tsx';
 import { useAuthListener } from '@/hooks/useAuthListener.ts';
 
-// TODO: Add Toasts & Total Refactor
+// TODO: Total Refactor
 export const App = (): JSX.Element => {
   useAuthListener();
 
@@ -16,6 +17,7 @@ export const App = (): JSX.Element => {
       class='font-main dark:(bg-slate-900, accent-sky-600, selection:bg-sky-600) flex min-h-[100svh] flex-col justify-between bg-slate-50 accent-emerald-400 selection:bg-emerald-400'>
       <Header />
       <main class='flex max-h-screen grow'>
+        <Toast />
         <Sidebar />
         <TodoList />
       </main>

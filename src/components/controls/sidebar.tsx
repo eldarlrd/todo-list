@@ -15,9 +15,12 @@ import { UserAccount } from '@/components/controls/userAccount.tsx';
 import { ProjectList } from '@/components/lists/projectList.tsx';
 import { AddProject } from '@/components/modals/addProject.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
+import { ERROR_PROJECT_ADD } from '@/config/errors.ts';
+import { SUCCESS_PROJECT_ADD } from '@/config/successes.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { useStateSync } from '@/hooks/useStateSync.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
+import { errorToast, successToast } from '@/lib/toast.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 
 interface DrawerControls {
@@ -104,9 +107,13 @@ const SidePanel = ({
       });
 
       dispatch(setSelectedProject(id));
+
+      successToast(SUCCESS_PROJECT_ADD);
     } catch (error: unknown) {
-      if (error instanceof Error)
-        console.error('Failed to add project:', error);
+      if (error instanceof Error) {
+        errorToast(ERROR_PROJECT_ADD);
+        console.error(ERROR_PROJECT_ADD, error);
+      }
     } finally {
       setIsLoading(false);
     }

@@ -2,8 +2,11 @@ import { RefreshCw } from 'lucide-preact';
 import { useState } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
+import { ERROR_SYNC } from '@/config/errors.ts';
+import { SUCCESS_SYNC } from '@/config/successes.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { taskMerger } from '@/lib/taskMerger.ts';
+import { errorToast, successToast } from '@/lib/toast.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 import { todoActions } from '@/slices/todoSlice.ts';
 
@@ -34,6 +37,13 @@ export const Sync = (): JSX.Element => {
           dispatch(setSelectedProject(mergedProjects[0]?.id));
         dispatch(setProjects(mergedProjects));
         dispatch(setTodos(mergedTodos));
+
+        successToast(SUCCESS_SYNC);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          errorToast(ERROR_SYNC);
+          console.error(ERROR_SYNC, error);
+        }
       } finally {
         setIsLoading(false);
       }

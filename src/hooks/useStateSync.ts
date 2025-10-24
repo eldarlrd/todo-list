@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import { useCallback } from 'preact/hooks';
 
-import { STAGE_OPTIONS } from '@/config/globals.ts';
+import { STAGE_OPTIONS } from '@/config/options.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import * as fsService from '@/lib/firestore.ts';
 import { type ProjectDetails, projectActions } from '@/slices/projectSlice.ts';

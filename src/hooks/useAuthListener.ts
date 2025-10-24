@@ -1,9 +1,12 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useRef } from 'preact/hooks';
 
+import { ERROR_SYNC } from '@/config/errors.ts';
+import { SUCCESS_SYNC } from '@/config/successes.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { auth } from '@/lib/firebase.ts';
 import { taskMerger } from '@/lib/taskMerger.ts';
+import { errorToast, successToast } from '@/lib/toast.ts';
 import { authActions } from '@/slices/authSlice.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 import { todoActions } from '@/slices/todoSlice.ts';
@@ -40,8 +43,13 @@ export const useAuthListener = (): void => {
             dispatch(setSelectedProject(mergedProjects[0]?.id));
           dispatch(setProjects(mergedProjects));
           dispatch(setTodos(mergedTodos));
+
+          successToast(SUCCESS_SYNC);
         } catch (error: unknown) {
-          if (error instanceof Error) throw error;
+          if (error instanceof Error) {
+            errorToast(ERROR_SYNC);
+            console.error(ERROR_SYNC, error);
+          }
         }
       } else {
         dispatch(clearUser());
