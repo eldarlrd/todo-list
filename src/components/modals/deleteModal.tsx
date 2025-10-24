@@ -8,7 +8,7 @@ interface DeleteControls {
   setIsVisible: Dispatch<StateUpdater<boolean>>;
   taskTitle: string;
   taskMode: string;
-  handleDelete: () => void;
+  handleDelete: () => void | Promise<void>;
 }
 
 export const DeleteModal = ({
@@ -37,7 +37,7 @@ export const DeleteModal = ({
         styleClass='hover:(bg-rose-700, active:bg-rose-600, dark:(bg-rose-700, active:bg-rose-800)) bg-rose-800 dark:bg-rose-600'
         isDisabled={false}
         handleConfirm={(): void => {
-          handleDelete();
+          void handleDelete();
           setIsVisible(false);
         }}
       />

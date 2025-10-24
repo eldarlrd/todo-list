@@ -7,7 +7,7 @@ import { taskMerger } from '@/lib/taskMerger.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 import { todoActions } from '@/slices/todoSlice.ts';
 
-export const RefreshButton = (): JSX.Element => {
+export const ResyncButton = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useAppSelector(state => state.authReducer);
 
@@ -17,10 +17,10 @@ export const RefreshButton = (): JSX.Element => {
   const { todoList: localTodos } = useAppSelector(state => state.todoReducer);
   const dispatch = useAppDispatch();
 
-  const { setProjects } = projectActions;
+  const { setProjects, setSelectedProject } = projectActions;
   const { setTodos } = todoActions;
 
-  const handleRefresh = async (): Promise<void> => {
+  const handleResync = async (): Promise<void> => {
     if (user) {
       try {
         setIsLoading(true);
@@ -30,6 +30,7 @@ export const RefreshButton = (): JSX.Element => {
           localTodos
         });
 
+        dispatch(setSelectedProject(mergedProjects[0]?.id));
         dispatch(setProjects(mergedProjects));
         dispatch(setTodos(mergedTodos));
       } finally {
@@ -41,11 +42,12 @@ export const RefreshButton = (): JSX.Element => {
   return (
     <button
       type='button'
-      title='Refresh'
+      title='Resync'
       id='user-sync'
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      onClick={handleRefresh}
-      class='hover:(bg-slate-100, active:(bg-slate-50), dark:(bg-slate-800, active:bg-slate-900)) lg:(w-14, px-4) xl:(w-16, px-5, py-2.5) max-h-[3rem] w-12 rounded px-3 py-1.5 leading-4 transition-colors md:py-2'>
+      onClick={handleResync}
+      disabled={isLoading}
+      class={`${isLoading ? 'cursor-not-allowed' : ''} hover:(bg-slate-100, active:(bg-slate-50), dark:(bg-slate-800, active:bg-slate-900)) lg:(w-14, px-4) xl:(w-16, px-5, py-2.5) max-h-[3rem] w-12 rounded px-3 py-1.5 leading-4 transition-colors md:py-2`}>
       <RefreshCw
         aria-label='Refresh'
         strokeWidth='2'

@@ -19,11 +19,12 @@ interface SyncTools {
   syncTodos: (todos: TodoDetails[]) => Promise<void>;
 }
 
-// TODO: Sync on Logout, (create, modify, rm) Proj, rm Todo
+// TODO: Sync on Logout
 export const useStateSync = (): SyncTools => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(state => state.authReducer);
-  const { addNewProject, editProject, deleteProject } = projectActions;
+  const { setProjects, addNewProject, editProject, deleteProject } =
+    projectActions;
   const { addNewTodo, editTodo, checkTodo, deleteTodo, deleteProjectTodos } =
     todoActions;
 
@@ -31,10 +32,16 @@ export const useStateSync = (): SyncTools => {
 
   const syncProjects = useCallback(
     async (projects: ProjectDetails[]) => {
-      if (!uid) throw new Error('User not authenticated');
+      if (!uid) {
+        dispatch(setProjects(projects));
+
+        return;
+      }
       await fsService.addProjects(uid, projects);
+
+      dispatch(setProjects(projects));
     },
-    [uid]
+    [dispatch, setProjects, uid]
   );
 
   const createProject = useCallback(
@@ -58,7 +65,11 @@ export const useStateSync = (): SyncTools => {
 
   const modifyProject = useCallback(
     async (project: ProjectDetails) => {
-      if (!uid) throw new Error('User not authenticated');
+      if (!uid) {
+        dispatch(editProject(project));
+
+        return;
+      }
 
       const { id, ...updates } = project;
 
@@ -71,7 +82,12 @@ export const useStateSync = (): SyncTools => {
 
   const removeProject = useCallback(
     async (projectId: string) => {
-      if (!uid) throw new Error('User not authenticated');
+      if (!uid) {
+        dispatch(deleteProject(projectId));
+        dispatch(deleteProjectTodos(projectId));
+
+        return;
+      }
 
       await fsService.deleteProject(uid, projectId);
       dispatch(deleteProject(projectId));
@@ -141,7 +157,11 @@ export const useStateSync = (): SyncTools => {
 
   const removeTodo = useCallback(
     async (todoId: string) => {
-      if (!uid) throw new Error('User not authenticated');
+      if (!uid) {
+        dispatch(deleteTodo(todoId));
+
+        return;
+      }
 
       await fsService.deleteTodo(uid, todoId);
       dispatch(deleteTodo(todoId));

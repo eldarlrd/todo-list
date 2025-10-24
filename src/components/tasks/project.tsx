@@ -7,8 +7,8 @@ import { type JSX } from 'preact/jsx-runtime';
 import { AddProject, PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
+import { useStateSync } from '@/hooks/useStateSync.ts';
 import { projectActions, type ProjectDetails } from '@/slices/projectSlice.ts';
-import { todoActions } from '@/slices/todoSlice.ts';
 
 interface ProjectProps extends ProjectDetails {
   panelTabIndex?: number;
@@ -25,11 +25,45 @@ export const Project = ({
   setModalContent
 }: ProjectProps): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { deleteProjectTodos } = todoActions;
-  const { setSelectedProject, editProject, deleteProject } = projectActions;
+  const { setSelectedProject } = projectActions;
+  const { modifyProject, removeProject } = useStateSync();
   const { projectList, selectedProject } = useAppSelector(
     state => state.projectReducer
   );
+
+  const handleEditProject = async ({
+    projectTitle,
+    projectIcon
+  }: {
+    projectTitle: string;
+    projectIcon: string;
+  }): Promise<void> => {
+    try {
+      await modifyProject({
+        id,
+        title: projectTitle,
+        iconKey: projectIcon
+      });
+    } catch (error: unknown) {
+      if (error instanceof Error)
+        console.error('Failed to edit project:', error);
+    }
+  };
+
+  const handleDeleteProject = async (): Promise<void> => {
+    try {
+      await removeProject(id);
+
+      dispatch(
+        setSelectedProject(
+          projectList[0]?.id !== id ? projectList[0]?.id : projectList[1]?.id
+        )
+      );
+    } catch (error: unknown) {
+      if (error instanceof Error)
+        console.error('Failed to delete project:', error);
+    }
+  };
 
   // Drag & Drop Movement
   const { setNodeRef, listeners, transition, transform, isDragging } =
@@ -78,21 +112,7 @@ export const Project = ({
                 key='Edit Project'
                 actionMode='Edit'
                 setIsVisible={setIsVisible}
-                handleAction={({
-                  projectTitle,
-                  projectIcon
-                }: {
-                  projectTitle?: string;
-                  projectIcon: string;
-                }): void => {
-                  dispatch(
-                    editProject({
-                      id,
-                      title: projectTitle,
-                      iconKey: projectIcon
-                    })
-                  );
-                }}
+                handleAction={handleEditProject}
                 currentTitle={title}
                 currentIcon={iconKey}
               />
@@ -114,17 +134,7 @@ export const Project = ({
                 setIsVisible={setIsVisible}
                 taskTitle={title}
                 taskMode='Project'
-                handleDelete={(): void => {
-                  dispatch(deleteProject(id));
-                  dispatch(deleteProjectTodos(id));
-                  dispatch(
-                    setSelectedProject(
-                      projectList[0]?.id !== id ?
-                        projectList[0]?.id
-                      : projectList[1]?.id
-                    )
-                  );
-                }}
+                handleDelete={handleDeleteProject}
               />
             );
           }}>

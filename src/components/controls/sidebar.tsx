@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/named
 import { type FocusTrap, createFocusTrap } from 'focus-trap';
 import { Menu, Plus, X } from 'lucide-preact';
-import { nanoid } from 'nanoid';
 import {
   type StateUpdater,
   useState,
@@ -17,6 +16,7 @@ import { ProjectList } from '@/components/lists/projectList.tsx';
 import { AddProject } from '@/components/modals/addProject.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { useAppDispatch } from '@/hooks/useAppState.ts';
+import { useStateSync } from '@/hooks/useStateSync.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 
@@ -72,29 +72,31 @@ const SidePanel = ({
   const { refer, isVisible, setIsVisible } = useVisible(false);
   const [focusTrap, setFocusTrap] = useState<FocusTrap>();
   const navRef = useRef<HTMLDivElement>(null);
+  const { createProject } = useStateSync();
 
   const windowWidth = useRef(window.innerWidth);
 
   const dispatch = useAppDispatch();
-  const { setSelectedProject, addNewProject } = projectActions;
+  const { setSelectedProject } = projectActions;
 
-  const handleAddNewProject = ({
+  const handleAddNewProject = async ({
     projectTitle,
     projectIcon
   }: {
-    projectTitle?: string;
+    projectTitle: string;
     projectIcon: string;
-  }): void => {
-    const id = nanoid();
-
-    dispatch(
-      addNewProject({
-        id,
+  }): Promise<void> => {
+    try {
+      const id = await createProject({
         title: projectTitle,
         iconKey: projectIcon
-      })
-    );
-    dispatch(setSelectedProject(id));
+      });
+
+      dispatch(setSelectedProject(id));
+    } catch (error: unknown) {
+      if (error instanceof Error)
+        console.error('Failed to add project:', error);
+    }
   };
 
   useEffect(() => {
@@ -177,8 +179,8 @@ const SidePanel = ({
 };
 
 export const Sidebar = (): JSX.Element => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
-  const [panelTabIndex, setPanelTabIndex] = useState<number>(-1);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [panelTabIndex, setPanelTabIndex] = useState(-1);
 
   return (
     <>

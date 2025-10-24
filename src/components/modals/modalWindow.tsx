@@ -10,7 +10,7 @@ import {
 } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
-const IsModalVisible = createContext<boolean>(false);
+const IsModalVisible = createContext(false);
 
 interface ModalControls {
   modalContent: JSX.Element | undefined;

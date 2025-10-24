@@ -4,6 +4,7 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  orderBy,
   query,
   updateDoc,
   where,
@@ -24,8 +25,10 @@ const fetchAllData = async (
   const projectsRef = collection(db, 'users', uid, 'projects');
   const todosRef = collection(db, 'users', uid, 'todos');
 
+  const projectsQuery = query(projectsRef, orderBy('order', 'asc'));
+
   const [projectsSnap, todosSnap] = await Promise.all([
-    getDocs(projectsRef),
+    getDocs(projectsQuery),
     getDocs(todosRef)
   ]);
 

@@ -16,7 +16,7 @@ export const useAuthListener = (): void => {
   const dispatch = useAppDispatch();
 
   const { clearUser } = authActions;
-  const { setProjects } = projectActions;
+  const { setProjects, setSelectedProject } = projectActions;
   const { setTodos } = todoActions;
   const hasSynced = useRef(false);
 
@@ -36,6 +36,7 @@ export const useAuthListener = (): void => {
             localTodos
           });
 
+          dispatch(setSelectedProject(mergedProjects[0]?.id));
           dispatch(setProjects(mergedProjects));
           dispatch(setTodos(mergedTodos));
         } catch (error: unknown) {
@@ -50,5 +51,13 @@ export const useAuthListener = (): void => {
     return (): void => {
       unsubscribe();
     };
-  }, [dispatch, localProjects, localTodos, setProjects, setTodos, clearUser]);
+  }, [
+    dispatch,
+    localProjects,
+    localTodos,
+    setProjects,
+    setTodos,
+    clearUser,
+    setSelectedProject
+  ]);
 };

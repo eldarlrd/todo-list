@@ -14,7 +14,7 @@ export const taskMerger = async ({
   uid,
   localProjects,
   localTodos
-}: MergerProps): Promise<(ProjectDetails[] | TodoDetails[])[]> => {
+}: MergerProps): Promise<(ProjectDetails[] | TodoDetails[] | [null])[]> => {
   try {
     const { projects: remoteProjects, todos: remoteTodos } =
       await fetchAllData(uid);
@@ -22,7 +22,7 @@ export const taskMerger = async ({
     const remoteProjectMap = new Map(remoteProjects.map(p => [p.id, p]));
     const remoteTodoMap = new Map(remoteTodos.map(t => [t.id, t]));
 
-    const mergedProjects: ProjectDetails[] = [...remoteProjects];
+    const mergedProjects = [...remoteProjects];
 
     localProjects.forEach(localProject => {
       if (!remoteProjectMap.has(localProject.id)) {
@@ -30,7 +30,7 @@ export const taskMerger = async ({
       }
     });
 
-    const mergedTodos: TodoDetails[] = [...remoteTodos];
+    const mergedTodos = [...remoteTodos];
 
     localTodos.forEach(localTodo => {
       if (!remoteTodoMap.has(localTodo.id)) {

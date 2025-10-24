@@ -13,9 +13,10 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { Project } from '@/components/tasks/project.tsx';
-import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
+import { useAppSelector } from '@/hooks/useAppState.ts';
+import { useStateSync } from '@/hooks/useStateSync.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
-import { projectActions } from '@/slices/projectSlice.ts';
+import { type ProjectDetails } from '@/slices/projectSlice.ts';
 
 export const ProjectList = ({
   panelTabIndex
@@ -24,10 +25,17 @@ export const ProjectList = ({
 }): JSX.Element => {
   const { refer, isVisible, setIsVisible } = useVisible(false);
   const [modalContent, setModalContent] = useState<JSX.Element>();
-
-  const dispatch = useAppDispatch();
-  const { setProjects } = projectActions;
   const { projectList } = useAppSelector(state => state.projectReducer);
+  const { syncProjects } = useStateSync();
+
+  const handleMove = async (projects: ProjectDetails[]): Promise<void> => {
+    try {
+      await syncProjects(projects);
+    } catch (error: unknown) {
+      if (error instanceof Error)
+        console.error('Failed to sort projects:', error);
+    }
+  };
 
   // Drag & Drop Sorting
   const onDragEnd = (e: DragEndEvent): void => {
@@ -41,7 +49,7 @@ export const ProjectList = ({
         project => project.id === over?.id
       );
 
-      dispatch(setProjects(arrayMove(projectList, prevIndex, newIndex)));
+      void handleMove(arrayMove(projectList, prevIndex, newIndex));
     }
   };
 

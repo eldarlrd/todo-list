@@ -6,9 +6,9 @@ import { type JSX } from 'preact/jsx-runtime';
 import { PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { AddTodo, PRIORITY_OPTIONS } from '@/components/modals/addTodo.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
-import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
+import { useAppSelector } from '@/hooks/useAppState.ts';
 import { useStateSync } from '@/hooks/useStateSync.ts';
-import { todoActions, type TodoDetails } from '@/slices/todoSlice.ts';
+import { type TodoDetails } from '@/slices/todoSlice.ts';
 
 interface TodoProps extends TodoDetails {
   setIsVisible: Dispatch<StateUpdater<boolean>>;
@@ -27,10 +27,8 @@ export const Todo = ({
   setIsVisible,
   setModalContent
 }: TodoProps): JSX.Element => {
-  const dispatch = useAppDispatch();
-  const { deleteTodo } = todoActions;
   const [isLoading, setIsLoading] = useState(false);
-  const { toggleTodo, modifyTodo } = useStateSync();
+  const { toggleTodo, modifyTodo, removeTodo } = useStateSync();
 
   const { projectList } = useAppSelector(state => state.projectReducer);
   const currProject = projectList.find(p => p.id === project);
@@ -154,7 +152,7 @@ export const Todo = ({
                     taskTitle={title}
                     taskMode='Todo'
                     handleDelete={(): void => {
-                      dispatch(deleteTodo(id));
+                      void removeTodo(id);
                     }}
                   />
                 );

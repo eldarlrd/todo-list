@@ -6,9 +6,12 @@ import { Sidebar } from '@/components/controls/sidebar.tsx';
 import { TodoList } from '@/components/lists/todoList.tsx';
 import { useAuthListener } from '@/hooks/useAuthListener.ts';
 
-// TODO: UI Improvements
-//  • Add Toasts
-//  • Add Todo Loader when Logged
+/*
+  TODO: UI Improvements
+    • Add Loaders when Logged
+    • Add Toasts
+    • Total Refactor
+*/
 export const App = (): JSX.Element => {
   useAuthListener();
 

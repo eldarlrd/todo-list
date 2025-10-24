@@ -116,9 +116,9 @@ interface ProjectOptions {
     projectTitle,
     projectIcon
   }: {
-    projectTitle?: string;
+    projectTitle: string;
     projectIcon: string;
-  }) => void;
+  }) => void | Promise<void>;
   currentTitle?: string;
   currentIcon?: string;
 }
@@ -130,10 +130,10 @@ const AddProject = ({
   currentTitle,
   currentIcon
 }: ProjectOptions): JSX.Element => {
-  const [projectTitle, setProjectTitle] = useState<string>();
-  const [projectIcon, setProjectIcon] = useState<string>(PROJECT_ICONS[0].key);
-  const [isDisabled, setIsDisabled] = useState<boolean>(true);
-  const isModalVisible = useContext<boolean>(IsModalVisible);
+  const [projectTitle, setProjectTitle] = useState('');
+  const [projectIcon, setProjectIcon] = useState(PROJECT_ICONS[0].key);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const isModalVisible = useContext(IsModalVisible);
 
   // Handle Editing
   useEffect(() => {
@@ -147,7 +147,7 @@ const AddProject = ({
   }, [isModalVisible, currentIcon, currentTitle]);
 
   useEffect(() => {
-    setIsDisabled(!projectTitle?.trim().length);
+    setIsDisabled(!projectTitle.trim().length);
   }, [projectTitle]);
 
   return (
@@ -213,7 +213,10 @@ const AddProject = ({
           styleClass='hover:(bg-emerald-700, active:bg-emerald-600, dark:(bg-sky-700, active:bg-sky-800)) bg-emerald-800 dark:bg-sky-600'
           isDisabled={isDisabled}
           handleConfirm={(): void => {
-            handleAction({ projectTitle: projectTitle?.trim(), projectIcon });
+            void handleAction({
+              projectTitle: projectTitle.trim(),
+              projectIcon
+            });
             setIsVisible(false);
           }}
         />

@@ -4,7 +4,7 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
-import { RefreshButton } from '@/components/buttons/refreshButton.tsx';
+import { ResyncButton } from '@/components/buttons/resyncButton.tsx';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { signInWithGoogle, signOut } from '@/lib/auth.ts';
 import { authActions } from '@/slices/authSlice.ts';
@@ -102,7 +102,6 @@ export const UserModal = ({ setIsVisible }: UserControls): JSX.Element => {
             setIsVisible(false);
           }}
         />
-        {user && <RefreshButton />}
         <ConfirmButton
           id='user-action'
           action={user ? 'Logout' : 'Login'}
@@ -111,7 +110,8 @@ export const UserModal = ({ setIsVisible }: UserControls): JSX.Element => {
           handleConfirm={() =>
             user ? void handleLogout() : void handleLogin()
           }
-        />
+        />{' '}
+        {user && <ResyncButton />}
       </span>
     </div>
   );
