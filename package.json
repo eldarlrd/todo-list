@@ -1,7 +1,7 @@
 {
   "name": "todo-list",
   "private": true,
-  "version": "1.4.7",
+  "version": "1.4.8",
   "type": "module",
   "keywords": [
     "todo list",
@@ -54,6 +54,7 @@
     "preact": "^10.27.2",
     "react": "npm:@preact/compat@^18.3.1",
     "react-dom": "npm:@preact/compat@^18.3.1",
+    "react-hot-toast": "^2.6.0",
     "react-redux": "^9.2.0"
   },
   "devDependencies": {

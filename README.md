@@ -7,8 +7,9 @@
 > - **[TypeScript](https://typescriptlang.org)**
 > - **[Redux Toolkit](https://redux-toolkit.js.org)**
 > - **[Nano ID](https://zelark.github.io/nano-id-cc)**
-> - **[date-fns](https://date-fns.org)**
 > - **[dnd kit](https://dndkit.com)**
+> - **[date-fns](https://date-fns.org)**
+> - **[React Hot Toast](https://react-hot-toast.com)**
 > - **[focus-trap](https://focus-trap.github.io/focus-trap)**
 > - **[Twind](https://twind.style)**
 > - **[Lucide](https://lucide.dev)**

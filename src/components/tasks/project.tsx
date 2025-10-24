@@ -63,9 +63,8 @@ export const Project = ({
       setIsDeleting(true);
       const cleanProjectList = projectList.filter(p => p.id !== id);
 
-      await removeProject(id);
-
       dispatch(setSelectedProject(cleanProjectList[0].id));
+      await removeProject(id);
     } catch (error: unknown) {
       if (error instanceof Error)
         console.error('Failed to delete project:', error);
