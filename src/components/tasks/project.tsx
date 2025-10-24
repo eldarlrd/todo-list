@@ -19,6 +19,7 @@ interface ProjectProps extends ProjectDetails {
 export const Project = ({
   id,
   title,
+  order,
   iconKey,
   panelTabIndex,
   setIsVisible,
@@ -41,6 +42,7 @@ export const Project = ({
     try {
       await modifyProject({
         id,
+        order,
         title: projectTitle,
         iconKey: projectIcon
       });

@@ -106,6 +106,7 @@ const AddTodo = ({
     const handleEditing = async (): Promise<void> => {
       try {
         const id = await createProject({
+          order: 0,
           title: 'Default',
           iconKey: PROJECT_ICONS[0].key
         });

@@ -15,7 +15,7 @@ import { UserAccount } from '@/components/controls/userAccount.tsx';
 import { ProjectList } from '@/components/lists/projectList.tsx';
 import { AddProject } from '@/components/modals/addProject.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
-import { useAppDispatch } from '@/hooks/useAppState.ts';
+import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { useStateSync } from '@/hooks/useStateSync.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
@@ -77,6 +77,7 @@ const SidePanel = ({
   const windowWidth = useRef(window.innerWidth);
 
   const dispatch = useAppDispatch();
+  const { projectList } = useAppSelector(state => state.projectReducer);
   const { setSelectedProject } = projectActions;
 
   const handleAddNewProject = async ({
@@ -88,6 +89,7 @@ const SidePanel = ({
   }): Promise<void> => {
     try {
       const id = await createProject({
+        order: projectList.length,
         title: projectTitle,
         iconKey: projectIcon
       });

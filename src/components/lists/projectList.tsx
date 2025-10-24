@@ -49,7 +49,15 @@ export const ProjectList = ({
         project => project.id === over?.id
       );
 
-      void handleMove(arrayMove(projectList, prevIndex, newIndex));
+      // Update Order
+      const reorderedProjects = arrayMove(projectList, prevIndex, newIndex).map(
+        (project, index) => ({
+          ...project,
+          order: index
+        })
+      );
+
+      void handleMove(reorderedProjects);
     }
   };
 
@@ -70,6 +78,7 @@ export const ProjectList = ({
                 <Project
                   id={project.id}
                   key={project.id}
+                  order={project.order}
                   title={project.title}
                   iconKey={project.iconKey}
                   panelTabIndex={panelTabIndex}

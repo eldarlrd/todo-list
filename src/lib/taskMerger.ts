@@ -25,17 +25,19 @@ export const taskMerger = async ({
     const mergedProjects = [...remoteProjects];
 
     localProjects.forEach(localProject => {
-      if (!remoteProjectMap.has(localProject.id)) {
+      if (!remoteProjectMap.has(localProject.id))
         mergedProjects.push(localProject);
-      }
     });
+
+    const reorderedProjects = mergedProjects.map((project, index) => ({
+      ...project,
+      order: index
+    }));
 
     const mergedTodos = [...remoteTodos];
 
     localTodos.forEach(localTodo => {
-      if (!remoteTodoMap.has(localTodo.id)) {
-        mergedTodos.push(localTodo);
-      }
+      if (!remoteTodoMap.has(localTodo.id)) mergedTodos.push(localTodo);
     });
 
     const localOnlyProjects = localProjects.filter(
@@ -54,7 +56,7 @@ export const taskMerger = async ({
       ]);
     }
 
-    return [mergedProjects, mergedTodos];
+    return [reorderedProjects, mergedTodos];
   } catch (error: unknown) {
     if (error instanceof Error)
       console.error('Failed to sync user data:', error);

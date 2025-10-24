@@ -14,6 +14,7 @@ describe('project reducer', () => {
   const initialState = undefined;
   const projectId = nanoid();
   const project = {
+    order: 0,
     id: projectId,
     title: 'New Project',
     iconKey: PROJECT_ICONS[1].key
@@ -56,6 +57,7 @@ describe('project reducer', () => {
 
     // Happy Path
     const editedProject = {
+      order: 0,
       id: projectId,
       title: 'Edited Project',
       iconKey: PROJECT_ICONS[2].key
@@ -67,6 +69,7 @@ describe('project reducer', () => {
 
     // Sad Path
     const fakeProject = {
+      order: 0,
       title: 'Nonexistent Project',
       iconKey: PROJECT_ICONS[3].key
     };

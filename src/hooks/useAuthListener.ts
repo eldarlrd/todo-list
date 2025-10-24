@@ -36,7 +36,8 @@ export const useAuthListener = (): void => {
             localTodos
           });
 
-          dispatch(setSelectedProject(mergedProjects[0]?.id));
+          if (!localProjects.length)
+            dispatch(setSelectedProject(mergedProjects[0]?.id));
           dispatch(setProjects(mergedProjects));
           dispatch(setTodos(mergedTodos));
         } catch (error: unknown) {

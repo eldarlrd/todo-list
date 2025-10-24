@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface ProjectDetails {
   id: string;
+  order: number;
   title: string;
   iconKey: string;
 }
