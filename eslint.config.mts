@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import vitest from '@vitest/eslint-plugin';
 // @ts-expect-error: missing type declaration
 import preact from 'eslint-config-preact';
 import eslintConfigPrettier from 'eslint-config-prettier';
@@ -21,6 +22,7 @@ export default tseslint.config({
     pluginPromise.configs['flat/recommended'],
     jsxA11y.flatConfigs.strict,
     ...preact,
+    vitest.configs.recommended,
     eslintConfigPrettier
   ],
   files: ['**/*.{ts,tsx}'],
@@ -59,6 +61,13 @@ export default tseslint.config({
     'import/no-useless-path-segments': 2,
     'import/no-named-as-default': 0,
     'import/group-exports': 2,
+    'vitest/no-test-return-statement': 2,
+    'vitest/consistent-test-filename': 2,
+    'vitest/prefer-equality-matcher': 2,
+    'vitest/prefer-lowercase-title': 2,
+    'vitest/prefer-strict-equal': 2,
+    'vitest/consistent-test-it': 2,
+    'vitest/no-test-prefixes': 2,
     'react/sort-comp': 2,
     'react/jsx-pascal-case': 2,
     'react/prefer-es6-class': 2,
