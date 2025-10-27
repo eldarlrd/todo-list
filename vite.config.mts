@@ -1,11 +1,22 @@
 /// <reference types='vitest/config' />
-import { defineConfig } from 'vite';
 import preact from '@preact/preset-vite';
+import { defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vite.dev/config
 export default defineConfig({
   base: '/todo-list/',
-  plugins: [preact()],
+  plugins: [preact(), VitePWA({
+    srcDir: 'src',
+    filename: 'sw.ts',
+    manifest: false,
+    injectRegister: null,
+    registerType: 'autoUpdate',
+    strategies: 'injectManifest',
+    injectManifest: {
+      globPatterns: ['**/*.{html,css,js,png,webp,woff2,webmanifest}']
+    }
+  })],
   resolve: {
     alias: {
       '@': '/src',
@@ -25,7 +36,7 @@ export default defineConfig({
     include: ['__tests__/**/*.{test,spec}.{ts,tsx}'],
     coverage: {
       include: ['src/{hooks,slices}/*.{ts,tsx}'],
-      exclude: ['src/hooks/{useAuthListener,useStateSync}.ts']
+      exclude: ['src/hooks/{useAuthListener,useStateSync}.ts'] // Firebase
     }
   }
 });

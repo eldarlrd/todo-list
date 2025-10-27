@@ -6,6 +6,7 @@
 > - **[Preact](https://preactjs.com)**
 > - **[TypeScript](https://typescriptlang.org)**
 > - **[Redux Toolkit](https://redux-toolkit.js.org)**
+> - **[Firebase](https://firebase.google.com)**
 > - **[Nano ID](https://zelark.github.io/nano-id-cc)**
 > - **[dnd kit](https://dndkit.com)**
 > - **[date-fns](https://date-fns.org)**
@@ -13,6 +14,7 @@
 > - **[focus-trap](https://focus-trap.github.io/focus-trap)**
 > - **[Twind](https://twind.style)**
 > - **[Lucide](https://lucide.dev)**
+> - **[Vite PWA](https://vite-pwa-org.netlify.app)**
 > - **[Vitest](https://vitest.dev)**
 > - **[Vite](https://vite.dev)**
 >

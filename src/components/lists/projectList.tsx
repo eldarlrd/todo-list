@@ -13,7 +13,7 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { Project } from '@/components/tasks/project.tsx';
-import { ERROR_PROJECTS_SET } from '@/config/errors.ts';
+import { ERROR_PROJECTS_SORT } from '@/config/errors.ts';
 import { useAppSelector } from '@/hooks/useAppState.ts';
 import { useStateSync } from '@/hooks/useStateSync.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
@@ -35,8 +35,8 @@ export const ProjectList = ({
       await syncProjects(projects);
     } catch (error: unknown) {
       if (error instanceof Error) {
-        errorToast(ERROR_PROJECTS_SET);
-        console.error(ERROR_PROJECTS_SET, error);
+        errorToast(ERROR_PROJECTS_SORT);
+        console.error(ERROR_PROJECTS_SORT, error);
       }
     }
   };

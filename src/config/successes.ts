@@ -1,14 +1,14 @@
-const SUCCESS_PROJECT_ADD = 'Successfully added project.' as const;
-const SUCCESS_PROJECT_EDIT = 'Successfully edited project.' as const;
-const SUCCESS_PROJECT_DELETE = 'Successfully deleted project.' as const;
+const SUCCESS_PROJECT_ADD = 'Project Added!';
+const SUCCESS_PROJECT_EDIT = 'Project Saved!';
+const SUCCESS_PROJECT_DELETE = 'Project Deleted!';
 
-const SUCCESS_TODO_ADD = 'Successfully added todo.' as const;
-const SUCCESS_TODO_EDIT = 'Successfully edited todo.' as const;
-const SUCCESS_TODO_DELETE = 'Successfully deleted todo.' as const;
+const SUCCESS_TODO_ADD = 'Todo Added!';
+const SUCCESS_TODO_EDIT = 'Todo Saved!';
+const SUCCESS_TODO_DELETE = 'Todo Deleted!';
 
-const SUCCESS_LOGIN = 'Successfully logged in.' as const;
-const SUCCESS_LOGOUT = 'Successfully logged out.' as const;
-const SUCCESS_SYNC = 'Successfully synced user data.' as const;
+const SUCCESS_LOGIN = "You're Logged In!";
+const SUCCESS_LOGOUT = "You're Logged Out!";
+const SUCCESS_SYNC = 'Data Synced!';
 
 export {
   SUCCESS_PROJECT_ADD,

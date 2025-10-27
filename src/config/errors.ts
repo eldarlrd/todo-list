@@ -1,21 +1,21 @@
-const ERROR_SERVICE_WORKER = 'Failed to register a service worker.' as const;
+const ERROR_SERVICE_WORKER = 'Service Worker Register failed.'; // Not a toast
 
-const ERROR_PROJECTS_SET = 'Failed to sort projects.' as const;
-const ERROR_PROJECT_ADD = 'Failed to add project.' as const;
-const ERROR_PROJECT_EDIT = 'Failed to edit project.' as const;
-const ERROR_PROJECT_DELETE = 'Failed to delete project.' as const;
+const ERROR_PROJECTS_SORT = 'Sort failed.';
+const ERROR_PROJECT_ADD = 'Project Add failed.';
+const ERROR_PROJECT_EDIT = 'Project Save failed.';
+const ERROR_PROJECT_DELETE = 'Project Delete failed.';
 
-const ERROR_TODO_ADD = 'Failed to add todo.' as const;
-const ERROR_TODO_EDIT = 'Failed to edit todo.' as const;
-const ERROR_TODO_DELETE = 'Failed to delete todo.' as const;
+const ERROR_TODO_ADD = 'Todo Add failed.';
+const ERROR_TODO_EDIT = 'Todo Save failed.';
+const ERROR_TODO_DELETE = 'Todo Delete failed.';
 
-const ERROR_LOGIN = 'Failed to login.' as const;
-const ERROR_LOGOUT = 'Failed to logout.' as const;
-const ERROR_SYNC = 'Failed to sync user data.' as const;
+const ERROR_LOGIN = 'Login failed.';
+const ERROR_LOGOUT = 'Logout failed.';
+const ERROR_SYNC = 'Sync failed.';
 
 export {
   ERROR_SERVICE_WORKER,
-  ERROR_PROJECTS_SET,
+  ERROR_PROJECTS_SORT,
   ERROR_PROJECT_ADD,
   ERROR_PROJECT_EDIT,
   ERROR_PROJECT_DELETE,
