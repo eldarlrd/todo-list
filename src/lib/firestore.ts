@@ -11,7 +11,7 @@ import {
   writeBatch
 } from 'firebase/firestore/lite';
 
-import { STAGE_OPTIONS } from '@/config/options.ts';
+import { STAGE_OPTIONS } from '@/config/options.tsx';
 import { db } from '@/lib/firebase.ts';
 import { type ProjectDetails } from '@/slices/projectSlice.ts';
 import { type TodoDetails } from '@/slices/todoSlice.ts';

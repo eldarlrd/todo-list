@@ -7,7 +7,6 @@ import { Sidebar } from '@/components/controls/sidebar.tsx';
 import { TodoList } from '@/components/lists/todoList.tsx';
 import { useAuthListener } from '@/hooks/useAuthListener.ts';
 
-// TODO: Total Refactor
 export const App = (): JSX.Element => {
   useAuthListener();
 

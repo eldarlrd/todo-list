@@ -2,7 +2,7 @@ import { useEffect } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 import { Toaster, useToasterStore, toast } from 'react-hot-toast';
 
-import { TOAST_LIMIT } from '@/config/options.ts';
+import { TOAST_LIMIT } from '@/config/options.tsx';
 
 export const Toast = (): JSX.Element => {
   const { toasts } = useToasterStore();

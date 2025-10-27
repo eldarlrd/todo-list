@@ -3,10 +3,10 @@ import { PenSquare, Trash2, CheckCircle2, HelpCircle } from 'lucide-preact';
 import { type Dispatch, type StateUpdater, useState } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
-import { PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { AddTodo, PRIORITY_OPTIONS } from '@/components/modals/addTodo.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
 import { ERROR_TODO_DELETE, ERROR_TODO_EDIT } from '@/config/errors.ts';
+import { PROJECT_ICONS } from '@/config/icons.tsx';
 import { SUCCESS_TODO_DELETE, SUCCESS_TODO_EDIT } from '@/config/successes.ts';
 import { useAppSelector } from '@/hooks/useAppState.ts';
 import { useStateSync } from '@/hooks/useStateSync.ts';

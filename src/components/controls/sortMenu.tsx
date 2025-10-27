@@ -1,68 +1,12 @@
-import {
-  ChevronDown,
-  ArrowDown01,
-  ArrowUp10,
-  ArrowDownAZ,
-  ArrowUpZA,
-  ArrowDownNarrowWide,
-  ArrowUpWideNarrow
-} from 'lucide-preact';
+import { ChevronDown } from 'lucide-preact';
 import { type JSX } from 'preact/jsx-runtime';
 
+import { SORT_OPTIONS } from '@/config/options.tsx';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { useVisible } from '@/hooks/useVisible.ts';
 import { todoActions } from '@/slices/todoSlice.ts';
 
-const SORT_OPTIONS: {
-  Title: JSX.Element[];
-  Priority: JSX.Element[];
-  'Due Date': JSX.Element[];
-} = {
-  Title: [
-    <ArrowDownAZ
-      key='Title Descending'
-      aria-label='Sort by Title Descending'
-      size='22'
-      class='md:scale-110'
-    />,
-    <ArrowUpZA
-      key='Title Ascending'
-      aria-label='Sort by Title Ascending'
-      size='22'
-      class='md:scale-110'
-    />
-  ],
-  Priority: [
-    <ArrowDown01
-      key='Priority Descending'
-      aria-label='Sort by Priority Descending'
-      size='22'
-      class='md:scale-110'
-    />,
-    <ArrowUp10
-      key='Priority Ascending'
-      aria-label='Sort by Priority Ascending'
-      size='22'
-      class='md:scale-110'
-    />
-  ],
-  'Due Date': [
-    <ArrowDownNarrowWide
-      key='Due Date Descending'
-      aria-label='Sort by Due Date Descending'
-      size='22'
-      class='md:scale-110'
-    />,
-    <ArrowUpWideNarrow
-      key='Due Date Ascending'
-      aria-label='Sort by Priority Ascending'
-      size='22'
-      class='md:scale-110'
-    />
-  ]
-};
-
-const SortMenu = (): JSX.Element => {
+export const SortMenu = (): JSX.Element => {
   const { refer, isVisible, setIsVisible } = useVisible(false);
 
   const dispatch = useAppDispatch();
@@ -134,5 +78,3 @@ const SortMenu = (): JSX.Element => {
     </div>
   );
 };
-
-export { SORT_OPTIONS, SortMenu };

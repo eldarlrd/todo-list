@@ -10,10 +10,10 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
-import { PROJECT_ICONS } from '@/components/modals/addProject.tsx';
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
 import { ERROR_PROJECT_ADD } from '@/config/errors.ts';
-import { STAGE_OPTIONS, VIEW_OPTIONS } from '@/config/options.ts';
+import { PROJECT_ICONS } from '@/config/icons.tsx';
+import { STAGE_OPTIONS, VIEW_OPTIONS } from '@/config/options.tsx';
 import { SUCCESS_PROJECT_ADD } from '@/config/successes.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { useStateSync } from '@/hooks/useStateSync.ts';
@@ -61,7 +61,7 @@ interface TodoOptions {
     priority,
     stage,
     isDone
-  }: TodoDetails) => void | Promise<void>;
+  }: TodoDetails) => Promise<void>;
   isLoading: boolean;
   currentTodo?: TodoDetails;
 }

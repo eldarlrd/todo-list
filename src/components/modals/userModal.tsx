@@ -4,7 +4,7 @@ import { type JSX } from 'preact/jsx-runtime';
 
 import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
-import { Sync } from '@/components/buttons/sync.tsx';
+import { SyncButton } from '@/components/buttons/syncButton.tsx';
 import { ERROR_LOGIN, ERROR_LOGOUT } from '@/config/errors.ts';
 import { SUCCESS_LOGIN, SUCCESS_LOGOUT } from '@/config/successes.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
@@ -125,7 +125,7 @@ export const UserModal = ({ setIsVisible }: UserControls): JSX.Element => {
             user ? void handleLogout() : void handleLogin()
           }
         />{' '}
-        {user && <Sync />}
+        {user && <SyncButton />}
       </span>
     </div>
   );

@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 
-import { PROJECT_ICONS } from '@/components/modals/addProject.tsx';
+import { PROJECT_ICONS } from '@/config/icons.tsx';
 import { projectActions, projectReducer } from '@/slices/projectSlice.ts';
 
 describe('project reducer', () => {

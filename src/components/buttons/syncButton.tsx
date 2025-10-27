@@ -10,7 +10,7 @@ import { errorToast, successToast } from '@/lib/toast.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 import { todoActions } from '@/slices/todoSlice.ts';
 
-export const Sync = (): JSX.Element => {
+export const SyncButton = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useAppSelector(state => state.authReducer);
 

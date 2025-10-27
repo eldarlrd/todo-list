@@ -10,7 +10,6 @@ describe('auth reducer', () => {
     email: 'test@example.com',
     displayName: 'Test User'
   } as User;
-
   const initialState = undefined;
 
   it('returns the initial state', () => {

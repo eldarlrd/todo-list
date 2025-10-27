@@ -45,7 +45,7 @@ export const taskMerger = async ({
     );
     const localOnlyTodos = localTodos.filter(t => !remoteTodoMap.has(t.id));
 
-    if (localOnlyProjects.length > 0 || localOnlyTodos.length > 0) {
+    if (localOnlyProjects.length > 0 || localOnlyTodos.length > 0)
       await Promise.all([
         localOnlyProjects.length > 0 ?
           addProjects(uid, localOnlyProjects)
@@ -54,7 +54,6 @@ export const taskMerger = async ({
           addTodos(uid, localOnlyTodos)
         : Promise.resolve()
       ]);
-    }
 
     return [reorderedProjects, mergedTodos];
   } catch (error: unknown) {

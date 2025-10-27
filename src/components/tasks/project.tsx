@@ -4,9 +4,10 @@ import { PenSquare, Trash2, GripVertical } from 'lucide-preact';
 import { type Dispatch, type StateUpdater, useState } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
-import { AddProject, PROJECT_ICONS } from '@/components/modals/addProject.tsx';
+import { AddProject } from '@/components/modals/addProject.tsx';
 import { DeleteModal } from '@/components/modals/deleteModal.tsx';
 import { ERROR_PROJECT_DELETE, ERROR_PROJECT_EDIT } from '@/config/errors.ts';
+import { PROJECT_ICONS } from '@/config/icons.tsx';
 import {
   SUCCESS_PROJECT_DELETE,
   SUCCESS_PROJECT_EDIT

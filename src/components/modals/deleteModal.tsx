@@ -9,7 +9,7 @@ interface DeleteControls {
   taskTitle: string;
   taskMode: string;
   isLoading: boolean;
-  handleDelete: () => void | Promise<void>;
+  handleDelete: () => Promise<void>;
 }
 
 export const DeleteModal = ({

@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import { useCallback } from 'preact/hooks';
 
-import { STAGE_OPTIONS } from '@/config/options.ts';
+import { STAGE_OPTIONS } from '@/config/options.tsx';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import * as fsService from '@/lib/firestore.ts';
 import { type ProjectDetails, projectActions } from '@/slices/projectSlice.ts';
@@ -28,31 +28,33 @@ export const useStateSync = (): SyncTools => {
 
   const uid = user?.uid;
 
+  const withSync = useCallback(
+    async <T>(
+      localAction: () => T,
+      remoteAction?: () => Promise<void>
+    ): Promise<T> => {
+      const result = localAction();
+
+      if (uid && remoteAction) await remoteAction();
+
+      return result;
+    },
+    [uid]
+  );
+
   const syncProjects = useCallback(
     async (projects: ProjectDetails[]) => {
-      if (!uid) {
-        dispatch(setProjects(projects));
-
-        return;
-      }
-
-      dispatch(setProjects(projects));
-      await fsService.addProjects(uid, projects);
+      await withSync(
+        () => dispatch(setProjects(projects)),
+        () => fsService.addProjects(uid!, projects)
+      );
     },
-    [dispatch, setProjects, uid]
+    [dispatch, setProjects, uid, withSync]
   );
 
   const createProject = useCallback(
     async (project: Omit<ProjectDetails, 'id'>) => {
-      if (!uid) {
-        const id = nanoid();
-
-        dispatch(addNewProject({ ...project, id }));
-
-        return id;
-      }
-
-      const id = await fsService.addProject(uid, project);
+      const id = uid ? await fsService.addProject(uid, project) : nanoid();
 
       dispatch(addNewProject({ ...project, id }));
 
@@ -63,47 +65,34 @@ export const useStateSync = (): SyncTools => {
 
   const modifyProject = useCallback(
     async (project: ProjectDetails) => {
-      if (!uid) {
-        dispatch(editProject(project));
+      await withSync(
+        () => dispatch(editProject(project)),
+        () => {
+          const { id, ...updates } = project;
 
-        return;
-      }
-
-      const { id, ...updates } = project;
-
-      dispatch(editProject(project));
-      await fsService.updateProject(uid, id, updates);
+          return fsService.updateProject(uid!, id, updates);
+        }
+      );
     },
-    [uid, dispatch, editProject]
+    [uid, dispatch, editProject, withSync]
   );
 
   const removeProject = useCallback(
     async (projectId: string) => {
-      if (!uid) {
-        dispatch(deleteProject(projectId));
-        dispatch(deleteProjectTodos(projectId));
-
-        return;
-      }
-
-      dispatch(deleteProject(projectId));
-      dispatch(deleteProjectTodos(projectId));
-      await fsService.deleteProject(uid, projectId);
+      await withSync(
+        () => {
+          dispatch(deleteProject(projectId));
+          dispatch(deleteProjectTodos(projectId));
+        },
+        () => fsService.deleteProject(uid!, projectId)
+      );
     },
-    [uid, dispatch, deleteProject, deleteProjectTodos]
+    [uid, dispatch, deleteProject, deleteProjectTodos, withSync]
   );
 
   const createTodo = useCallback(
     async (todo: Omit<TodoDetails, 'id'>) => {
-      if (!uid) {
-        const id = nanoid();
-
-        dispatch(addNewTodo({ ...todo, id }));
-
-        return;
-      }
-
-      const id = await fsService.addTodo(uid, todo);
+      const id = uid ? await fsService.addTodo(uid, todo) : nanoid();
 
       dispatch(addNewTodo({ ...todo, id }));
     },
@@ -112,50 +101,40 @@ export const useStateSync = (): SyncTools => {
 
   const toggleTodo = useCallback(
     async (todoId: string, isDone: boolean) => {
-      if (!uid) {
-        dispatch(checkTodo({ id: todoId, isDone }));
-
-        return;
-      }
-
-      dispatch(checkTodo({ id: todoId, isDone }));
-      await fsService.checkTodo(uid, todoId, isDone);
+      await withSync(
+        () => dispatch(checkTodo({ id: todoId, isDone })),
+        () => fsService.checkTodo(uid!, todoId, isDone)
+      );
     },
-    [uid, dispatch, checkTodo]
+    [uid, dispatch, checkTodo, withSync]
   );
 
   const modifyTodo = useCallback(
     async (todo: TodoDetails) => {
-      if (!uid) {
-        dispatch(editTodo(todo));
+      await withSync(
+        () => dispatch(editTodo(todo)),
+        () => {
+          const { id, ...data } = todo;
+          const updates = {
+            ...data,
+            isDone: todo.stage === STAGE_OPTIONS[2]
+          };
 
-        return;
-      }
-
-      const { id, ...data } = todo;
-      const updates = {
-        ...data,
-        isDone: todo.stage === STAGE_OPTIONS[2]
-      };
-
-      dispatch(editTodo(todo));
-      await fsService.updateTodo(uid, id, updates);
+          return fsService.updateTodo(uid!, id, updates);
+        }
+      );
     },
-    [uid, dispatch, editTodo]
+    [uid, dispatch, editTodo, withSync]
   );
 
   const removeTodo = useCallback(
     async (todoId: string) => {
-      if (!uid) {
-        dispatch(deleteTodo(todoId));
-
-        return;
-      }
-
-      dispatch(deleteTodo(todoId));
-      await fsService.deleteTodo(uid, todoId);
+      await withSync(
+        () => dispatch(deleteTodo(todoId)),
+        () => fsService.deleteTodo(uid!, todoId)
+      );
     },
-    [uid, dispatch, deleteTodo]
+    [uid, dispatch, deleteTodo, withSync]
   );
 
   return {
