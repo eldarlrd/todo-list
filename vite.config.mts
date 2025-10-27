@@ -36,7 +36,9 @@ export default defineConfig({
     include: ['__tests__/**/*.{test,spec}.{ts,tsx}'],
     coverage: {
       include: ['src/{hooks,slices}/*.{ts,tsx}'],
-      exclude: ['src/hooks/{useAuthListener,useStateSync}.ts'] // Firebase
+      exclude: [
+        'src/hooks/{useAppState,useAuthListener,useStateSync}.ts' // Firebase
+      ]
     }
   }
 });
