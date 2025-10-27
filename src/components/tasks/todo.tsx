@@ -114,7 +114,7 @@ export const Todo = ({
           </p>
           <p>{description}</p>
           <p class='mt-1 -mb-1'>
-            {format(todoDueDate, 'eee., d MMM. ’yy')}
+            {format(todoDueDate, 'eee, d MMM ’yy')}
             {isTomorrow(todoDueDate) ?
               ' • Tomorrow'
             : isToday(todoDueDate) ?
