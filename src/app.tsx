@@ -13,6 +13,7 @@ export const App = (): JSX.Element => {
   return (
     <div
       id='app'
+      style='-webkit-tap-highlight-color:#64748b80' // tw-slate-500
       class='font-main dark:(bg-slate-900, accent-sky-600, selection:bg-sky-600) flex min-h-[100dvh] flex-col justify-between bg-slate-50 accent-emerald-400 selection:bg-emerald-400'>
       <Header />
       <main class='flex max-h-screen grow'>

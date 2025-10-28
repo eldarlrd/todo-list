@@ -72,18 +72,18 @@ export const UserModal = ({ setIsVisible }: UserControls): JSX.Element => {
     <div class='flex flex-col gap-1.5 text-center text-base break-words select-none xl:text-lg'>
       {user ?
         <>
-          <p class='font-medium'>
+          <p class='leading-relaxed font-medium'>
             <span>
               {user.photoURL ?
                 <img
-                  class='pointer-events-none mr-1.5 inline h-8 w-8 rounded-full text-sm transition-all'
+                  class='pointer-events-none mr-1.5 inline h-7 w-7 rounded-full text-sm transition-all'
                   alt='User Avatar'
                   src={user.photoURL}
                 />
               : <CircleUserRound
                   aria-label='Circle User'
                   strokeWidth='2'
-                  class='mr-1.5 inline h-8 w-8'
+                  class='mr-1.5 inline h-7 w-7'
                 />
               }
               {user.displayName}{' '}

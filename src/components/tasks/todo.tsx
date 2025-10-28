@@ -98,7 +98,7 @@ export const Todo = ({
           isDone ?
             'dark:(bg-sky-900) bg-emerald-100'
           : 'dark:(bg-slate-800) bg-slate-100'
-        } mt-3.5 flex justify-between gap-6 rounded px-4 py-3 drop-shadow-sm duration-150 xl:text-lg`}>
+        } mt-3.5 flex justify-between gap-6 rounded px-4 py-3 drop-shadow-sm transition-colors duration-150 xl:text-lg`}>
         <div class='flex flex-col gap-1.5'>
           <p class='flex -skew-x-6 items-center gap-0.5 text-slate-600 dark:text-slate-400'>
             <span class='scale-75'>
