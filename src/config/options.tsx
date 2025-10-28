@@ -9,6 +9,7 @@ import {
 import { type JSX } from 'preact/jsx-runtime';
 
 const TOAST_LIMIT = 2;
+const MAX_CHARACTER_LENGTH = 140; // X Character Limit
 const STAGE_OPTIONS = ['Todo', 'In Progress', 'Done'] as const;
 const VIEW_OPTIONS = ['All', 'Todo', 'In Progress', 'Done'] as const;
 
@@ -61,4 +62,10 @@ const SORT_OPTIONS: {
   ]
 };
 
-export { TOAST_LIMIT, STAGE_OPTIONS, VIEW_OPTIONS, SORT_OPTIONS };
+export {
+  TOAST_LIMIT,
+  MAX_CHARACTER_LENGTH,
+  STAGE_OPTIONS,
+  VIEW_OPTIONS,
+  SORT_OPTIONS
+};

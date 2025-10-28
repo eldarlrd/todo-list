@@ -11,6 +11,7 @@ import { CancelButton } from '@/components/buttons/cancelButton.tsx';
 import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
 import { PROJECT_ICONS } from '@/config/icons.tsx';
+import { MAX_CHARACTER_LENGTH } from '@/config/options.tsx';
 
 interface ProjectOptions {
   actionMode: string;
@@ -72,7 +73,7 @@ export const AddProject = ({
           name='project-title'
           class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
           minLength={1}
-          maxLength={140}
+          maxLength={MAX_CHARACTER_LENGTH}
           value={projectTitle}
           required
           onInput={(e: Event): void => {

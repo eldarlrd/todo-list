@@ -13,7 +13,11 @@ import { ConfirmButton } from '@/components/buttons/confirmButton.tsx';
 import { IsModalVisible } from '@/components/modals/modalWindow.tsx';
 import { ERROR_PROJECT_ADD } from '@/config/errors.ts';
 import { PROJECT_ICONS } from '@/config/icons.tsx';
-import { STAGE_OPTIONS, VIEW_OPTIONS } from '@/config/options.tsx';
+import {
+  MAX_CHARACTER_LENGTH,
+  STAGE_OPTIONS,
+  VIEW_OPTIONS
+} from '@/config/options.tsx';
 import { SUCCESS_PROJECT_ADD } from '@/config/successes.ts';
 import { useAppDispatch, useAppSelector } from '@/hooks/useAppState.ts';
 import { useStateSync } from '@/hooks/useStateSync.ts';
@@ -169,7 +173,7 @@ const AddTodo = ({
           name='todo-title'
           class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
           minLength={1}
-          maxLength={140}
+          maxLength={MAX_CHARACTER_LENGTH}
           value={todo.title}
           required
           onInput={(e: Event): void => {
@@ -180,12 +184,11 @@ const AddTodo = ({
 
       <label class='flex flex-col gap-1.5 xl:text-lg'>
         <legend class='font-medium'>Description</legend>
-        <input
+        <textarea
           title=''
-          type='text'
           name='todo-description'
-          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
-          maxLength={280}
+          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) h-20 resize-none rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
+          maxLength={MAX_CHARACTER_LENGTH * 5}
           value={todo.description}
           onInput={(e: Event): void => {
             handleInput(e, 'description');
