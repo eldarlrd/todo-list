@@ -173,7 +173,7 @@ export const Project = ({
           type='button'
           title='Drag Project'
           tabIndex={panelTabIndex}
-          class='cursor-grab rounded duration-150 active:cursor-grabbing'>
+          class='cursor-grab touch-none rounded duration-150 active:cursor-grabbing'>
           <GripVertical aria-label='Drag' />
         </button>
       </span>
