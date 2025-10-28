@@ -187,6 +187,7 @@ const AddTodo = ({
         <textarea
           title=''
           name='todo-description'
+          style='scrollbar-width:thin'
           class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) h-20 resize-none rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
           maxLength={MAX_CHARACTER_LENGTH * 5}
           value={todo.description}

@@ -99,7 +99,7 @@ export const Todo = ({
             'dark:(bg-sky-900) bg-emerald-100'
           : 'dark:(bg-slate-800) bg-slate-100'
         } mt-3.5 flex justify-between gap-6 rounded px-4 py-3 drop-shadow-sm duration-150 xl:text-lg`}>
-        <div class='flex flex-col gap-1.5 break-all'>
+        <div class='flex flex-col gap-1.5'>
           <p class='flex -skew-x-6 items-center gap-0.5 text-slate-600 dark:text-slate-400'>
             <span class='scale-75'>
               {PROJECT_ICONS.find(p => p.key === currProject?.iconKey)?.icon}
@@ -112,7 +112,7 @@ export const Todo = ({
             } -my-1 font-medium decoration-2`}>
             {title}
           </p>
-          <p>{description}</p>
+          <p class='whitespace-pre-line'>{description}</p>
           <p class='mt-1 -mb-1'>
             {format(todoDueDate, 'eee, d MMM ’yy')}
             {isTomorrow(todoDueDate) ?

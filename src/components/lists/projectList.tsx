@@ -69,6 +69,7 @@ export const ProjectList = ({
     <>
       <div
         id='project-list'
+        style='scrollbar-width:thin'
         class='-mt-2 flex h-full min-w-full flex-col gap-1 overflow-y-auto px-3 py-1.5'>
         <DndContext
           collisionDetection={closestCenter}
