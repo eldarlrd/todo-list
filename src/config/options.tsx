@@ -13,6 +13,24 @@ const MAX_CHARACTER_LENGTH = 140; // X Character Limit
 const STAGE_OPTIONS = ['Todo', 'In Progress', 'Done'] as const;
 const VIEW_OPTIONS = ['All', 'Todo', 'In Progress', 'Done'] as const;
 
+const PRIORITY_OPTIONS: {
+  value: string;
+  color: string;
+}[] = [
+  {
+    value: 'Low',
+    color: 'teal-500'
+  },
+  {
+    value: 'Medium',
+    color: 'amber-500'
+  },
+  {
+    value: 'High',
+    color: 'rose-400'
+  }
+];
+
 const SORT_OPTIONS: {
   Title: JSX.Element[];
   Priority: JSX.Element[];
@@ -67,5 +85,6 @@ export {
   MAX_CHARACTER_LENGTH,
   STAGE_OPTIONS,
   VIEW_OPTIONS,
+  PRIORITY_OPTIONS,
   SORT_OPTIONS
 };

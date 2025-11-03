@@ -39,6 +39,7 @@ export const AddProject = ({
   const [projectTitle, setProjectTitle] = useState('');
   const [projectIcon, setProjectIcon] = useState(PROJECT_ICONS[0].key);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [isTouched, setIsTouched] = useState(false);
   const isModalVisible = useContext(IsModalVisible);
 
   // Handle Editing
@@ -47,6 +48,7 @@ export const AddProject = ({
       setProjectTitle(currentTitle);
       setProjectIcon(currentIcon);
     } else {
+      setIsTouched(false);
       setProjectTitle('');
       setProjectIcon(PROJECT_ICONS[0].key);
     }
@@ -68,16 +70,17 @@ export const AddProject = ({
           <span class='text-violet-900 dark:text-pink-300'>*</span>
         </legend>
         <input
+          required
           title=''
           type='text'
           name='project-title'
-          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
+          class={`${isTouched && isDisabled ? '!dark:outline-rose-600 !outline-rose-800' : ''} dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500`}
           minLength={1}
           maxLength={MAX_CHARACTER_LENGTH}
           value={projectTitle}
-          required
           onInput={(e: Event): void => {
             setProjectTitle((e.target as HTMLInputElement).value);
+            setIsTouched(true);
           }}
         />
       </label>

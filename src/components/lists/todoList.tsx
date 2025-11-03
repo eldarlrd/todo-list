@@ -4,13 +4,13 @@ import { useState } from 'preact/hooks';
 import { type JSX } from 'preact/jsx-runtime';
 
 import { ControlPanel } from '@/components/controls/controlPanel.tsx';
-import { PRIORITY_OPTIONS } from '@/components/modals/addTodo.tsx';
 import { ModalWindow } from '@/components/modals/modalWindow.tsx';
 import { Todo } from '@/components/tasks/todo.tsx';
 import {
   STAGE_OPTIONS,
   VIEW_OPTIONS,
-  SORT_OPTIONS
+  SORT_OPTIONS,
+  PRIORITY_OPTIONS
 } from '@/config/options.tsx';
 import { useAppSelector } from '@/hooks/useAppState.ts';
 import { useVisible } from '@/hooks/useVisible.ts';

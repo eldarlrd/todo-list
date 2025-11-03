@@ -15,6 +15,7 @@ import { ERROR_PROJECT_ADD } from '@/config/errors.ts';
 import { PROJECT_ICONS } from '@/config/icons.tsx';
 import {
   MAX_CHARACTER_LENGTH,
+  PRIORITY_OPTIONS,
   STAGE_OPTIONS,
   VIEW_OPTIONS
 } from '@/config/options.tsx';
@@ -24,35 +25,6 @@ import { useStateSync } from '@/hooks/useStateSync.ts';
 import { errorToast, successToast } from '@/lib/toast.ts';
 import { projectActions } from '@/slices/projectSlice.ts';
 import { todoActions, type TodoDetails } from '@/slices/todoSlice.ts';
-
-const PRIORITY_OPTIONS: {
-  value: string;
-  color: string;
-}[] = [
-  {
-    value: 'Low',
-    color: 'teal-500'
-  },
-  {
-    value: 'Medium',
-    color: 'amber-500'
-  },
-  {
-    value: 'High',
-    color: 'rose-400'
-  }
-];
-
-const emptyTodo: TodoDetails = {
-  id: '',
-  project: '',
-  title: '',
-  description: '',
-  dueDate: formatISO(new Date(), { representation: 'date' }),
-  priority: PRIORITY_OPTIONS[0].value,
-  stage: STAGE_OPTIONS[0],
-  isDone: false
-};
 
 interface TodoOptions {
   actionMode: string;
@@ -70,15 +42,27 @@ interface TodoOptions {
   currentTodo?: TodoDetails;
 }
 
-const AddTodo = ({
+const emptyTodo: TodoDetails = {
+  id: '',
+  project: '',
+  title: '',
+  description: '',
+  dueDate: formatISO(new Date(), { representation: 'date' }),
+  priority: PRIORITY_OPTIONS[0].value,
+  stage: STAGE_OPTIONS[0],
+  isDone: false
+};
+
+export const AddTodo = ({
   actionMode,
   setIsVisible,
   handleAction,
   isLoading,
   currentTodo
 }: TodoOptions): JSX.Element => {
-  const [todo, setTodo] = useState<TodoDetails>(emptyTodo);
-  const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const [todo, setTodo] = useState(emptyTodo);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [isTouched, setIsTouched] = useState(false);
   const isModalVisible = useContext(IsModalVisible);
   const { createProject } = useStateSync();
 
@@ -132,6 +116,7 @@ const AddTodo = ({
     if (currentTodo?.title) setTodo(currentTodo);
     else {
       setTodo(emptyTodo);
+      setIsTouched(false);
 
       if (isModalVisible && !selectedProject) void handleEditing();
     }
@@ -144,17 +129,16 @@ const AddTodo = ({
     setSelectedProject
   ]);
 
-  useEffect(() => {
-    const inputDate = new Date(todo.dueDate);
+  // Validation
+  const inputDate = new Date(todo.dueDate);
+  const isEmpty = !todo.title.trim().length;
+  const isCorrectDate =
+    isValid(inputDate) && (isToday(inputDate) || isFuture(inputDate));
 
-    if (
-      !!todo.title.trim().length &&
-      isValid(inputDate) &&
-      (isToday(inputDate) || isFuture(inputDate))
-    )
-      setIsDisabled(false);
+  useEffect(() => {
+    if (!isEmpty && isCorrectDate) setIsDisabled(false);
     else setIsDisabled(true);
-  }, [todo.title, todo.dueDate]);
+  }, [isEmpty, isCorrectDate]);
 
   return (
     <form
@@ -168,16 +152,17 @@ const AddTodo = ({
           <span class='text-violet-900 dark:text-pink-300'>*</span>
         </legend>
         <input
+          required
           title=''
           type='text'
           name='todo-title'
-          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
+          class={`${isTouched && isEmpty ? '!dark:outline-rose-600 !outline-rose-800' : ''} dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500`}
           minLength={1}
           maxLength={MAX_CHARACTER_LENGTH}
           value={todo.title}
-          required
           onInput={(e: Event): void => {
             handleInput(e, 'title');
+            setIsTouched(true);
           }}
         />
       </label>
@@ -188,7 +173,7 @@ const AddTodo = ({
           title=''
           name='todo-description'
           style='scrollbar-width:thin'
-          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) h-20 resize-none rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
+          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) h-20 resize-none rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500 xl:h-24'
           maxLength={MAX_CHARACTER_LENGTH * 5}
           value={todo.description}
           onInput={(e: Event): void => {
@@ -203,7 +188,7 @@ const AddTodo = ({
           title=''
           type='date'
           name='todo-date'
-          class='dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500'
+          class={`${!isCorrectDate ? '!dark:outline-rose-600 !outline-rose-800' : ''} dark:(bg-slate-800, caret-pink-300) focus:(outline-violet-900, dark:outline-pink-400) rounded bg-slate-50 px-2 py-1.5 caret-violet-900 outline outline-1 outline-transparent duration-150 hover:outline-slate-500`}
           max='9999-12-31'
           min={emptyTodo.dueDate}
           value={todo.dueDate}
@@ -288,5 +273,3 @@ const AddTodo = ({
     </form>
   );
 };
-
-export { PRIORITY_OPTIONS, AddTodo };
