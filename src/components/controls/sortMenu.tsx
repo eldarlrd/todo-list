@@ -51,9 +51,9 @@ export const SortMenu = (): JSX.Element => {
         }}>
         {sortMode ?
           <ChevronDown
+            class={`${isVisible ? 'rotate-180' : ''} md:scale-110`}
             aria-label='Chevron Down'
             size='22'
-            class='md:scale-110'
           />
         : null}
       </button>

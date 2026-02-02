@@ -1,11 +1,17 @@
 import {
+  Baby,
   Backpack,
   BookOpen,
+  CarFront,
   CircleDollarSign,
+  Clapperboard,
+  Cross,
+  Dog,
   Dumbbell,
   Gamepad2,
   Gem,
   Gift,
+  GraduationCap,
   Heart,
   Home,
   LaptopMinimal,
@@ -24,41 +30,10 @@ export const PROJECT_ICONS: {
   key: string;
   icon: JSX.Element;
 }[] = [
+  // General
   {
     key: 'star',
     icon: <Star aria-label='Star' class='xl:scale-110' />
-  },
-  {
-    key: 'book',
-    icon: <BookOpen aria-label='Book' class='xl:scale-110' />
-  },
-  {
-    key: 'laptop',
-    icon: <LaptopMinimal aria-label='Laptop' class='xl:scale-110' />
-  },
-  {
-    key: 'leaf',
-    icon: <Leaf aria-label='Leaf' class='xl:scale-110' />
-  },
-  {
-    key: 'wrench',
-    icon: <Wrench aria-label='Wrench' class='xl:scale-110' />
-  },
-  {
-    key: 'home',
-    icon: <Home aria-label='Home' class='xl:scale-110' />
-  },
-  {
-    key: 'pizza',
-    icon: <Pizza aria-label='Pizza' class='xl:scale-110' />
-  },
-  {
-    key: 'cart',
-    icon: <ShoppingCart aria-label='Shopping Cart' class='xl:scale-110' />
-  },
-  {
-    key: 'backpack',
-    icon: <Backpack aria-label='Backpack' class='xl:scale-110' />
   },
   {
     key: 'heart',
@@ -68,29 +43,92 @@ export const PROJECT_ICONS: {
     key: 'gem',
     icon: <Gem aria-label='Gem' class='xl:scale-110' />
   },
+  // Health
   {
-    key: 'gift',
-    icon: <Gift aria-label='Gift' class='xl:scale-110' />
+    key: 'cross',
+    icon: <Cross aria-label='Cross' class='xl:scale-110' />
+  },
+  {
+    key: 'dumbbell',
+    icon: <Dumbbell aria-label='Dumbbell' class='xl:scale-110' />
+  },
+  // Work
+  {
+    key: 'wrench',
+    icon: <Wrench aria-label='Wrench' class='xl:scale-110' />
   },
   {
     key: 'pen',
     icon: <PenTool aria-label='Pen' class='xl:scale-110' />
   },
   {
-    key: 'dumbbell',
-    icon: <Dumbbell aria-label='Dumbbell' class='xl:scale-110' />
+    key: 'laptop',
+    icon: <LaptopMinimal aria-label='Laptop' class='xl:scale-110' />
+  },
+  // Education
+  {
+    key: 'graduation',
+    icon: <GraduationCap aria-label='Graduation' class='xl:scale-110' />
   },
   {
-    key: 'music',
-    icon: <Music aria-label='Music' class='xl:scale-110' />
+    key: 'book',
+    icon: <BookOpen aria-label='Book' class='xl:scale-110' />
+  },
+  {
+    key: 'backpack',
+    icon: <Backpack aria-label='Backpack' class='xl:scale-110' />
+  },
+  // Media
+  {
+    key: 'clapperboard',
+    icon: <Clapperboard aria-label='Clapperboard' class='xl:scale-110' />
   },
   {
     key: 'gamepad',
     icon: <Gamepad2 aria-label='Gamepad' class='xl:scale-110' />
   },
   {
+    key: 'music',
+    icon: <Music aria-label='Music' class='xl:scale-110' />
+  },
+  // Finance
+  {
+    key: 'cart',
+    icon: <ShoppingCart aria-label='Shopping Cart' class='xl:scale-110' />
+  },
+  {
     key: 'dollar',
     icon: <CircleDollarSign aria-label='Dollar' class='xl:scale-110' />
+  },
+  {
+    key: 'gift',
+    icon: <Gift aria-label='Gift' class='xl:scale-110' />
+  },
+  // Lifestyle
+  {
+    key: 'home',
+    icon: <Home aria-label='Home' class='xl:scale-110' />
+  },
+  {
+    key: 'car',
+    icon: <CarFront aria-label='Car' class='xl:scale-110' />
+  },
+  {
+    key: 'leaf',
+    icon: <Leaf aria-label='Leaf' class='xl:scale-110' />
+  },
+  {
+    key: 'pizza',
+    icon: <Pizza aria-label='Pizza' class='xl:scale-110' />
+  },
+  // People
+  {
+    key: 'baby',
+    icon: <Baby aria-label='Baby' class='xl:scale-110' />
+  },
+  {
+    key: 'dog',
+    icon: <Dog aria-label='Dog' class='xl:scale-110' />
   },
   {
     key: 'users',

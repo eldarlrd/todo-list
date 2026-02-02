@@ -37,13 +37,13 @@ bun bundle
 ```sh
 bun preview
 ```
-### Format Code (ESLint + Prettier)
+### Fix Code (ESLint + Prettier)
 ```sh
-bun format
+bun fix
 ```
-### Cut Orphans (Knip)
+### See Orphans (Knip)
 ```sh
-bun cut
+bun orphans
 ```
 ## Test
 ### Run Watch
